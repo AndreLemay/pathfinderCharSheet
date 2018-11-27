@@ -7,3 +7,5 @@ dist
 #files
 *.tgz
 *.log
+
+out/
