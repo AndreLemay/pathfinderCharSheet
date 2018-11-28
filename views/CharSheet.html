@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    </link>
+</head>
+<script>
+    //hacky workaround because TS seems to compile things in a way that electron doesn't like
+    //electron itself should keep using module.exports, but tsc sticks a line that expects this
+    //to be there, so just give it what it wants
+    window.exports = {};
+</script>
+
+<body>
+    <div class="container abilities">
+        <div class="row">
+            <div class="col-2"><label>STR</label></div>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-3 form-group">
+                        <label>Base</label>
+                        <input type="text" class="form-control base" id="baseStrength">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>From Items</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>Temp</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>Total</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"><label>DEX</label></div>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-3 form-group">
+                        <label>Base</label>
+                        <input type="text" class="form-control base" id="baseDexterity">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>From Items</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>Temp</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>Total</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"><label>CON</label></div>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-3 form-group">
+                        <label>Base</label>
+                        <input type="text" class="form-control base" id="baseConstitution">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>From Items</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>Temp</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>Total</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"><label>INT</label></div>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-3 form-group">
+                        <label>Base</label>
+                        <input type="text" class="form-control base" id="baseIntelligence">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>From Items</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>Temp</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>Total</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"><label>WIS</label></div>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-3 form-group">
+                        <label>Base</label>
+                        <input type="text" class="form-control base" id="baseWisdom">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>From Items</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>Temp</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>Total</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"><label>CHA</label></div>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-3 form-group">
+                        <label>Base</label>
+                        <input type="text" class="form-control base" id="baseCharisma">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>From Items</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>Temp</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label>Total</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container hp">
+        <div class="row">
+            <label>Hit Points</label>
+        </div>
+        <div class="row">
+            <div class="col-3 form-group">
+                <label>Current</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-3 form-group">
+                <label>Max</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-3 form-group">
+                <label>Temp</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-3 form-group">
+                <label>Nonlethal</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 form-group">
+                <label>Damage Reduction</label>
+                <textarea rows="3" class="form-control"></textarea>
+            </div>
+            <div class="col-6 form-group">
+                <label>Energy Resistance</label>
+                <textarea rows="3" class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="container initiative">
+        <div class="row">
+            <label>Initiative</label>
+        </div>
+        <div class="row">
+            <div class="col-3 form-group">
+                <label>Base</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-3 form-group">
+                <label>From DEX</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-3 form-group">
+                <label>Feats/Training/Etc.</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-3 form-group">
+                <label>Total</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="container ac">
+        <div class="row">
+            <div class="col-4 form-group">
+                <label>Armour Class</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Base</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>DEX</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Dodge</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Deflection</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Armour</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Shield</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Natural</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Size</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 form-group">
+                <label>Armour Class</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Base</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1">
+            </div>
+            <div class="col-1">
+            </div>
+            <div class="col-1 form-group">
+                <label>Deflection</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Armour</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Shield</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Natural</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Size</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 form-group">
+                <label>Armour Class</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Base</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>DEX</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Dodge</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Deflection</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1">
+            </div>
+            <div class="col-1">
+            </div>
+            <div class="col-1">
+            </div>
+            <div class="col-1 form-group">
+                <label>Size</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 form-group">
+                <label>Temp AC</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Spell Res.</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="container cm">
+        <div class="row">
+            <div class="col-4 form-group">
+                <label>Combat Manoeuvre Bonus</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>STR</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>BAB</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Size</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Misc</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 form-group">
+                <label>Combat Manoeuvre Bonus</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>STR</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>DEX</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Dodge</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Deflection</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>BAB</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Size</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Misc</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 form-group">
+                <label>Combat Manoeuvre Bonus</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>STR</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1">
+            </div>
+            <div class="col-1">
+            </div>
+            <div class="col-1 form-group">
+                <label>Deflection</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>BAB</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Size</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 form-group">
+                <label>Misc</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 form-group">
+                <label>Temp CMB</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Temp CMD</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="container saves">
+        <div class="row">
+            <div class="col-2 form-group">
+                <label>Fortitude</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Base</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>CON</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Racial</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Misc</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Temp</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 form-group">
+                <label>Reflex</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Base</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>DEX</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Racial</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Misc</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Temp</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 form-group">
+                <label>Will</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Base</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>WIS</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Racial</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Misc</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-2 form-group">
+                <label>Temp</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../scripts/renderer.ts"></script>
+</body>
+
+</html>
