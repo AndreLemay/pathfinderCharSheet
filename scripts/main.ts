@@ -1,6 +1,3 @@
-/// <reference path="../node_modules/electron-prebuilt-compile/electron.d.ts" />
-
-
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
 
