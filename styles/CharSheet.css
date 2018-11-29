@@ -1,0 +1,15 @@
+.section-head {
+    color: white;
+    background-color: dimgray;
+    font-weight: bold;
+}
+
+.section-head > label {
+    margin: auto;
+}
+
+.ability-title {
+    font-weight: bolder;
+    align-items: center;
+    margin: auto;
+}
