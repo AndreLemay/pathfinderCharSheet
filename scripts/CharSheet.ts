@@ -7,6 +7,12 @@ enum BonusType {
     Morale = "MORALE"
 }
 
+enum EnergyType {
+    Fire = "FIRE",
+    Acid = "ACID",
+    Lightning = "Lightning",
+}
+
 enum StatType {
     Strength = "STR",
     Dexterity = "DEX",
@@ -27,13 +33,14 @@ enum StatType {
     HitPoints = "HP",
     ArmourClass = "AC",
     SpellResistance = "SPELLRES",
-    DamageReduction = "DR"
+    DamageReduction = "DR",
+    EnergyResistance = "ER"
 }
 
 interface ValueBonus {
     affectedStat: StatType,
     bonusType: BonusType,
-    bonusAmount: Number,
+    bonusAmount: number,
 }
 
 class Equipment {
@@ -50,41 +57,53 @@ class Equipment {
 
 export class CharacterSheet {
     //Ability Scores
-    baseStrength: Number;
-    getTotalStrength() {
-
+    baseStrength: number = 0;
+    additionalStrength: number = 0;
+    tempStrength: number = 0;
+    getStrengthBonus = (): number => {
+        return Math.floor((this.baseStrength + this.additionalStrength + this.tempStrength - 10) / 2);
     };
-    baseDexterity: Number;
-    getTotalDexterity() {
-
+    baseDexterity: number = 0;
+    additionalDexterity: number = 0;
+    tempDexterity: number = 0;
+    getDexterityBonus = (): number => {
+        return Math.floor((this.baseDexterity + this.additionalDexterity + this.tempDexterity - 10) / 2);
     };
-    baseConstitution: Number;
-    getTotalConstitution() {
-
+    baseConstitution: number = 0;
+    additionalConstitution: number = 0;
+    tempConstitution: number = 0;
+    getConstitutionBonus = (): number => {
+        return Math.floor((this.baseConstitution + this.additionalConstitution + this.tempConstitution - 10) / 2);
     };
-    baseIntelligence: Number;
-    getTotalIntelligence() {
-
+    baseIntelligence: number = 0;
+    additionalIntelligence: number = 0;
+    tempIntelligence: number = 0;
+    getIntelligenceBonus = (): number => {
+        return Math.floor((this.baseIntelligence + this.additionalIntelligence + this.tempIntelligence - 10) / 2);
     };
-    baseWisdom: Number;
-    getTotalWisdom() {
-
+    baseWisdom: number = 0;
+    additionalWisdom: number = 0;
+    tempWisdom: number = 0;
+    getWisdomBonus = (): number => {
+        return Math.floor((this.baseWisdom + this.additionalWisdom + this.tempWisdom - 10) / 2);
     };
-    baseCharisma: Number;
-    getTotalCharisma() {
-
+    baseCharisma: number = 0;
+    additionalCharisma: number = 0;
+    tempCharisma: number = 0;
+    getCharismaBonus = (): number => {
+        return Math.floor((this.baseCharisma + this.additionalCharisma + this.tempCharisma - 10) / 2);
     };
     //Initiative
-    baseInitiative: Number;
+    baseInitiative: number;
     getTotalInitiative() {
 
     };
     //Combat Manoeuvres
-    baseCMB: Number;
+    baseCMB: number;
     getTotalCMB() {
 
     };
-    baseCMD: Number;
+    baseCMD: number;
     getTotalCMD() {
 
     };
@@ -92,7 +111,7 @@ export class CharacterSheet {
 
     };
     //Armour Class
-    baseAC: Number;
+    baseAC: number;
     getTotalAC() {
 
     };
@@ -103,32 +122,21 @@ export class CharacterSheet {
 
     };
     //Hit Points
-    maxHP: Number;
-    currentHP: Number;
-    tempHP: Number;
-    nonLethalHP: Number;
+    maxHP: number;
+    currentHP: number;
+    tempHP: number;
+    nonLethalHP: number;
     //Saves
-    baseFortSave: Number;
+    baseFortSave: number;
     getTotalFortSave() {
 
     };
-    baseReflexSave: Number;
+    baseReflexSave: number;
     getTotalReflexSave() {
 
     };
-    baseWillSave: Number;
+    baseWillSave: number;
     getTotalWillSave() {
 
     };
-    //Resists
-    baseSpellRes: Number;
-    getTotalSpellRes() {
-
-    }
-    baseDR: Number;
-    getTotalDR() {
-
-    }
-
-
 }

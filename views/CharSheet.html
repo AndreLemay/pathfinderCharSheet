@@ -20,21 +20,21 @@
             <div class="col-2"><label>STR</label></div>
             <div class="col-10">
                 <div class="row">
-                    <div class="col-3 form-group">
+                    <div class="col-3 form-group" data-field-name="baseStrength">
                         <label>Base</label>
-                        <input type="text" class="form-control base" id="baseStrength">
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
-                        <label>From Items</label>
-                        <input type="text" class="form-control">
+                    <div class="col-3 form-group" data-field-name="additionalStrength">
+                        <label>Additional</label>
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
+                    <div class="col-3 form-group" data-field-name="tempStrength">
                         <label>Temp</label>
-                        <input type="text" class="form-control">
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
-                        <label>Total</label>
-                        <input type="text" class="form-control">
+                    <div class="col-3 form-group" data-value-from="getStrengthBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control">
                     </div>
                 </div>
             </div>
@@ -43,21 +43,21 @@
             <div class="col-2"><label>DEX</label></div>
             <div class="col-10">
                 <div class="row">
-                    <div class="col-3 form-group">
+                    <div class="col-3 form-group" data-field-name="baseDexterity">
                         <label>Base</label>
-                        <input type="text" class="form-control base" id="baseDexterity">
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
-                        <label>From Items</label>
-                        <input type="text" class="form-control">
+                    <div class="col-3 form-group" data-field-name="additionalDexterity">
+                        <label>Additional</label>
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
+                    <div class="col-3 form-group" data-field-name="tempDexterity">
                         <label>Temp</label>
-                        <input type="text" class="form-control">
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
-                        <label>Total</label>
-                        <input type="text" class="form-control">
+                    <div class="col-3 form-group" data-value-from="getTotalDexterityBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control">
                     </div>
                 </div>
             </div>
@@ -66,21 +66,21 @@
             <div class="col-2"><label>CON</label></div>
             <div class="col-10">
                 <div class="row">
-                    <div class="col-3 form-group">
+                    <div class="col-3 form-group" data-field-name="baseConstitution">
                         <label>Base</label>
-                        <input type="text" class="form-control base" id="baseConstitution">
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
-                        <label>From Items</label>
-                        <input type="text" class="form-control">
+                    <div class="col-3 form-group" data-field-name="additionalConstitution">
+                        <label>Additional</label>
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
+                    <div class="col-3 form-group" data-field-name="tempConstitution">
                         <label>Temp</label>
-                        <input type="text" class="form-control">
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
-                        <label>Total</label>
-                        <input type="text" class="form-control">
+                    <div class="col-3 form-group" data-value-from="getTotalConstitutionBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control">
                     </div>
                 </div>
             </div>
@@ -89,21 +89,21 @@
             <div class="col-2"><label>INT</label></div>
             <div class="col-10">
                 <div class="row">
-                    <div class="col-3 form-group">
+                    <div class="col-3 form-group" data-field-name="baseIntelligence">
                         <label>Base</label>
-                        <input type="text" class="form-control base" id="baseIntelligence">
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
-                        <label>From Items</label>
-                        <input type="text" class="form-control">
+                    <div class="col-3 form-group" data-field-name="additionalIntelligence">
+                        <label>Additional</label>
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
+                    <div class="col-3 form-group" data-field-name="tempIntelligence">
                         <label>Temp</label>
-                        <input type="text" class="form-control">
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
-                        <label>Total</label>
-                        <input type="text" class="form-control">
+                    <div class="col-3 form-group" data-value-from="getTotalIntelligenceBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control">
                     </div>
                 </div>
             </div>
@@ -112,21 +112,21 @@
             <div class="col-2"><label>WIS</label></div>
             <div class="col-10">
                 <div class="row">
-                    <div class="col-3 form-group">
+                    <div class="col-3 form-group" data-field-name="baseWisdom">
                         <label>Base</label>
-                        <input type="text" class="form-control base" id="baseWisdom">
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
-                        <label>From Items</label>
-                        <input type="text" class="form-control">
+                    <div class="col-3 form-group" data-field-name="additionalWisdom">
+                        <label>Additional</label>
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
+                    <div class="col-3 form-group" data-field-name="tempWisdom">
                         <label>Temp</label>
-                        <input type="text" class="form-control">
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
-                        <label>Total</label>
-                        <input type="text" class="form-control">
+                    <div class="col-3 form-group" data-value-from="getTotalWisdomBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control">
                     </div>
                 </div>
             </div>
@@ -135,21 +135,21 @@
             <div class="col-2"><label>CHA</label></div>
             <div class="col-10">
                 <div class="row">
-                    <div class="col-3 form-group">
+                    <div class="col-3 form-group" data-field-name="baseCharisma">
                         <label>Base</label>
-                        <input type="text" class="form-control base" id="baseCharisma">
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
-                        <label>From Items</label>
-                        <input type="text" class="form-control">
+                    <div class="col-3 form-group" data-field-name="additionalCharisma">
+                        <label>Additional</label>
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
+                    <div class="col-3 form-group" data-field-name="tempCharisma">
                         <label>Temp</label>
-                        <input type="text" class="form-control">
+                        <input type="number" class="form-control">
                     </div>
-                    <div class="col-3 form-group">
-                        <label>Total</label>
-                        <input type="text" class="form-control">
+                    <div class="col-3 form-group" data-value-from="getTotalCharismaBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control">
                     </div>
                 </div>
             </div>
@@ -160,31 +160,31 @@
             <label>Hit Points</label>
         </div>
         <div class="row">
-            <div class="col-3 form-group">
+            <div class="col-3 form-group" data-field-name="currentHP">
                 <label>Current</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
-            <div class="col-3 form-group">
+            <div class="col-3 form-group" data-field-name="maxHP">
                 <label>Max</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
-            <div class="col-3 form-group">
+            <div class="col-3 form-group" data-field-name="tempHP">
                 <label>Temp</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
-            <div class="col-3 form-group">
+            <div class="col-3 form-group" data-field-name="nonLethalHP">
                 <label>Nonlethal</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="col-6 form-group">
                 <label>Damage Reduction</label>
-                <textarea rows="3" class="form-control"></textarea>
+                <numberarea rows="3" class="form-control"></numberarea>
             </div>
             <div class="col-6 form-group">
                 <label>Energy Resistance</label>
-                <textarea rows="3" class="form-control"></textarea>
+                <numberarea rows="3" class="form-control"></numberarea>
             </div>
         </div>
     </div>
@@ -193,21 +193,21 @@
             <label>Initiative</label>
         </div>
         <div class="row">
-            <div class="col-3 form-group">
+            <div class="col-3 form-group" data-field-name="baseInitiative">
                 <label>Base</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-3 form-group">
                 <label>From DEX</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-3 form-group">
                 <label>Feats/Training/Etc.</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-3 form-group">
                 <label>Total</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
     </div>
@@ -215,49 +215,49 @@
         <div class="row">
             <div class="col-4 form-group">
                 <label>Armour Class</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Base</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control" disabled value="10">
             </div>
-            <div class="col-1 form-group">
+            <div class="col-1 form-group" data-value-from="getDexterityBonus">
                 <label>DEX</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control" disabled>
             </div>
             <div class="col-1 form-group">
                 <label>Dodge</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Deflection</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Armour</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Shield</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Natural</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Size</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="col-4 form-group">
                 <label>Armour Class</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Base</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1">
             </div>
@@ -265,45 +265,45 @@
             </div>
             <div class="col-1 form-group">
                 <label>Deflection</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Armour</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Shield</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Natural</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Size</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="col-4 form-group">
                 <label>Armour Class</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Base</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>DEX</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Dodge</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Deflection</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1">
             </div>
@@ -313,17 +313,17 @@
             </div>
             <div class="col-1 form-group">
                 <label>Size</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="col-2 form-group">
                 <label>Temp AC</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Spell Res.</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
     </div>
@@ -331,67 +331,67 @@
         <div class="row">
             <div class="col-4 form-group">
                 <label>Combat Manoeuvre Bonus</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>STR</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>BAB</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Size</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Misc</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="col-4 form-group">
                 <label>Combat Manoeuvre Bonus</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>STR</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>DEX</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Dodge</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Deflection</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>BAB</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Size</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Misc</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="col-4 form-group">
                 <label>Combat Manoeuvre Bonus</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>STR</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1">
             </div>
@@ -399,29 +399,29 @@
             </div>
             <div class="col-1 form-group">
                 <label>Deflection</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>BAB</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Size</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-1 form-group">
                 <label>Misc</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="col-2 form-group">
                 <label>Temp CMB</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Temp CMD</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
     </div>
@@ -429,79 +429,79 @@
         <div class="row">
             <div class="col-2 form-group">
                 <label>Fortitude</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Base</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>CON</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Racial</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Misc</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Temp</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="col-2 form-group">
                 <label>Reflex</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Base</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>DEX</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Racial</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Misc</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Temp</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="col-2 form-group">
                 <label>Will</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Base</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>WIS</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Racial</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Misc</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
             <div class="col-2 form-group">
                 <label>Temp</label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control">
             </div>
         </div>
     </div>
