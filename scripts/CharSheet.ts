@@ -55,6 +55,26 @@ class Equipment {
     }
 }
 
+export class Skill {
+    classSkill: boolean = false;
+    ranks: number = 0;
+    racialBonus: number = 0;
+    featBonus: number = 0;
+    miscBonus: number = 0;
+
+    constructor(
+        readonly trained: boolean,
+        readonly abilityBonus: () => number,
+        readonly armourPenalty: () => number = () => { return 0; }) { }
+
+    calcSkillBonus = (): number => {
+        if (this.trained && this.ranks === 0) return null;
+
+        return this.abilityBonus() + (this.classSkill && this.ranks > 0 ? 3 : 0) + this.ranks + this.racialBonus + this.featBonus
+            + this.miscBonus + this.armourPenalty(); //expecting this be be negative, so we want to add
+    }
+}
+
 export class CharacterSheet {
     //Ability Scores
     baseStrength: number = 10;
@@ -177,5 +197,47 @@ export class CharacterSheet {
     tempWillSave: number = 0;
     calcWillSave = (): number => {
         return this.baseWillSave + this.calcWisdomBonus() + this.racialWillSave + this.miscWillSave + this.tempWillSave;
+    };
+    //skills
+    armourPenalty: number = 0;
+    getArmourPenalty = (): number => {
+        return this.armourPenalty;
+    }
+    skills: { [name: string]: Skill; } = {
+        "acrobatics": new Skill(false, this.calcDexterityBonus, this.getArmourPenalty),
+        "appraise": new Skill(false, this.calcIntelligenceBonus),
+        "bluff": new Skill(false, this.calcCharismaBonus),
+        "climb": new Skill(false, this.calcStrengthBonus, this.getArmourPenalty),
+        "craft": new Skill(false, this.calcIntelligenceBonus),
+        "diplomacy": new Skill(false, this.calcCharismaBonus),
+        "disableDevice": new Skill(true, this.calcDexterityBonus, this.getArmourPenalty),
+        "disguise": new Skill(false, this.calcCharismaBonus),
+        "escapeArtist": new Skill(false, this.calcDexterityBonus, this.getArmourPenalty),
+        "fly": new Skill(false, this.calcDexterityBonus, this.getArmourPenalty),
+        "handleAnimal": new Skill(true, this.calcCharismaBonus),
+        "heal": new Skill(false, this.calcWisdomBonus),
+        "intimidate": new Skill(false, this.calcCharismaBonus),
+        "knowledgeArcana": new Skill(true, this.calcIntelligenceBonus),
+        "knowledgeDungeoneering": new Skill(true, this.calcIntelligenceBonus),
+        "knowledgeEngineering": new Skill(true, this.calcIntelligenceBonus),
+        "knowledgeGeography": new Skill(true, this.calcIntelligenceBonus),
+        "knowledgeHistory": new Skill(true, this.calcIntelligenceBonus),
+        "knowledgeLocal": new Skill(true, this.calcIntelligenceBonus),
+        "knowledgeNature": new Skill(true, this.calcIntelligenceBonus),
+        "knowledgeNobility": new Skill(true, this.calcIntelligenceBonus),
+        "knowledgePlanes": new Skill(true, this.calcIntelligenceBonus),
+        "knowledgeReligion": new Skill(true, this.calcIntelligenceBonus),
+        "linguistics": new Skill(true, this.calcIntelligenceBonus),
+        "perception": new Skill(false, this.calcWisdomBonus),
+        "perform": new Skill(false, this.calcCharismaBonus),
+        "profession": new Skill(true, this.calcWisdomBonus),
+        "ride": new Skill(false, this.calcDexterityBonus, this.getArmourPenalty),
+        "senseMotive": new Skill(false, this.calcWisdomBonus),
+        "sleightOfHand": new Skill(true, this.calcDexterityBonus, this.getArmourPenalty),
+        "spellcraft": new Skill(true, this.calcIntelligenceBonus),
+        "stealth": new Skill(false, this.calcDexterityBonus, this.getArmourPenalty),
+        "survival": new Skill(false, this.calcWisdomBonus),
+        "swim": new Skill(false, this.calcStrengthBonus, this.getArmourPenalty),
+        "useMagicDevice": new Skill(true, this.calcCharismaBonus)
     };
 }

@@ -1,35 +1,82 @@
-import { CharacterSheet } from "./CharSheet"
+import { CharacterSheet, Skill } from "./CharSheet"
 import * as $ from "jquery"
 
 let sheet = new CharacterSheet();
 
 function recalcSheet() {
-    $("div[data-value-output]>input").trigger("charSheet:recalc");
+    $("div[data-value-output]>input, div[data-skill-name]").trigger("charSheet:recalc");
 }
 
+function getSheetProp(prop: string, skillName: string = null) {
+    var value;
+    if (skillName) {
+        var skill: Skill = sheet.skills[skillName];
+        if (typeof skill[prop] === 'function')
+            value = skill[prop]();
+        else value = skill[prop];
+    }
+    else {
+        if (typeof sheet[prop] === 'function')
+            value = sheet[prop]();
+        else value = sheet[prop];
+    }
+
+    return value;
+}
+
+//basic outputs
 $("div[data-value-output]>input").on("charSheet:recalc", (event) => {
     var elem = $(event.currentTarget);
     var outputFrom = elem.parent().attr("data-value-output");
-    var value = sheet[outputFrom];
-    if (typeof value === 'function')
-        value = value();
-    elem.attr("value", value);
+    elem.attr("value", getSheetProp(outputFrom));
 });
 
+//basic inputs
 $("div[data-value-input]>input").change((event) => {
     var elem = $(event.currentTarget);
     sheet[elem.parent().attr("data-value-input")] = +elem.val();
     recalcSheet();
 });
 
+//skill outputs
+$("div[data-skill-name]").on("charSheet:recalc", (event) => {
+    var elem = $(event.currentTarget);
+    var skillName = elem.attr("data-skill-name");
+    elem.find("div[data-skill-output]>input").each((index, input) => {
+        var outputFrom = $(input).parent().attr("data-skill-output");
+        if ($(input).attr("type") === "checkbox")
+            $(input).prop("checked", getSheetProp(outputFrom, skillName));
+        else $(input).attr("value", getSheetProp(outputFrom, skillName));
+    });
+});
+
+//skill inputs
+$("div[data-skill-input]>input").change((event) => {
+    var elem = $(event.currentTarget);
+    var parentSkill = elem.closest("div[data-skill-name]").attr("data-skill-name");
+    if (elem.attr("type") === "checkbox")
+        sheet.skills[parentSkill][elem.parent().attr("data-skill-input")] = !!elem.prop("checked");
+    else
+        sheet.skills[parentSkill][elem.parent().attr("data-skill-input")] = +elem.val();
+    recalcSheet();
+});
+
 //disable all outputs
-$("div[data-value-output]>input").prop("disabled", true);
+$("div[data-value-output]>input,div[data-skill-output]>input").prop("disabled", true);
 
 //initialize inputs to default values
 $("div[data-value-input]>input").attr("value", function () {
     var sheetProp = $(this).parent().attr("data-value-input");
     return sheet[sheetProp];
 });
+$("div[data-skill-input]>input[type='number']").attr("value", function () {
+    var parentSkill = $(this).closest("div[data-skill-name]").attr("data-skill-name");
+    return sheet.skills[parentSkill][$(this).attr("data-skill-input")];
+});
+$("div[data-skill-input]>input[type='checkbox']").prop("checked", function () {
+    var parentSkill = $(this).closest("div[data-skill-name]").attr("data-skill-name");
+    return sheet.skills[parentSkill][$(this).attr("data-skill-input")];
+});
 
 //trigger initial calculation
-$("div[data-value-output]>input").trigger("charSheet:recalc");
+$("div[data-value-output]>input, div[data-skill-name]").trigger("charSheet:recalc");
