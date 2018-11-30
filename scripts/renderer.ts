@@ -1,3 +1,6 @@
+import { remote } from "electron"
+import * as jetpack from "fs-jetpack"
+import * as path from "path"
 import { CharacterSheet, Skill } from "./CharSheet"
 import * as $ from "jquery"
 
@@ -23,6 +26,12 @@ function getSheetProp(prop: string, skillName: string = null) {
 
     return value;
 }
+
+//save button
+$("#saveButton").click((event) => {
+    let savePath = path.join(remote.app.getPath("appData"), "pfCharSheets", "charSave.sav");
+    jetpack.write(savePath, sheet.save());
+});
 
 //basic outputs
 $("div[data-value-output]>input").on("charSheet:recalc", (event) => {

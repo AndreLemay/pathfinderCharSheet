@@ -43,6 +43,71 @@ interface ValueBonus {
     bonusAmount: number,
 }
 
+interface SavedCharacter {
+    baseStrength?: number,
+    additionalStrength?: number,
+    tempStrength?: number,
+    baseDexterity?: number,
+    additionalDexterity?: number,
+    tempDexterity?: number,
+    baseConstitution?: number,
+    additionalConstitution?: number,
+    tempConstitution?: number,
+    baseIntelligence?: number,
+    additionalIntelligence?: number,
+    tempIntelligence?: number,
+    baseWisdom?: number,
+    additionalWisdom?: number,
+    tempWisdom?: number,
+    baseCharisma?: number,
+    additionalCharisma?: number,
+    tempCharisma?: number,
+    featInitiative?: number,
+    trainingInitiative?: number,
+    miscInitiative?: number,
+    armourAC?: number,
+    shieldAC?: number,
+    naturalAC?: number,
+    miscCMB?: number,
+    miscCMD?: number,
+    maxHP?: number,
+    currentHP?: number,
+    tempHP?: number,
+    nonLethalHP?: number,
+    baseAttackBonus?: number,
+    attackMoraleBonus?: number,
+    attackBuffs?: number,
+    attackNerfs?: number,
+    damageMoraleBonus?: number,
+    damageBuffs?: number,
+    damageNerfs?: number,
+    dodgeModifier?: number,
+    deflectionModifier?: number,
+    sizeModifier?: number,
+    baseFortSave?: number,
+    racialFortSave?: number,
+    miscFortSave?: number,
+    tempFortSave?: number,
+    baseReflexSave?: number,
+    racialReflexSave?: number,
+    miscReflexSave?: number,
+    tempReflexSave?: number,
+    baseWillSave?: number,
+    racialWillSave?: number,
+    miscWillSave?: number,
+    tempWillSave?: number,
+    armourPenalty?: number,
+    skills?: {
+        [name: string]: {
+            isClassSkill: boolean,
+            ranks: number,
+            racialBonus: number,
+            featBonus: number,
+            miscBonus: number
+        };
+    },
+}
+
 class Equipment {
     name: string;
     description: string;
@@ -56,7 +121,7 @@ class Equipment {
 }
 
 export class Skill {
-    classSkill: boolean = false;
+    isClassSkill: boolean = false;
     ranks: number = 0;
     racialBonus: number = 0;
     featBonus: number = 0;
@@ -70,12 +135,36 @@ export class Skill {
     calcSkillBonus = (): number => {
         if (this.trained && this.ranks === 0) return null;
 
-        return this.abilityBonus() + (this.classSkill && this.ranks > 0 ? 3 : 0) + this.ranks + this.racialBonus + this.featBonus
+        return this.abilityBonus() + (this.isClassSkill && this.ranks > 0 ? 3 : 0) + this.ranks + this.racialBonus + this.featBonus
             + this.miscBonus + this.armourPenalty(); //expecting this be be negative, so we want to add
     }
 }
 
 export class CharacterSheet {
+    save = (): string => {
+        var characterObj: SavedCharacter = {};
+        for (let prop of Object.keys(this)) {
+            if (prop === "skills" || typeof this[prop] === "function")
+                continue;
+
+            characterObj[prop] = this[prop];
+        }
+
+        characterObj.skills = {}
+        for (let name of Object.keys(this.skills)) {
+            let skill: Skill = this.skills[name];
+            characterObj.skills[name] = {
+                isClassSkill: skill.isClassSkill,
+                ranks: skill.ranks,
+                racialBonus: skill.racialBonus,
+                featBonus: skill.featBonus,
+                miscBonus: skill.miscBonus
+            }
+        }
+
+        return JSON.stringify(characterObj);
+    };
+
     //Ability Scores
     baseStrength: number = 10;
     additionalStrength: number = 0;
