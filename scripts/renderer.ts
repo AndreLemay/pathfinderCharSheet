@@ -36,9 +36,17 @@ function initEvents() {
 
     //load button
     $("#loadButton").click(() => {
-        let loadPath = path.join(remote.app.getPath("appData"), "pfCharSheets", "charSave.sav");
-        sheet = CharacterSheet.load(jetpack.read(loadPath, "json"));
-        initFields();
+        remote.dialog.showOpenDialog(remote.getCurrentWindow(), {
+            defaultPath: path.join(remote.app.getPath("appData"), "pfCharSheets"),
+            filters: [{ name: "Character Save Files", extensions: ["sav"] }],
+            properties: ["openFile"]
+        }, (paths: string[]) => {
+            if (paths.length > 0) {
+                let loadPath = paths[0];
+                sheet = CharacterSheet.load(jetpack.read(loadPath, "json"));
+                initFields();
+            }
+        });
     });
 
     //basic outputs
@@ -51,7 +59,18 @@ function initEvents() {
     //basic inputs
     $("div[data-value-input]>input, div[data-value-input]>select").change((event) => {
         var elem = $(event.currentTarget);
-        sheet[elem.parent().attr("data-value-input")] = +elem.val();
+        var tagName = elem.prop("tagName");
+        var sheetVal: any = elem.val();
+
+        //force the type to what CharacterSheet will expect
+        if (elem.attr("type") === "number" || tagName === "SELECT") {
+            sheetVal = +sheetVal;
+        }
+        else if (elem.attr("type") === "checkbox") {
+            sheetVal = !!sheetVal;
+        }
+
+        sheet[elem.parent().attr("data-value-input")] = sheetVal;
         recalcSheet();
     });
 
@@ -84,17 +103,20 @@ function initFields() {
     $("div[data-value-output]>input,div[data-skill-output]>input").prop("disabled", true);
 
     //initialize inputs to default values
-    $("div[data-value-input]>input, div[data-value-input]>select").attr("value", function () {
-        var sheetProp = $(this).parent().attr("data-value-input");
-        return sheet[sheetProp];
+    $("div[data-value-input]>input, div[data-value-input]>select").each((index, elem) => {
+        var sheetProp = $(elem).parent().attr("data-value-input");
+        if ($(elem).attr("type") === "checkbox")
+            $(elem).prop("checked", sheet[sheetProp]);
+        else if ($(elem).prop("tagName") === "SELECT")
+            $(elem).val(sheet[sheetProp]).change();
+        else $(elem).attr("value", sheet[sheetProp]);
     });
-    $("div[data-skill-input]>input[type='number']").attr("value", function () {
-        var parentSkill = $(this).closest("div[data-skill-name]").attr("data-skill-name");
-        return sheet.skills[parentSkill][$(this).attr("data-skill-input")];
-    });
-    $("div[data-skill-input]>input[type='checkbox']").prop("checked", function () {
-        var parentSkill = $(this).closest("div[data-skill-name]").attr("data-skill-name");
-        return sheet.skills[parentSkill][$(this).attr("data-skill-input")];
+    $("div[data-skill-input]>input").each((index, elem) => {
+        var parentSkill = $(elem).closest("div[data-skill-name]").attr("data-skill-name");
+        var skillProp = $(elem).parent().attr("data-skill-input");
+        if ($(elem).attr("type") === "checkbox")
+            $(elem).prop("checked", sheet.skills[parentSkill][skillProp]);
+        else $(elem).attr("value", sheet.skills[parentSkill][skillProp]);
     });
 
     //recalculate
