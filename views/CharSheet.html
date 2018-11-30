@@ -156,23 +156,23 @@
                     <div class="col form-group" data-value-input="alignment">
                         <label>Alignment</label>
                         <select class="form-control form-control-sm">
-                            <option value="0">Lawful Good</option>
-                            <option value="1">Lawful Neutral</option>
-                            <option value="2">Lawful Evil</option>
-                            <option value="3">Neutral Good</option>
-                            <option value="4">True Neutral</option>
-                            <option value="5">Neutral Evil</option>
-                            <option value="6">Chaotic Good</option>
-                            <option value="7">Chaotic Neutral</option>
-                            <option value="8">Chaotic Evil</option>
+                            <option value="LAWFULGOOD">Lawful Good</option>
+                            <option value="LAWFULNEUTRAL">Lawful Neutral</option>
+                            <option value="LAWFULEVIL">Lawful Evil</option>
+                            <option value="NEUTRALGOOD">Neutral Good</option>
+                            <option value="TRUENEUTRAL">True Neutral</option>
+                            <option value="NEUTRALEVIL">Neutral Evil</option>
+                            <option value="CHAOTICGOOD">Chaotic Good</option>
+                            <option value="CHAOTICNEUTRAL">Chaotic Neutral</option>
+                            <option value="CHAOTICEVIL">Chaotic Evil</option>
                         </select>
                     </div>
                     <div class="col form-group" data-value-input="gender">
                         <label>Gender</label>
                         <select class="form-control form-control-sm">
-                            <option value="0">Male</option>
-                            <option value="1">Female</option>
-                            <option value="2">Other</option>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                            <option value="OTHER">Other</option>
                         </select>
                     </div>
                 </div>
@@ -184,9 +184,9 @@
                     <div class="col form-group" data-value-input="size">
                         <label>Size</label>
                         <select class="form-control form-control-sm">
-                            <option value="0">Small</option>
-                            <option value="1">Medium</option>
-                            <option value="2">Large</option>
+                            <option value="SMALL">Small</option>
+                            <option value="MEDIUM">Medium</option>
+                            <option value="LARGE">Large</option>
                         </select>
                     </div>
                     <div class="col form-group" data-value-input="sizeModifier">
@@ -423,7 +423,7 @@
                     <div class="col" data-skill-input="miscBonus">
                         <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="col" data-value-input="armourPenalty">
+                    <div class="col" data-value-output="calcArmourCheckPenalty">
                         <input type="number" class="form-control form-control-sm">
                     </div>
                 </div>
@@ -1472,11 +1472,11 @@
                     <label>Deflection</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
-                <div class="col form-group" data-value-input="armourAC">
+                <div class="col form-group" data-value-output="armour.acBonus">
                     <label>Armour</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
-                <div class="col form-group" data-value-input="shieldAC">
+                <div class="col form-group" data-value-output="shield.acBonus">
                     <label>Shield</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
@@ -1506,11 +1506,11 @@
                     <label>Deflection</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
-                <div class="col form-group" data-value-output="armourAC">
+                <div class="col form-group" data-value-output="armour.acBonus">
                     <label>Armour</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
-                <div class="col form-group" data-value-output="shieldAC">
+                <div class="col form-group" data-value-output="shield.acBonus">
                     <label>Shield</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
@@ -1674,6 +1674,72 @@
                     <input type="number" class="form-control form-control-sm">
                 </div>
             </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-6 px-5">
+                <div class="row section-head"><label>Armour</label></div>
+                <div class="form-row align-items-end">
+                    <div class="col form-group" data-value-input="armour.name">
+                        <label>Name</label>
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="armour.description">
+                        <label>Description</label>
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="form-row align-items-end">
+                    <div class="col form-group" data-value-input="armour.type">
+                        <label>Type</label>
+                        <select class="form-control form-control-sm">
+                            <option value="NONE">None</option>
+                            <option value="LIGHT">Light</option>
+                            <option value="MEDIUM">Medium</option>
+                            <option value="HEAVY">Heavy</option>
+                        </select>
+                    </div>
+                    <div class="col form-group" data-value-input="armour.maxSpeed">
+                        <label>Max Speed</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="armour.maxDEX">
+                        <label>Max DEX</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="form-row align-items-end">
+                    <div class="col form-group" data-value-input="armour.checkPenalty">
+                        <label>Check Penalty</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="armour.acBonus">
+                        <label>AC</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row section-head"><label>Shield</label></div>
+                <div class="form-row align-items-end">
+                    <div class="col form-group" data-value-input="shield.name">
+                        <label>Name</label>
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="shield.description">
+                        <label>Description</label>
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="form-row align-items-end">
+                    <div class="col form-group" data-value-input="shield.checkPenalty">
+                        <label>Check Penalty</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="shield.acBonus">
+                        <label>AC</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 px-5"></div>
         </div>
     </div>
 

@@ -19,9 +19,17 @@ function getSheetProp(prop: string, skillName: string = null) {
         else value = skill[prop];
     }
     else {
-        if (typeof sheet[prop] === 'function')
-            value = sheet[prop]();
-        else value = sheet[prop];
+        var objWithProp = sheet;
+        //if we have a composite property, loop throug to get to the one we want to set
+        var ind = 0;
+        while ((ind = prop.indexOf(".")) > 0) {
+            objWithProp = objWithProp[prop.slice(0, ind)];
+            prop = prop.slice(ind + 1);
+        }
+
+        if (typeof objWithProp[prop] === 'function')
+            value = objWithProp[prop]();
+        else value = objWithProp[prop];
     }
 
     return value;
@@ -61,6 +69,8 @@ function initEvents() {
         var elem = $(event.currentTarget);
         var tagName = elem.prop("tagName");
         var sheetVal: any = elem.val();
+        var sheetProp = elem.parent().attr("data-value-input");
+        var objWithProp = sheet;
 
         //force the type to what CharacterSheet will expect
         if (elem.attr("type") === "number" || tagName === "SELECT") {
@@ -70,7 +80,14 @@ function initEvents() {
             sheetVal = !!sheetVal;
         }
 
-        sheet[elem.parent().attr("data-value-input")] = sheetVal;
+        //if we have a composite property, loop throug to get to the one we want to set
+        var ind = 0;
+        while ((ind = sheetProp.indexOf(".")) > 0) {
+            objWithProp = objWithProp[sheetProp.slice(0, ind)];
+            sheetProp = sheetProp.slice(ind + 1);
+        }
+
+        objWithProp[sheetProp] = sheetVal;
         recalcSheet();
     });
 
@@ -105,11 +122,12 @@ function initFields() {
     //initialize inputs to default values
     $("div[data-value-input]>input, div[data-value-input]>select").each((index, elem) => {
         var sheetProp = $(elem).parent().attr("data-value-input");
+
         if ($(elem).attr("type") === "checkbox")
-            $(elem).prop("checked", sheet[sheetProp]);
+            $(elem).prop("checked", getSheetProp(sheetProp));
         else if ($(elem).prop("tagName") === "SELECT")
-            $(elem).val(sheet[sheetProp]).change();
-        else $(elem).attr("value", sheet[sheetProp]);
+            $(elem).val(getSheetProp(sheetProp)).change();
+        else $(elem).attr("value", getSheetProp(sheetProp));
     });
     $("div[data-skill-input]>input").each((index, elem) => {
         var parentSkill = $(elem).closest("div[data-skill-name]").attr("data-skill-name");

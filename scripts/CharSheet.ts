@@ -14,27 +14,27 @@ enum EnergyType {
 }
 
 enum Alignment {
-    LawfulGood,
-    LawfulNeutral,
-    LawfulEvil,
-    NeutralGood,
-    TrueNeutral,
-    NeutralEvil,
-    ChaoticGood,
-    ChaoticNeutral,
-    ChaoticEvil
+    LawfulGood = "LAWFULGOOD",
+    LawfulNeutral = "LAWFULNEUTRAL",
+    LawfulEvil = "LAWFULEVIL",
+    NeutralGood = "NEUTRALGOOD",
+    TrueNeutral = "TRUENEUTRAL",
+    NeutralEvil = "NEUTRALEVIL",
+    ChaoticGood = "CHAOTICGOOD",
+    ChaoticNeutral = "CHAOTICNEUTRAL",
+    ChaoticEvil = "CHAOTICEVIL"
 }
 
 enum Gender {
-    Male,
-    Female,
-    Other
+    Male = "MALE",
+    Female = "FEMALE",
+    Other = "OTHER"
 }
 
 enum Size {
-    Small,
-    Medium,
-    Large
+    Small = "SMALL",
+    Medium = "MEDIUM",
+    Large = "LARGE"
 }
 
 enum StatType {
@@ -59,6 +59,13 @@ enum StatType {
     SpellResistance = "SPELLRES",
     DamageReduction = "DR",
     EnergyResistance = "ER"
+}
+
+enum ArmourType {
+    None = "NONE",
+    Light = "LIGHT",
+    Medium = "MEDIUM",
+    Heavy = "HEAVY"
 }
 
 interface ValueBonus {
@@ -144,14 +151,33 @@ interface SavedCharacter {
 }
 
 class Equipment {
-    name: string;
-    description: string;
     bonuses: ValueBonus[];
 
-    constructor(name: string, description: string, ...bonuses: ValueBonus[]) {
-        this.name = name;
-        this.description = description;
+    constructor(readonly name: string, readonly description: string, ...bonuses: ValueBonus[]) {
         this.bonuses = bonuses;
+    }
+}
+
+class Armour extends Equipment {
+    acBonus: number = 0;
+    type: ArmourType = ArmourType.None;
+    maxDEX: number = null;
+    checkPenalty: number = 0;
+    maxSpeed: number = 0;
+    constructor(
+        name: string,
+        description: string,
+        ...bonuses: ValueBonus[]) {
+        super(name, description, ...bonuses);
+    }
+}
+
+class Shield extends Equipment {
+    acBonus: number = 0;
+    checkPenalty: number = 0;
+
+    constructor(name: string, description: string, ...bonuses: ValueBonus[]) {
+        super(name, description, ...bonuses);
     }
 }
 
@@ -165,7 +191,7 @@ export class Skill {
     constructor(
         readonly trained: boolean,
         readonly abilityBonus: () => number,
-        readonly armourPenalty: () => number = () => { return 0; }) { }
+        readonly armourPenalty: () => number = () => { return null; }) { }
 
     calcSkillBonus = (): number => {
         if (this.trained && this.ranks === 0) return null;
@@ -266,6 +292,7 @@ export class CharacterSheet {
     calcCharismaBonus = (): number => {
         return Math.floor((this.baseCharisma + this.additionalCharisma + this.tempCharisma - 10) / 2);
     };
+
     //Initiative
     featInitiative: number = 0;
     trainingInitiative: number = 0;
@@ -273,22 +300,22 @@ export class CharacterSheet {
     calcInitiative = (): number => {
         return this.calcDexterityBonus() + this.featInitiative + this.trainingInitiative + this.miscInitiative;
     };
+
     //Armour Class
-    armourAC: number = 0;
-    shieldAC: number = 0;
     naturalAC: number = 0;
     tempAC: number = 0;
     spellRes: number = 0;
     calcAC = (): number => {
         return 10 + this.calcDexterityBonus() + this.dodgeModifier + this.deflectionModifier
-            + this.armourAC + this.shieldAC + this.naturalAC + this.sizeModifier + this.tempAC;
+            + this.armour.acBonus + this.shield.acBonus + this.naturalAC + this.sizeModifier + this.tempAC;
     };
     calcFlatFootedAC = (): number => {
-        return 10 + this.deflectionModifier + this.armourAC + this.shieldAC + this.naturalAC + this.sizeModifier + this.tempAC;
+        return 10 + this.deflectionModifier + this.armour.acBonus + this.shield.acBonus + this.naturalAC + this.sizeModifier + this.tempAC;
     };
     calcTouchAC = (): number => {
         return 10 + this.calcDexterityBonus() + this.dodgeModifier + this.deflectionModifier + this.sizeModifier + this.tempAC;
     };
+
     //Combat Manoeuvres
     miscCMB: number = 0;
     tempCMB: number = 0;
@@ -305,6 +332,7 @@ export class CharacterSheet {
         return 10 + this.calcStrengthBonus() + this.deflectionModifier + this.baseAttackBonus - this.sizeModifier
             + this.miscCMD + this.tempCMD;
     };
+
     //Hit Points
     maxHP: number = 0;
     currentHP: number = 0;
@@ -312,6 +340,7 @@ export class CharacterSheet {
     nonLethalHP: number = 0;
     damageReduction: string = "";
     energyRes: string = "";
+
     //BAB
     baseAttackBonus: number = 0;
     calcMeleeAttackBonus = (): number => {
@@ -332,10 +361,12 @@ export class CharacterSheet {
     calcTempDamageBonus = (): number => {
         return this.damageMoraleBonus + this.damageBuffs - this.damageNerfs;
     }
+
     //modifiers
     dodgeModifier: number = 0;
     deflectionModifier: number = 0;
     sizeModifier: number = 0;
+
     //Saves
     baseFortSave: number = 0;
     racialFortSave: number = 0;
@@ -358,22 +389,27 @@ export class CharacterSheet {
     calcWillSave = (): number => {
         return this.baseWillSave + this.calcWisdomBonus() + this.racialWillSave + this.miscWillSave + this.tempWillSave;
     };
-    //skills
-    armourPenalty: number = 0;
-    getArmourPenalty = (): number => {
-        return this.armourPenalty;
+
+    //equipment (default to "none")
+    armour: Armour = new Armour("No Armour", "Feels like I'm wearong nothing at all");
+    shield: Shield = new Shield("No Shield", "Even a gnarled log would be better");
+
+    calcArmourCheckPenalty = (): number => {
+        return this.armour.checkPenalty + this.shield.checkPenalty
     }
+
+    //skills
     skills: { [name: string]: Skill; } = {
-        "acrobatics": new Skill(false, this.calcDexterityBonus, this.getArmourPenalty),
+        "acrobatics": new Skill(false, this.calcDexterityBonus, this.calcArmourCheckPenalty),
         "appraise": new Skill(false, this.calcIntelligenceBonus),
         "bluff": new Skill(false, this.calcCharismaBonus),
-        "climb": new Skill(false, this.calcStrengthBonus, this.getArmourPenalty),
+        "climb": new Skill(false, this.calcStrengthBonus, this.calcArmourCheckPenalty),
         "craft": new Skill(false, this.calcIntelligenceBonus),
         "diplomacy": new Skill(false, this.calcCharismaBonus),
-        "disableDevice": new Skill(true, this.calcDexterityBonus, this.getArmourPenalty),
+        "disableDevice": new Skill(true, this.calcDexterityBonus, this.calcArmourCheckPenalty),
         "disguise": new Skill(false, this.calcCharismaBonus),
-        "escapeArtist": new Skill(false, this.calcDexterityBonus, this.getArmourPenalty),
-        "fly": new Skill(false, this.calcDexterityBonus, this.getArmourPenalty),
+        "escapeArtist": new Skill(false, this.calcDexterityBonus, this.calcArmourCheckPenalty),
+        "fly": new Skill(false, this.calcDexterityBonus, this.calcArmourCheckPenalty),
         "handleAnimal": new Skill(true, this.calcCharismaBonus),
         "heal": new Skill(false, this.calcWisdomBonus),
         "intimidate": new Skill(false, this.calcCharismaBonus),
@@ -391,13 +427,13 @@ export class CharacterSheet {
         "perception": new Skill(false, this.calcWisdomBonus),
         "perform": new Skill(false, this.calcCharismaBonus),
         "profession": new Skill(true, this.calcWisdomBonus),
-        "ride": new Skill(false, this.calcDexterityBonus, this.getArmourPenalty),
+        "ride": new Skill(false, this.calcDexterityBonus, this.calcArmourCheckPenalty),
         "senseMotive": new Skill(false, this.calcWisdomBonus),
-        "sleightOfHand": new Skill(true, this.calcDexterityBonus, this.getArmourPenalty),
+        "sleightOfHand": new Skill(true, this.calcDexterityBonus, this.calcArmourCheckPenalty),
         "spellcraft": new Skill(true, this.calcIntelligenceBonus),
-        "stealth": new Skill(false, this.calcDexterityBonus, this.getArmourPenalty),
+        "stealth": new Skill(false, this.calcDexterityBonus, this.calcArmourCheckPenalty),
         "survival": new Skill(false, this.calcWisdomBonus),
-        "swim": new Skill(false, this.calcStrengthBonus, this.getArmourPenalty),
+        "swim": new Skill(false, this.calcStrengthBonus, this.calcArmourCheckPenalty),
         "useMagicDevice": new Skill(true, this.calcCharismaBonus)
     };
 }
