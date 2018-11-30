@@ -15,128 +15,138 @@
 </script>
 
 <body>
-    <div class="container-fluid">
+    <div class="navbar sticky-top navbar-expand navbar-dark bg-dark">
+        <div class="navbar-nav">
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="fileMenuLink" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">File</a>
+                <div class="dropdown-menu" aria-labelledby="fileMenuLink">
+                    <a class="dropdown-item" href="#">Save</a>
+                    <a class="dropdown-item" href="#">Load</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-4">
         <div class="row">
-            <div class="col-6">
-                <div class="col-10">
-                    <div class="row section-head"><label>Ability Scores</label></div>
-                    <div class="form-row align-items-end">
-                        <div class="col-2 ability-title"><label>STR</label></div>
-                        <div class="col form-group" data-value-input="baseStrength">
-                            <label>Base</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="additionalStrength">
-                            <label>Additional</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="tempStrength">
-                            <label>Temp</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-output="calcStrengthBonus">
-                            <label>Bonus</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
+            <div class="col-6 px-5">
+                <div class="row section-head"><label>Ability Scores</label></div>
+                <div class="form-row align-items-end">
+                    <div class="col-2 ability-title"><label>STR</label></div>
+                    <div class="col form-group" data-value-input="baseStrength">
+                        <label>Base</label>
+                        <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="form-row align-items-end">
-                        <div class="col-2 ability-title"><label>DEX</label></div>
-                        <div class="col form-group" data-value-input="baseDexterity">
-                            <label>Base</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="additionalDexterity">
-                            <label>Additional</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="tempDexterity">
-                            <label>Temp</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-output="calcDexterityBonus">
-                            <label>Bonus</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
+                    <div class="col form-group" data-value-input="additionalStrength">
+                        <label>Additional</label>
+                        <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="form-row align-items-end">
-                        <div class="col-2 ability-title"><label>CON</label></div>
-                        <div class="col form-group" data-value-input="baseConstitution">
-                            <label>Base</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="additionalConstitution">
-                            <label>Additional</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="tempConstitution">
-                            <label>Temp</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-output="calcConstitutionBonus">
-                            <label>Bonus</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
+                    <div class="col form-group" data-value-input="tempStrength">
+                        <label>Temp</label>
+                        <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="form-row align-items-end">
-                        <div class="col-2 ability-title"><label>INT</label></div>
-                        <div class="col form-group" data-value-input="baseIntelligence">
-                            <label>Base</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="additionalIntelligence">
-                            <label>Additional</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="tempIntelligence">
-                            <label>Temp</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-output="calcIntelligenceBonus">
-                            <label>Bonus</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
+                    <div class="col form-group" data-value-output="calcStrengthBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="form-row align-items-end">
-                        <div class="col-2 ability-title"><label>WIS</label></div>
-                        <div class="col form-group" data-value-input="baseWisdom">
-                            <label>Base</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="additionalWisdom">
-                            <label>Additional</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="tempWisdom">
-                            <label>Temp</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-output="calcWisdomBonus">
-                            <label>Bonus</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
+                </div>
+                <div class="form-row align-items-end">
+                    <div class="col-2 ability-title"><label>DEX</label></div>
+                    <div class="col form-group" data-value-input="baseDexterity">
+                        <label>Base</label>
+                        <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="form-row align-items-end">
-                        <div class="col-2 ability-title"><label>CHA</label></div>
-                        <div class="col form-group" data-value-input="baseCharisma">
-                            <label>Base</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="additionalCharisma">
-                            <label>Additional</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="tempCharisma">
-                            <label>Temp</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-output="calcCharismaBonus">
-                            <label>Bonus</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
+                    <div class="col form-group" data-value-input="additionalDexterity">
+                        <label>Additional</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="tempDexterity">
+                        <label>Temp</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-output="calcDexterityBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="form-row align-items-end">
+                    <div class="col-2 ability-title"><label>CON</label></div>
+                    <div class="col form-group" data-value-input="baseConstitution">
+                        <label>Base</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="additionalConstitution">
+                        <label>Additional</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="tempConstitution">
+                        <label>Temp</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-output="calcConstitutionBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="form-row align-items-end">
+                    <div class="col-2 ability-title"><label>INT</label></div>
+                    <div class="col form-group" data-value-input="baseIntelligence">
+                        <label>Base</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="additionalIntelligence">
+                        <label>Additional</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="tempIntelligence">
+                        <label>Temp</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-output="calcIntelligenceBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="form-row align-items-end">
+                    <div class="col-2 ability-title"><label>WIS</label></div>
+                    <div class="col form-group" data-value-input="baseWisdom">
+                        <label>Base</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="additionalWisdom">
+                        <label>Additional</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="tempWisdom">
+                        <label>Temp</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-output="calcWisdomBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="form-row align-items-end">
+                    <div class="col-2 ability-title"><label>CHA</label></div>
+                    <div class="col form-group" data-value-input="baseCharisma">
+                        <label>Base</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="additionalCharisma">
+                        <label>Additional</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="tempCharisma">
+                        <label>Temp</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-output="calcCharismaBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control form-control-sm">
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-6 px-5">
                 <div class="row section-head">
                     <label>Health</label>
                 </div>
@@ -249,89 +259,87 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-5">
-                <div class="col-10">
-                    <div class="row section-head"><label>Initiative</label></div>
-                    <div class="form-row align-items-end">
-                        <div class="col form-group" data-value-output="calcInitiative">
-                            <label>Bonus</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-output="calcDexterityBonus">
-                            <label>From DEX</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="featInitiative">
-                            <label>Feats</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="trainingInitiative">
-                            <label>Training</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="miscInitiative">
-                            <label>Misc</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
+        <div class="row mt-4">
+            <div class="col-4 px-5">
+                <div class="row section-head"><label>Initiative</label></div>
+                <div class="form-row align-items-end">
+                    <div class="col form-group" data-value-output="calcInitiative">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="row section-head"><label>Base Attack</label></div>
-                    <div class="form-row align-items-end">
-                        <div class="col form-group" data-value-input="baseAttackBonus">
-                            <label>Bonus</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-output="calcMeleeAttackBonus">
-                            <label>Melee</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-output="calcRangedAttackBonus">
-                            <label>Ranged</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
+                    <div class="col form-group" data-value-output="calcDexterityBonus">
+                        <label>From DEX</label>
+                        <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="form-row align-items-end">
-                        <div class="col form-group" data-value-output="calcTempAttackBonus">
-                            <label>Temp Attack Bonus</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="attackMoraleBonus">
-                            <label>Morale Bonus</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="attackBuffs">
-                            <label>Buffs</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="attackNerfs">
-                            <label>Nerfs</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
+                    <div class="col form-group" data-value-input="featInitiative">
+                        <label>Feats</label>
+                        <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="form-row align-items-end">
-                        <div class="col form-group" data-value-output="calcTempDamageBonus">
-                            <label>Temp Damage Bonus</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="damageMoraleBonus">
-                            <label>Morale Bonus</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="damageBuffs">
-                            <label>Buffs</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
-                        <div class="col form-group" data-value-input="damageNerfs">
-                            <label>Nerfs</label>
-                            <input type="number" class="form-control form-control-sm">
-                        </div>
+                    <div class="col form-group" data-value-input="trainingInitiative">
+                        <label>Training</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="miscInitiative">
+                        <label>Misc</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="row section-head"><label>Base Attack</label></div>
+                <div class="form-row align-items-end">
+                    <div class="col form-group" data-value-input="baseAttackBonus">
+                        <label>Bonus</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-output="calcMeleeAttackBonus">
+                        <label>Melee</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-output="calcRangedAttackBonus">
+                        <label>Ranged</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="form-row align-items-end">
+                    <div class="col form-group" data-value-output="calcTempAttackBonus">
+                        <label>Temp Attack Bonus</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="attackMoraleBonus">
+                        <label>Morale Bonus</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="attackBuffs">
+                        <label>Buffs</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="attackNerfs">
+                        <label>Nerfs</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="form-row align-items-end">
+                    <div class="col form-group" data-value-output="calcTempDamageBonus">
+                        <label>Temp Damage Bonus</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="damageMoraleBonus">
+                        <label>Morale Bonus</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="damageBuffs">
+                        <label>Buffs</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="damageNerfs">
+                        <label>Nerfs</label>
+                        <input type="number" class="form-control form-control-sm">
                     </div>
                 </div>
             </div>
-            <div class="col-7">
+            <div class="col-8 px-5">
                 <div class="row section-head"><label>Skills</label></div>
                 <div class="form-row">
-                    <div class="col-3"></div>
+                    <div class="col-4"></div>
                     <div class="col"><label>Trained Only</label></div>
                     <div class="col"><label>Skill Bonus</label></div>
                     <div class="col"><label>Ability Bonus</label></div>
@@ -343,7 +351,7 @@
                     <div class="col"><label>Armour Check Penalty</label></div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="acrobatics">
-                    <div class="col-3"><label>Acrobatics</label></div>
+                    <div class="col-4"><label>Acrobatics</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -373,7 +381,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="appraise">
-                    <div class="col-3"><label>Appraise</label></div>
+                    <div class="col-4"><label>Appraise</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -403,7 +411,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="bluff">
-                    <div class="col-3"><label>Bluff</label></div>
+                    <div class="col-4"><label>Bluff</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -433,7 +441,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="climb">
-                    <div class="col-3"><label>Climb</label></div>
+                    <div class="col-4"><label>Climb</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -463,7 +471,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="craft">
-                    <div class="col-3"><label>Craft</label></div>
+                    <div class="col-4"><label>Craft</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -493,7 +501,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="diplomacy">
-                    <div class="col-3"><label>Diplomacy</label></div>
+                    <div class="col-4"><label>Diplomacy</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -523,7 +531,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="disableDevice">
-                    <div class="col-3"><label>Disable Device</label></div>
+                    <div class="col-4"><label>Disable Device</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -553,7 +561,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="disguise">
-                    <div class="col-3"><label>Disguise</label></div>
+                    <div class="col-4"><label>Disguise</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -583,7 +591,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="escapeArtist">
-                    <div class="col-3"><label>Escape Artist</label></div>
+                    <div class="col-4"><label>Escape Artist</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -613,7 +621,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="fly">
-                    <div class="col-3"><label>Fly</label></div>
+                    <div class="col-4"><label>Fly</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -643,7 +651,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="handleAnimal">
-                    <div class="col-3"><label>Handle Animal</label></div>
+                    <div class="col-4"><label>Handle Animal</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -673,7 +681,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="heal">
-                    <div class="col-3"><label>Heal</label></div>
+                    <div class="col-4"><label>Heal</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -703,7 +711,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="intimidate">
-                    <div class="col-3"><label>Intimidate</label></div>
+                    <div class="col-4"><label>Intimidate</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -733,7 +741,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="knowledgeArcana">
-                    <div class="col-3"><label>Knowledge (Arcana)</label></div>
+                    <div class="col-4"><label>Knowledge (Arcana)</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -763,7 +771,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="knowledgeDungeoneering">
-                    <div class="col-3"><label>Knowledge (Dungeoneering)</label></div>
+                    <div class="col-4"><label>Knowledge (Dungeoneering)</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -793,7 +801,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="knowledgeEngineering">
-                    <div class="col-3"><label>Knowledge (Engineering)</label></div>
+                    <div class="col-4"><label>Knowledge (Engineering)</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -823,7 +831,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="knowledgeGeography">
-                    <div class="col-3"><label>Knowledge (Geography)</label></div>
+                    <div class="col-4"><label>Knowledge (Geography)</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -853,7 +861,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="knowledgeHistory">
-                    <div class="col-3"><label>Knowledge (History)</label></div>
+                    <div class="col-4"><label>Knowledge (History)</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -883,7 +891,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="knowledgeLocal">
-                    <div class="col-3"><label>Knowledge (Local)</label></div>
+                    <div class="col-4"><label>Knowledge (Local)</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -913,7 +921,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="knowledgeNature">
-                    <div class="col-3"><label>Knowledge (Nature)</label></div>
+                    <div class="col-4"><label>Knowledge (Nature)</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -943,7 +951,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="knowledgeNobility">
-                    <div class="col-3"><label>Knowledge (Nobility)</label></div>
+                    <div class="col-4"><label>Knowledge (Nobility)</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -973,7 +981,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="knowledgePlanes">
-                    <div class="col-3"><label>Knowledge (Planes)</label></div>
+                    <div class="col-4"><label>Knowledge (Planes)</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1003,7 +1011,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="knowledgeReligion">
-                    <div class="col-3"><label>Knowledge (Religion)</label></div>
+                    <div class="col-4"><label>Knowledge (Religion)</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1033,7 +1041,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="linguistics">
-                    <div class="col-3"><label>Linguistics</label></div>
+                    <div class="col-4"><label>Linguistics</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1063,7 +1071,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="perception">
-                    <div class="col-3"><label>Perception</label></div>
+                    <div class="col-4"><label>Perception</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1093,7 +1101,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="perform">
-                    <div class="col-3"><label>Perform</label></div>
+                    <div class="col-4"><label>Perform</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1123,7 +1131,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="profession">
-                    <div class="col-3"><label>Profession</label></div>
+                    <div class="col-4"><label>Profession</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1153,7 +1161,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="ride">
-                    <div class="col-3"><label>Ride</label></div>
+                    <div class="col-4"><label>Ride</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1183,7 +1191,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="senseMotive">
-                    <div class="col-3"><label>Sense Motive</label></div>
+                    <div class="col-4"><label>Sense Motive</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1213,7 +1221,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="sleightOfHand">
-                    <div class="col-3"><label>Sleight of Hand</label></div>
+                    <div class="col-4"><label>Sleight of Hand</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1243,7 +1251,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="spellcraft">
-                    <div class="col-3"><label>Spellcraft</label></div>
+                    <div class="col-4"><label>Spellcraft</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1273,7 +1281,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="stealth">
-                    <div class="col-3"><label>Stealth</label></div>
+                    <div class="col-4"><label>Stealth</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1303,7 +1311,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="survival">
-                    <div class="col-3"><label>Survival</label></div>
+                    <div class="col-4"><label>Survival</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1333,7 +1341,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="swim">
-                    <div class="col-3"><label>Swim</label></div>
+                    <div class="col-4"><label>Swim</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1363,7 +1371,7 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end" data-skill-name="useMagicDevice">
-                    <div class="col-3"><label>Use Magic Device</label></div>
+                    <div class="col-4"><label>Use Magic Device</label></div>
                     <div class="col" data-skill-output="trained">
                         <input type="checkbox" class="form-control form-control-sm input-sm">
                     </div>
@@ -1394,228 +1402,230 @@
                 </div>
             </div>
         </div>
-        <div class="row section-head"><label>Armour Class</label></div>
-        <div class="form-row align-items-end">
-            <div class="col form-group" data-value-output="calcAC">
-                <label>Armour Class</label>
-                <input type="number" class="form-control form-control-sm">
+        <div class="px-5 mt-4">
+            <div class="row section-head"><label>Armour Class</label></div>
+            <div class="form-row align-items-end">
+                <div class="col form-group" data-value-output="calcAC">
+                    <label>Armour Class</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group">
+                    <label>Base</label>
+                    <input type="number" class="form-control form-control-sm" value="10" disabled>
+                </div>
+                <div class="col form-group" data-value-output="calcDexterityBonus">
+                    <label>DEX</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-input="dodgeModifier">
+                    <label>Dodge</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-input="deflectionModifier">
+                    <label>Deflection</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-input="armourAC">
+                    <label>Armour</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-input="shieldAC">
+                    <label>Shield</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-input="naturalAC">
+                    <label>Natural</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-input="sizeModifier">
+                    <label>Size</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
             </div>
-            <div class="col form-group">
-                <label>Base</label>
-                <input type="number" class="form-control form-control-sm" value="10" disabled>
+            <div class="form-row align-items-end">
+                <div class="col form-group" data-value-output="calcFlatFootedAC">
+                    <label>Flat-Footed</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group">
+                    <label>Base</label>
+                    <input type="number" class="form-control form-control-sm" value="10" disabled>
+                </div>
+                <div class="col">
+                </div>
+                <div class="col">
+                </div>
+                <div class="col form-group" data-value-output="deflectionModifier">
+                    <label>Deflection</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="armourAC">
+                    <label>Armour</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="shieldAC">
+                    <label>Shield</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="naturalAC">
+                    <label>Natural</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="sizeModifier">
+                    <label>Size</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
             </div>
-            <div class="col form-group" data-value-output="calcDexterityBonus">
-                <label>DEX</label>
-                <input type="number" class="form-control form-control-sm">
+            <div class="form-row align-items-end">
+                <div class="col form-group" data-value-output="calcTouchAC">
+                    <label>Touch</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group">
+                    <label>Base</label>
+                    <input type="number" class="form-control form-control-sm" value="10" disabled>
+                </div>
+                <div class="col form-group" data-value-output="calcDexterityBonus">
+                    <label>DEX</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="dodgeModifier">
+                    <label>Dodge</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="deflectionModifier">
+                    <label>Deflection</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col">
+                </div>
+                <div class="col">
+                </div>
+                <div class="col">
+                </div>
+                <div class="col form-group" data-value-output="sizeModifier">
+                    <label>Size</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
             </div>
-            <div class="col form-group" data-value-input="dodgeModifier">
-                <label>Dodge</label>
-                <input type="number" class="form-control form-control-sm">
+            <div class="form-row align-items-end">
+                <div class="col-2 form-group">
+                    <label>Temp AC</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col-2 form-group">
+                    <label>Spell Res.</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
             </div>
-            <div class="col form-group" data-value-input="deflectionModifier">
-                <label>Deflection</label>
-                <input type="number" class="form-control form-control-sm">
+            <div class="row section-head"><label>Combat Manoeuvres</label></div>
+            <div class="form-row align-items-end">
+                <div class="col form-group" data-value-output="calcCMB">
+                    <label>CMB</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="calcStrengthBonus">
+                    <label>STR</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="baseAttackBonus">
+                    <label>BAB</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-input="sizeModifier">
+                    <label>Size</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-input="miscCMB">
+                    <label>Misc</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
             </div>
-            <div class="col form-group" data-value-input="armourAC">
-                <label>Armour</label>
-                <input type="number" class="form-control form-control-sm">
+            <div class="form-row align-items-end">
+                <div class="col form-group" data-value-output="calcCMD">
+                    <label>CMD</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group">
+                    <label>Base</label>
+                    <input type="number" class="form-control form-control-sm" value="10" disabled>
+                </div>
+                <div class="col form-group" data-value-output="calcStrengthBonus">
+                    <label>STR</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="calcDexterityBonus">
+                    <label>DEX</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="dodgeModifier">
+                    <label>Dodge</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="deflectionModifier">
+                    <label>Deflection</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="baseAttackBonus">
+                    <label>BAB</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="sizeModifier">
+                    <label>Size</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-input="miscCMD">
+                    <label>Misc</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
             </div>
-            <div class="col form-group" data-value-input="shieldAC">
-                <label>Shield</label>
-                <input type="number" class="form-control form-control-sm">
+            <div class="form-row align-items-end">
+                <div class="col form-group" data-value-output="calcFlatFootedCMD">
+                    <label>Flat-Footed</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group">
+                    <label>Base</label>
+                    <input type="number" class="form-control form-control-sm" value="10" disabled>
+                </div>
+                <div class="col form-group" data-value-output="calcStrengthBonus">
+                    <label>STR</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col">
+                </div>
+                <div class="col">
+                </div>
+                <div class="col form-group" data-value-output="deflectionModifier">
+                    <label>Deflection</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="baseAttackBonus">
+                    <label>BAB</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="sizeModifier">
+                    <label>Size</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col form-group" data-value-output="miscCMD">
+                    <label>Misc</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
             </div>
-            <div class="col form-group" data-value-input="naturalAC">
-                <label>Natural</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-input="sizeModifier">
-                <label>Size</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-        </div>
-        <div class="form-row align-items-end">
-            <div class="col form-group" data-value-output="calcFlatFootedAC">
-                <label>Flat-Footed</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group">
-                <label>Base</label>
-                <input type="number" class="form-control form-control-sm" value="10" disabled>
-            </div>
-            <div class="col">
-            </div>
-            <div class="col">
-            </div>
-            <div class="col form-group" data-value-output="deflectionModifier">
-                <label>Deflection</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="armourAC">
-                <label>Armour</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="shieldAC">
-                <label>Shield</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="naturalAC">
-                <label>Natural</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="sizeModifier">
-                <label>Size</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-        </div>
-        <div class="form-row align-items-end">
-            <div class="col form-group" data-value-output="calcTouchAC">
-                <label>Touch</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group">
-                <label>Base</label>
-                <input type="number" class="form-control form-control-sm" value="10" disabled>
-            </div>
-            <div class="col form-group" data-value-output="calcDexterityBonus">
-                <label>DEX</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="dodgeModifier">
-                <label>Dodge</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="deflectionModifier">
-                <label>Deflection</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col">
-            </div>
-            <div class="col">
-            </div>
-            <div class="col">
-            </div>
-            <div class="col form-group" data-value-output="sizeModifier">
-                <label>Size</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-        </div>
-        <div class="form-row align-items-end">
-            <div class="col-2 form-group">
-                <label>Temp AC</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col-2 form-group">
-                <label>Spell Res.</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-        </div>
-        <div class="row section-head"><label>Combat Manoeuvres</label></div>
-        <div class="form-row align-items-end">
-            <div class="col form-group" data-value-output="calcCMB">
-                <label>CMB</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="calcStrengthBonus">
-                <label>STR</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="baseAttackBonus">
-                <label>BAB</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-input="sizeModifier">
-                <label>Size</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-input="miscCMB">
-                <label>Misc</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col"></div>
-            <div class="col"></div>
-            <div class="col"></div>
-            <div class="col"></div>
-        </div>
-        <div class="form-row align-items-end">
-            <div class="col form-group" data-value-output="calcCMD">
-                <label>CMD</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group">
-                <label>Base</label>
-                <input type="number" class="form-control form-control-sm" value="10" disabled>
-            </div>
-            <div class="col form-group" data-value-output="calcStrengthBonus">
-                <label>STR</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="calcDexterityBonus">
-                <label>DEX</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="dodgeModifier">
-                <label>Dodge</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="deflectionModifier">
-                <label>Deflection</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="baseAttackBonus">
-                <label>BAB</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="sizeModifier">
-                <label>Size</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-input="miscCMD">
-                <label>Misc</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-        </div>
-        <div class="form-row align-items-end">
-            <div class="col form-group" data-value-output="calcFlatFootedCMD">
-                <label>Flat-Footed</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group">
-                <label>Base</label>
-                <input type="number" class="form-control form-control-sm" value="10" disabled>
-            </div>
-            <div class="col form-group" data-value-output="calcStrengthBonus">
-                <label>STR</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col">
-            </div>
-            <div class="col">
-            </div>
-            <div class="col form-group" data-value-output="deflectionModifier">
-                <label>Deflection</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="baseAttackBonus">
-                <label>BAB</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="sizeModifier">
-                <label>Size</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col form-group" data-value-output="miscCMD">
-                <label>Misc</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-        </div>
-        <div class="form-row align-items-end">
-            <div class="col-2 form-group">
-                <label>Temp CMB</label>
-                <input type="number" class="form-control form-control-sm">
-            </div>
-            <div class="col-2 form-group">
-                <label>Temp CMD</label>
-                <input type="number" class="form-control form-control-sm">
+            <div class="form-row align-items-end">
+                <div class="col-2 form-group">
+                    <label>Temp CMB</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="col-2 form-group">
+                    <label>Temp CMD</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
             </div>
         </div>
     </div>
