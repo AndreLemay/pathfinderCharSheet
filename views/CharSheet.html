@@ -147,6 +147,53 @@
                 </div>
             </div>
             <div class="col-6 px-5">
+                <div class="row section-head"><label>Character</label></div>
+                <div class="form-row align-items-end">
+                    <div class="col form-group" data-value-input="characterName">
+                        <label>Name</label>
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="alignment">
+                        <label>Alignment</label>
+                        <select class="form-control form-control-sm">
+                            <option value="0">Lawful Good</option>
+                            <option value="1">Lawful Neutral</option>
+                            <option value="2">Lawful Evil</option>
+                            <option value="3">Neutral Good</option>
+                            <option value="4">True Neutral</option>
+                            <option value="5">Neutral Evil</option>
+                            <option value="6">Chaotic Good</option>
+                            <option value="7">Chaotic Neutral</option>
+                            <option value="8">Chaotic Evil</option>
+                        </select>
+                    </div>
+                    <div class="col form-group" data-value-input="gender">
+                        <label>Gender</label>
+                        <select class="form-control form-control-sm">
+                            <option value="0">Male</option>
+                            <option value="1">Female</option>
+                            <option value="2">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row align-items-end">
+                    <div class="col form-group" data-value-input="race">
+                        <label>Race</label>
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col form-group" data-value-input="size">
+                        <label>Size</label>
+                        <select class="form-control form-control-sm">
+                            <option value="0">Small</option>
+                            <option value="1">Medium</option>
+                            <option value="2">Large</option>
+                        </select>
+                    </div>
+                    <div class="col form-group" data-value-input="sizeModifier">
+                        <label>Size Modifier</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                </div>
                 <div class="row section-head">
                     <label>Health</label>
                 </div>
@@ -169,13 +216,13 @@
                     </div>
                 </div>
                 <div class="form-row align-items-end">
-                    <div class="col-6 form-group">
+                    <div class="col-6 form-group" data-value-input="damageReduction">
                         <label>Damage Reduction</label>
-                        <numberarea form-row align-items-ends="3" class="form-control form-control-sm"></numberarea>
+                        <textarea rows="3" class="form-control form-control-sm"></textarea>
                     </div>
-                    <div class="col-6 form-group">
+                    <div class="col-6 form-group" data-value-input="energyRes">
                         <label>Energy Resistance</label>
-                        <numberarea form-row align-items-ends="3" class="form-control form-control-sm"></numberarea>
+                        <textarea rows="3" class="form-control form-control-sm"></textarea>
                     </div>
                 </div>
                 <div class="row section-head"><label>Saves</label></div>
@@ -1437,7 +1484,7 @@
                     <label>Natural</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
-                <div class="col form-group" data-value-input="sizeModifier">
+                <div class="col form-group" data-value-output="sizeModifier">
                     <label>Size</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
@@ -1509,11 +1556,11 @@
                 </div>
             </div>
             <div class="form-row align-items-end">
-                <div class="col-2 form-group">
+                <div class="col-2 form-group" data-value-input="tempAC">
                     <label>Temp AC</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
-                <div class="col-2 form-group">
+                <div class="col-2 form-group" data-value-input="spellRes">
                     <label>Spell Res.</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
@@ -1532,7 +1579,7 @@
                     <label>BAB</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
-                <div class="col form-group" data-value-input="sizeModifier">
+                <div class="col form-group" data-value-output="sizeModifier">
                     <label>Size</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
@@ -1618,11 +1665,11 @@
                 </div>
             </div>
             <div class="form-row align-items-end">
-                <div class="col-2 form-group">
+                <div class="col-2 form-group" data-value-input="tempCMB">
                     <label>Temp CMB</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
-                <div class="col-2 form-group">
+                <div class="col-2 form-group" data-value-input="tempCMD">
                     <label>Temp CMD</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>

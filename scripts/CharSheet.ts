@@ -13,6 +13,30 @@ enum EnergyType {
     Lightning = "Lightning",
 }
 
+enum Alignment {
+    LawfulGood,
+    LawfulNeutral,
+    LawfulEvil,
+    NeutralGood,
+    TrueNeutral,
+    NeutralEvil,
+    ChaoticGood,
+    ChaoticNeutral,
+    ChaoticEvil
+}
+
+enum Gender {
+    Male,
+    Female,
+    Other
+}
+
+enum Size {
+    Small,
+    Medium,
+    Large
+}
+
 enum StatType {
     Strength = "STR",
     Dexterity = "DEX",
@@ -44,6 +68,11 @@ interface ValueBonus {
 }
 
 interface SavedCharacter {
+    characterName?: string,
+    alignment?: Alignment,
+    gender?: Gender,
+    race?: string,
+    size?: Size,
     baseStrength?: number,
     additionalStrength?: number,
     tempStrength?: number,
@@ -68,12 +97,18 @@ interface SavedCharacter {
     armourAC?: number,
     shieldAC?: number,
     naturalAC?: number,
+    tempAC?: number,
+    spellRes?: number,
     miscCMB?: number,
+    tempCMB?: number,
     miscCMD?: number,
+    tempCMD?: number,
     maxHP?: number,
     currentHP?: number,
     tempHP?: number,
     nonLethalHP?: number,
+    damageReduction?: string,
+    energyRes?: string,
     baseAttackBonus?: number,
     attackMoraleBonus?: number,
     attackBuffs?: number,
@@ -187,6 +222,13 @@ export class CharacterSheet {
         return sheet;
     }
 
+    //Character info
+    characterName: string = "Default Name";
+    alignment: Alignment = Alignment.TrueNeutral;
+    gender: Gender = Gender.Male;
+    race: string = "Human";
+    size: Size = Size.Medium;
+
     //Ability Scores
     baseStrength: number = 10;
     additionalStrength: number = 0;
@@ -235,34 +277,41 @@ export class CharacterSheet {
     armourAC: number = 0;
     shieldAC: number = 0;
     naturalAC: number = 0;
+    tempAC: number = 0;
+    spellRes: number = 0;
     calcAC = (): number => {
         return 10 + this.calcDexterityBonus() + this.dodgeModifier + this.deflectionModifier
-            + this.armourAC + this.shieldAC + this.naturalAC + this.sizeModifier;
+            + this.armourAC + this.shieldAC + this.naturalAC + this.sizeModifier + this.tempAC;
     };
     calcFlatFootedAC = (): number => {
-        return 10 + this.deflectionModifier + this.armourAC + this.shieldAC + this.naturalAC + this.sizeModifier;
+        return 10 + this.deflectionModifier + this.armourAC + this.shieldAC + this.naturalAC + this.sizeModifier + this.tempAC;
     };
     calcTouchAC = (): number => {
-        return 10 + this.calcDexterityBonus() + this.dodgeModifier + this.deflectionModifier + this.sizeModifier;
+        return 10 + this.calcDexterityBonus() + this.dodgeModifier + this.deflectionModifier + this.sizeModifier + this.tempAC;
     };
     //Combat Manoeuvres
     miscCMB: number = 0;
+    tempCMB: number = 0;
     calcCMB = (): number => {
-        return this.calcStrengthBonus() + this.baseAttackBonus - this.sizeModifier + this.miscCMB;
+        return this.calcStrengthBonus() + this.baseAttackBonus - this.sizeModifier + this.miscCMB + this.tempCMB;
     };
     miscCMD: number = 0;
+    tempCMD: number = 0;
     calcCMD = (): number => {
         return 10 + this.calcStrengthBonus() + this.calcDexterityBonus() + this.dodgeModifier + this.deflectionModifier
-            + this.baseAttackBonus - this.sizeModifier + this.miscCMD;
+            + this.baseAttackBonus - this.sizeModifier + this.miscCMD + this.tempCMD;
     };
     calcFlatFootedCMD = (): number => {
-        return 10 + this.calcStrengthBonus() + this.deflectionModifier + this.baseAttackBonus - this.sizeModifier + this.miscCMD;
+        return 10 + this.calcStrengthBonus() + this.deflectionModifier + this.baseAttackBonus - this.sizeModifier
+            + this.miscCMD + this.tempCMD;
     };
     //Hit Points
     maxHP: number = 0;
     currentHP: number = 0;
     tempHP: number = 0;
     nonLethalHP: number = 0;
+    damageReduction: string = "";
+    energyRes: string = "";
     //BAB
     baseAttackBonus: number = 0;
     calcMeleeAttackBonus = (): number => {

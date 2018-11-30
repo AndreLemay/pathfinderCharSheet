@@ -30,7 +30,7 @@ function getSheetProp(prop: string, skillName: string = null) {
 function initEvents() {
     //save button
     $("#saveButton").click(() => {
-        let savePath = path.join(remote.app.getPath("appData"), "pfCharSheets", "charSave.sav");
+        let savePath = path.join(remote.app.getPath("appData"), "pfCharSheets", sheet.characterName + ".sav");
         jetpack.write(savePath, sheet.save());
     });
 
@@ -49,7 +49,7 @@ function initEvents() {
     });
 
     //basic inputs
-    $("div[data-value-input]>input").change((event) => {
+    $("div[data-value-input]>input, div[data-value-input]>select").change((event) => {
         var elem = $(event.currentTarget);
         sheet[elem.parent().attr("data-value-input")] = +elem.val();
         recalcSheet();
@@ -84,7 +84,7 @@ function initFields() {
     $("div[data-value-output]>input,div[data-skill-output]>input").prop("disabled", true);
 
     //initialize inputs to default values
-    $("div[data-value-input]>input").attr("value", function () {
+    $("div[data-value-input]>input, div[data-value-input]>select").attr("value", function () {
         var sheetProp = $(this).parent().attr("data-value-input");
         return sheet[sheetProp];
     });
