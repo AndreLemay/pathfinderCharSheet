@@ -141,7 +141,7 @@ export class Skill {
 }
 
 export class CharacterSheet {
-    save = (): string => {
+    save = (): SavedCharacter => {
         var characterObj: SavedCharacter = {};
         for (let prop of Object.keys(this)) {
             if (prop === "skills" || typeof this[prop] === "function")
@@ -162,8 +162,30 @@ export class CharacterSheet {
             }
         }
 
-        return JSON.stringify(characterObj);
+        return characterObj;
     };
+
+    static load = (characterObj: SavedCharacter): CharacterSheet => {
+        let sheet = new CharacterSheet();
+        for (let prop in characterObj) {
+            if (prop === "skills")
+                continue;
+
+            sheet[prop] = characterObj[prop];
+        }
+
+        for (let name in characterObj.skills) {
+            let savedSkill = characterObj.skills[name];
+            let skill = sheet.skills[name];
+            skill.isClassSkill = savedSkill.isClassSkill;
+            skill.ranks = savedSkill.ranks;
+            skill.racialBonus = savedSkill.racialBonus;
+            skill.featBonus = savedSkill.featBonus;
+            skill.miscBonus = savedSkill.miscBonus;
+        }
+
+        return sheet;
+    }
 
     //Ability Scores
     baseStrength: number = 10;
