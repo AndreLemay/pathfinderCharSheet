@@ -13,3 +13,18 @@
     align-items: center;
     margin: auto;
 }
+
+.equipment-container {
+    overflow: auto;
+    height: 405px;
+    padding: 0 5px 0 5px;
+    margin: 0 -15px 0 -15px;
+}
+
+.equipment-item {
+    border-bottom: 1px solid darkgray;
+}
+
+.equipment-item .form-group {
+    margin-bottom: 5px;
+}

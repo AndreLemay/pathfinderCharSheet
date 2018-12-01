@@ -1,11 +1,27 @@
 export enum BonusType {
-    Enhancement,
-    Dodge,
+    Alchemical,
+    Armour,
+    Attack,
+    Circumstance,
+    Competence,
     Deflection,
-    Morale
+    Dodge,
+    Enhancement,
+    Inherent,
+    Insight,
+    Luck,
+    Morale,
+    NaturalArmour,
+    Profane,
+    Racial,
+    Resistance,
+    Sacred,
+    Shield,
+    Size,
+    Trait
 }
 
-enum Alignment {
+export enum Alignment {
     LawfulGood,
     LawfulNeutral,
     LawfulEvil,
@@ -17,13 +33,13 @@ enum Alignment {
     ChaoticEvil
 }
 
-enum Gender {
+export enum Gender {
     Male,
     Female,
     Other
 }
 
-enum Size {
+export enum Size {
     Small,
     Medium,
     Large
@@ -44,10 +60,11 @@ export enum StatType {
     FortitudeSave,
     ReflexSave,
     WillSave,
-    ArmourClass
+    ArmourClass,
+    AllSaves
 }
 
-enum ArmourType {
+export enum ArmourType {
     None,
     Light,
     Medium,
@@ -65,35 +82,40 @@ export class ValueBonus {
         this.bonusAmount = bonusAmount;
     }
 
-    asString(): string {
+    asString(short?: boolean): string {
         var retStr = "";
 
         //amount
-        retStr += (this.bonusAmount > 0 ? "+" : "") + this.bonusAmount;
+        retStr += (this.bonusAmount > 0 ? "+" : "") + this.bonusAmount + " ";
 
         //type
-        switch (this.bonusType) {
-            case BonusType.Enhancement:
-                retStr += " enhancement bonus to ";
-                break;
-            case BonusType.Morale:
-                retStr += " morale bonus to ";
-                break;
-            case BonusType.Deflection:
-                retStr += " deflection bonus to ";
-                break;
-            case BonusType.Dodge:
-                retStr += " dodge bonus to ";
-                break;
+        if (!short) {
+            switch (this.bonusType) {
+                case BonusType.Enhancement:
+                    retStr += "enhancement bonus to ";
+                    break;
+                case BonusType.Morale:
+                    retStr += "morale bonus to ";
+                    break;
+                case BonusType.Deflection:
+                    retStr += "deflection bonus to ";
+                    break;
+                case BonusType.Dodge:
+                    retStr += "dodge bonus to ";
+                    break;
+            }
         }
 
         //affected stat
         switch (this.affectedStat) {
+            case StatType.AllSaves:
+                retStr += short ? "saves" : "all saving throws";
+                break;
             case StatType.ArmourClass:
                 retStr += "AC";
                 break;
             case StatType.Attack:
-                retStr += "attack";
+                retStr += short ? "atk" : "attack";
                 break;
             case StatType.CMB:
                 retStr += "CMB";
@@ -102,37 +124,37 @@ export class ValueBonus {
                 retStr += "CMD";
                 break;
             case StatType.Charisma:
-                retStr += "charisma";
+                retStr += short ? "CHA" : "charisma";
                 break;
             case StatType.Constitution:
-                retStr += "constitution";
+                retStr += short ? "CON" : "constitution";
                 break;
             case StatType.Damage:
-                retStr += "damage";
+                retStr += short ? "dmg" : "damage";
                 break;
             case StatType.Dexterity:
-                retStr += "dexterity";
+                retStr += short ? "DEX" : "dexterity";
                 break;
             case StatType.FortitudeSave:
-                retStr += "fortitude saves";
+                retStr += short ? "fort." : "fortitude saves";
                 break;
             case StatType.Initiative:
-                retStr += "initiative";
+                retStr += short ? "init." : "initiative";
                 break;
             case StatType.Intelligence:
-                retStr += "intelligence";
+                retStr += short ? "INT" : "intelligence";
                 break;
             case StatType.ReflexSave:
-                retStr += "reflex saves";
+                retStr += short ? "ref." : "reflex saves";
                 break;
             case StatType.Strength:
-                retStr += "strength";
+                retStr += short ? "STR" : "strength";
                 break;
             case StatType.WillSave:
-                retStr += "will saves";
+                retStr += short ? "will" : "will saves";
                 break;
             case StatType.Wisdom:
-                retStr += "wisdom";
+                retStr += short ? "WIS" : "wisdom";
                 break;
         }
 
@@ -142,22 +164,20 @@ export class ValueBonus {
 
 export class Equipment {
     name: string;
-    description: string;
     bonuses: ValueBonus[] = [];
 
-    constructor(name: string, description: string, ...bonuses: ValueBonus[]) {
+    constructor(name: string, ...bonuses: ValueBonus[]) {
         this.name = name;
-        this.description = description;
         this.bonuses = bonuses;
     }
 
-    bonusesToString = (): string => {
+    bonusesToString = (short?: boolean): string => {
         var retStr = "";
 
         for (var i = 0; i < this.bonuses.length; i++) {
             var bonus = this.bonuses[i];
 
-            retStr += bonus.asString();
+            retStr += bonus.asString(short);
 
             if (i < this.bonuses.length - 1)
                 retStr += ", ";
@@ -175,9 +195,8 @@ class Armour extends Equipment {
     maxSpeed: number = 0;
     constructor(
         name: string,
-        description: string,
         ...bonuses: ValueBonus[]) {
-        super(name, description, ...bonuses);
+        super(name, ...bonuses);
     }
 }
 
@@ -185,8 +204,8 @@ class Shield extends Equipment {
     acBonus: number = 0;
     checkPenalty: number = 0;
 
-    constructor(name: string, description: string, ...bonuses: ValueBonus[]) {
-        super(name, description, ...bonuses);
+    constructor(name: string, ...bonuses: ValueBonus[]) {
+        super(name, ...bonuses);
     }
 }
 
@@ -400,8 +419,8 @@ export class CharacterSheet {
     };
 
     //equipment (default to "none")
-    armour: Armour = new Armour("No Armour", "Feels like I'm wearong nothing at all");
-    shield: Shield = new Shield("No Shield", "Even a gnarled log would be better");
+    armour: Armour = new Armour("No Armour");
+    shield: Shield = new Shield("No Shield");
 
     calcArmourCheckPenalty = (): number => {
         return this.armour.checkPenalty + this.shield.checkPenalty

@@ -1,5 +1,5 @@
 {
-  "name": "electron-quick-start-typescript",
+  "name": "pathfinder-char-sheet",
   "version": "1.0.0",
   "description": "Pathfinder Character Sheet",
   "scripts": {
@@ -19,6 +19,7 @@
     "jquery": "^3.3.1",
     "popper.js": "^1.14.6",
     "@types/jquery": "^3.3.22",
-    "fs-jetpack": "^2.2.0"
+    "fs-jetpack": "^2.2.0",
+    "@types/bootstrap": "^4.1.2"
   }
 }

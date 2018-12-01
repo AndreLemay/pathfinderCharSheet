@@ -1,14 +1,47 @@
 import { remote } from "electron"
 import * as jetpack from "fs-jetpack"
 import * as path from "path"
-import { CharacterSheet, Skill, Equipment, ValueBonus, BonusType, StatType } from "./CharSheet"
+import {
+    CharacterSheet, Skill, Equipment, ValueBonus, BonusType, StatType,
+    Alignment, Gender, Size, ArmourType
+} from "./CharSheet"
 import * as $ from "jquery"
+import "bootstrap"
 
 let sheet = new CharacterSheet();
 let tempEquip: Equipment = null;
 
 function recalcSheet() {
     $("div[data-value-output]>input, div[data-skill-name]").trigger("charSheet:recalc");
+}
+
+function renderEnumToDropdown(dropdownSelector: string, enumType: any /*typescript is weird so just take any...*/) {
+    Object.keys(enumType).forEach((type: any) => {
+        if (isNaN(type)) {
+            $(dropdownSelector).append(`<option value="${enumType[type]}">${type}</option>`);
+        }
+    });
+}
+
+function renderEquipment() {
+    //clear before re-rendering
+    $(".equipment-container").empty();
+
+    sheet.equipment.forEach((item: Equipment) => {
+        var html: string =
+            `<div class="form-row align-items-end equipment-item">
+                <div class="col-3 form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control form-control-sm" disabled value="${item.name}">
+                </div>
+                <div class="col-9 form-group">
+                    <label>Properties</label>
+                    <input type="text" class="form-control form-control-sm" disabled id="properties" value="${item.bonusesToString(true)}">
+                </div>
+            </div>`;
+
+        $(".equipment-container").append(html);
+    });
 }
 
 function getSheetProp(prop: string, skillName: string = null) {
@@ -145,33 +178,30 @@ function initFields() {
 function initModal() {
     //initialize the var we use to store the modal values
     $("#addEquipmentModal").on("show.bs.modal", () => {
-        tempEquip = new Equipment("", "");
+        tempEquip = new Equipment("");
     });
 
     //make sure we don't accidentally hold on to values after the modal closes
+    //also clear the fields
     $("#addEquipmentModal").on("hidden.bs.modal", () => {
         tempEquip = null;
+        $("#addEquipmentModal input[id], #addEquipmentModal textarea[id]").val(null);
     });
 
     //map values from modal fields to Equipment object
-    $("#addEquipmentModal #name").change((index, event) => {
+    $("#addEquipmentModal #name").change((event) => {
         var elem = $(event.currentTarget);
         tempEquip.name = elem.val() + ""; //force it to a string to make typescript happy
     });
 
-    $("#addEquipmentModal #description").change((index, event) => {
-        var elem = $(event.currentTarget);
-        tempEquip.description = elem.val() + ""; //force it to a string to make typescript happy
-    });
-
     //add properties
-    $("#addBonusButton").click(() => {
+    $("#addEquipmentModal #addBonusButton").click(() => {
         //get values from the inputs (not importing types for these because string enums are a pain)
         var bonusType: BonusType = +$("#addEquipmentModal #bonusType").val();
         var affectedStat: StatType = +$("#addEquipmentModal #affectedStat").val();
         var bonusAmount = +$("#addEquipmentModal #bonusAmount").val();
 
-        var bonus: ValueBonus = new ValueBonus(            
+        var bonus: ValueBonus = new ValueBonus(
             affectedStat,
             bonusType,
             bonusAmount
@@ -180,8 +210,27 @@ function initModal() {
         tempEquip.bonuses.push(bonus);
         $("#addEquipmentModal #properties").val(tempEquip.bonusesToString());
     });
+
+    //add equipment to the sheet
+    $("#addEquipmentModal #addEquipmentButton").click(() => {
+        sheet.equipment.push(tempEquip);
+
+        $("#addEquipmentModal").modal('hide');
+        renderEquipment();
+    });
 }
 
+function initDropdowns() {
+    renderEnumToDropdown("#addEquipmentModal #bonusType", BonusType);
+    renderEnumToDropdown("#addEquipmentModal #affectedStat", StatType);
+    renderEnumToDropdown("div[data-value-input='alignment']>select", Alignment);
+    renderEnumToDropdown("div[data-value-input='gender']>select", Gender);
+    renderEnumToDropdown("div[data-value-input='size']>select", Size);
+    renderEnumToDropdown("div[data-value-input='armour.type']>select", ArmourType);
+}
+
+initDropdowns();
 initEvents();
 initFields();
 initModal();
+renderEquipment();
