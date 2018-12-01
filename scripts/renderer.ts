@@ -1,10 +1,11 @@
 import { remote } from "electron"
 import * as jetpack from "fs-jetpack"
 import * as path from "path"
-import { CharacterSheet, Skill } from "./CharSheet"
+import { CharacterSheet, Skill, Equipment, ValueBonus, BonusType, StatType } from "./CharSheet"
 import * as $ from "jquery"
 
 let sheet = new CharacterSheet();
+let tempEquip: Equipment = null;
 
 function recalcSheet() {
     $("div[data-value-output]>input, div[data-skill-name]").trigger("charSheet:recalc");
@@ -141,5 +142,46 @@ function initFields() {
     $("div[data-value-output]>input, div[data-skill-name]").trigger("charSheet:recalc");
 }
 
+function initModal() {
+    //initialize the var we use to store the modal values
+    $("#addEquipmentModal").on("show.bs.modal", () => {
+        tempEquip = new Equipment("", "");
+    });
+
+    //make sure we don't accidentally hold on to values after the modal closes
+    $("#addEquipmentModal").on("hidden.bs.modal", () => {
+        tempEquip = null;
+    });
+
+    //map values from modal fields to Equipment object
+    $("#addEquipmentModal #name").change((index, event) => {
+        var elem = $(event.currentTarget);
+        tempEquip.name = elem.val() + ""; //force it to a string to make typescript happy
+    });
+
+    $("#addEquipmentModal #description").change((index, event) => {
+        var elem = $(event.currentTarget);
+        tempEquip.description = elem.val() + ""; //force it to a string to make typescript happy
+    });
+
+    //add properties
+    $("#addBonusButton").click(() => {
+        //get values from the inputs (not importing types for these because string enums are a pain)
+        var bonusType: BonusType = +$("#addEquipmentModal #bonusType").val();
+        var affectedStat: StatType = +$("#addEquipmentModal #affectedStat").val();
+        var bonusAmount = +$("#addEquipmentModal #bonusAmount").val();
+
+        var bonus: ValueBonus = new ValueBonus(            
+            affectedStat,
+            bonusType,
+            bonusAmount
+        );
+
+        tempEquip.bonuses.push(bonus);
+        $("#addEquipmentModal #properties").val(tempEquip.bonusesToString());
+    });
+}
+
 initEvents();
 initFields();
+initModal();

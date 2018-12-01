@@ -1,84 +1,169 @@
-enum BonusType {
-    Enhancement = "ENHANCEMENT",
-    Dodge = "DODGE",
-    Deflection = "DEFLECTION",
-    Size = "SIZE",
-    Temp = "TEMP",
-    Morale = "MORALE"
-}
-
-enum EnergyType {
-    Fire = "FIRE",
-    Acid = "ACID",
-    Lightning = "Lightning",
+export enum BonusType {
+    Enhancement,
+    Dodge,
+    Deflection,
+    Morale
 }
 
 enum Alignment {
-    LawfulGood = "LAWFULGOOD",
-    LawfulNeutral = "LAWFULNEUTRAL",
-    LawfulEvil = "LAWFULEVIL",
-    NeutralGood = "NEUTRALGOOD",
-    TrueNeutral = "TRUENEUTRAL",
-    NeutralEvil = "NEUTRALEVIL",
-    ChaoticGood = "CHAOTICGOOD",
-    ChaoticNeutral = "CHAOTICNEUTRAL",
-    ChaoticEvil = "CHAOTICEVIL"
+    LawfulGood,
+    LawfulNeutral,
+    LawfulEvil,
+    NeutralGood,
+    TrueNeutral,
+    NeutralEvil,
+    ChaoticGood,
+    ChaoticNeutral,
+    ChaoticEvil
 }
 
 enum Gender {
-    Male = "MALE",
-    Female = "FEMALE",
-    Other = "OTHER"
+    Male,
+    Female,
+    Other
 }
 
 enum Size {
-    Small = "SMALL",
-    Medium = "MEDIUM",
-    Large = "LARGE"
+    Small,
+    Medium,
+    Large
 }
 
-enum StatType {
-    Strength = "STR",
-    Dexterity = "DEX",
-    Constitution = "CON",
-    Intelligence = "INT",
-    Wisdom = "WIS",
-    Charisma = "CHA",
-    Skill = "SKILL",
-    ClassLevel = "CLASSLEVEL",
-    Initiative = "INITIATIVE",
-    Speed = "SPEED",
-    BaseAttackBonus = "BAB",
-    CombatMnvrBonus = "CMB",
-    CombatMnvrDefence = "CMD",
-    FortitudeSave = "FORTITUDE",
-    ReflexSave = "REFLEX",
-    WillSave = "WILL",
-    HitPoints = "HP",
-    ArmourClass = "AC",
-    SpellResistance = "SPELLRES",
-    DamageReduction = "DR",
-    EnergyResistance = "ER"
+export enum StatType {
+    Strength,
+    Dexterity,
+    Constitution,
+    Intelligence,
+    Wisdom,
+    Charisma,
+    Initiative,
+    Attack,
+    Damage,
+    CMB,
+    CMD,
+    FortitudeSave,
+    ReflexSave,
+    WillSave,
+    ArmourClass
 }
 
 enum ArmourType {
-    None = "NONE",
-    Light = "LIGHT",
-    Medium = "MEDIUM",
-    Heavy = "HEAVY"
+    None,
+    Light,
+    Medium,
+    Heavy
 }
 
-interface ValueBonus {
-    affectedStat: StatType,
-    bonusType: BonusType,
-    bonusAmount: number,
+export class ValueBonus {
+    affectedStat: StatType;
+    bonusType: BonusType;
+    bonusAmount: number;
+
+    constructor(affectedStat: StatType, bonusType: BonusType, bonusAmount: number) {
+        this.affectedStat = affectedStat;
+        this.bonusType = bonusType;
+        this.bonusAmount = bonusAmount;
+    }
+
+    asString(): string {
+        var retStr = "";
+
+        //amount
+        retStr += (this.bonusAmount > 0 ? "+" : "") + this.bonusAmount;
+
+        //type
+        switch (this.bonusType) {
+            case BonusType.Enhancement:
+                retStr += " enhancement bonus to ";
+                break;
+            case BonusType.Morale:
+                retStr += " morale bonus to ";
+                break;
+            case BonusType.Deflection:
+                retStr += " deflection bonus to ";
+                break;
+            case BonusType.Dodge:
+                retStr += " dodge bonus to ";
+                break;
+        }
+
+        //affected stat
+        switch (this.affectedStat) {
+            case StatType.ArmourClass:
+                retStr += "AC";
+                break;
+            case StatType.Attack:
+                retStr += "attack";
+                break;
+            case StatType.CMB:
+                retStr += "CMB";
+                break;
+            case StatType.CMD:
+                retStr += "CMD";
+                break;
+            case StatType.Charisma:
+                retStr += "charisma";
+                break;
+            case StatType.Constitution:
+                retStr += "constitution";
+                break;
+            case StatType.Damage:
+                retStr += "damage";
+                break;
+            case StatType.Dexterity:
+                retStr += "dexterity";
+                break;
+            case StatType.FortitudeSave:
+                retStr += "fortitude saves";
+                break;
+            case StatType.Initiative:
+                retStr += "initiative";
+                break;
+            case StatType.Intelligence:
+                retStr += "intelligence";
+                break;
+            case StatType.ReflexSave:
+                retStr += "reflex saves";
+                break;
+            case StatType.Strength:
+                retStr += "strength";
+                break;
+            case StatType.WillSave:
+                retStr += "will saves";
+                break;
+            case StatType.Wisdom:
+                retStr += "wisdom";
+                break;
+        }
+
+        return retStr;
+    };
 }
 
-class Equipment {
-    bonuses: ValueBonus[];
+export class Equipment {
+    name: string;
+    description: string;
+    bonuses: ValueBonus[] = [];
 
-    constructor(readonly name: string, readonly description: string, ...bonuses: ValueBonus[]) {
+    constructor(name: string, description: string, ...bonuses: ValueBonus[]) {
+        this.name = name;
+        this.description = description;
         this.bonuses = bonuses;
+    }
+
+    bonusesToString = (): string => {
+        var retStr = "";
+
+        for (var i = 0; i < this.bonuses.length; i++) {
+            var bonus = this.bonuses[i];
+
+            retStr += bonus.asString();
+
+            if (i < this.bonuses.length - 1)
+                retStr += ", ";
+        }
+
+        return retStr;
     }
 }
 
@@ -230,7 +315,7 @@ export class CharacterSheet {
     tempAC: number = 0;
     spellRes: number = 0;
     calcAC = (): number => {
-        return 10 + this.calcDexterityBonus() + this.dodgeModifier + this.deflectionModifier
+        return 10 + Math.min(this.calcDexterityBonus(), this.armour.maxDEX) + this.dodgeModifier + this.deflectionModifier
             + this.armour.acBonus + this.shield.acBonus + this.naturalAC + this.sizeModifier + this.tempAC;
     };
     calcFlatFootedAC = (): number => {
@@ -360,4 +445,7 @@ export class CharacterSheet {
         "swim": new Skill(false, this.calcStrengthBonus, this.calcArmourCheckPenalty),
         "useMagicDevice": new Skill(true, this.calcCharismaBonus)
     };
+
+    //equipment
+    equipment: Equipment[] = [];
 }

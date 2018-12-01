@@ -25,6 +25,9 @@
                     <a class="dropdown-item" href="#" id="loadButton">Load</a>
                 </div>
             </div>
+            <div class="nav-item">
+                <a href="#" data-toggle="modal" data-target="#addEquipmentModal">Add Equipment</a>
+            </div>
         </div>
     </div>
     <div class="container-fluid mt-4">
@@ -156,23 +159,23 @@
                     <div class="col form-group" data-value-input="alignment">
                         <label>Alignment</label>
                         <select class="form-control form-control-sm">
-                            <option value="LAWFULGOOD">Lawful Good</option>
-                            <option value="LAWFULNEUTRAL">Lawful Neutral</option>
-                            <option value="LAWFULEVIL">Lawful Evil</option>
-                            <option value="NEUTRALGOOD">Neutral Good</option>
-                            <option value="TRUENEUTRAL">True Neutral</option>
-                            <option value="NEUTRALEVIL">Neutral Evil</option>
-                            <option value="CHAOTICGOOD">Chaotic Good</option>
-                            <option value="CHAOTICNEUTRAL">Chaotic Neutral</option>
-                            <option value="CHAOTICEVIL">Chaotic Evil</option>
+                            <option value="0">Lawful Good</option>
+                            <option value="1">Lawful Neutral</option>
+                            <option value="2">Lawful Evil</option>
+                            <option value="3">Neutral Good</option>
+                            <option value="4">True Neutral</option>
+                            <option value="5">Neutral Evil</option>
+                            <option value="6">Chaotic Good</option>
+                            <option value="7">Chaotic Neutral</option>
+                            <option value="8">Chaotic Evil</option>
                         </select>
                     </div>
                     <div class="col form-group" data-value-input="gender">
                         <label>Gender</label>
                         <select class="form-control form-control-sm">
-                            <option value="MALE">Male</option>
-                            <option value="FEMALE">Female</option>
-                            <option value="OTHER">Other</option>
+                            <option value="0">Male</option>
+                            <option value="1">Female</option>
+                            <option value="2">Other</option>
                         </select>
                     </div>
                 </div>
@@ -184,9 +187,9 @@
                     <div class="col form-group" data-value-input="size">
                         <label>Size</label>
                         <select class="form-control form-control-sm">
-                            <option value="SMALL">Small</option>
-                            <option value="MEDIUM">Medium</option>
-                            <option value="LARGE">Large</option>
+                            <option value="0">Small</option>
+                            <option value="1">Medium</option>
+                            <option value="2">Large</option>
                         </select>
                     </div>
                     <div class="col form-group" data-value-input="sizeModifier">
@@ -1692,10 +1695,10 @@
                     <div class="col form-group" data-value-input="armour.type">
                         <label>Type</label>
                         <select class="form-control form-control-sm">
-                            <option value="NONE">None</option>
-                            <option value="LIGHT">Light</option>
-                            <option value="MEDIUM">Medium</option>
-                            <option value="HEAVY">Heavy</option>
+                            <option value="0">None</option>
+                            <option value="1">Light</option>
+                            <option value="2">Medium</option>
+                            <option value="3">Heavy</option>
                         </select>
                     </div>
                     <div class="col form-group" data-value-input="armour.maxSpeed">
@@ -1739,7 +1742,84 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 px-5"></div>
+            <div class="col-6 px-5">
+                <div class="row section-head"><label>Equipment</label></div>
+                <div class="row" id="equipmentContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addEquipmentModal" tabindex="-1" role="dialog" aria-labelledby="addEquipmentModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEquipmentModalTitle">New Equipment</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="form-row align-items-end">
+                            <div class="col form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control form-control-sm" id="name">
+                            </div>
+                            <div class="col form-group">
+                                <label>Description</label>
+                                <input type="text" class="form-control form-control-sm" id="description">
+                            </div>
+                        </div>
+                        <div class="form-row align-items-end">
+                            <div class="col form-group">
+                                <label>Properties</label>
+                                <textarea class="form-control form-control-sm" id="properties" rows="3" disabled></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row align-items-end">
+                            <div class="col form-group">
+                                <label>Bonus Type</label>
+                                <select class="form-control form-control-sm" id="bonusType">
+                                    <option value="0">Enhancement</option>
+                                    <option value="1">Dodge</option>
+                                    <option value="2">Deflection</option>
+                                    <option value="3">Morale</option>
+                                </select>
+                            </div>
+                            <div class="col form-group">
+                                <label>Affected Stat</label>
+                                <select class="form-control form-control-sm" id="affectedStat">
+                                    <option value="0">Strength</option>
+                                    <option value="1">Dexterity</option>
+                                    <option value="2">Constitution</option>
+                                    <option value="3">Intelligence</option>
+                                    <option value="4">Wisdom</option>
+                                    <option value="5">Charisma</option>
+                                    <option value="6">Initiative</option>
+                                    <option value="7">Attack</option>
+                                    <option value="8">Damage</option>
+                                    <option value="9">CMB</option>
+                                    <option value="10">CMD</option>
+                                    <option value="11">Fortitude Save</option>
+                                    <option value="12">Reflex Save</option>
+                                    <option value="13">Will Save</option>
+                                    <option value="14">AC</option>
+                                </select>
+                            </div>
+                            <div class="col form-group">
+                                <label>Amount</label>
+                                <input type="number" class="form-control form-control-sm" id="bonusAmount">
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-secondary" id="addBonusButton">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Equipment</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
