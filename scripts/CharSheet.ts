@@ -74,82 +74,6 @@ interface ValueBonus {
     bonusAmount: number,
 }
 
-interface SavedCharacter {
-    characterName?: string,
-    alignment?: Alignment,
-    gender?: Gender,
-    race?: string,
-    size?: Size,
-    baseStrength?: number,
-    additionalStrength?: number,
-    tempStrength?: number,
-    baseDexterity?: number,
-    additionalDexterity?: number,
-    tempDexterity?: number,
-    baseConstitution?: number,
-    additionalConstitution?: number,
-    tempConstitution?: number,
-    baseIntelligence?: number,
-    additionalIntelligence?: number,
-    tempIntelligence?: number,
-    baseWisdom?: number,
-    additionalWisdom?: number,
-    tempWisdom?: number,
-    baseCharisma?: number,
-    additionalCharisma?: number,
-    tempCharisma?: number,
-    featInitiative?: number,
-    trainingInitiative?: number,
-    miscInitiative?: number,
-    armourAC?: number,
-    shieldAC?: number,
-    naturalAC?: number,
-    tempAC?: number,
-    spellRes?: number,
-    miscCMB?: number,
-    tempCMB?: number,
-    miscCMD?: number,
-    tempCMD?: number,
-    maxHP?: number,
-    currentHP?: number,
-    tempHP?: number,
-    nonLethalHP?: number,
-    damageReduction?: string,
-    energyRes?: string,
-    baseAttackBonus?: number,
-    attackMoraleBonus?: number,
-    attackBuffs?: number,
-    attackNerfs?: number,
-    damageMoraleBonus?: number,
-    damageBuffs?: number,
-    damageNerfs?: number,
-    dodgeModifier?: number,
-    deflectionModifier?: number,
-    sizeModifier?: number,
-    baseFortSave?: number,
-    racialFortSave?: number,
-    miscFortSave?: number,
-    tempFortSave?: number,
-    baseReflexSave?: number,
-    racialReflexSave?: number,
-    miscReflexSave?: number,
-    tempReflexSave?: number,
-    baseWillSave?: number,
-    racialWillSave?: number,
-    miscWillSave?: number,
-    tempWillSave?: number,
-    armourPenalty?: number,
-    skills?: {
-        [name: string]: {
-            isClassSkill: boolean,
-            ranks: number,
-            racialBonus: number,
-            featBonus: number,
-            miscBonus: number
-        };
-    },
-}
-
 class Equipment {
     bonuses: ValueBonus[];
 
@@ -202,8 +126,8 @@ export class Skill {
 }
 
 export class CharacterSheet {
-    save = (): SavedCharacter => {
-        var characterObj: SavedCharacter = {};
+    save = (): any => {
+        var characterObj: any = {};
         for (let prop of Object.keys(this)) {
             if (prop === "skills" || typeof this[prop] === "function")
                 continue;
@@ -226,7 +150,7 @@ export class CharacterSheet {
         return characterObj;
     };
 
-    static load = (characterObj: SavedCharacter): CharacterSheet => {
+    static load = (characterObj: any): CharacterSheet => {
         let sheet = new CharacterSheet();
         for (let prop in characterObj) {
             if (prop === "skills")

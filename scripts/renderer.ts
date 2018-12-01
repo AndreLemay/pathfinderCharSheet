@@ -73,7 +73,7 @@ function initEvents() {
         var objWithProp = sheet;
 
         //force the type to what CharacterSheet will expect
-        if (elem.attr("type") === "number" || tagName === "SELECT") {
+        if (elem.attr("type") === "number") {
             sheetVal = +sheetVal;
         }
         else if (elem.attr("type") === "checkbox") {
