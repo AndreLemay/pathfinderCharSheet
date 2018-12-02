@@ -452,7 +452,7 @@ export class CharacterSheet {
 
     //Combat Manoeuvres
     calcMiscCMB = (): number => {
-        return this.sumEquipmentBonuses([StatType.CMB], 
+        return this.sumEquipmentBonuses([StatType.CMB],
             BonusType.Circumstance,
             BonusType.Competence,
             BonusType.Insight,
@@ -501,21 +501,25 @@ export class CharacterSheet {
     calcRangedAttackBonus = (): number => {
         return this.baseAttackBonus + this.calcDexterityBonus()
     }
-    calcAttackMoraleBonus = (): number => {
-        return this.sumEquipmentBonuses([StatType.Attack], BonusType.Morale)
+    calcMiscAttackBonus = (): number => {
+        return this.sumEquipmentBonuses([StatType.Attack],
+            BonusType.Circumstance,
+            BonusType.Competence,
+            BonusType.Enhancement,
+            BonusType.Insight,
+            BonusType.Luck,
+            BonusType.Morale,
+            BonusType.Profane,
+            BonusType.Sacred,
+            BonusType.Size)
     }
-    attackBuffs: number = 0
-    attackNerfs: number = 0
-    calcTempAttackBonus = (): number => {
-        return this.calcAttackMoraleBonus() + this.attackBuffs - this.attackNerfs
-    }
-    calcDamageMoraleBonus = (): number => {
-        return this.sumEquipmentBonuses([StatType.Damage], BonusType.Morale)
-    }
-    damageBuffs: number = 0
-    damageNerfs: number = 0
-    calcTempDamageBonus = (): number => {
-        return this.calcDamageMoraleBonus() + this.damageBuffs - this.damageNerfs
+    calcMiscDamageBonus = (): number => {
+        return this.sumEquipmentBonuses([StatType.Damage],
+            BonusType.Enhancement,
+            BonusType.Luck,
+            BonusType.Morale,
+            BonusType.Profane,
+            BonusType.Sacred)
     }
 
     //modifiers
@@ -541,9 +545,8 @@ export class CharacterSheet {
             BonusType.Resistance,
             BonusType.Sacred)
     }
-    tempFortSave: number = 0
     calcFortSave = (): number => {
-        return this.baseFortSave + this.calcConstitutionBonus() + this.racialFortSave + this.calcMiscFortSave() + this.tempFortSave
+        return this.baseFortSave + this.calcConstitutionBonus() + this.racialFortSave + this.calcMiscFortSave()
     }
     baseReflexSave: number = 0
     racialReflexSave: number = 0
@@ -559,9 +562,8 @@ export class CharacterSheet {
             BonusType.Resistance,
             BonusType.Sacred)
     }
-    tempReflexSave: number = 0
     calcReflexSave = (): number => {
-        return this.baseReflexSave + this.calcDexterityBonus() + this.racialReflexSave + this.calcMiscReflexSave() + this.tempReflexSave
+        return this.baseReflexSave + this.calcDexterityBonus() + this.racialReflexSave + this.calcMiscReflexSave()
     }
     baseWillSave: number = 0
     racialWillSave: number = 0
@@ -576,9 +578,8 @@ export class CharacterSheet {
             BonusType.Resistance,
             BonusType.Sacred)
     }
-    tempWillSave: number = 0
     calcWillSave = (): number => {
-        return this.baseWillSave + this.calcWisdomBonus() + this.racialWillSave + this.calcMiscWillSave() + this.tempWillSave
+        return this.baseWillSave + this.calcWisdomBonus() + this.racialWillSave + this.calcMiscWillSave()
     }
 
     //equipment (default to "none")

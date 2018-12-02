@@ -44,10 +44,6 @@
                         <label>Additional</label>
                         <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="col form-group" data-value-input="tempStrength">
-                        <label>Temp</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
                     <div class="col form-group" data-value-output="calcStrengthBonus">
                         <label>Bonus</label>
                         <input type="number" class="form-control form-control-sm">
@@ -61,10 +57,6 @@
                     </div>
                     <div class="col form-group" data-value-output="calcAdditionalDexterity">
                         <label>Additional</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                    <div class="col form-group" data-value-input="tempDexterity">
-                        <label>Temp</label>
                         <input type="number" class="form-control form-control-sm">
                     </div>
                     <div class="col form-group" data-value-output="calcDexterityBonus">
@@ -82,10 +74,6 @@
                         <label>Additional</label>
                         <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="col form-group" data-value-input="tempConstitution">
-                        <label>Temp</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
                     <div class="col form-group" data-value-output="calcConstitutionBonus">
                         <label>Bonus</label>
                         <input type="number" class="form-control form-control-sm">
@@ -99,10 +87,6 @@
                     </div>
                     <div class="col form-group" data-value-output="calcAdditionalIntelligence">
                         <label>Additional</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                    <div class="col form-group" data-value-input="tempIntelligence">
-                        <label>Temp</label>
                         <input type="number" class="form-control form-control-sm">
                     </div>
                     <div class="col form-group" data-value-output="calcIntelligenceBonus">
@@ -120,10 +104,6 @@
                         <label>Additional</label>
                         <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="col form-group" data-value-input="tempWisdom">
-                        <label>Temp</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
                     <div class="col form-group" data-value-output="calcWisdomBonus">
                         <label>Bonus</label>
                         <input type="number" class="form-control form-control-sm">
@@ -137,10 +117,6 @@
                     </div>
                     <div class="col form-group" data-value-output="calcAdditionalCharisma">
                         <label>Additional</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                    <div class="col form-group" data-value-input="tempCharisma">
-                        <label>Temp</label>
                         <input type="number" class="form-control form-control-sm">
                     </div>
                     <div class="col form-group" data-value-output="calcCharismaBonus">
@@ -232,10 +208,6 @@
                         <label>Misc</label>
                         <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="col-2 form-group" data-value-input="tempFortSave">
-                        <label>Temp</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
                 </div>
                 <div class="form-row align-items-end">
                     <div class="col-2 form-group" data-value-output="calcReflexSave">
@@ -258,10 +230,6 @@
                         <label>Misc</label>
                         <input type="number" class="form-control form-control-sm">
                     </div>
-                    <div class="col-2 form-group" data-value-input="tempReflexSave">
-                        <label>Temp</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
                 </div>
                 <div class="form-row align-items-end">
                     <div class="col-2 form-group" data-value-output="calcWillSave">
@@ -282,10 +250,6 @@
                     </div>
                     <div class="col-2 form-group" data-value-output="calcMiscWillSave">
                         <label>Misc</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                    <div class="col-2 form-group" data-value-input="tempWillSave">
-                        <label>Temp</label>
                         <input type="number" class="form-control form-control-sm">
                     </div>
                 </div>
@@ -316,54 +280,24 @@
                         <input type="number" class="form-control form-control-sm">
                     </div>
                 </div>
-                <div class="row section-head"><label>Base Attack</label></div>
+                <div class="row section-head"><label>Attack Bonus</label></div>
                 <div class="form-row align-items-end">
                     <div class="col form-group" data-value-input="baseAttackBonus">
-                        <label>Bonus</label>
+                        <label>Base</label>
                         <input type="number" class="form-control form-control-sm">
                     </div>
+                    <div class="col form-group" data-value-output="calcMiscAttackBonus">
+                        <label>Misc</label>
+                        <input type="number" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="form-row align-items-end">
                     <div class="col form-group" data-value-output="calcMeleeAttackBonus">
                         <label>Melee</label>
                         <input type="number" class="form-control form-control-sm">
                     </div>
                     <div class="col form-group" data-value-output="calcRangedAttackBonus">
                         <label>Ranged</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                </div>
-                <div class="form-row align-items-end">
-                    <div class="col form-group" data-value-output="calcTempAttackBonus">
-                        <label>Temp Attack Bonus</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                    <div class="col form-group" data-value-output="calcAttackMoraleBonus">
-                        <label>Morale Bonus</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                    <div class="col form-group" data-value-input="attackBuffs">
-                        <label>Buffs</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                    <div class="col form-group" data-value-input="attackNerfs">
-                        <label>Nerfs</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                </div>
-                <div class="form-row align-items-end">
-                    <div class="col form-group" data-value-output="calcTempDamageBonus">
-                        <label>Temp Damage Bonus</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                    <div class="col form-group" data-value-output="calcDamageMoraleBonus">
-                        <label>Morale Bonus</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                    <div class="col form-group" data-value-input="damageBuffs">
-                        <label>Buffs</label>
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                    <div class="col form-group" data-value-input="damageNerfs">
-                        <label>Nerfs</label>
                         <input type="number" class="form-control form-control-sm">
                     </div>
                 </div>
@@ -1541,10 +1475,6 @@
                 </div>
             </div>
             <div class="form-row align-items-end">
-                <div class="col-2 form-group" data-value-input="tempAC">
-                    <label>Temp AC</label>
-                    <input type="number" class="form-control form-control-sm">
-                </div>
                 <div class="col-2 form-group" data-value-input="spellRes">
                     <label>Spell Res.</label>
                     <input type="number" class="form-control form-control-sm">
@@ -1646,16 +1576,6 @@
                 </div>
                 <div class="col form-group" data-value-output="calcMiscCMD">
                     <label>Misc</label>
-                    <input type="number" class="form-control form-control-sm">
-                </div>
-            </div>
-            <div class="form-row align-items-end">
-                <div class="col-2 form-group" data-value-input="tempCMB">
-                    <label>Temp CMB</label>
-                    <input type="number" class="form-control form-control-sm">
-                </div>
-                <div class="col-2 form-group" data-value-input="tempCMD">
-                    <label>Temp CMD</label>
                     <input type="number" class="form-control form-control-sm">
                 </div>
             </div>
