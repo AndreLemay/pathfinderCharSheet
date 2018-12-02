@@ -21,6 +21,29 @@ export enum BonusType {
     Trait
 }
 
+let bonusStackingMap: { [key: number]: boolean } = {
+    [BonusType.Alchemical]: true,
+    [BonusType.Armour]: false,
+    [BonusType.Attack]: true,
+    [BonusType.Circumstance]: true,
+    [BonusType.Competence]: false,
+    [BonusType.Deflection]: false,
+    [BonusType.Dodge]: true,
+    [BonusType.Enhancement]: false,
+    [BonusType.Inherent]: true,
+    [BonusType.Insight]: false,
+    [BonusType.Luck]: false,
+    [BonusType.Morale]: false,
+    [BonusType.NaturalArmour]: false,
+    [BonusType.Profane]: false,
+    [BonusType.Racial]: true,
+    [BonusType.Resistance]: false,
+    [BonusType.Sacred]: false,
+    [BonusType.Shield]: false,
+    [BonusType.Size]: true,
+    [BonusType.Trait]: false
+}
+
 export enum Alignment {
     LawfulGood,
     LawfulNeutral,
@@ -72,176 +95,224 @@ export enum ArmourType {
 }
 
 export class ValueBonus {
-    affectedStat: StatType;
-    bonusType: BonusType;
-    bonusAmount: number;
+    affectedStat: StatType
+    bonusType: BonusType
+    bonusAmount: number
 
     constructor(affectedStat: StatType, bonusType: BonusType, bonusAmount: number) {
-        this.affectedStat = affectedStat;
-        this.bonusType = bonusType;
-        this.bonusAmount = bonusAmount;
+        this.affectedStat = affectedStat
+        this.bonusType = bonusType
+        this.bonusAmount = bonusAmount
     }
 
     asString(short?: boolean): string {
-        var retStr = "";
+        var retStr = ""
 
         //amount
-        retStr += (this.bonusAmount > 0 ? "+" : "") + this.bonusAmount + " ";
+        retStr += (this.bonusAmount > 0 ? "+" : "") + this.bonusAmount + " "
 
         //type
         if (!short) {
             switch (this.bonusType) {
-                case BonusType.Enhancement:
-                    retStr += "enhancement bonus to ";
-                    break;
-                case BonusType.Morale:
-                    retStr += "morale bonus to ";
-                    break;
+                case BonusType.Alchemical:
+                    retStr += "alchemical bonus to "
+                    break
+                case BonusType.Armour:
+                    retStr += "armour bonus to "
+                    break
+                case BonusType.Attack:
+                    retStr += "attack bonus to "
+                    break
+                case BonusType.Circumstance:
+                    retStr += "circumstance bonus to "
+                    break
+                case BonusType.Competence:
+                    retStr += "competence bonus to "
+                    break
                 case BonusType.Deflection:
-                    retStr += "deflection bonus to ";
-                    break;
+                    retStr += "deflection bonus to "
+                    break
                 case BonusType.Dodge:
-                    retStr += "dodge bonus to ";
-                    break;
+                    retStr += "dodge bonus to "
+                    break
+                case BonusType.Enhancement:
+                    retStr += "enhancement bonus to "
+                    break
+                case BonusType.Inherent:
+                    retStr += "inherent bonus to "
+                    break
+                case BonusType.Insight:
+                    retStr += "insight bonus to "
+                    break
+                case BonusType.Luck:
+                    retStr += "luck bonus to "
+                    break
+                case BonusType.Morale:
+                    retStr += "morale bonus to "
+                    break
+                case BonusType.NaturalArmour:
+                    retStr += "natural armour bonus to "
+                    break
+                case BonusType.Profane:
+                    retStr += "profane bonus to "
+                    break
+                case BonusType.Racial:
+                    retStr += "racial bonus to "
+                    break
+                case BonusType.Resistance:
+                    retStr += "resistance bonus to "
+                    break
+                case BonusType.Sacred:
+                    retStr += "sacred bonus to "
+                    break
+                case BonusType.Shield:
+                    retStr += "shield bonus to "
+                    break
+                case BonusType.Size:
+                    retStr += "size bonus to "
+                    break
+                case BonusType.Trait:
+                    retStr += "trait bonus to "
+                    break
             }
         }
 
         //affected stat
         switch (this.affectedStat) {
             case StatType.AllSaves:
-                retStr += short ? "saves" : "all saving throws";
-                break;
+                retStr += short ? "saves" : "all saving throws"
+                break
             case StatType.ArmourClass:
-                retStr += "AC";
-                break;
+                retStr += "AC"
+                break
             case StatType.Attack:
-                retStr += short ? "atk" : "attack";
-                break;
+                retStr += short ? "atk" : "attack"
+                break
             case StatType.CMB:
-                retStr += "CMB";
-                break;
+                retStr += "CMB"
+                break
             case StatType.CMD:
-                retStr += "CMD";
-                break;
+                retStr += "CMD"
+                break
             case StatType.Charisma:
-                retStr += short ? "CHA" : "charisma";
-                break;
+                retStr += short ? "CHA" : "charisma"
+                break
             case StatType.Constitution:
-                retStr += short ? "CON" : "constitution";
-                break;
+                retStr += short ? "CON" : "constitution"
+                break
             case StatType.Damage:
-                retStr += short ? "dmg" : "damage";
-                break;
+                retStr += short ? "dmg" : "damage"
+                break
             case StatType.Dexterity:
-                retStr += short ? "DEX" : "dexterity";
-                break;
+                retStr += short ? "DEX" : "dexterity"
+                break
             case StatType.FortitudeSave:
-                retStr += short ? "fort." : "fortitude saves";
-                break;
+                retStr += short ? "fort." : "fortitude saves"
+                break
             case StatType.Initiative:
-                retStr += short ? "init." : "initiative";
-                break;
+                retStr += short ? "init." : "initiative"
+                break
             case StatType.Intelligence:
-                retStr += short ? "INT" : "intelligence";
-                break;
+                retStr += short ? "INT" : "intelligence"
+                break
             case StatType.ReflexSave:
-                retStr += short ? "ref." : "reflex saves";
-                break;
+                retStr += short ? "ref." : "reflex saves"
+                break
             case StatType.Strength:
-                retStr += short ? "STR" : "strength";
-                break;
+                retStr += short ? "STR" : "strength"
+                break
             case StatType.WillSave:
-                retStr += short ? "will" : "will saves";
-                break;
+                retStr += short ? "will" : "will saves"
+                break
             case StatType.Wisdom:
-                retStr += short ? "WIS" : "wisdom";
-                break;
+                retStr += short ? "WIS" : "wisdom"
+                break
         }
 
-        return retStr;
-    };
+        return retStr
+    }
 }
 
 export class Equipment {
-    name: string;
-    bonuses: ValueBonus[] = [];
+    name: string
+    bonuses: ValueBonus[] = []
 
     constructor(name: string, ...bonuses: ValueBonus[]) {
-        this.name = name;
-        this.bonuses = bonuses;
+        this.name = name
+        this.bonuses = bonuses
     }
 
     bonusesToString = (short?: boolean): string => {
-        var retStr = "";
+        var retStr = ""
 
         for (var i = 0; i < this.bonuses.length; i++) {
-            var bonus = this.bonuses[i];
+            var bonus = this.bonuses[i]
 
-            retStr += bonus.asString(short);
+            retStr += bonus.asString(short)
 
             if (i < this.bonuses.length - 1)
-                retStr += ", ";
+                retStr += ", "
         }
 
-        return retStr;
+        return retStr
     }
 }
 
 class Armour extends Equipment {
-    acBonus: number = 0;
-    type: ArmourType = ArmourType.None;
-    maxDEX: number = null;
-    checkPenalty: number = 0;
-    maxSpeed: number = 0;
+    acBonus: number = 0
+    type: ArmourType = ArmourType.None
+    maxDEX: number = null
+    checkPenalty: number = 0
+    maxSpeed: number = 0
     constructor(
         name: string,
         ...bonuses: ValueBonus[]) {
-        super(name, ...bonuses);
+        super(name, ...bonuses)
     }
 }
 
 class Shield extends Equipment {
-    acBonus: number = 0;
-    checkPenalty: number = 0;
+    acBonus: number = 0
+    checkPenalty: number = 0
 
     constructor(name: string, ...bonuses: ValueBonus[]) {
-        super(name, ...bonuses);
+        super(name, ...bonuses)
     }
 }
 
 export class Skill {
-    isClassSkill: boolean = false;
-    ranks: number = 0;
-    racialBonus: number = 0;
-    featBonus: number = 0;
-    miscBonus: number = 0;
+    isClassSkill: boolean = false
+    ranks: number = 0
+    racialBonus: number = 0
+    featBonus: number = 0
+    miscBonus: number = 0
 
     constructor(
         readonly trained: boolean,
         readonly abilityBonus: () => number,
-        readonly armourPenalty: () => number = () => { return null; }) { }
+        readonly armourPenalty: () => number = () => { return null }) { }
 
     calcSkillBonus = (): number => {
-        if (this.trained && this.ranks === 0) return null;
+        if (this.trained && this.ranks === 0) return null
 
         return this.abilityBonus() + (this.isClassSkill && this.ranks > 0 ? 3 : 0) + this.ranks + this.racialBonus + this.featBonus
-            + this.miscBonus + this.armourPenalty(); //expecting this be be negative, so we want to add
+            + this.miscBonus + this.armourPenalty() //expecting this be be negative, so we want to add
     }
 }
 
 export class CharacterSheet {
     save = (): any => {
-        var characterObj: any = {};
+        var characterObj: any = {}
         for (let prop of Object.keys(this)) {
             if (prop === "skills" || typeof this[prop] === "function")
-                continue;
+                continue
 
-            characterObj[prop] = this[prop];
+            characterObj[prop] = this[prop]
         }
 
         characterObj.skills = {}
         for (let name of Object.keys(this.skills)) {
-            let skill: Skill = this.skills[name];
+            let skill: Skill = this.skills[name]
             characterObj.skills[name] = {
                 isClassSkill: skill.isClassSkill,
                 ranks: skill.ranks,
@@ -251,183 +322,275 @@ export class CharacterSheet {
             }
         }
 
-        return characterObj;
-    };
+        return characterObj
+    }
 
     static load = (characterObj: any): CharacterSheet => {
-        let sheet = new CharacterSheet();
+        let sheet = new CharacterSheet()
         for (let prop in characterObj) {
             if (prop === "skills")
-                continue;
+                continue
 
-            sheet[prop] = characterObj[prop];
+            sheet[prop] = characterObj[prop]
         }
 
         for (let name in characterObj.skills) {
-            let savedSkill = characterObj.skills[name];
-            let skill = sheet.skills[name];
-            skill.isClassSkill = savedSkill.isClassSkill;
-            skill.ranks = savedSkill.ranks;
-            skill.racialBonus = savedSkill.racialBonus;
-            skill.featBonus = savedSkill.featBonus;
-            skill.miscBonus = savedSkill.miscBonus;
+            let savedSkill = characterObj.skills[name]
+            let skill = sheet.skills[name]
+            skill.isClassSkill = savedSkill.isClassSkill
+            skill.ranks = savedSkill.ranks
+            skill.racialBonus = savedSkill.racialBonus
+            skill.featBonus = savedSkill.featBonus
+            skill.miscBonus = savedSkill.miscBonus
         }
 
-        return sheet;
+        return sheet
     }
 
     //Character info
-    characterName: string = "Default Name";
-    alignment: Alignment = Alignment.TrueNeutral;
-    gender: Gender = Gender.Male;
-    race: string = "Human";
-    size: Size = Size.Medium;
+    characterName: string = "Default Name"
+    alignment: Alignment = Alignment.TrueNeutral
+    gender: Gender = Gender.Male
+    race: string = "Human"
+    size: Size = Size.Medium
 
     //Ability Scores
-    baseStrength: number = 10;
-    additionalStrength: number = 0;
-    tempStrength: number = 0;
+    baseStrength: number = 10
+    calcAdditionalStrength = (): number => {
+        return this.sumEquipmentBonuses([StatType.Strength],
+            BonusType.Alchemical,
+            BonusType.Enhancement,
+            BonusType.Inherent,
+            BonusType.Morale)
+    }
+    tempStrength: number = 0
     calcStrengthBonus = (): number => {
-        return Math.floor((this.baseStrength + this.additionalStrength + this.tempStrength - 10) / 2);
-    };
-    baseDexterity: number = 10;
-    additionalDexterity: number = 0;
-    tempDexterity: number = 0;
+        return Math.floor((this.baseStrength + this.calcAdditionalStrength() + this.tempStrength - 10) / 2)
+    }
+    baseDexterity: number = 10
+    calcAdditionalDexterity = (): number => {
+        return this.sumEquipmentBonuses([StatType.Dexterity],
+            BonusType.Alchemical,
+            BonusType.Enhancement,
+            BonusType.Inherent,
+            BonusType.Morale)
+    }
+    tempDexterity: number = 0
     calcDexterityBonus = (): number => {
-        return Math.floor((this.baseDexterity + this.additionalDexterity + this.tempDexterity - 10) / 2);
-    };
-    baseConstitution: number = 10;
-    additionalConstitution: number = 0;
-    tempConstitution: number = 0;
+        return Math.floor((this.baseDexterity + this.calcAdditionalDexterity() + this.tempDexterity - 10) / 2)
+    }
+    baseConstitution: number = 10
+    calcAdditionalConstitution = (): number => {
+        return this.sumEquipmentBonuses([StatType.Constitution],
+            BonusType.Alchemical,
+            BonusType.Enhancement,
+            BonusType.Inherent,
+            BonusType.Morale)
+    }
+    tempConstitution: number = 0
     calcConstitutionBonus = (): number => {
-        return Math.floor((this.baseConstitution + this.additionalConstitution + this.tempConstitution - 10) / 2);
-    };
-    baseIntelligence: number = 10;
-    additionalIntelligence: number = 0;
-    tempIntelligence: number = 0;
+        return Math.floor((this.baseConstitution + this.calcAdditionalConstitution() + this.tempConstitution - 10) / 2)
+    }
+    baseIntelligence: number = 10
+    calcAdditionalIntelligence = (): number => {
+        return this.sumEquipmentBonuses([StatType.Intelligence],
+            BonusType.Alchemical,
+            BonusType.Enhancement,
+            BonusType.Inherent)
+    }
+    tempIntelligence: number = 0
     calcIntelligenceBonus = (): number => {
-        return Math.floor((this.baseIntelligence + this.additionalIntelligence + this.tempIntelligence - 10) / 2);
-    };
-    baseWisdom: number = 10;
-    additionalWisdom: number = 0;
-    tempWisdom: number = 0;
+        return Math.floor((this.baseIntelligence + this.calcAdditionalIntelligence() + this.tempIntelligence - 10) / 2)
+    }
+    baseWisdom: number = 10
+    calcAdditionalWisdom = (): number => {
+        return this.sumEquipmentBonuses([StatType.Wisdom],
+            BonusType.Alchemical,
+            BonusType.Enhancement,
+            BonusType.Inherent)
+    }
+    tempWisdom: number = 0
     calcWisdomBonus = (): number => {
-        return Math.floor((this.baseWisdom + this.additionalWisdom + this.tempWisdom - 10) / 2);
-    };
-    baseCharisma: number = 10;
-    additionalCharisma: number = 0;
-    tempCharisma: number = 0;
+        return Math.floor((this.baseWisdom + this.calcAdditionalWisdom() + this.tempWisdom - 10) / 2)
+    }
+    baseCharisma: number = 10
+    calcAdditionalCharisma = (): number => {
+        return this.sumEquipmentBonuses([StatType.Charisma],
+            BonusType.Alchemical,
+            BonusType.Enhancement,
+            BonusType.Inherent)
+    }
+    tempCharisma: number = 0
     calcCharismaBonus = (): number => {
-        return Math.floor((this.baseCharisma + this.additionalCharisma + this.tempCharisma - 10) / 2);
-    };
+        return Math.floor((this.baseCharisma + this.calcAdditionalCharisma() + this.tempCharisma - 10) / 2)
+    }
 
     //Initiative
-    featInitiative: number = 0;
-    trainingInitiative: number = 0;
-    miscInitiative: number = 0;
+    featInitiative: number = 0
+    trainingInitiative: number = 0
+    calcMiscInitiative = (): number => {
+        return this.sumEquipmentBonuses([StatType.Initiative])
+    }
     calcInitiative = (): number => {
-        return this.calcDexterityBonus() + this.featInitiative + this.trainingInitiative + this.miscInitiative;
-    };
+        return this.calcDexterityBonus() + this.featInitiative + this.trainingInitiative + this.calcMiscInitiative()
+    }
 
     //Armour Class
-    naturalAC: number = 0;
-    tempAC: number = 0;
-    spellRes: number = 0;
+    naturalAC: number = 0
+    tempAC: number = 0
+    spellRes: number = 0
     calcAC = (): number => {
-        return 10 + Math.min(this.calcDexterityBonus(), this.armour.maxDEX) + this.dodgeModifier + this.deflectionModifier
-            + this.armour.acBonus + this.shield.acBonus + this.naturalAC + this.sizeModifier + this.tempAC;
-    };
+        return 10 + Math.min(this.calcDexterityBonus(), this.armour.maxDEX) + this.calcDodgeBonus() + this.calcDeflectionBonus()
+            + this.armour.acBonus + this.shield.acBonus + this.naturalAC + this.sizeModifier + this.tempAC
+    }
     calcFlatFootedAC = (): number => {
-        return 10 + this.deflectionModifier + this.armour.acBonus + this.shield.acBonus + this.naturalAC + this.sizeModifier + this.tempAC;
-    };
+        return 10 + this.calcDeflectionBonus() + this.armour.acBonus + this.shield.acBonus + this.naturalAC + this.sizeModifier + this.tempAC
+    }
     calcTouchAC = (): number => {
-        return 10 + this.calcDexterityBonus() + this.dodgeModifier + this.deflectionModifier + this.sizeModifier + this.tempAC;
-    };
+        return 10 + this.calcDexterityBonus() + this.calcDodgeBonus() + this.calcDeflectionBonus() + this.sizeModifier + this.tempAC
+    }
 
     //Combat Manoeuvres
-    miscCMB: number = 0;
-    tempCMB: number = 0;
+    calcMiscCMB = (): number => {
+        return this.sumEquipmentBonuses([StatType.CMB], 
+            BonusType.Circumstance,
+            BonusType.Competence,
+            BonusType.Insight,
+            BonusType.Luck,
+            BonusType.Morale,
+            BonusType.Profane,
+            BonusType.Sacred)
+    }
+    tempCMB: number = 0
     calcCMB = (): number => {
-        return this.calcStrengthBonus() + this.baseAttackBonus - this.sizeModifier + this.miscCMB + this.tempCMB;
-    };
-    miscCMD: number = 0;
-    tempCMD: number = 0;
+        return this.calcStrengthBonus() + this.baseAttackBonus - this.sizeModifier + this.calcMiscCMB() + this.tempCMB
+    }
+    calcMiscCMD = (): number => {
+        return this.sumEquipmentBonuses([StatType.CMB],
+            BonusType.Circumstance,
+            BonusType.Competence,
+            BonusType.Insight,
+            BonusType.Luck,
+            BonusType.Morale,
+            BonusType.Profane,
+            BonusType.Sacred)
+    }
+    tempCMD: number = 0
     calcCMD = (): number => {
-        return 10 + this.calcStrengthBonus() + this.calcDexterityBonus() + this.dodgeModifier + this.deflectionModifier
-            + this.baseAttackBonus - this.sizeModifier + this.miscCMD + this.tempCMD;
-    };
+        return 10 + this.calcStrengthBonus() + this.calcDexterityBonus() + this.calcDodgeBonus() + this.calcDeflectionBonus()
+            + this.baseAttackBonus - this.sizeModifier + this.calcMiscCMD() + this.tempCMD
+    }
     calcFlatFootedCMD = (): number => {
-        return 10 + this.calcStrengthBonus() + this.deflectionModifier + this.baseAttackBonus - this.sizeModifier
-            + this.miscCMD + this.tempCMD;
-    };
+        return 10 + this.calcStrengthBonus() + this.calcDeflectionBonus() + this.baseAttackBonus - this.sizeModifier
+            + this.calcMiscCMD() + this.tempCMD
+    }
 
     //Hit Points
-    maxHP: number = 0;
-    currentHP: number = 0;
-    tempHP: number = 0;
-    nonLethalHP: number = 0;
-    damageReduction: string = "";
-    energyRes: string = "";
+    maxHP: number = 0
+    currentHP: number = 0
+    tempHP: number = 0
+    nonLethalHP: number = 0
+    damageReduction: string = ""
+    energyRes: string = ""
 
     //BAB
-    baseAttackBonus: number = 0;
+    baseAttackBonus: number = 0
     calcMeleeAttackBonus = (): number => {
-        return this.baseAttackBonus + this.calcStrengthBonus();
-    };
+        return this.baseAttackBonus + this.calcStrengthBonus()
+    }
     calcRangedAttackBonus = (): number => {
-        return this.baseAttackBonus + this.calcDexterityBonus();
-    };
-    attackMoraleBonus: number = 0;
-    attackBuffs: number = 0;
-    attackNerfs: number = 0;
+        return this.baseAttackBonus + this.calcDexterityBonus()
+    }
+    calcAttackMoraleBonus = (): number => {
+        return this.sumEquipmentBonuses([StatType.Attack], BonusType.Morale)
+    }
+    attackBuffs: number = 0
+    attackNerfs: number = 0
     calcTempAttackBonus = (): number => {
-        return this.attackMoraleBonus + this.attackBuffs - this.attackNerfs;
-    };
-    damageMoraleBonus: number = 0;
-    damageBuffs: number = 0;
-    damageNerfs: number = 0;
+        return this.calcAttackMoraleBonus() + this.attackBuffs - this.attackNerfs
+    }
+    calcDamageMoraleBonus = (): number => {
+        return this.sumEquipmentBonuses([StatType.Damage], BonusType.Morale)
+    }
+    damageBuffs: number = 0
+    damageNerfs: number = 0
     calcTempDamageBonus = (): number => {
-        return this.damageMoraleBonus + this.damageBuffs - this.damageNerfs;
+        return this.calcDamageMoraleBonus() + this.damageBuffs - this.damageNerfs
     }
 
     //modifiers
-    dodgeModifier: number = 0;
-    deflectionModifier: number = 0;
-    sizeModifier: number = 0;
+    calcDodgeBonus = (): number => {
+        return this.sumEquipmentBonuses([StatType.ArmourClass], BonusType.Dodge);
+    }
+    calcDeflectionBonus = (): number => {
+        return this.sumEquipmentBonuses([StatType.ArmourClass], BonusType.Deflection);
+    }
+    sizeModifier: number = 0
 
     //Saves
-    baseFortSave: number = 0;
-    racialFortSave: number = 0;
-    miscFortSave: number = 0;
-    tempFortSave: number = 0;
+    baseFortSave: number = 0
+    racialFortSave: number = 0
+    calcMiscFortSave = (): number => {
+        return this.sumEquipmentBonuses([StatType.FortitudeSave, StatType.AllSaves],
+            BonusType.Alchemical,
+            BonusType.Competence,
+            BonusType.Insight,
+            BonusType.Luck,
+            BonusType.Morale,
+            BonusType.Profane,
+            BonusType.Resistance,
+            BonusType.Sacred)
+    }
+    tempFortSave: number = 0
     calcFortSave = (): number => {
-        return this.baseFortSave + this.calcConstitutionBonus() + this.racialFortSave + this.miscFortSave + this.tempFortSave;
-    };
-    baseReflexSave: number = 0;
-    racialReflexSave: number = 0;
-    miscReflexSave: number = 0;
-    tempReflexSave: number = 0;
+        return this.baseFortSave + this.calcConstitutionBonus() + this.racialFortSave + this.calcMiscFortSave() + this.tempFortSave
+    }
+    baseReflexSave: number = 0
+    racialReflexSave: number = 0
+    calcMiscReflexSave = (): number => {
+        return this.sumEquipmentBonuses([StatType.ReflexSave, StatType.AllSaves],
+            BonusType.Alchemical,
+            BonusType.Competence,
+            BonusType.Dodge,
+            BonusType.Insight,
+            BonusType.Luck,
+            BonusType.Morale,
+            BonusType.Profane,
+            BonusType.Resistance,
+            BonusType.Sacred)
+    }
+    tempReflexSave: number = 0
     calcReflexSave = (): number => {
-        return this.baseReflexSave + this.calcDexterityBonus() + this.racialReflexSave + this.miscReflexSave + this.tempReflexSave;
-    };
-    baseWillSave: number = 0;
-    racialWillSave: number = 0;
-    miscWillSave: number = 0;
-    tempWillSave: number = 0;
+        return this.baseReflexSave + this.calcDexterityBonus() + this.racialReflexSave + this.calcMiscReflexSave() + this.tempReflexSave
+    }
+    baseWillSave: number = 0
+    racialWillSave: number = 0
+    calcMiscWillSave = (): number => {
+        return this.sumEquipmentBonuses([StatType.WillSave, StatType.AllSaves],
+            BonusType.Alchemical,
+            BonusType.Competence,
+            BonusType.Insight,
+            BonusType.Luck,
+            BonusType.Morale,
+            BonusType.Profane,
+            BonusType.Resistance,
+            BonusType.Sacred)
+    }
+    tempWillSave: number = 0
     calcWillSave = (): number => {
-        return this.baseWillSave + this.calcWisdomBonus() + this.racialWillSave + this.miscWillSave + this.tempWillSave;
-    };
+        return this.baseWillSave + this.calcWisdomBonus() + this.racialWillSave + this.calcMiscWillSave() + this.tempWillSave
+    }
 
     //equipment (default to "none")
-    armour: Armour = new Armour("No Armour");
-    shield: Shield = new Shield("No Shield");
+    armour: Armour = new Armour("No Armour")
+    shield: Shield = new Shield("No Shield")
 
     calcArmourCheckPenalty = (): number => {
         return this.armour.checkPenalty + this.shield.checkPenalty
     }
 
     //skills
-    skills: { [name: string]: Skill; } = {
+    skills: { [name: string]: Skill } = {
         "acrobatics": new Skill(false, this.calcDexterityBonus, this.calcArmourCheckPenalty),
         "appraise": new Skill(false, this.calcIntelligenceBonus),
         "bluff": new Skill(false, this.calcCharismaBonus),
@@ -463,8 +626,52 @@ export class CharacterSheet {
         "survival": new Skill(false, this.calcWisdomBonus),
         "swim": new Skill(false, this.calcStrengthBonus, this.calcArmourCheckPenalty),
         "useMagicDevice": new Skill(true, this.calcCharismaBonus)
-    };
+    }
 
     //equipment
-    equipment: Equipment[] = [];
+    equipment: Equipment[] = []
+
+    //if no bonuses are included, assume all bonus types apply
+    private sumEquipmentBonuses(statToSum: StatType[], ...includedBonuses: BonusType[]): number {
+        var add = 0
+        var bonusesByType: { [key: number]: ValueBonus[] } = {}
+
+        //initialize types dictionary based on what's included
+        if (includedBonuses.length > 0) {
+            includedBonuses.forEach((type: BonusType) => {
+                bonusesByType[type] = []
+            })
+        }
+        else {
+            Object.keys(BonusType).forEach((type: any) => {
+                if (isNaN(type)) {
+                    //add to the includedBonses array as well so the reduce later has something to operate on
+                    //stupid type casting because TS is annoying with enums... again
+                    includedBonuses.push(BonusType[type] as unknown as BonusType)
+                    bonusesByType[BonusType[type]] = []
+                }
+            })
+        }
+
+        //sort all equipment bonuses into their respective buckets
+        this.equipment.forEach((item) => {
+            item.bonuses.forEach((bonus) => {
+                if (bonusesByType[bonus.bonusType] !== undefined && statToSum.indexOf(bonus.affectedStat) >= 0)
+                    bonusesByType[bonus.bonusType].push(bonus)
+            })
+        })
+
+        add = includedBonuses.reduce((sum: number, type: BonusType) => {
+            if (includedBonuses.length === 0 || bonusStackingMap[type] === true)
+                return sum + bonusesByType[type].reduce((acc: number, cur: ValueBonus) => {
+                    return acc + cur.bonusAmount
+                }, 0)
+            else
+                return sum + bonusesByType[type].reduce((acc: number, cur: ValueBonus) => {
+                    return Math.max(acc, cur.bonusAmount)
+                }, 0)
+        }, 0)
+
+        return add
+    }
 }

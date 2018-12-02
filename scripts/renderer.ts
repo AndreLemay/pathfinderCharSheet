@@ -217,6 +217,7 @@ function initModal() {
 
         $("#addEquipmentModal").modal('hide');
         renderEquipment();
+        recalcSheet();
     });
 }
 
