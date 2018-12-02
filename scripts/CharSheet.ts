@@ -235,10 +235,12 @@ export class ValueBonus {
 
 export class Equipment {
     name: string
+    description: string
     bonuses: ValueBonus[] = []
 
-    constructor(name: string, ...bonuses: ValueBonus[]) {
+    constructor(name: string, description: string, ...bonuses: ValueBonus[]) {
         this.name = name
+        this.description = description
         this.bonuses = bonuses
     }
 
@@ -266,8 +268,9 @@ class Armour extends Equipment {
     maxSpeed: number = 0
     constructor(
         name: string,
+        description: string,
         ...bonuses: ValueBonus[]) {
-        super(name, ...bonuses)
+        super(name, description, ...bonuses)
     }
 }
 
@@ -275,8 +278,8 @@ class Shield extends Equipment {
     acBonus: number = 0
     checkPenalty: number = 0
 
-    constructor(name: string, ...bonuses: ValueBonus[]) {
-        super(name, ...bonuses)
+    constructor(name: string, description: string, ...bonuses: ValueBonus[]) {
+        super(name, description, ...bonuses)
     }
 }
 
@@ -583,8 +586,8 @@ export class CharacterSheet {
     }
 
     //equipment (default to "none")
-    armour: Armour = new Armour("No Armour")
-    shield: Shield = new Shield("No Shield")
+    armour: Armour = new Armour("No Armour", "")
+    shield: Shield = new Shield("No Shield", "")
 
     calcArmourCheckPenalty = (): number => {
         return this.armour.checkPenalty + this.shield.checkPenalty
