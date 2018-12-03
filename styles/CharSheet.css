@@ -28,3 +28,16 @@
 .equipment-item .form-group {
     margin-bottom: 5px;
 }
+
+.skill-table-body .form-row {
+    padding: 3px 0 3px 0;
+}
+
+.skill-table-body .form-row:nth-child(odd) {
+    background-color: rgba(211, 211, 211, 0.4);
+}
+
+.skill-table-body input[type="checkbox"]:disabled:not(:checked),
+.skill-table-body input:placeholder-shown {
+    display: none;
+}

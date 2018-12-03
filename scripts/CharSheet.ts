@@ -44,6 +44,44 @@ let bonusStackingMap: { [key: number]: boolean } = {
     [BonusType.Trait]: false
 }
 
+export enum SkillName {
+    Acrobatics,
+    Appraise,
+    Bluff,
+    Climb,
+    Craft,
+    Diplomacy,
+    DisableDevice,
+    Disguise,
+    EscapeArtist,
+    Fly,
+    HandleAnimal,
+    Heal,
+    Intimidate,
+    KnowledgeArcana,
+    KnowledgeDungeoneering,
+    KnowledgeEngineering,
+    KnowledgeGeography,
+    KnowledgeHistory,
+    KnowledgeLocal,
+    KnowledgeNature,
+    KnowledgeNobility,
+    KnowledgePlanes,
+    KnowledgeReligion,
+    Linguistics,
+    Perception,
+    Perform,
+    Profession,
+    Ride,
+    SenseMotive,
+    SleightOfHand,
+    Spellcraft,
+    Stealth,
+    Survival,
+    Swim,
+    UseMagicDevice
+}
+
 export enum Alignment {
     LawfulGood,
     LawfulNeutral,
@@ -95,12 +133,19 @@ export enum ArmourType {
 }
 
 export class ValueBonus {
+    //because enums in TS basically just compile down to string->number/number->string maps, 
+    //we can't accept StatType or SkillName, because they'll be effectively the same and there
+    //won't be any way to tell whether this bonus is to a stat or a skill (unless manually
+    //initializing the values in both enums so there's no overlap.. but then there's no point in having
+    //separate enums). Instead we just have to assume one is always going to be null
     affectedStat: StatType
+    affectedSkill: SkillName
     bonusType: BonusType
     bonusAmount: number
 
-    constructor(affectedStat: StatType, bonusType: BonusType, bonusAmount: number) {
+    constructor(affectedStat: StatType, affectedSkill: SkillName, bonusType: BonusType, bonusAmount: number) {
         this.affectedStat = affectedStat
+        this.affectedSkill = affectedSkill
         this.bonusType = bonusType
         this.bonusAmount = bonusAmount
     }
@@ -195,37 +240,146 @@ export class ValueBonus {
                 retStr += "CMD"
                 break
             case StatType.Charisma:
-                retStr += short ? "CHA" : "charisma"
+                retStr += short ? "CHA" : "Charisma"
                 break
             case StatType.Constitution:
-                retStr += short ? "CON" : "constitution"
+                retStr += short ? "CON" : "Constitution"
                 break
             case StatType.Damage:
                 retStr += short ? "dmg" : "damage"
                 break
             case StatType.Dexterity:
-                retStr += short ? "DEX" : "dexterity"
+                retStr += short ? "DEX" : "Dexterity"
                 break
             case StatType.FortitudeSave:
-                retStr += short ? "fort." : "fortitude saves"
+                retStr += short ? "fort." : "Fortitude Saves"
                 break
             case StatType.Initiative:
-                retStr += short ? "init." : "initiative"
+                retStr += short ? "init." : "Initiative"
                 break
             case StatType.Intelligence:
-                retStr += short ? "INT" : "intelligence"
+                retStr += short ? "INT" : "Intelligence"
                 break
             case StatType.ReflexSave:
-                retStr += short ? "ref." : "reflex saves"
+                retStr += short ? "ref." : "Reflex Saves"
                 break
             case StatType.Strength:
-                retStr += short ? "STR" : "strength"
+                retStr += short ? "STR" : "Strength"
                 break
             case StatType.WillSave:
-                retStr += short ? "will" : "will saves"
+                retStr += short ? "will" : "Will Saves"
                 break
             case StatType.Wisdom:
-                retStr += short ? "WIS" : "wisdom"
+                retStr += short ? "WIS" : "Wisdom"
+                break
+        }
+
+        //affected skill (don't get a short version)
+        switch (this.affectedSkill) {
+            case SkillName.Acrobatics:
+                retStr += "Acrobatics"
+                break
+            case SkillName.Appraise:
+                retStr += "Appraise"
+                break
+            case SkillName.Bluff:
+                retStr += "Bluff"
+                break
+            case SkillName.Climb:
+                retStr += "Climb"
+                break
+            case SkillName.Craft:
+                retStr += "Craft"
+                break
+            case SkillName.Diplomacy:
+                retStr += "Diplomacy"
+                break
+            case SkillName.DisableDevice:
+                retStr += "Disable Device"
+                break
+            case SkillName.Disguise:
+                retStr += "Disguise"
+                break
+            case SkillName.EscapeArtist:
+                retStr += "Escape Artist"
+                break
+            case SkillName.Fly:
+                retStr += "Fly"
+                break
+            case SkillName.HandleAnimal:
+                retStr += "Handle Animal"
+                break
+            case SkillName.Heal:
+                retStr += "Heal"
+                break
+            case SkillName.Intimidate:
+                retStr += "Intimidate"
+                break
+            case SkillName.KnowledgeArcana:
+                retStr += "Knowledge (Arcana)"
+                break
+            case SkillName.KnowledgeDungeoneering:
+                retStr += "Knowledge (Dungeoneering)"
+                break
+            case SkillName.KnowledgeEngineering:
+                retStr += "Knowledge (Engineering)"
+                break
+            case SkillName.KnowledgeGeography:
+                retStr += "Knowledge (Geography)"
+                break
+            case SkillName.KnowledgeHistory:
+                retStr += "Knowledge (History)"
+                break
+            case SkillName.KnowledgeLocal:
+                retStr += "Knowledge (Local)"
+                break
+            case SkillName.KnowledgeNature:
+                retStr += "Knowledge (Nature)"
+                break
+            case SkillName.KnowledgeNobility:
+                retStr += "Knowledge (Nobility)"
+                break
+            case SkillName.KnowledgePlanes:
+                retStr += "Knowledge (Planes)"
+                break
+            case SkillName.KnowledgeReligion:
+                retStr += "Knowldge (Religion)"
+                break
+            case SkillName.Linguistics:
+                retStr += "Linguistics"
+                break
+            case SkillName.Perception:
+                retStr += "Perception"
+                break
+            case SkillName.Perform:
+                retStr += "Perform"
+                break
+            case SkillName.Profession:
+                retStr += "Profession"
+                break
+            case SkillName.Ride:
+                retStr += "Ride"
+                break
+            case SkillName.SenseMotive:
+                retStr += "Sense Motive"
+                break
+            case SkillName.SleightOfHand:
+                retStr += "Sleight Of Hand"
+                break
+            case SkillName.Spellcraft:
+                retStr += "Spellcraft"
+                break
+            case SkillName.Stealth:
+                retStr += "Stealth"
+                break
+            case SkillName.Survival:
+                retStr += "Survival"
+                break
+            case SkillName.Swim:
+                retStr += "Swim"
+                break
+            case SkillName.UseMagicDevice:
+                retStr += "Use Magic Device"
                 break
         }
 
@@ -288,18 +442,32 @@ export class Skill {
     ranks: number = 0
     racialBonus: number = 0
     featBonus: number = 0
-    miscBonus: number = 0
 
     constructor(
+        readonly skillName: SkillName,
         readonly trained: boolean,
         readonly abilityBonus: () => number,
-        readonly armourPenalty: () => number = () => { return null }) { }
+        readonly miscBonus: (skill: SkillName, ...bonuses: BonusType[]) => number,
+        readonly armourPenalty: () => number = () => { return null }, ) { }
+
+    //need a noargs version of this so the renderer process can call it without being able to pass arguments
+    calcMiscBonus = (): number => {
+        return this.miscBonus(this.skillName,
+            BonusType.Circumstance,
+            BonusType.Competence,
+            BonusType.Insight,
+            BonusType.Luck,
+            BonusType.Morale,
+            BonusType.Profane,
+            BonusType.Sacred)
+    }
 
     calcSkillBonus = (): number => {
         if (this.trained && this.ranks === 0) return null
 
         return this.abilityBonus() + (this.isClassSkill && this.ranks > 0 ? 3 : 0) + this.ranks + this.racialBonus + this.featBonus
-            + this.miscBonus + this.armourPenalty() //expecting this be be negative, so we want to add
+            + this.armourPenalty() //expecting this be be negative, so we want to add 
+            + this.calcMiscBonus()
     }
 }
 
@@ -360,7 +528,7 @@ export class CharacterSheet {
     //Ability Scores
     baseStrength: number = 10
     calcAdditionalStrength = (): number => {
-        return this.sumEquipmentBonuses([StatType.Strength],
+        return this.sumEquipmentStatBonuses([StatType.Strength],
             BonusType.Alchemical,
             BonusType.Enhancement,
             BonusType.Inherent,
@@ -372,7 +540,7 @@ export class CharacterSheet {
     }
     baseDexterity: number = 10
     calcAdditionalDexterity = (): number => {
-        return this.sumEquipmentBonuses([StatType.Dexterity],
+        return this.sumEquipmentStatBonuses([StatType.Dexterity],
             BonusType.Alchemical,
             BonusType.Enhancement,
             BonusType.Inherent,
@@ -384,7 +552,7 @@ export class CharacterSheet {
     }
     baseConstitution: number = 10
     calcAdditionalConstitution = (): number => {
-        return this.sumEquipmentBonuses([StatType.Constitution],
+        return this.sumEquipmentStatBonuses([StatType.Constitution],
             BonusType.Alchemical,
             BonusType.Enhancement,
             BonusType.Inherent,
@@ -396,7 +564,7 @@ export class CharacterSheet {
     }
     baseIntelligence: number = 10
     calcAdditionalIntelligence = (): number => {
-        return this.sumEquipmentBonuses([StatType.Intelligence],
+        return this.sumEquipmentStatBonuses([StatType.Intelligence],
             BonusType.Alchemical,
             BonusType.Enhancement,
             BonusType.Inherent)
@@ -407,7 +575,7 @@ export class CharacterSheet {
     }
     baseWisdom: number = 10
     calcAdditionalWisdom = (): number => {
-        return this.sumEquipmentBonuses([StatType.Wisdom],
+        return this.sumEquipmentStatBonuses([StatType.Wisdom],
             BonusType.Alchemical,
             BonusType.Enhancement,
             BonusType.Inherent)
@@ -418,7 +586,7 @@ export class CharacterSheet {
     }
     baseCharisma: number = 10
     calcAdditionalCharisma = (): number => {
-        return this.sumEquipmentBonuses([StatType.Charisma],
+        return this.sumEquipmentStatBonuses([StatType.Charisma],
             BonusType.Alchemical,
             BonusType.Enhancement,
             BonusType.Inherent)
@@ -432,7 +600,7 @@ export class CharacterSheet {
     featInitiative: number = 0
     trainingInitiative: number = 0
     calcMiscInitiative = (): number => {
-        return this.sumEquipmentBonuses([StatType.Initiative])
+        return this.sumEquipmentStatBonuses([StatType.Initiative])
     }
     calcInitiative = (): number => {
         return this.calcDexterityBonus() + this.featInitiative + this.trainingInitiative + this.calcMiscInitiative()
@@ -455,7 +623,7 @@ export class CharacterSheet {
 
     //Combat Manoeuvres
     calcMiscCMB = (): number => {
-        return this.sumEquipmentBonuses([StatType.CMB],
+        return this.sumEquipmentStatBonuses([StatType.CMB],
             BonusType.Circumstance,
             BonusType.Competence,
             BonusType.Insight,
@@ -469,7 +637,7 @@ export class CharacterSheet {
         return this.calcStrengthBonus() + this.baseAttackBonus - this.sizeModifier + this.calcMiscCMB() + this.tempCMB
     }
     calcMiscCMD = (): number => {
-        return this.sumEquipmentBonuses([StatType.CMB],
+        return this.sumEquipmentStatBonuses([StatType.CMB],
             BonusType.Circumstance,
             BonusType.Competence,
             BonusType.Insight,
@@ -505,7 +673,7 @@ export class CharacterSheet {
         return this.baseAttackBonus + this.calcDexterityBonus()
     }
     calcMiscAttackBonus = (): number => {
-        return this.sumEquipmentBonuses([StatType.Attack],
+        return this.sumEquipmentStatBonuses([StatType.Attack],
             BonusType.Circumstance,
             BonusType.Competence,
             BonusType.Enhancement,
@@ -517,7 +685,7 @@ export class CharacterSheet {
             BonusType.Size)
     }
     calcMiscDamageBonus = (): number => {
-        return this.sumEquipmentBonuses([StatType.Damage],
+        return this.sumEquipmentStatBonuses([StatType.Damage],
             BonusType.Enhancement,
             BonusType.Luck,
             BonusType.Morale,
@@ -527,10 +695,10 @@ export class CharacterSheet {
 
     //modifiers
     calcDodgeBonus = (): number => {
-        return this.sumEquipmentBonuses([StatType.ArmourClass], BonusType.Dodge);
+        return this.sumEquipmentStatBonuses([StatType.ArmourClass], BonusType.Dodge);
     }
     calcDeflectionBonus = (): number => {
-        return this.sumEquipmentBonuses([StatType.ArmourClass], BonusType.Deflection);
+        return this.sumEquipmentStatBonuses([StatType.ArmourClass], BonusType.Deflection);
     }
     sizeModifier: number = 0
 
@@ -538,7 +706,7 @@ export class CharacterSheet {
     baseFortSave: number = 0
     racialFortSave: number = 0
     calcMiscFortSave = (): number => {
-        return this.sumEquipmentBonuses([StatType.FortitudeSave, StatType.AllSaves],
+        return this.sumEquipmentStatBonuses([StatType.FortitudeSave, StatType.AllSaves],
             BonusType.Alchemical,
             BonusType.Competence,
             BonusType.Insight,
@@ -554,7 +722,7 @@ export class CharacterSheet {
     baseReflexSave: number = 0
     racialReflexSave: number = 0
     calcMiscReflexSave = (): number => {
-        return this.sumEquipmentBonuses([StatType.ReflexSave, StatType.AllSaves],
+        return this.sumEquipmentStatBonuses([StatType.ReflexSave, StatType.AllSaves],
             BonusType.Alchemical,
             BonusType.Competence,
             BonusType.Dodge,
@@ -571,7 +739,7 @@ export class CharacterSheet {
     baseWillSave: number = 0
     racialWillSave: number = 0
     calcMiscWillSave = (): number => {
-        return this.sumEquipmentBonuses([StatType.WillSave, StatType.AllSaves],
+        return this.sumEquipmentStatBonuses([StatType.WillSave, StatType.AllSaves],
             BonusType.Alchemical,
             BonusType.Competence,
             BonusType.Insight,
@@ -593,50 +761,11 @@ export class CharacterSheet {
         return this.armour.checkPenalty + this.shield.checkPenalty
     }
 
-    //skills
-    skills: { [name: string]: Skill } = {
-        "acrobatics": new Skill(false, this.calcDexterityBonus, this.calcArmourCheckPenalty),
-        "appraise": new Skill(false, this.calcIntelligenceBonus),
-        "bluff": new Skill(false, this.calcCharismaBonus),
-        "climb": new Skill(false, this.calcStrengthBonus, this.calcArmourCheckPenalty),
-        "craft": new Skill(false, this.calcIntelligenceBonus),
-        "diplomacy": new Skill(false, this.calcCharismaBonus),
-        "disableDevice": new Skill(true, this.calcDexterityBonus, this.calcArmourCheckPenalty),
-        "disguise": new Skill(false, this.calcCharismaBonus),
-        "escapeArtist": new Skill(false, this.calcDexterityBonus, this.calcArmourCheckPenalty),
-        "fly": new Skill(false, this.calcDexterityBonus, this.calcArmourCheckPenalty),
-        "handleAnimal": new Skill(true, this.calcCharismaBonus),
-        "heal": new Skill(false, this.calcWisdomBonus),
-        "intimidate": new Skill(false, this.calcCharismaBonus),
-        "knowledgeArcana": new Skill(true, this.calcIntelligenceBonus),
-        "knowledgeDungeoneering": new Skill(true, this.calcIntelligenceBonus),
-        "knowledgeEngineering": new Skill(true, this.calcIntelligenceBonus),
-        "knowledgeGeography": new Skill(true, this.calcIntelligenceBonus),
-        "knowledgeHistory": new Skill(true, this.calcIntelligenceBonus),
-        "knowledgeLocal": new Skill(true, this.calcIntelligenceBonus),
-        "knowledgeNature": new Skill(true, this.calcIntelligenceBonus),
-        "knowledgeNobility": new Skill(true, this.calcIntelligenceBonus),
-        "knowledgePlanes": new Skill(true, this.calcIntelligenceBonus),
-        "knowledgeReligion": new Skill(true, this.calcIntelligenceBonus),
-        "linguistics": new Skill(true, this.calcIntelligenceBonus),
-        "perception": new Skill(false, this.calcWisdomBonus),
-        "perform": new Skill(false, this.calcCharismaBonus),
-        "profession": new Skill(true, this.calcWisdomBonus),
-        "ride": new Skill(false, this.calcDexterityBonus, this.calcArmourCheckPenalty),
-        "senseMotive": new Skill(false, this.calcWisdomBonus),
-        "sleightOfHand": new Skill(true, this.calcDexterityBonus, this.calcArmourCheckPenalty),
-        "spellcraft": new Skill(true, this.calcIntelligenceBonus),
-        "stealth": new Skill(false, this.calcDexterityBonus, this.calcArmourCheckPenalty),
-        "survival": new Skill(false, this.calcWisdomBonus),
-        "swim": new Skill(false, this.calcStrengthBonus, this.calcArmourCheckPenalty),
-        "useMagicDevice": new Skill(true, this.calcCharismaBonus)
-    }
-
     //equipment
     equipment: Equipment[] = []
 
     //if no bonuses are included, assume all bonus types apply
-    private sumEquipmentBonuses(statToSum: StatType[], ...includedBonuses: BonusType[]): number {
+    private sumEquipmentStatBonuses = (statToSum: StatType[], ...includedBonuses: BonusType[]): number => {
         var add = 0
         var bonusesByType: { [key: number]: ValueBonus[] } = {}
 
@@ -645,6 +774,10 @@ export class CharacterSheet {
             includedBonuses.forEach((type: BonusType) => {
                 bonusesByType[type] = []
             })
+
+            //these affect everything, so just add them always
+            bonusesByType[BonusType.Racial] = []
+            bonusesByType[BonusType.Trait] = []
         }
         else {
             Object.keys(BonusType).forEach((type: any) => {
@@ -677,5 +810,92 @@ export class CharacterSheet {
         }, 0)
 
         return add
+    }
+
+    //if no bonuses are included, assume all bonus types apply
+    private sumEquipmentSkillBonuses = (statToSum: SkillName, ...includedBonuses: BonusType[]): number => {
+        var add = 0
+        var bonusesByType: { [key: number]: ValueBonus[] } = {}
+
+        //initialize types dictionary based on what's included
+        if (includedBonuses.length > 0) {
+            includedBonuses.forEach((type: BonusType) => {
+                bonusesByType[type] = []
+            })
+
+            //these affect everything, so just add them always
+            bonusesByType[BonusType.Racial] = []
+            bonusesByType[BonusType.Trait] = []
+        }
+        else {
+            Object.keys(BonusType).forEach((type: any) => {
+                if (isNaN(type)) {
+                    //add to the includedBonses array as well so the reduce later has something to operate on
+                    //stupid type casting because TS is annoying with enums... again
+                    includedBonuses.push(BonusType[type] as unknown as BonusType)
+                    bonusesByType[BonusType[type]] = []
+                }
+            })
+        }
+
+        //sort all equipment bonuses into their respective buckets
+        this.equipment.forEach((item) => {
+            item.bonuses.forEach((bonus) => {
+                if (bonusesByType[bonus.bonusType] !== undefined && statToSum === bonus.affectedSkill)
+                    bonusesByType[bonus.bonusType].push(bonus)
+            })
+        })
+
+        add = includedBonuses.reduce((sum: number, type: BonusType) => {
+            if (includedBonuses.length === 0 || bonusStackingMap[type] === true)
+                return sum + bonusesByType[type].reduce((acc: number, cur: ValueBonus) => {
+                    return acc + cur.bonusAmount
+                }, 0)
+            else
+                return sum + bonusesByType[type].reduce((acc: number, cur: ValueBonus) => {
+                    return Math.max(acc, cur.bonusAmount)
+                }, 0)
+        }, 0)
+
+        return add
+    }
+
+    //skills
+    skills: { [name: number]: Skill } = {
+        [SkillName.Acrobatics]: new Skill(SkillName.Acrobatics, false, this.calcDexterityBonus, this.sumEquipmentSkillBonuses, this.calcArmourCheckPenalty),
+        [SkillName.Appraise]: new Skill(SkillName.Appraise, false, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.Bluff]: new Skill(SkillName.Bluff, false, this.calcCharismaBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.Climb]: new Skill(SkillName.Climb, false, this.calcStrengthBonus, this.sumEquipmentSkillBonuses, this.calcArmourCheckPenalty),
+        [SkillName.Craft]: new Skill(SkillName.Craft, false, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.Diplomacy]: new Skill(SkillName.Diplomacy, false, this.calcCharismaBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.DisableDevice]: new Skill(SkillName.DisableDevice, true, this.calcDexterityBonus, this.sumEquipmentSkillBonuses, this.calcArmourCheckPenalty),
+        [SkillName.Disguise]: new Skill(SkillName.Disguise, false, this.calcCharismaBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.EscapeArtist]: new Skill(SkillName.EscapeArtist, false, this.calcDexterityBonus, this.sumEquipmentSkillBonuses, this.calcArmourCheckPenalty),
+        [SkillName.Fly]: new Skill(SkillName.Fly, false, this.calcDexterityBonus, this.sumEquipmentSkillBonuses, this.calcArmourCheckPenalty),
+        [SkillName.HandleAnimal]: new Skill(SkillName.HandleAnimal, true, this.calcCharismaBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.Heal]: new Skill(SkillName.Heal, false, this.calcWisdomBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.Intimidate]: new Skill(SkillName.Intimidate, false, this.calcCharismaBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.KnowledgeArcana]: new Skill(SkillName.KnowledgeArcana, true, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.KnowledgeDungeoneering]: new Skill(SkillName.KnowledgeDungeoneering, true, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.KnowledgeEngineering]: new Skill(SkillName.KnowledgeEngineering, true, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.KnowledgeGeography]: new Skill(SkillName.KnowledgeGeography, true, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.KnowledgeHistory]: new Skill(SkillName.KnowledgeHistory, true, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.KnowledgeLocal]: new Skill(SkillName.KnowledgeLocal, true, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.KnowledgeNature]: new Skill(SkillName.KnowledgeNature, true, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.KnowledgeNobility]: new Skill(SkillName.KnowledgeNobility, true, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.KnowledgePlanes]: new Skill(SkillName.KnowledgePlanes, true, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.KnowledgeReligion]: new Skill(SkillName.KnowledgeReligion, true, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.Linguistics]: new Skill(SkillName.Linguistics, true, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.Perception]: new Skill(SkillName.Perception, false, this.calcWisdomBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.Perform]: new Skill(SkillName.Perform, false, this.calcCharismaBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.Profession]: new Skill(SkillName.Profession, true, this.calcWisdomBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.Ride]: new Skill(SkillName.Ride, false, this.calcDexterityBonus, this.sumEquipmentSkillBonuses, this.calcArmourCheckPenalty),
+        [SkillName.SenseMotive]: new Skill(SkillName.SenseMotive, false, this.calcWisdomBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.SleightOfHand]: new Skill(SkillName.SleightOfHand, true, this.calcDexterityBonus, this.sumEquipmentSkillBonuses, this.calcArmourCheckPenalty),
+        [SkillName.Spellcraft]: new Skill(SkillName.Spellcraft, true, this.calcIntelligenceBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.Stealth]: new Skill(SkillName.Stealth, false, this.calcDexterityBonus, this.sumEquipmentSkillBonuses, this.calcArmourCheckPenalty),
+        [SkillName.Survival]: new Skill(SkillName.Survival, false, this.calcWisdomBonus, this.sumEquipmentSkillBonuses),
+        [SkillName.Swim]: new Skill(SkillName.Swim, false, this.calcStrengthBonus, this.sumEquipmentSkillBonuses, this.calcArmourCheckPenalty),
+        [SkillName.UseMagicDevice]: new Skill(SkillName.UseMagicDevice, true, this.calcCharismaBonus, this.sumEquipmentSkillBonuses)
     }
 }

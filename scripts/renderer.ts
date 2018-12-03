@@ -3,10 +3,30 @@ import * as jetpack from "fs-jetpack"
 import * as path from "path"
 import {
     CharacterSheet, Skill, Equipment, ValueBonus, BonusType, StatType,
-    Alignment, Gender, Size, ArmourType
+    Alignment, Gender, Size, ArmourType, SkillName
 } from "./CharSheet"
 import * as $ from "jquery"
 import "bootstrap"
+
+/* Remove this stuff when finished, just a debug menu */
+let rightClickPosition = null
+const menu = new remote.Menu()
+const menuItem = new remote.MenuItem({
+    label: 'Inspect Element',
+    click: () => {
+        remote.getCurrentWindow().webContents.inspectElement(rightClickPosition.x, rightClickPosition.y)
+    }
+})
+menu.append(menuItem)
+
+window.addEventListener('contextmenu', (e) => {
+    e.preventDefault()
+    rightClickPosition = { x: e.x, y: e.y }
+    menu.popup({
+        window: remote.getCurrentWindow()
+    })
+}, false)
+/* --------------------------------------------------- */
 
 let sheet = new CharacterSheet()
 let tempEquip: Equipment = null
@@ -211,6 +231,24 @@ function initModal() {
 
         var bonus: ValueBonus = new ValueBonus(
             affectedStat,
+            null,
+            bonusType,
+            bonusAmount
+        )
+
+        tempEquip.bonuses.push(bonus)
+        $("#addEquipmentModal #properties").val(tempEquip.bonusesToString())
+    })
+
+    $("#addEquipmentModal #addSkillBonusButton").click(() => {
+        //get values from the inputs (not importing types for these because string enums are a pain)
+        var bonusType: BonusType = +$("#addEquipmentModal #skillBonusType").val()
+        var affectedskill: SkillName = +$("#addEquipmentModal #affectedSkill").val()
+        var bonusAmount = +$("#addEquipmentModal #skillBonusAmount").val()
+
+        var bonus: ValueBonus = new ValueBonus(
+            null,
+            affectedskill,
             bonusType,
             bonusAmount
         )
@@ -231,7 +269,9 @@ function initModal() {
 
 function initDropdowns() {
     renderEnumToDropdown("#addEquipmentModal #bonusType", BonusType)
+    renderEnumToDropdown("#addEquipmentModal #skillBonusType", BonusType)
     renderEnumToDropdown("#addEquipmentModal #affectedStat", StatType)
+    renderEnumToDropdown("#addEquipmentModal #affectedSkill", SkillName)
     renderEnumToDropdown("div[data-value-input='alignment']>select", Alignment)
     renderEnumToDropdown("div[data-value-input='gender']>select", Gender)
     renderEnumToDropdown("div[data-value-input='size']>select", Size)
