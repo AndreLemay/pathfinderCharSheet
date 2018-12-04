@@ -26,7 +26,13 @@
                 </div>
             </div>
             <div class="nav-item">
-                <a href="#" data-toggle="modal" data-target="#addEquipmentModal">Add Equipment</a>
+                <a href="#" class="nav-link" data-toggle="modal" data-target="#addEquipmentModal">Add Equipment</a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-toggle="modal" data-target="#addAttackModal">Add Attack</a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" data-toggle="modal" data-target="#addFeatModal">Add Feat</a>
             </div>
         </div>
     </div>
@@ -301,6 +307,10 @@
                         <input placeholder=" " type="number" class="form-control form-control-sm">
                     </div>
                 </div>
+                <div class="row section-head"><label>Attacks</label></div>
+                <div class="attack-container"></div>
+                <div class="row section-head"><label>Feats</label></div>
+                <div class="feat-container"></div>
             </div>
             <div class="col-8 px-5 skill-table">
                 <div class="row section-head"><label>Skills</label></div>
@@ -1711,10 +1721,194 @@
                     <button type="button" class="btn btn-primary" id="addEquipmentButton">Add Equipment</button>
                 </div>
             </div>
-
         </div>
     </div>
-
+    <div class="modal fade" id="addFeatModal" tabindex="-1" role="dialog" aria-labelledby="addFeatModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEquipmentModalTitle">New Feat</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="form-row align-items-end">
+                            <div class="col-3 form-group">
+                                <label>Name</label>
+                                <input placeholder=" " type="text" class="form-control form-control-sm" id="name">
+                            </div>
+                            <div class="col-9 form-group">
+                                <label>Properties</label>
+                                <input placeholder=" " class="form-control form-control-sm" id="properties" disabled>
+                            </div>
+                            <div class="col">
+                                <textarea class="form-control form-control-sm" id="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row align-items-end">
+                            <label>Stat Bonus</label>
+                            <div class="col form-group">
+                                <label>Bonus Type</label>
+                                <select class="form-control form-control-sm" id="bonusType"><select>
+                            </div>
+                            <div class="col form-group">
+                                <label>Affected Stat</label>
+                                <select class="form-control form-control-sm" id="affectedStat"></select>
+                            </div>
+                            <div class="col form-group">
+                                <label>Amount</label>
+                                <input placeholder=" " type="number" class="form-control form-control-sm" id="bonusAmount">
+                            </div>
+                            <div class="col form-group">
+                                <button class="btn btn-secondary" id="addBonusButton">Add</button>
+                            </div>
+                        </div>
+                        <div class="form-row align-items-end">
+                            <label>Skill Bonus</label>
+                            <div class="col form-group">
+                                <label>Bonus Type</label>
+                                <select class="form-control form-control-sm" id="skillBonusType"><select>
+                            </div>
+                            <div class="col form-group">
+                                <label>Affected Skill</label>
+                                <select class="form-control form-control-sm" id="affectedSkill"></select>
+                            </div>
+                            <div class="col form-group">
+                                <label>Amount</label>
+                                <input placeholder=" " type="number" class="form-control form-control-sm" id="skillBonusAmount">
+                            </div>
+                            <div class="col form-group">
+                                <button class="btn btn-secondary" id="addSkillBonusButton">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="addFeatButton">Add Feat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addAttackModal" tabindex="-1" role="dialog" aria-labelledby="addAttackModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAttackModalTitle">New Attack</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="form-row align-items-end">
+                            <div class="col-3 form-group">
+                                <label>Name</label>
+                                <input placeholder=" " type="text" class="form-control form-control-sm" id="name">
+                            </div>
+                            <div class="col-9 form-group">
+                                <label>Properties</label>
+                                <input readonly placeholder=" " class="form-control form-control-sm" id="properties">
+                            </div>
+                            <div class="col">
+                                <textarea class="form-control form-control-sm" id="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row align-items-end">
+                            <div class="col-1 form-group">
+                                <label>Range</label>
+                                <input type="number" class="form-control form-control-sm" id="range">
+                            </div>
+                            <div class="col-5 form-group">
+                                <label>Type</label>
+                                <div class="form-control form-control-sm">
+                                    <div class="form-check form-check-inline">
+                                        <input type="checkbox" class="form-check-input" name="damageType" value="B">
+                                        <label class="form-check-label">Bludgeoning</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="checkbox" class="form-check-input" name="damageType" value="P">
+                                        <label class="form-check-label">Piercing</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="checkbox" class="form-check-input" name="damageType" value="S">
+                                        <label class="form-check-label">Slashing</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 form-group">
+                                <label>Damage</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="number" class="form-control form-control-sm" id="damageAmount">
+                                    <div class="input-group-prepend input-group-append">
+                                        <div class="input-group-text">d</div>
+                                    </div>
+                                    <select class="form-control form-control-sm" id="damageDie">
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="6">6</option>
+                                        <option value="8">8</option>
+                                        <option value="10">10</option>
+                                        <option value="12">12</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-3 form-group">
+                                <label>Critical</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="number" min="1" max="20" class="form-control form-control-sm" id="critRange">
+                                    <div class="input-group-prepend input-group-append">
+                                        <div class="input-group-text">-20 x</div>
+                                    </div>
+                                    <input type="number" class="form-control form-control-sm" id="critMultiplier">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row align-items-end">
+                            <label>Stat Bonus</label>
+                            <div class="col form-group">
+                                <label>Bonus Type</label>
+                                <select class="form-control form-control-sm" id="bonusType"><select>
+                            </div>
+                            <div class="col form-group">
+                                <label>Affected Stat</label>
+                                <select class="form-control form-control-sm" id="affectedStat"></select>
+                            </div>
+                            <div class="col form-group">
+                                <label>Amount</label>
+                                <input placeholder=" " type="number" class="form-control form-control-sm" id="bonusAmount">
+                            </div>
+                            <div class="col form-group">
+                                <button class="btn btn-secondary" id="addBonusButton">Add</button>
+                            </div>
+                        </div>
+                        <div class="form-row align-items-end">
+                            <label>Skill Bonus</label>
+                            <div class="col form-group">
+                                <label>Bonus Type</label>
+                                <select class="form-control form-control-sm" id="skillBonusType"><select>
+                            </div>
+                            <div class="col form-group">
+                                <label>Affected Skill</label>
+                                <select class="form-control form-control-sm" id="affectedSkill"></select>
+                            </div>
+                            <div class="col form-group">
+                                <label>Amount</label>
+                                <input placeholder=" " type="number" class="form-control form-control-sm" id="skillBonusAmount">
+                            </div>
+                            <div class="col form-group">
+                                <button class="btn btn-secondary" id="addSkillBonusButton">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="addAttackButton">Add ATtack</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

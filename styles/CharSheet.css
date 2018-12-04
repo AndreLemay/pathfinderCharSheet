@@ -14,18 +14,33 @@
     margin: auto;
 }
 
-.equipment-container {
+.equipment-container,
+.attack-container,
+.feat-container {
     overflow: auto;
     height: 405px;
     padding: 0 5px 0 5px;
     margin: 0 -15px 0 -15px;
 }
 
-.equipment-item {
+.attack-container,
+.feat-container {
+    height: 690px;
+}
+
+.attack-container .form-group,
+.attack-container .form-group label {
+    margin-bottom: 2px;
+}
+
+.equipment-item,
+.attack-item,
+.feat-item {
     border-bottom: 1px solid darkgray;
 }
 
-.equipment-item .form-group {
+.equipment-item .form-inline,
+.feat-item .form-inline {
     margin-bottom: 5px;
 }
 

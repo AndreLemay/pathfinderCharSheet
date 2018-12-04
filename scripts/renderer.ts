@@ -3,7 +3,7 @@ import * as jetpack from "fs-jetpack"
 import * as path from "path"
 import {
     CharacterSheet, Skill, Equipment, ValueBonus, BonusType, StatType,
-    Alignment, Gender, Size, ArmourType, SkillName
+    Alignment, Gender, Size, ArmourType, SkillName, Weapon, Feat
 } from "./CharSheet"
 import * as $ from "jquery"
 import "bootstrap"
@@ -30,6 +30,8 @@ window.addEventListener('contextmenu', (e) => {
 
 let sheet = new CharacterSheet()
 let tempEquip: Equipment = null
+let tempWeapon: Weapon = null
+let teampFeat: Feat = null
 
 function recalcSheet() {
     $("div[data-value-output]>input, div[data-skill-name]").trigger("charSheet:recalc")
@@ -49,21 +51,84 @@ function renderEquipment() {
 
     sheet.equipment.forEach((item: Equipment) => {
         var html: string =
-            `<div class="form-row align-items-end equipment-item">
-                <div class="col-3 form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control form-control-sm" disabled value="${item.name}">
+            `<div class="equipment-item">
+                <div class="form-row align-items-center">
+                    <div class="col-2"><label>Name</label></div>
+                    <div class="col-10">
+                        <input type="text" class="form-control form-control-sm form-control-plaintext" readonly value="${item.name}">
+                    </div>
                 </div>
-                <div class="col-9 form-group">
-                    <label>Properties</label>
-                    <input type="text" class="form-control form-control-sm" disabled value="${item.bonusesToString(true)}">
-                </div>
-                <div class="col form-group">
-                    <textarea class="form-control form-control-sm" disable>${item.description}</textarea>
+                <div class="form-row align-items-center">
+                    <div class="col-2"><label>Properties</label></div>
+                    <div class="col-10">
+                        <textarea class="form-control form-control-sm form-control-plaintext" readonly>${item.bonusesToString(true)}\n${item.description}</textarea>
+                    </div>
                 </div>
             </div>`
 
         $(".equipment-container").append(html)
+    })
+}
+
+function renderFeats() {
+    //clear before re-rendering
+    $(".feat-container").empty()
+
+    sheet.feats.forEach((item: Equipment) => {
+        var html: string =
+            `<div class="feat-item">
+                <div class="form-row align-items-center">
+                    <div class="col-3"><label>Name</label></div>
+                    <div class="col-9">
+                        <input type="text" class="form-control form-control-sm form-control-plaintext" readonly value="${item.name}">
+                    </div>
+                </div>
+                <div class="form-row align-items-center">
+                    <div class="col-3"><label>Properties</label></div>
+                    <div class="col-9">
+                        <textarea class="form-control form-control-sm form-control-plaintext" readonly>${item.bonusesToString(true)}\n${item.description}</textarea>
+                    </div>
+                </div>
+            </div>`
+
+        $(".feat-container").append(html)
+    })
+}
+
+function renderAttacks() {
+    //clear before re-rendering
+    $(".attack-container").empty()
+
+    sheet.equipment.filter((item) => { return item instanceof Weapon }).forEach((item: Weapon) => {
+        var html: string =
+            `<div class="form-row align-items-end">
+                <div class="col-8 form-group">
+                    <label>Name</label>
+                    <input readonly class="form-control form-control-sm form-control-plaintext" value="${item.name}">
+                </div>
+                <div class="col-4 form-group">
+                    <label>Range</label>
+                    <input readonly class="form-control form-control-sm form-control-plaintext" value="${item.range}">
+                </div>
+                <div class="col-12 form-group">
+                    <label>Properties</label>
+                    <textarea readonly class="form-control form-control-sm form-control-plaintext">${item.bonusesToString(true)}<br/>${item.description}</textarea>
+                </div>
+                <div class="col-4 form-group">
+                    <label>Type</label>
+                    <input readonly class="form-control form-control-sm form-control-plaintext" value="${item.damageType.join("/")}">
+                </div>
+                <div class="col-4 form-group">
+                    <label>Damage</label>
+                    <input readonly class="form-control form-control-sm form-control-plaintext" value="${item.damageAmount}d${item.damageDie}">
+                </div>
+                <div class="col-4 form-group">
+                    <label>Critical</label>
+                    <input readonly class="form-control form-control-sm form-control-plaintext" value="${item.critRange}-20x${item.critMultiplier}">
+                </div>
+            </div>`
+
+        $(".attack-container").append(html)
     })
 }
 
@@ -198,7 +263,7 @@ function initFields() {
     $("div[data-value-output]>input, div[data-skill-name]").trigger("charSheet:recalc")
 }
 
-function initModal() {
+function initEquipmentModal() {
     //initialize the var we use to store the modal values
     $("#addEquipmentModal").on("show.bs.modal", () => {
         tempEquip = new Equipment("", "")
@@ -267,11 +332,192 @@ function initModal() {
     })
 }
 
+function initFeatModal() {
+    //initialize the var we use to store the modal values
+    $("#addFeatModal").on("show.bs.modal", () => {
+        teampFeat = new Feat("", "")
+    })
+
+    //make sure we don't accidentally hold on to values after the modal closes
+    //also clear the fields
+    $("#addFeatModal").on("hidden.bs.modal", () => {
+        teampFeat = null
+        $("#addFeatModal input[id], #addFeatModal textarea[id]").val(null)
+    })
+
+    //map values from modal fields to Equipment object
+    $("#addFeatModal #name").change((event) => {
+        var elem = $(event.currentTarget)
+        teampFeat.name = elem.val() + "" //force it to a string to make typescript happy
+    })
+
+    $("#addFeatModal #description").change((event) => {
+        var elem = $(event.currentTarget)
+        teampFeat.description = elem.val() + ""
+    })
+
+    //add properties
+    $("#addFeatModal #addBonusButton").click(() => {
+        //get values from the inputs (not importing types for these because string enums are a pain)
+        var bonusType: BonusType = +$("#addFeatModal #bonusType").val()
+        var affectedStat: StatType = +$("#addFeatModal #affectedStat").val()
+        var bonusAmount = +$("#addFeatModal #bonusAmount").val()
+
+        var bonus: ValueBonus = new ValueBonus(
+            affectedStat,
+            null,
+            bonusType,
+            bonusAmount
+        )
+
+        teampFeat.bonuses.push(bonus)
+        $("#addFeatModal #properties").val(teampFeat.bonusesToString())
+    })
+
+    $("#addFeatModal #addSkillBonusButton").click(() => {
+        //get values from the inputs (not importing types for these because string enums are a pain)
+        var bonusType: BonusType = +$("#addFeatModal #skillBonusType").val()
+        var affectedskill: SkillName = +$("#addFeatModal #affectedSkill").val()
+        var bonusAmount = +$("#addFeatModal #skillBonusAmount").val()
+
+        var bonus: ValueBonus = new ValueBonus(
+            null,
+            affectedskill,
+            bonusType,
+            bonusAmount
+        )
+
+        teampFeat.bonuses.push(bonus)
+        $("#addFeatModal #properties").val(teampFeat.bonusesToString())
+    })
+
+    //add equipment to the sheet
+    $("#addFeatModal #addFeatButton").click(() => {
+        sheet.feats.push(teampFeat)
+
+        $("#addFeatModal").modal('hide')
+        renderFeats()
+        recalcSheet()
+    })
+}
+
+function initAttackModal() {
+    //initialize the var we use to store the modal values
+    $("#addAttackModal").on("show.bs.modal", () => {
+        tempWeapon = new Weapon("", "")
+    })
+
+    //make sure we don't accidentally hold on to values after the modal closes
+    //also clear the fields
+    $("#addAttackModal").on("hidden.bs.modal", () => {
+        tempWeapon = null
+        $("#addAttackModal input[id], #addAttackModal textarea[id]").val(null)
+    })
+
+    //map values from modal fields to Equipment object
+    $("#addAttackModal #name").change((event) => {
+        var elem = $(event.currentTarget)
+        tempWeapon.name = elem.val() + "" //force it to a string to make typescript happy
+    })
+
+    $("#addAttackModal #description").change((event) => {
+        var elem = $(event.currentTarget)
+        tempWeapon.description = elem.val() + ""
+    })
+
+    $("#addAttackModal #range").change((event) => {
+        var elem = $(event.currentTarget)
+        tempWeapon.range = +elem.val()
+    })
+
+    $("#addAttackModal input[name='damageType']").change((event) => {
+        var elem = $(event.currentTarget)
+        var val = elem.val() + ""
+        if (elem.prop("checked"))
+            tempWeapon.damageType.push(val)
+        else 
+            tempWeapon.damageType.splice(tempWeapon.damageType.indexOf(val), 1)
+    })
+
+    $("#addAttackModal #damageAmount").change((event) => {
+        var elem = $(event.currentTarget)
+        tempWeapon.damageAmount = +elem.val()
+    })
+
+    $("#addAttackModal #damageDie").change((event) => {
+        var elem = $(event.currentTarget)
+        tempWeapon.damageDie = +elem.val()
+    })
+
+    $("#addAttackModal #critRange").change((event) => {
+        var elem = $(event.currentTarget)
+        tempWeapon.critRange = +elem.val()
+    })
+
+    $("#addAttackModal #critMultiplier").change((event) => {
+        var elem = $(event.currentTarget)
+        tempWeapon.critMultiplier = +elem.val()
+    })
+
+    //add properties
+    $("#addAttackModal #addBonusButton").click(() => {
+        //get values from the inputs (not importing types for these because string enums are a pain)
+        var bonusType: BonusType = +$("#addAttackModal #bonusType").val()
+        var affectedStat: StatType = +$("#addAttackModal #affectedStat").val()
+        var bonusAmount = +$("#addAttackModal #bonusAmount").val()
+
+        var bonus: ValueBonus = new ValueBonus(
+            affectedStat,
+            null,
+            bonusType,
+            bonusAmount
+        )
+
+        tempWeapon.bonuses.push(bonus)
+        $("#addAttackModal #properties").val(tempWeapon.bonusesToString())
+    })
+
+    $("#addAttackModal #addSkillBonusButton").click(() => {
+        //get values from the inputs (not importing types for these because string enums are a pain)
+        var bonusType: BonusType = +$("#addAttackModal #skillBonusType").val()
+        var affectedskill: SkillName = +$("#addAttackModal #affectedSkill").val()
+        var bonusAmount = +$("#addAttackModal #skillBonusAmount").val()
+
+        var bonus: ValueBonus = new ValueBonus(
+            null,
+            affectedskill,
+            bonusType,
+            bonusAmount
+        )
+
+        tempWeapon.bonuses.push(bonus)
+        $("#addAttackModal #properties").val(tempWeapon.bonusesToString())
+    })
+
+    //add equipment to the sheet
+    $("#addAttackModal #addAttackButton").click(() => {
+        sheet.equipment.push(tempWeapon)
+
+        $("#addAttackModal").modal('hide')
+        renderEquipment()
+        renderAttacks()
+        recalcSheet()
+    })
+}
+
 function initDropdowns() {
     renderEnumToDropdown("#addEquipmentModal #bonusType", BonusType)
     renderEnumToDropdown("#addEquipmentModal #skillBonusType", BonusType)
     renderEnumToDropdown("#addEquipmentModal #affectedStat", StatType)
     renderEnumToDropdown("#addEquipmentModal #affectedSkill", SkillName)
+    renderEnumToDropdown("#addAttackModal #bonusType", BonusType)
+    renderEnumToDropdown("#addAttackModal #skillBonusType", BonusType)
+    renderEnumToDropdown("#addAttackModal #affectedStat", StatType)
+    renderEnumToDropdown("#addAttackModal #affectedSkill", SkillName)
+    renderEnumToDropdown("#addFeatModal #bonusType", BonusType)
+    renderEnumToDropdown("#addFeatModal #skillBonusType", BonusType)
+    renderEnumToDropdown("#addFeatModal #affectedStat", StatType)
+    renderEnumToDropdown("#addFeatModal #affectedSkill", SkillName)
     renderEnumToDropdown("div[data-value-input='alignment']>select", Alignment)
     renderEnumToDropdown("div[data-value-input='gender']>select", Gender)
     renderEnumToDropdown("div[data-value-input='size']>select", Size)
@@ -281,5 +527,9 @@ function initDropdowns() {
 initDropdowns()
 initEvents()
 initFields()
-initModal()
+initEquipmentModal()
+initFeatModal()
+initAttackModal()
 renderEquipment()
+renderFeats()
+renderAttacks()
