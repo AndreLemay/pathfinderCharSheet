@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 .section-head {
     color: white;
     background-color: dimgray;
