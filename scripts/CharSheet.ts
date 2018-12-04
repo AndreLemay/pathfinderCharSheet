@@ -460,7 +460,6 @@ export class Weapon extends Equipment {
 export class Skill {
     isClassSkill: boolean = false
     ranks: number = 0
-    racialBonus: number = 0
 
     constructor(
         readonly skillName: SkillName,
@@ -496,7 +495,7 @@ export class Skill {
     calcSkillBonus = (): number => {
         if (this.trained && this.ranks === 0) return null
 
-        return this.abilityBonus() + (this.isClassSkill && this.ranks > 0 ? 3 : 0) + this.ranks + this.racialBonus + this.calcFeatBonus()
+        return this.abilityBonus() + (this.isClassSkill && this.ranks > 0 ? 3 : 0) + this.ranks + this.calcFeatBonus()
             + this.armourPenalty() //expecting this be be negative, so we want to add 
             + this.calcMiscBonus()
     }
@@ -517,8 +516,7 @@ export class CharacterSheet {
             let skill: Skill = this.skills[name]
             characterObj.skills[name] = {
                 isClassSkill: skill.isClassSkill,
-                ranks: skill.ranks,
-                racialBonus: skill.racialBonus
+                ranks: skill.ranks
             }
         }
 
@@ -539,7 +537,6 @@ export class CharacterSheet {
             let skill = sheet.skills[name]
             skill.isClassSkill = savedSkill.isClassSkill
             skill.ranks = savedSkill.ranks
-            skill.racialBonus = savedSkill.racialBonus
         }
 
         return sheet
@@ -651,15 +648,11 @@ export class CharacterSheet {
     }
 
     //Initiative
-    calcFeatInitiative = (): number => {
-        return this.sumFeatStatBonuses([StatType.Initiative])
-    }
-    trainingInitiative: number = 0
     calcMiscInitiative = (): number => {
         return this.sumEquipmentStatBonuses([StatType.Initiative]) + this.sumFeatStatBonuses([StatType.Initiative])
     }
     calcInitiative = (): number => {
-        return this.calcDexterityBonus() + this.calcFeatInitiative() + this.trainingInitiative + this.calcMiscInitiative()
+        return this.calcDexterityBonus() + this.calcMiscInitiative()
     }
 
     //Armour Class
@@ -792,7 +785,6 @@ export class CharacterSheet {
 
     //Saves
     baseFortSave: number = 0
-    racialFortSave: number = 0
     calcMiscFortSave = (): number => {
         return this.sumEquipmentStatBonuses([StatType.FortitudeSave, StatType.AllSaves],
             BonusType.Alchemical,
@@ -814,10 +806,9 @@ export class CharacterSheet {
                 BonusType.Sacred)
     }
     calcFortSave = (): number => {
-        return this.baseFortSave + this.calcConstitutionBonus() + this.racialFortSave + this.calcMiscFortSave()
+        return this.baseFortSave + this.calcConstitutionBonus() + this.calcMiscFortSave()
     }
     baseReflexSave: number = 0
-    racialReflexSave: number = 0
     calcMiscReflexSave = (): number => {
         return this.sumEquipmentStatBonuses([StatType.ReflexSave, StatType.AllSaves],
             BonusType.Alchemical,
@@ -841,10 +832,9 @@ export class CharacterSheet {
                 BonusType.Sacred)
     }
     calcReflexSave = (): number => {
-        return this.baseReflexSave + this.calcDexterityBonus() + this.racialReflexSave + this.calcMiscReflexSave()
+        return this.baseReflexSave + this.calcDexterityBonus() + this.calcMiscReflexSave()
     }
     baseWillSave: number = 0
-    racialWillSave: number = 0
     calcMiscWillSave = (): number => {
         return this.sumEquipmentStatBonuses([StatType.WillSave, StatType.AllSaves],
             BonusType.Alchemical,
@@ -866,7 +856,7 @@ export class CharacterSheet {
                 BonusType.Sacred)
     }
     calcWillSave = (): number => {
-        return this.baseWillSave + this.calcWisdomBonus() + this.racialWillSave + this.calcMiscWillSave()
+        return this.baseWillSave + this.calcWisdomBonus() + this.calcMiscWillSave()
     }
 
     //equipment (default to "none")
