@@ -518,9 +518,7 @@ export class CharacterSheet {
             characterObj.skills[name] = {
                 isClassSkill: skill.isClassSkill,
                 ranks: skill.ranks,
-                racialBonus: skill.racialBonus,
-                featBonus: skill.featBonus,
-                miscBonus: skill.miscBonus
+                racialBonus: skill.racialBonus
             }
         }
 
@@ -542,8 +540,6 @@ export class CharacterSheet {
             skill.isClassSkill = savedSkill.isClassSkill
             skill.ranks = savedSkill.ranks
             skill.racialBonus = savedSkill.racialBonus
-            skill.featBonus = savedSkill.featBonus
-            skill.miscBonus = savedSkill.miscBonus
         }
 
         return sheet
@@ -655,13 +651,15 @@ export class CharacterSheet {
     }
 
     //Initiative
-    featInitiative: number = 0
+    calcFeatInitiative = (): number => {
+        return this.sumFeatStatBonuses([StatType.Initiative])
+    }
     trainingInitiative: number = 0
     calcMiscInitiative = (): number => {
         return this.sumEquipmentStatBonuses([StatType.Initiative]) + this.sumFeatStatBonuses([StatType.Initiative])
     }
     calcInitiative = (): number => {
-        return this.calcDexterityBonus() + this.featInitiative + this.trainingInitiative + this.calcMiscInitiative()
+        return this.calcDexterityBonus() + this.calcFeatInitiative() + this.trainingInitiative + this.calcMiscInitiative()
     }
 
     //Armour Class
