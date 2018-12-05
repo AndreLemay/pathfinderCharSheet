@@ -2,6 +2,16 @@ body {
     overflow-x: hidden;
 }
 
+input, select, .form-group, .skill-table-head>.col {
+    text-align: center;
+    text-align-last: center;
+}
+
+input[type="text"] {
+    text-align: start;
+    text-align-last: start;
+}
+
 .section-head {
     color: white;
     background-color: dimgray;
@@ -14,7 +24,7 @@ body {
 
 .ability-title {
     font-weight: bolder;
-    align-items: center;
+    text-align: center;
     margin: auto;
 }
 
@@ -56,7 +66,13 @@ body {
     background-color: rgba(211, 211, 211, 0.4);
 }
 
+/*bootstrap's form-control-plaintext sets this, but apparently its input[readonly] style overrides this,
+so set it back*/
+.skill-table-body input:read-only {
+    background-color: transparent;
+}
+
 .skill-table-body input[type="checkbox"]:disabled:not(:checked),
-.skill-table-body input:placeholder-shown {
+.skill-table-body input:read-only:placeholder-shown {
     display: none;
 }

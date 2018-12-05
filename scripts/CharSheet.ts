@@ -893,7 +893,7 @@ export class CharacterSheet {
         }
 
         //sort all equipment bonuses into their respective buckets
-        this.equipment.forEach((item) => {
+        from.forEach((item) => {
             item.bonuses.forEach((bonus) => {
                 if (bonusesByType[bonus.bonusType] !== undefined && statToSum.indexOf(bonus.affectedStat) >= 0)
                     bonusesByType[bonus.bonusType].push(bonus)
@@ -940,7 +940,7 @@ export class CharacterSheet {
         }
 
         //sort all equipment bonuses into their respective buckets
-        this.equipment.forEach((item) => {
+        from.forEach((item) => {
             item.bonuses.forEach((bonus) => {
                 if (bonusesByType[bonus.bonusType] !== undefined && statToSum === bonus.affectedSkill)
                     bonusesByType[bonus.bonusType].push(bonus)

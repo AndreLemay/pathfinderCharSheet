@@ -102,17 +102,17 @@ function renderAttacks() {
     sheet.equipment.filter((item) => { return item instanceof Weapon }).forEach((item: Weapon) => {
         var html: string =
             `<div class="form-row align-items-end">
-                <div class="col-8 form-group">
+                <div class="col-4 form-group">
                     <label>Name</label>
                     <input readonly class="form-control form-control-sm form-control-plaintext" value="${item.name}">
+                </div>
+                <div class="col-8 form-group">
+                    <label>Properties</label>
+                    <textarea readonly class="form-control form-control-sm form-control-plaintext">${item.bonusesToString(true)}\n${item.description}</textarea>
                 </div>
                 <div class="col-4 form-group">
                     <label>Range</label>
                     <input readonly class="form-control form-control-sm form-control-plaintext" value="${item.range}">
-                </div>
-                <div class="col-12 form-group">
-                    <label>Properties</label>
-                    <textarea readonly class="form-control form-control-sm form-control-plaintext">${item.bonusesToString(true)}<br/>${item.description}</textarea>
                 </div>
                 <div class="col-4 form-group">
                     <label>Type</label>
@@ -239,7 +239,8 @@ function initEvents() {
 
 function initFields() {
     //disable all outputs
-    $("div[data-value-output]>input,div[data-skill-output]>input").prop("disabled", true)
+    $("div[data-value-output]>input:not(:checkbox),div[data-skill-output]>input:not(:checkbox)").prop("readonly", true).addClass("form-control-plaintext")
+    $("div[data-value-output]>input:checkbox,div[data-skill-output]>input:checkbox").prop("disabled", true)
 
     //initialize inputs to default values
     $("div[data-value-input]>input, div[data-value-input]>select").each((index, elem) => {

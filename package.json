@@ -10,7 +10,7 @@
   },
   "repository": "https://github.com/AndreLemay/pathfinderCharSheet",
   "author": "Andre Lemay",
-  "license": "CC0-1.0",
+  "license": "MIT",
   "devDependencies": {
     "@types/bootstrap": "^4.1.2",
     "@types/jquery": "^3.3.22",
