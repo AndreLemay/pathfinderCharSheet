@@ -76,3 +76,85 @@ so set it back*/
 .skill-table-body input:read-only:placeholder-shown {
     display: none;
 }
+
+/* Slider/Toggle checkbox css*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 30px;
+    margin: 0.25rem 0 0 0;
+}
+
+.switch input {
+    display:none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f2f2f2;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    z-index: 2;
+    content: "";
+    height: 30px;
+    width: 30px;
+    left: 0px;
+    bottom: 0px;
+    background-color: lightgray;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22); 
+    transition: all 0.4s ease-in-out;
+}
+.slider:after {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    content: "On";
+    text-align: left !important;
+    padding-left: 0;
+    width: 70px;
+    color: #fff;
+    height: 30px;
+    border-radius: 100px;
+    background-color: #007bff;
+    transform: translateX(-40px);
+    transition: all 0.4s ease-in-out;
+    padding-top: 2px;
+}
+
+input:checked + .slider:after {
+  transform: translateX(0px);
+  padding-left: 10px;
+}
+
+input:checked + .slider:before {
+  transform: translateX(40px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 100px;
+}
+
+.slider.round:before {
+  border-radius: 100%;
+}
+.absolute-no {
+	position: absolute;
+	left: 0;
+	color: darkslategrey;
+	text-align: right !important;
+    width: calc(100% - 10px);
+    height: 30px;
+    cursor: pointer;
+    padding-top: 2px;
+}

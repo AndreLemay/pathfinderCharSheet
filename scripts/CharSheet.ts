@@ -422,8 +422,9 @@ export class Equipment {
     }
 }
 
-//identical functionality to equipment, extending so we can reuse the same bonus summing functions
+//yes it's not techincally equipment but it largely functions the same
 export class Feat extends Equipment {
+    active: boolean = true
     constructor(name: string, description: string, ...bonuses: ValueBonus[]) {
         super(name, description, ...bonuses)
     }
@@ -713,7 +714,7 @@ export class CharacterSheet {
         return this.calcStrengthBonus() + this.baseAttackBonus - this.sizeModifier + this.calcMiscCMB() + this.tempCMB
     }
     calcMiscCMD = (): number => {
-        return this.sumEquipmentStatBonuses([StatType.CMB],
+        return this.sumEquipmentStatBonuses([StatType.CMD],
             BonusType.Circumstance,
             BonusType.Competence,
             BonusType.Insight,
@@ -721,7 +722,7 @@ export class CharacterSheet {
             BonusType.Morale,
             BonusType.Profane,
             BonusType.Sacred) +
-            this.sumFeatStatBonuses([StatType.CMB],
+            this.sumFeatStatBonuses([StatType.CMD],
                 BonusType.Circumstance,
                 BonusType.Competence,
                 BonusType.Insight,
@@ -751,10 +752,10 @@ export class CharacterSheet {
     //BAB
     baseAttackBonus: number = 0
     calcMeleeAttackBonus = (): number => {
-        return this.baseAttackBonus + this.calcStrengthBonus()
+        return this.baseAttackBonus + this.calcStrengthBonus() + this.calcMiscAttackBonus()
     }
     calcRangedAttackBonus = (): number => {
-        return this.baseAttackBonus + this.calcDexterityBonus()
+        return this.baseAttackBonus + this.calcDexterityBonus() + this.calcMiscAttackBonus()
     }
     calcMiscAttackBonus = (): number => {
         return this.sumEquipmentStatBonuses([StatType.Attack],
@@ -997,12 +998,12 @@ export class CharacterSheet {
 
     //if no bonuses are included, assume all bonus types apply
     private sumFeatStatBonuses = (statToSum: StatType[], ...includedBonuses: BonusType[]): number => {
-        return this.sumStatBonuses(this.feats, statToSum, ...includedBonuses)
+        return this.sumStatBonuses(this.feats.filter((item) => { return item.active }), statToSum, ...includedBonuses)
     }
 
     //if no bonuses are included, assume all bonus types apply
     private sumFeatSkillBonuses = (statToSum: SkillName, ...includedBonuses: BonusType[]): number => {
-        return this.sumSkillBonuses(this.feats, statToSum, ...includedBonuses)
+        return this.sumSkillBonuses(this.feats.filter((item) => { return item.active }), statToSum, ...includedBonuses)
     }
 
     //skills

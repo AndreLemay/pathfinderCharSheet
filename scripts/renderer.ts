@@ -34,7 +34,9 @@ let tempWeapon: Weapon = null
 let teampFeat: Feat = null
 
 function recalcSheet() {
-    $("div[data-value-output]>input, div[data-skill-name]").trigger("charSheet:recalc")
+    $("div[data-value-output]>input, div[data-skill-name]").trigger("charSheet:recalc")    
+    //also need to re-render attacks as they won't be picked up by the sheet recalc, and might be affected by damage bonuses
+    renderAttacks()
 }
 
 function renderEnumToDropdown(dropdownSelector: string, enumType: any /*typescript is weird so just take any...*/) {
@@ -74,13 +76,20 @@ function renderFeats() {
     //clear before re-rendering
     $(".feat-container").empty()
 
-    sheet.feats.forEach((item: Equipment) => {
+    sheet.feats.forEach((item: Feat, index: number) => {
         var html: string =
-            `<div class="feat-item">
+            `<div class="feat-item" data-feat-index="${index}">
                 <div class="form-row align-items-center">
                     <div class="col-3"><label>Name</label></div>
-                    <div class="col-9">
+                    <div class="col-6">
                         <input type="text" class="form-control form-control-sm form-control-plaintext" readonly value="${item.name}">
+                    </div>
+                    <div class="col-3">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                            <span class="absolute-no">Off</span>
+                        </label>
                     </div>
                 </div>
                 <div class="form-row align-items-center">
@@ -92,6 +101,11 @@ function renderFeats() {
             </div>`
 
         $(".feat-container").append(html)
+        $(`div[data-feat-index="${index}"] .switch>input`).change((event) => {
+            var elem = $(event.currentTarget)[0] as HTMLInputElement
+            item.active = elem.checked
+            recalcSheet()
+        })
     })
 }
 
@@ -120,7 +134,7 @@ function renderAttacks() {
                 </div>
                 <div class="col-4 form-group">
                     <label>Damage</label>
-                    <input readonly class="form-control form-control-sm form-control-plaintext" value="${item.damageAmount}d${item.damageDie}">
+                    <input readonly class="form-control form-control-sm form-control-plaintext" value="${item.damageAmount}d${item.damageDie} + ${sheet.calcMiscDamageBonus()}">
                 </div>
                 <div class="col-4 form-group">
                     <label>Critical</label>
