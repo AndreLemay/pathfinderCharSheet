@@ -1,27 +1,26 @@
 {
     "include": [
-        "./scripts/*"
+        "app/**/*.ts",
+        "app/**/*.tsx",
+        "node_modules/@types/**/*.d.ts"
+    ],
+    "exclude": [
+        "dist"
     ],
     "compilerOptions": {
         "lib": [
             "es6",
             "dom"
         ],
+        "jsx": "react",
         "types": [
-            "node",
-            "jquery"
+            //"node",
+            //"jquery"
         ],
         "target": "es6",
         "module": "commonjs",
-        "pretty": true,
-        "outDir": "./dist",
+        "outDir": "dist",
         "moduleResolution": "node",
         "sourceMap": true,
-        "baseUrl": ".",
-        "paths": {
-            "*": [
-                "node_modules/*"
-            ]
-        }
     }
 }
