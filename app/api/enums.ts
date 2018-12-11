@@ -7,7 +7,7 @@ export class BonusTypeValue extends EnumValue {
     }
 }
 
-export class BonusTypeEnum extends Enum<BonusTypeValue> {
+class BonusTypeEnum extends Enum<BonusTypeValue> {
     constructor() {
         super()
         this.initEnum("BonusType")
@@ -41,7 +41,7 @@ export class SkillNameValue extends EnumValue {
     }
 }
 
-export class SkillNameEnum extends Enum<SkillNameValue> {
+class SkillNameEnum extends Enum<SkillNameValue> {
     constructor() {
         super()
         this.initEnum("Skill")
@@ -90,7 +90,7 @@ export class AlignmentValue extends EnumValue {
     }
 }
 
-export class AlignmentEnum extends Enum<AlignmentValue> {
+class AlignmentEnum extends Enum<AlignmentValue> {
     constructor() {
         super()
         this.initEnum("Alignment")
@@ -113,7 +113,7 @@ export class GenderValue extends EnumValue {
     }
 }
 
-export class GenderEnum extends Enum<GenderValue> {
+class GenderEnum extends Enum<GenderValue> {
     constructor() {
         super()
         this.initEnum("Gender")
@@ -130,7 +130,7 @@ export class SizeValue extends EnumValue {
     }
 }
 
-export class SizeEnum extends Enum<SizeValue> {
+class SizeEnum extends Enum<SizeValue> {
     constructor() {
         super()
         this.initEnum("Size")
@@ -147,7 +147,7 @@ export class StatTypeValue extends EnumValue {
     }
 }
 
-export class StatTypeEnum extends Enum<StatTypeValue> {
+class StatTypeEnum extends Enum<StatTypeValue> {
     constructor() {
         super()
         this.initEnum("StatType")
@@ -179,7 +179,7 @@ export class ArmourTypeValue extends EnumValue {
     }
 }
 
-export class ArmourTypeEnum extends Enum<ArmourTypeValue> {
+class ArmourTypeEnum extends Enum<ArmourTypeValue> {
     constructor() {
         super()
         this.initEnum("ArmourType")
