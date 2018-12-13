@@ -1,5 +1,5 @@
 import * as React from "react"
-import { IProps, InputField } from "./common"
+import { IProps, InputField, OutputField } from "./common"
 import { Row, Col, Input } from "reactstrap";
 
 interface SkillProps extends IProps {
@@ -14,7 +14,7 @@ export default class Skill extends React.Component<SkillProps, any> {
                 <Col xs="4"><span>{this.props.label}</span></Col>
                 <Col>
                     {this.props.trainedOnly &&
-                    //using regular input instead of reactstrap input because the latter does dumb things with styles
+                        //using regular input instead of reactstrap input because the latter does dumb things with styles
                         <input
                             className="form-control form-control-sm"
                             disabled
@@ -23,16 +23,16 @@ export default class Skill extends React.Component<SkillProps, any> {
                     }
                 </Col>
                 <Col>
-                    <InputField
+                    <OutputField
                         inputType="number"
                         className="form-control form-control-sm"
-                        readonly={true} />
+                    />
                 </Col>
                 <Col>
-                    <InputField
+                    <OutputField
                         inputType="number"
                         className="form-control form-control-sm"
-                        readonly={true} />
+                    />
                 </Col>
                 <Col>
                     <input
@@ -45,23 +45,23 @@ export default class Skill extends React.Component<SkillProps, any> {
                         className="form-control form-control-sm" />
                 </Col>
                 <Col>
-                    <InputField
+                    <OutputField
                         inputType="number"
                         className="form-control form-control-sm"
-                        readonly={true} />
+                    />
                 </Col>
                 <Col>
-                    <InputField
+                    <OutputField
                         inputType="number"
                         className="form-control form-control-sm"
-                        readonly={true} />
+                    />
                 </Col>
                 <Col>
                     {this.props.checkPenaltyApplies &&
-                        <InputField
+                        <OutputField
                             inputType="number"
                             className="form-control form-control-sm"
-                            readonly={true} />}
+                        />}
                 </Col>
             </Row>
         )

@@ -6,14 +6,16 @@ import { InputType } from "reactstrap/lib/Input";
 export interface IProps {
     label?: string
     className?: string
-    tag?: string
 }
 
 interface FieldProps extends IProps {
-    readonly?: boolean
+    value?: string
     inputType?: InputType
-    defaultValue?: string
+}
+
+interface InputProps extends FieldProps {
     dropdownType?: Enum<EnumValue>
+    change?: () => void
 }
 
 export class SectionHeader extends React.Component<IProps, any> {
@@ -26,40 +28,57 @@ export class SectionHeader extends React.Component<IProps, any> {
     }
 }
 
-export class InputField extends React.Component<FieldProps, any> {
+export class OutputField extends React.Component<FieldProps, any> {
     render() {
-        //need to handle plaintext this way because some moron working on reactstrap
-        //thought it would be a good idea to have Input completely break expectations of
-        //what you'll get back if you specify plaintext
-        let plainText = this.props.readonly ? "form-control-plaintext" : ""
         if (this.props.label && this.props.label.length > 0)
             return (
                 <FormGroup className={`${this.props.className || ""}`}>
                     <label>{this.props.label}</label>
                     <Input bsSize="sm"
-                        className={`${plainText}`}
+                        className="form-control-plaintext"
                         type={this.props.inputType || "text"}
-                        defaultValue={this.props.defaultValue}
-                        readOnly={this.props.readonly} />
+                        value={this.props.value}
+                        readOnly={true} />
                 </FormGroup>
             )
         else return (
             <Input bsSize="sm"
                 type={this.props.inputType || "text"}
-                defaultValue={this.props.inputType !== "select" && this.props.defaultValue}
-                readOnly={this.props.readonly}
-                plaintext={this.props.readonly} />
+                className="form-control-plaintext"
+                value={this.props.inputType !== "select" && this.props.value}
+                readOnly={true} />
         )
     }
 }
 
-export class DropdownField extends React.Component<FieldProps, any> {
+export class InputField extends React.Component<InputProps, any> {
     render() {
         if (this.props.label && this.props.label.length > 0)
             return (
                 <FormGroup className={`${this.props.className || ""}`}>
                     <label>{this.props.label}</label>
-                    <Input type="select" bsSize="sm">
+                    <Input bsSize="sm"
+                        type={this.props.inputType || "text"}
+                        value={this.props.value}
+                        onChange={this.props.change} />
+                </FormGroup>
+            )
+        else return (
+            <Input bsSize="sm"
+                type={this.props.inputType || "text"}
+                value={this.props.value}
+                onChange={this.props.change} />
+        )
+    }
+}
+
+export class DropdownField extends React.Component<InputProps, any> {
+    render() {
+        if (this.props.label && this.props.label.length > 0)
+            return (
+                <FormGroup className={`${this.props.className || ""}`}>
+                    <label>{this.props.label}</label>
+                    <Input type="select" bsSize="sm" onChange={this.props.change}>
                         {this.props.dropdownType.values.map(option => {
                             return <option key={option.ordinal} value={option.ordinal}>{option.description}</option>
                         })}
@@ -67,7 +86,7 @@ export class DropdownField extends React.Component<FieldProps, any> {
                 </FormGroup>
             )
         else return (
-            <Input type="select" bsSize="sm">
+            <Input type="select" bsSize="sm" onChange={this.props.change}>
                 {this.props.dropdownType.values.map(option => {
                     return <option key={option.ordinal} value={option.ordinal}>{option.description}</option>
                 })}

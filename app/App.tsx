@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Container, Row, Col, FormGroup } from "reactstrap";
 import Toolbar from "./components/Toolbar";
-import { SectionHeader, InputField, DropdownField } from "./components/common";
+import { SectionHeader, InputField, DropdownField, OutputField } from "./components/common";
 import AbilityScore from "./components/AbilityScore";
 import Skill from "./components/Skill"
 import { Alignment, Gender, Size, SkillName, ArmourType } from "./api/enums";
@@ -54,32 +54,32 @@ export default class App extends React.Component<any, any> {
                                     <SectionHeader label="Attack Bonus" />
                                     <Row className="form-row">
                                         <InputField label="Base" inputType="number" className="col" />
-                                        <InputField label="Misc" inputType="number" className="col" readonly={true} />
+                                        <OutputField label="Misc" inputType="number" className="col" />
                                     </Row>
                                     <Row className="form-row">
-                                        <InputField label="Melee" inputType="number" className="col" readonly={true} />
-                                        <InputField label="Ranged" inputType="number" className="col" readonly={true} />
+                                        <OutputField label="Melee" inputType="number" className="col" />
+                                        <OutputField label="Ranged" inputType="number" className="col" />
                                     </Row>
                                 </Col>
                                 <Col xs="8">
                                     <SectionHeader label="Saves" />
                                     <Row className="form-row">
-                                        <InputField label="Fortitude" inputType="number" className="col" readonly={true} />
+                                        <OutputField label="Fortitude" inputType="number" className="col" />
                                         <InputField label="Base" inputType="number" className="col" />
-                                        <InputField label="CON" inputType="number" className="col" readonly={true} />
-                                        <InputField label="Misc" inputType="number" className="col" readonly={true} />
+                                        <OutputField label="CON" inputType="number" className="col" />
+                                        <OutputField label="Misc" inputType="number" className="col" />
                                     </Row>
                                     <Row className="form-row">
-                                        <InputField label="Reflex" inputType="number" className="col" readonly={true} />
+                                        <OutputField label="Reflex" inputType="number" className="col" />
                                         <InputField label="Base" inputType="number" className="col" />
-                                        <InputField label="DEX" inputType="number" className="col" readonly={true} />
-                                        <InputField label="Misc" inputType="number" className="col" readonly={true} />
+                                        <OutputField label="DEX" inputType="number" className="col" />
+                                        <OutputField label="Misc" inputType="number" className="col" />
                                     </Row>
                                     <Row className="form-row">
-                                        <InputField label="Will" inputType="number" className="col" readonly={true} />
+                                        <OutputField label="Will" inputType="number" className="col" />
                                         <InputField label="Base" inputType="number" className="col" />
-                                        <InputField label="WIS" inputType="number" className="col" readonly={true} />
-                                        <InputField label="Misc" inputType="number" className="col" readonly={true} />
+                                        <OutputField label="WIS" inputType="number" className="col" />
+                                        <OutputField label="Misc" inputType="number" className="col" />
                                     </Row>
                                 </Col>
                             </Row>
@@ -120,210 +120,210 @@ export default class App extends React.Component<any, any> {
                         <Col xs="6" className="px-5">
                             <SectionHeader label="Armour Class" />
                             <Row className="form-row align-items-end">
-                                <InputField label="Armour Class"
+                                <OutputField label="Armour Class"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Base"
+                                />
+                                <OutputField label="Base"
                                     className="col"
                                     inputType="number"
-                                    readonly={true}
-                                    defaultValue="10" />
-                                <InputField label="DEX"
+
+                                    value="10" />
+                                <OutputField label="DEX"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Dodge"
+                                />
+                                <OutputField label="Dodge"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Deflection"
+                                />
+                                <OutputField label="Deflection"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Armour"
+                                />
+                                <OutputField label="Armour"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Shield"
+                                />
+                                <OutputField label="Shield"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Natural"
+                                />
+                                <OutputField label="Natural"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Size"
+                                />
+                                <OutputField label="Size"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
+                                />
                             </Row>
                             <Row className="form-row align-items-end">
-                                <InputField label="Flat-Footed"
+                                <OutputField label="Flat-Footed"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Base"
+                                />
+                                <OutputField label="Base"
                                     className="col"
                                     inputType="number"
-                                    readonly={true}
-                                    defaultValue="10" />
+
+                                    value="10" />
                                 <Col />
                                 <Col />
-                                <InputField label="Deflection"
+                                <OutputField label="Deflection"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Armour"
+                                />
+                                <OutputField label="Armour"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Shield"
+                                />
+                                <OutputField label="Shield"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Natural"
+                                />
+                                <OutputField label="Natural"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Size"
+                                />
+                                <OutputField label="Size"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
+                                />
                             </Row>
                             <Row className="form-row align-items-end">
-                                <InputField label="Touch"
+                                <OutputField label="Touch"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Base"
+                                />
+                                <OutputField label="Base"
                                     className="col"
                                     inputType="number"
-                                    readonly={true}
-                                    defaultValue="10" />
-                                <InputField label="DEX"
+
+                                    value="10" />
+                                <OutputField label="DEX"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Dodge"
+                                />
+                                <OutputField label="Dodge"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Deflection"
+                                />
+                                <OutputField label="Deflection"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
+                                />
                                 <Col />
                                 <Col />
                                 <Col />
-                                <InputField label="Size"
+                                <OutputField label="Size"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
+                                />
                             </Row>
                             <Row className="form-row align-items-end">
-                                <InputField label="Spell Res."
+                                <OutputField label="Spell Res."
                                     className="col-2"
                                     inputType="number" />
                             </Row>
                             <SectionHeader label="Combat Manoeuvres" />
                             <Row className="form-row align-items-end">
-                                <InputField label="CMB"
+                                <OutputField label="CMB"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="STR"
+                                />
+                                <OutputField label="STR"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="BAB"
+                                />
+                                <OutputField label="BAB"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Size"
+                                />
+                                <OutputField label="Size"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Misc"
+                                />
+                                <OutputField label="Misc"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
+                                />
                                 <Col />
                                 <Col />
                                 <Col />
                                 <Col />
                             </Row>
                             <Row className="form-row align-items-end">
-                                <InputField label="CMD"
+                                <OutputField label="CMD"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Base"
+                                />
+                                <OutputField label="Base"
                                     className="col"
                                     inputType="number"
-                                    readonly={true}
-                                    defaultValue="10" />
-                                <InputField label="STR"
+
+                                    value="10" />
+                                <OutputField label="STR"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="DEX"
+                                />
+                                <OutputField label="DEX"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Dodge"
+                                />
+                                <OutputField label="Dodge"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Deflection"
+                                />
+                                <OutputField label="Deflection"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="BAB"
+                                />
+                                <OutputField label="BAB"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Size"
+                                />
+                                <OutputField label="Size"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Misc"
+                                />
+                                <OutputField label="Misc"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
+                                />
                             </Row>
                             <Row className="form-row align-items-end">
-                                <InputField label="Flat-Footed"
+                                <OutputField label="Flat-Footed"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Base"
+                                />
+                                <OutputField label="Base"
                                     className="col"
                                     inputType="number"
-                                    readonly={true}
-                                    defaultValue="10" />
-                                <InputField label="STR"
+
+                                    value="10" />
+                                <OutputField label="STR"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
+                                />
                                 <Col />
                                 <Col />
-                                <InputField label="Deflection"
+                                <OutputField label="Deflection"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="BAB"
+                                />
+                                <OutputField label="BAB"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Size"
+                                />
+                                <OutputField label="Size"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
-                                <InputField label="Misc"
+                                />
+                                <OutputField label="Misc"
                                     className="col"
                                     inputType="number"
-                                    readonly={true} />
+                                />
                             </Row>
                         </Col>
                         <Col xs="6">
