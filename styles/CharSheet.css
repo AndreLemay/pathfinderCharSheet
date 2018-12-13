@@ -16,6 +16,8 @@ input[type="text"] {
     color: white;
     background-color: dimgray;
     font-weight: bold;
+    width: 100%;
+    text-align: center;
 }
 
 .section-head > label {

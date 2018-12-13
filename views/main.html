@@ -1,1 +1,25 @@
-THIS IS A TEST
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/CharSheet.css">
+</head>
+<script>
+    //hacky workaround because TS seems to compile things in a way that electron doesn't like
+    //electron itself should keep using module.exports, but tsc sticks a line that expects this
+    //to be there, so just give it what it wants
+    window.exports = {};
+</script>
+
+<body>
+    <div id="app"></div>
+    <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>require("../dist/renderer.js")</script>
+</body>
+
+</html>

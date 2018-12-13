@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
+import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 
 let mainWindow: Electron.BrowserWindow;
 
@@ -12,7 +13,13 @@ function createWindow() {
         }
     });
 
-    mainWindow.loadFile(path.join(__dirname, "../views/CharSheet.html"));
+    installExtension(REACT_DEVELOPER_TOOLS).then((name) => {
+        console.log(`Added Extension:  ${name}`);
+    }).catch((err) => {
+        console.log('An error occurred: ', err)
+    });
+
+    mainWindow.loadFile(path.join(__dirname, "../views/main.html"));
 
     mainWindow.on("closed", (event) => {
         mainWindow = null;

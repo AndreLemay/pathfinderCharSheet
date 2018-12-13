@@ -13,10 +13,6 @@
             "dom"
         ],
         "jsx": "react",
-        "types": [
-            //"node",
-            //"jquery"
-        ],
         "target": "es6",
         "module": "commonjs",
         "outDir": "dist",

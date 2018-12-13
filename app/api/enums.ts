@@ -36,7 +36,7 @@ class BonusTypeEnum extends Enum<BonusTypeValue> {
 }
 
 export class SkillNameValue extends EnumValue {
-    constructor(name: string) {
+    constructor(name: string, readonly trainedOnly: boolean, readonly checkPenaltyApplies: boolean) {
         super(name)
     }
 }
@@ -47,41 +47,41 @@ class SkillNameEnum extends Enum<SkillNameValue> {
         this.initEnum("Skill")
     }
 
-    Acrobatics: SkillNameValue = new SkillNameValue("Acrobatics")
-    Appraise: SkillNameValue = new SkillNameValue("Appraise")
-    Bluff: SkillNameValue = new SkillNameValue("Bluff")
-    Climb: SkillNameValue = new SkillNameValue("Climb")
-    Craft: SkillNameValue = new SkillNameValue("Craft")
-    Diplomacy: SkillNameValue = new SkillNameValue("Diplomacy")
-    DisableDevice: SkillNameValue = new SkillNameValue("Disable Device")
-    Disguise: SkillNameValue = new SkillNameValue("Disguise")
-    EscapeArtist: SkillNameValue = new SkillNameValue("Escape Artist")
-    Fly: SkillNameValue = new SkillNameValue("Fly")
-    HandleAnimal: SkillNameValue = new SkillNameValue("Handle Animal")
-    Heal: SkillNameValue = new SkillNameValue("Heal")
-    Intimidate: SkillNameValue = new SkillNameValue("Intimidate")
-    KnowledgeArcana: SkillNameValue = new SkillNameValue("Knowledge (Arcana)")
-    KnowledgeDungeoneering: SkillNameValue = new SkillNameValue("Knowledge (Dungeoneering)")
-    KnowledgeEngineering: SkillNameValue = new SkillNameValue("Knowledge (Engineering)")
-    KnowledgeGeography: SkillNameValue = new SkillNameValue("Knowledge (Geography)")
-    KnowledgeHistory: SkillNameValue = new SkillNameValue("Knowledge (History)")
-    KnowledgeLocal: SkillNameValue = new SkillNameValue("Knowledge (Local)")
-    KnowledgeNature: SkillNameValue = new SkillNameValue("Knowledge (Nature")
-    KnowledgeNobility: SkillNameValue = new SkillNameValue("Knowledge (Nobility)")
-    KnowledgePlanes: SkillNameValue = new SkillNameValue("Knowledge (Planes)")
-    KnowledgeReligion: SkillNameValue = new SkillNameValue("Knowledge (Religion)")
-    Linguistics: SkillNameValue = new SkillNameValue("Linguistics")
-    Perception: SkillNameValue = new SkillNameValue("Perception")
-    Perform: SkillNameValue = new SkillNameValue("Perform")
-    Profession: SkillNameValue = new SkillNameValue("Profession")
-    Ride: SkillNameValue = new SkillNameValue("Ride")
-    SenseMotive: SkillNameValue = new SkillNameValue("Sense Motive")
-    SleightOfHand: SkillNameValue = new SkillNameValue("Sleight of Hand")
-    Spellcraft: SkillNameValue = new SkillNameValue("Spellcraft")
-    Stealth: SkillNameValue = new SkillNameValue("Stealth")
-    Survival: SkillNameValue = new SkillNameValue("Survival")
-    Swim: SkillNameValue = new SkillNameValue("Swim")
-    UseMagicDevice: SkillNameValue = new SkillNameValue("Use Magic Device")
+    Acrobatics: SkillNameValue = new SkillNameValue("Acrobatics", false, true)
+    Appraise: SkillNameValue = new SkillNameValue("Appraise", false, false)
+    Bluff: SkillNameValue = new SkillNameValue("Bluff", false, false)
+    Climb: SkillNameValue = new SkillNameValue("Climb", false, true)
+    Craft: SkillNameValue = new SkillNameValue("Craft", false, false)
+    Diplomacy: SkillNameValue = new SkillNameValue("Diplomacy", false, false)
+    DisableDevice: SkillNameValue = new SkillNameValue("Disable Device", true, true)
+    Disguise: SkillNameValue = new SkillNameValue("Disguise", false, false)
+    EscapeArtist: SkillNameValue = new SkillNameValue("Escape Artist", false, true)
+    Fly: SkillNameValue = new SkillNameValue("Fly", false, true)
+    HandleAnimal: SkillNameValue = new SkillNameValue("Handle Animal", true, false)
+    Heal: SkillNameValue = new SkillNameValue("Heal", false, false)
+    Intimidate: SkillNameValue = new SkillNameValue("Intimidate", false, false)
+    KnowledgeArcana: SkillNameValue = new SkillNameValue("Knowledge (Arcana)", true, false)
+    KnowledgeDungeoneering: SkillNameValue = new SkillNameValue("Knowledge (Dungeoneering)", true, false)
+    KnowledgeEngineering: SkillNameValue = new SkillNameValue("Knowledge (Engineering)", true, false)
+    KnowledgeGeography: SkillNameValue = new SkillNameValue("Knowledge (Geography)", true, false)
+    KnowledgeHistory: SkillNameValue = new SkillNameValue("Knowledge (History)", true, false)
+    KnowledgeLocal: SkillNameValue = new SkillNameValue("Knowledge (Local)", true, false)
+    KnowledgeNature: SkillNameValue = new SkillNameValue("Knowledge (Nature", true, false)
+    KnowledgeNobility: SkillNameValue = new SkillNameValue("Knowledge (Nobility)", true, false)
+    KnowledgePlanes: SkillNameValue = new SkillNameValue("Knowledge (Planes)", true, false)
+    KnowledgeReligion: SkillNameValue = new SkillNameValue("Knowledge (Religion)", true, false)
+    Linguistics: SkillNameValue = new SkillNameValue("Linguistics", true, false)
+    Perception: SkillNameValue = new SkillNameValue("Perception", false, false)
+    Perform: SkillNameValue = new SkillNameValue("Perform", false, false)
+    Profession: SkillNameValue = new SkillNameValue("Profession", true, false)
+    Ride: SkillNameValue = new SkillNameValue("Ride", false, true)
+    SenseMotive: SkillNameValue = new SkillNameValue("Sense Motive", false, false)
+    SleightOfHand: SkillNameValue = new SkillNameValue("Sleight of Hand", true, true)
+    Spellcraft: SkillNameValue = new SkillNameValue("Spellcraft", true, false)
+    Stealth: SkillNameValue = new SkillNameValue("Stealth", false, true)
+    Survival: SkillNameValue = new SkillNameValue("Survival", false, false)
+    Swim: SkillNameValue = new SkillNameValue("Swim", false, false)
+    UseMagicDevice: SkillNameValue = new SkillNameValue("Use Magic Device", true, false)
 }
 
 export class AlignmentValue extends EnumValue {
@@ -125,7 +125,7 @@ class GenderEnum extends Enum<GenderValue> {
 }
 
 export class SizeValue extends EnumValue {
-    constructor(name: string) {
+    constructor(name: string, readonly acModifier: number) {
         super(name)
     }
 }
@@ -136,9 +136,15 @@ class SizeEnum extends Enum<SizeValue> {
         this.initEnum("Size")
     }
 
-    Small: SizeValue = new SizeValue("Small")
-    Medium: SizeValue = new SizeValue("Medium")
-    Large: SizeValue = new SizeValue("Large")
+    Fine: SizeValue = new SizeValue("Fine", 8)
+    Diminiutive: SizeValue = new SizeValue("Diminiutive", 4)
+    Tiny: SizeValue = new SizeValue("Tiny", 2)
+    Small: SizeValue = new SizeValue("Small", 1)
+    Medium: SizeValue = new SizeValue("Medium", 0)
+    Large: SizeValue = new SizeValue("Large", -1)
+    Huge: SizeValue = new SizeValue("Huge", -2)
+    Gargantuan: SizeValue = new SizeValue("Gargantuan", -4)
+    Colossal: SizeValue = new SizeValue("Colossal", -8)
 }
 
 export class StatTypeValue extends EnumValue {
