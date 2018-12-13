@@ -28,15 +28,19 @@ export class SectionHeader extends React.Component<IProps, any> {
 
 export class InputField extends React.Component<FieldProps, any> {
     render() {
+        //need to handle plaintext this way because some moron working on reactstrap
+        //thought it would be a good idea to have Input completely break expectations of
+        //what you'll get back if you specify plaintext
+        let plainText = this.props.readonly ? "form-control-plaintext" : ""
         if (this.props.label && this.props.label.length > 0)
             return (
                 <FormGroup className={`${this.props.className || ""}`}>
                     <label>{this.props.label}</label>
                     <Input bsSize="sm"
+                        className={`${plainText}`}
                         type={this.props.inputType || "text"}
                         defaultValue={this.props.defaultValue}
-                        readOnly={this.props.readonly}
-                        plaintext={this.props.readonly} />
+                        readOnly={this.props.readonly} />
                 </FormGroup>
             )
         else return (
