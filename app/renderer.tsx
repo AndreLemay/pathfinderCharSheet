@@ -4,13 +4,13 @@ import App from "./App"
 import * as $ from "jquery"
 
 window.onload = () => {
-    ReactDOM.render(<App/>, $("#app")[0])
+    ReactDOM.render(<App />, $("#app")[0])
 }
 
 // import { remote } from "electron"
 // import * as jetpack from "fs-jetpack"
 // import * as path from "path"
-// import { CharacterSheet, Skill, Equipment, ValueBonus, Weapon, Feat } from "../api/CharSheet"
+// import { CharacterSheet, Skill, Equipment, ValueBonus, Weapon, Feat } from "../store/types"
 // import * as enums from "../api/enums"
 // import * as $ from "jquery"
 // import "bootstrap"

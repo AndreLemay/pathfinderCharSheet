@@ -1,39 +1,42 @@
 import * as React from "react"
-import { IProps, InputField, OutputField } from "./common"
-import { ValueBonus } from "../api/CharSheet";
-import { Row, Col } from "reactstrap";
+import OutputField from "./common/OutputField";
+import { ValueBonus } from "../store/types";
 
-interface FeatProps extends IProps {
+interface FeatProps {
     name: string
     description: string
     bonuses: ValueBonus[]
+    active: boolean
+    onActiveChange: (active: boolean) => void
 }
 
-export default class Feat extends React.Component<FeatProps, any> {
-    render() {
-        return (
-            <div className="feat-item">
-                <Row className="form-row align-items-center">
-                    <Col xs="3"><label>Name</label></Col>
-                    <Col xs="6">
-                        <OutputField className="form-control-plaintext" value={this.props.name} />
-                    </Col>
-                    <Col xs="3">
-                        <label className="switch">
-                            <input type="checkbox" checked />
-                            <span className="slider round"></span>
-                            <span className="absolute-no">Off</span>
-                        </label>
-                    </Col>
-                    <Row className="form-row align-items-center">
-                        <Col xs="3"><label>Properties</label></Col>
-                        <Col xs="9">
-                            <OutputField inputType="textarea" className="form-control-plaintext" value={
-                                this.props.bonuses.map((bonus) => { return bonus.asString(true) }) + "\n" + this.props.description} />
-                        </Col>
-                    </Row>
-                </Row>
-            </div>
-        )
+export default (props: FeatProps) => {
+    function activeChange(event: React.ChangeEvent<HTMLInputElement>) {
+        props.onActiveChange(event.currentTarget.checked)
     }
+
+    return (
+        <div className="feat-item ">
+            <div className="form-row align-items-center">
+                <div className="col-3"><label>Name</label></div>
+                <div className="col-6">
+                    <OutputField className="form-control-plaintext" value={props.name} />
+                </div>
+                <div className="col-3">
+                    <label className="switch">
+                        <input type="checkbox" checked={props.active} onChange={activeChange} />
+                        <span className="slider round"></span>
+                        <span className="absolute-no">Off</span>
+                    </label>
+                </div>
+            </div>
+            <div className="form-row align-items-center">
+                <div className="col-3"><label>Properties</label></div>
+                <div className="col-9">
+                    <OutputField inputType="textarea" value={
+                        props.bonuses.map((bonus) => { return bonus.asString(true) }) + "\n" + props.description} />
+                </div>
+            </div>
+        </div>
+    )
 }

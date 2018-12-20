@@ -1,28 +1,29 @@
 import * as React from "react"
-import { IProps, InputField, OutputField } from "./common"
-import { Row, Col } from "reactstrap";
+import OutputField from "./common/OutputField";
+import { ValueBonus } from "../store/types";
 
-interface EquipmentProps extends IProps {
-
+interface EquipmentProps {
+    name: string
+    description: string
+    bonuses: ValueBonus[]
 }
 
-export default class Equipment extends React.Component<EquipmentProps, any> {
-    render() {
-        return (
-            <div className="equipment-item">
-                <Row className="form-row align-items-center">
-                    <Col xs="2"><label>Name</label></Col>
-                    <Col xs="10">
-                        <OutputField className="form-control-plaintext" />
-                    </Col>
-                </Row>
-                <Row className="form-row align-items-center">
-                    <Col xs="2"><label>Properties</label></Col>
-                    <Col xs="10">
-                        <OutputField inputType="textarea" className="form-control-plaintext" />
-                    </Col>
-                </Row>
+export default (props: EquipmentProps) => {
+    return (
+        <div className="equipment-item">
+            <div className="form-row align-items-center">
+                <div className="col-2"><label>Name</label></div>
+                <div className="col-10">
+                    <OutputField inputType="textarea" value={props.name} />
+                </div>
             </div>
-        )
-    }
+            <div className="form-row align-items-center">
+                <div className="col-2"><label>Properties</label></div>
+                <div className="col-10">
+                    <OutputField inputType="textarea" value={
+                        props.bonuses.map((bonus) => { return bonus.asString(true) }) + "\n" + props.description} />
+                </div>
+            </div>
+        </div>
+    )
 }
