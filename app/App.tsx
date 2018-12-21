@@ -15,6 +15,7 @@ import AttacksContainer from "./containers/AttacksContainer";
 import ArmourContainer from "./containers/ArmourContainer";
 import ShieldContainer from "./containers/ShieldContainer";
 import EquipmentContainer from "./containers/EquipmentContainer";
+import InitiativeContainer from "./containers/InitiativeContainer";
 
 const store = configureStore()
 
@@ -30,7 +31,13 @@ export default function App() {
                     addAttack={this.addAttack} /> */}
                 <div className="container-fluid">
                     <div className="row mt-4">
-                        <AbilityScoresContainer className="col-6 px-5" />
+                        <div className="col-6 px-5">
+                            <div className="row">
+                                <AbilityScoresContainer className="col" />
+                            </div>                            
+                            <InitiativeContainer className="form-row align-items-end" />
+                        </div>
+                        
                         <div className="col-6 px-5">
                             <CharacterContainer className="form-row align-items-end" />
                             <HealthContainer className="form-row align-items-end" />

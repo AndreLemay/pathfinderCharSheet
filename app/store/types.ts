@@ -110,6 +110,10 @@ export interface CombatManeuverState {
     readonly miscCMD: number
 }
 
+export interface InitiativeState {
+    readonly miscInitiative: number
+}
+
 export default class CharacterSheetState {
     readonly abilities: AbilitiesState
     readonly character: CharacterState
@@ -124,6 +128,7 @@ export default class CharacterSheetState {
     readonly armour: ArmourState
     readonly shield: ShieldState
     readonly equipment: EquipmentState[]
+    readonly initiative: InitiativeState
 }
 
 export class ValueBonus {

@@ -13,6 +13,7 @@ import attacks from "./attacksReducer"
 import armour from "./armourReducer"
 import shield from "./shieldReducer"
 import equipment from "./equipmentReducer"
+import initiative from "./initiativeReducer"
 
 const rootReducer = combineReducers<CharacterSheetState>({
     abilities: abilityScores,
@@ -27,7 +28,8 @@ const rootReducer = combineReducers<CharacterSheetState>({
     attacks,
     armour,
     shield,
-    equipment
+    equipment,
+    initiative
 })
 
 export default rootReducer
