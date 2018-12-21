@@ -86,8 +86,8 @@ class ArmourClassContainer extends React.Component<ArmourClassContainerProps> {
                         className="col"
                         inputType="number"
                         value={10} />
-                    <div />
-                    <div />
+                    <div className="col" />
+                    <div className="col" />
                     <OutputField label="Deflection"
                         className="col"
                         inputType="number"
@@ -139,9 +139,9 @@ class ArmourClassContainer extends React.Component<ArmourClassContainerProps> {
                         inputType="number"
                         value={this.props.deflectionBonus}
                     />
-                    <div />
-                    <div />
-                    <div />
+                    <div className="col" />
+                    <div className="col" />
+                    <div className="col" />
                     <OutputField label="Size"
                         className="col"
                         inputType="number"

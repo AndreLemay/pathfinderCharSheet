@@ -9,7 +9,7 @@ import AttackBonusContainer from "./containers/AttackBonusContainer";
 import SavesContainer from "./containers/SavesContainer";
 import FeatsContainer from "./containers/FeatsContainer";
 import SkillsContainer from "./containers/SkillsContainer";
-import ArmourClassContainer from "./containers/armourClassContainer";
+import ArmourClassContainer from "./containers/ArmourClassContainer";
 import CombatManeuversContainer from "./containers/CombatManeuversContainer";
 import AttacksContainer from "./containers/AttacksContainer";
 import ArmourContainer from "./containers/ArmourContainer";
@@ -32,11 +32,11 @@ export default function App() {
                     <div className="row mt-4">
                         <AbilityScoresContainer className="col-6 px-5" />
                         <div className="col-6 px-5">
-                            <CharacterContainer className="row" />
-                            <HealthContainer className="row" />
+                            <CharacterContainer className="form-row align-items-end" />
+                            <HealthContainer className="form-row align-items-end" />
                             <div className="row">
-                                <AttackBonusContainer className="col-4" />
-                                <SavesContainer className="col-8" />
+                                <AttackBonusContainer className="col-4 pl-0" />
+                                <SavesContainer className="col-8 pr-0" />
                             </div>
                         </div>
                     </div>
@@ -46,15 +46,23 @@ export default function App() {
                     </div>
                     <div className="row mt-4">
                         <div className="col-6 px-5">
-                            <ArmourClassContainer className="row" />
-                            <CombatManeuversContainer className="row" />
+                            <div className="row">
+                                <ArmourClassContainer className="col" />
+                            </div>
+                            <div className="row">
+                                <CombatManeuversContainer className="col" />
+                            </div>
                         </div>
                         <AttacksContainer className="col-6 px-5" />
                     </div>
                     <div className="row mt-4">
                         <div className="col-6 px-5">
-                            <ArmourContainer className="row" />
-                            <ShieldContainer className="row mt-4" />
+                            <div className="row">
+                                <ArmourContainer className="col" />
+                            </div>
+                            <div className="row">
+                                <ShieldContainer className="col" />                            
+                            </div>
                         </div>
                         <EquipmentContainer className="col-6 px-5" />
                     </div>

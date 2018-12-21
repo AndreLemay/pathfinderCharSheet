@@ -6,6 +6,7 @@ import { activeUpdate } from "../store/actions/featActions";
 
 export interface OwnProps {
     featIndex: number
+    className?: string
 }
 
 interface StateProps {
@@ -24,7 +25,8 @@ type IndividualFeatContainerProps = StateProps & DispatchProps & OwnProps
 class IndividualFeatContainer extends React.Component<IndividualFeatContainerProps> {
     render() {
         return (
-            <Feat name={this.props.name}
+            <Feat className={this.props.className}
+                name={this.props.name}
                 description={this.props.description}
                 bonuses={this.props.bonuses}
                 active={this.props.active}

@@ -3,6 +3,7 @@ import OutputField from "./common/OutputField";
 import { ValueBonus } from "../store/types";
 
 interface FeatProps {
+    className?: string
     name: string
     description: string
     bonuses: ValueBonus[]
@@ -16,7 +17,7 @@ export default function Feat(props: FeatProps) {
     }
 
     return (
-        <div className="feat-item ">
+        <div className={`feat-name ${props.className}`}>
             <div className="form-row align-items-center">
                 <div className="col-3"><label>Name</label></div>
                 <div className="col-6">

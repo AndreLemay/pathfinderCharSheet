@@ -46,7 +46,7 @@ class StrengthContainer extends React.Component<AbilityScoresContainerProps> {
     render() {
         return (
             <div className={this.props.className}>
-                <SectionHeader className="row" label="Ability Scores" />
+                <SectionHeader label="Ability Scores" />
                 <AbilityScore
                     label="STR"
                     base={this.props.baseStr}

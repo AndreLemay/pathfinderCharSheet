@@ -15,22 +15,15 @@ export default function DropdownField(props: DropdownProps) {
         props.onValueChange(props.dropdownType.values[ordinal])
     }
 
-    if (props.label && props.label.length > 0)
-        return (
-            <div className={` form-group ${props.className || ""}`}>
-                <label>{props.label}</label>
-                <select className="form-control form-control-sm" value={props.value.ordinal} onChange={change}>
-                    {props.dropdownType.values.map(option => {
-                        return <option key={option.ordinal} value={option.ordinal}>{option.description}</option>
-                    })}
-                </select>
-            </div>
-        )
-    else return (
-        <select className={props.className} value={props.value.ordinal} onChange={change}>
-            {props.dropdownType.values.map(option => {
-                return <option key={option.ordinal} value={option.ordinal}>{option.description}</option>
-            })}
-        </select>
+    return (
+        <div className={` form-group ${props.className || ""}`}>
+            {props.label && props.label.length > 0 &&
+                <label>{props.label}</label>}
+            <select className="form-control form-control-sm" value={props.value.ordinal} onChange={change}>
+                {props.dropdownType.values.map(option => {
+                    return <option key={option.ordinal} value={option.ordinal}>{option.description}</option>
+                })}
+            </select>
+        </div>
     )
 }

@@ -68,6 +68,12 @@ input[type="text"] {
     background-color: rgba(211, 211, 211, 0.4);
 }
 
+/*This basically defeats the point of the form-group class but it's easier than making the 
+form-group from OutputField optional*/
+.skill-table-body .form-group {
+    margin: 0;
+}
+
 /*bootstrap's form-control-plaintext sets this, but apparently its input[readonly] style overrides this,
 so set it back*/
 .skill-table-body input:read-only {

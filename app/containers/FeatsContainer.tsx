@@ -19,9 +19,9 @@ class FeatsContainer extends React.Component<FeatsContainerProps> {
     render() {
         return (
             <div className={this.props.className}>
-                <SectionHeader label="Feats/Abilities" className="row" />
+                <SectionHeader label="Feats/Abilities" />
                 {this.props.feats.map((feat, index) => {
-                    return <IndividualFeatContainer featIndex={index} />
+                    return <IndividualFeatContainer className="form-row align-items-end" featIndex={index} />
                 })}
             </div>
         )

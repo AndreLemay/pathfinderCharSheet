@@ -4,6 +4,7 @@ import InputField from "./common/InputField";
 import { SkillNameValue } from "../api/enums";
 
 interface SkillProps {
+    className?: string
     skill: SkillNameValue
     skillBonus: number
     abilityBonus: number
@@ -22,7 +23,7 @@ export default function Skill(props: SkillProps) {
     }
 
     return (
-        <div className="form-row align-items-end">
+        <div className="form-row align-items-center">
             <div className="col-4"><span>{props.skill.description}</span></div>
             <div className="col">
                 {props.skill.trainedOnly &&
@@ -36,14 +37,12 @@ export default function Skill(props: SkillProps) {
             <div className="col">
                 <OutputField
                     inputType="number"
-                    className="form-control form-control-sm"
                     value={props.skillBonus}
                 />
             </div>
             <div className="col">
                 <OutputField
                     inputType="number"
-                    className="form-control form-control-sm"
                     value={props.abilityBonus}
                 />
             </div>
@@ -57,21 +56,18 @@ export default function Skill(props: SkillProps) {
             <div className="col">
                 <InputField
                     inputType="number"
-                    className="form-control form-control-sm"
                     value={props.ranks}
                     onValueChange={props.rankChange} />
             </div>
             <div className="col">
                 <OutputField
                     inputType="number"
-                    className="form-control form-control-sm"
                     value={props.featBonus}
                 />
             </div>
             <div className="col">
                 <OutputField
                     inputType="number"
-                    className="form-control form-control-sm"
                     value={props.miscBonus}
                 />
             </div>
@@ -79,7 +75,6 @@ export default function Skill(props: SkillProps) {
                 {props.skill.checkPenaltyApplies &&
                     <OutputField
                         inputType="number"
-                        className="form-control form-control-sm"
                         value={props.armourPenalty}
                     />}
             </div>

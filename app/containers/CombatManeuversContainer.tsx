@@ -58,10 +58,10 @@ class CombatManeuversContainer extends React.Component<CombatManeuversContainerP
                         inputType="number"
                         value={this.props.miscCMB}
                     />
-                    <div />
-                    <div />
-                    <div />
-                    <div />
+                    <div className="col" />
+                    <div className="col" />
+                    <div className="col" />
+                    <div className="col" />
                 </div>
                 <div className="form-row align-items-end">
                     <OutputField label="CMD"
@@ -124,8 +124,8 @@ class CombatManeuversContainer extends React.Component<CombatManeuversContainerP
                         inputType="number"
                         value={this.props.strBonus}
                     />
-                    <div />
-                    <div />
+                    <div className="col" />
+                    <div className="col" />
                     <OutputField label="Deflection"
                         className="col"
                         inputType="number"
