@@ -1,7 +1,6 @@
-import {createStore} from "redux"
+import {createStore, compose} from "redux"
 import rootReducer from "./reducers/rootReducer"
-import CharacterSheetState from "./types";
 
-export default function configureStore(initialState?: CharacterSheetState) {
-    return createStore(rootReducer, initialState)
+export default function configureStore() {
+    return createStore(rootReducer, compose((window as any).__REDUX_DEVTOOLS_EXTENSION__()))
 }

@@ -5,8 +5,6 @@ import { Reducer } from "redux";
 let initialState: ArmourClassState = {
     dodgeModifier: 0,
     deflectionModifier: 0,
-    armourAC: 0,
-    shieldAC: 0,
     natArmour: 0
 }
 

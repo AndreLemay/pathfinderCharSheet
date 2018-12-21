@@ -1,4 +1,4 @@
-import CharacterSheetState, { ShieldState } from "../types";
+import { ShieldState } from "../types";
 import * as actions from "../actions/shieldActions"
 import { Reducer } from "redux";
 import { ActionType } from "typesafe-actions";

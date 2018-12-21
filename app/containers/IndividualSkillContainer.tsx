@@ -5,6 +5,7 @@ import Skill from "../components/Skill";
 import CharacterSheetState from "../store/types";
 import { makeGetSkillBonus, makeGetSkillAbilityBonus } from "../store/selectors/skillSelectors";
 import { classSkillUpdate, ranksUpdate } from "../store/actions/skillActions";
+import { getArmourPenalty } from "../store/selectors/armourClassSelectors";
 
 export interface OwnProps {
     skillOrd: number
@@ -51,13 +52,13 @@ const makeMapStateToProps = (state: CharacterSheetState, props: OwnProps) => {
     const getAbilityBonus = makeGetSkillAbilityBonus()
     const mapStateToProps = (state: CharacterSheetState, props: OwnProps): StateProps => {
         return {
-            skillBonus: getSkillBonus(props, state),
-            abilityBonus: getAbilityBonus(props, state),
+            skillBonus: getSkillBonus(state, props),
+            abilityBonus: getAbilityBonus(state, props),
             isClassSkill: state.skills[props.skillOrd].isClassSkill,
             ranks: state.skills[props.skillOrd].ranks,
             featBonus: state.skills[props.skillOrd].featBonus,
             miscBonus: state.skills[props.skillOrd].miscBonus,
-            armourPenalty: state.skills[props.skillOrd]. armourPenalty
+            armourPenalty: getArmourPenalty(state)
         }
     }
 

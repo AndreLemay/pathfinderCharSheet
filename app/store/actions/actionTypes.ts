@@ -8,7 +8,7 @@ export const enum AbilityScoreActionTypes {
 }
 
 export const enum CharacterStateActionTypes {
-    NAME_UPDATE = "NAME_UPDATE",
+    NAME_UPDATE = "CHARACTER_NAME_UPDATE",
     ALIGNMENT_UPDATE = "ALIGNMENT_UPDATE",
     GENDER_UPDATE = "GENDER_UPDATE",
     RACE_UPDATE = "RACE_UPDATE",
@@ -25,7 +25,7 @@ export const enum HealthActionTypes {
 }
 
 export const enum BaseAttackActionTypes {
-    BASE_UPDATE = "BASE_UPDATE"
+    BASE_UPDATE = "BAB_UPDATE"
 }
 
 export const enum SaveActionTypes {
@@ -40,20 +40,20 @@ export const enum SkillActionTypes {
 }
 
 export const enum ArmourActionTypes {
-    NAME_UPDATE = "NAME_UPDATE",
-    DESCRIPTION_UPDATE = "DESCRIPTION_UPDATE",
+    NAME_UPDATE = "ARMOUR_NAME_UPDATE",
+    DESCRIPTION_UPDATE = "ARMOUR_DESCRIPTION_UPDATE",
     TYPE_UPDATE = "TYPE_UPDATE",
     MAX_SPEED_UPDATE = "MAX_SPEED_UPDATE",
     MAX_DEX_UPDATE = "MAX_DEX_UPDATE",
-    CHECK_PENALTY_UPDATE = "CHECK_PENALTY_UPDATE",
-    AC_UPDATE = "AC_UPDATE"
+    CHECK_PENALTY_UPDATE = "ARMOUR_CHECK_PENALTY_UPDATE",
+    AC_UPDATE = "ARMOUR_AC_UPDATE"
 }
 
 export const enum ShieldActionTypes {
-    NAME_UPDATE = "NAME_UPDATE",
-    DESCRIPTION_UPDATE = "DESCRIPTION_UPDATE",
-    CHECK_PENALTY_UPDATE = "CHECK_PENALTY_UPDATE",
-    AC_UPDATE = "AC_UPDATE"
+    NAME_UPDATE = "SHIELD_NAME_UPDATE",
+    DESCRIPTION_UPDATE = "SHIELD_DESCRIPTION_UPDATE",
+    CHECK_PENALTY_UPDATE = "SHIELD_CHECK_PENALTY_UPDATE",
+    AC_UPDATE = "SHIELD_AC_UPDATE"
 }
 
 export const enum FeatActionTypes {

@@ -61,7 +61,6 @@ export interface SkillState {
     readonly ranks: number
     readonly miscBonus: number
     readonly featBonus: number
-    readonly armourPenalty: number
 }
 
 export interface AttackState {
@@ -100,8 +99,6 @@ export interface EquipmentState {
 export interface ArmourClassState {
     readonly dodgeModifier: number
     readonly deflectionModifier: number
-    readonly armourAC: number
-    readonly shieldAC: number
     readonly natArmour: number
 }
 

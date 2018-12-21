@@ -4,7 +4,7 @@ import { getStrengthBonus, getDexterityBonus, getConstitutionBonus, getIntellige
 import { createSelector } from "reselect";
 import { OwnProps } from "../../containers/IndividualSkillContainer";
 
-const getAbilityBonus = (props: OwnProps, state: CharacterSheetState) => {
+const getAbilityBonus = (state: CharacterSheetState, props: OwnProps) => {
     switch (SkillName.values[props.skillOrd].bonusFromAbility) {
         case AbilityType.Strength: {
             return getStrengthBonus(state)
@@ -26,11 +26,11 @@ const getAbilityBonus = (props: OwnProps, state: CharacterSheetState) => {
         }
     }
 }
-const getClassSkill = (props: OwnProps, state: CharacterSheetState) => state.skills[props.skillOrd].isClassSkill
-const getRanks = (props: OwnProps, state: CharacterSheetState) => state.skills[props.skillOrd].ranks
-const getFeatBonus = (props: OwnProps, state: CharacterSheetState) => state.skills[props.skillOrd].featBonus
-const getMiscBonus = (props: OwnProps, state: CharacterSheetState) => state.skills[props.skillOrd].miscBonus
-const getArmourPenalty = (props: OwnProps, state: CharacterSheetState) => state.skills[props.skillOrd].armourPenalty
+const getClassSkill = (state: CharacterSheetState, props: OwnProps) => state.skills[props.skillOrd].isClassSkill
+const getRanks = (state: CharacterSheetState, props: OwnProps) => state.skills[props.skillOrd].ranks
+const getFeatBonus = (state: CharacterSheetState, props: OwnProps) => state.skills[props.skillOrd].featBonus
+const getMiscBonus = (state: CharacterSheetState, props: OwnProps) => state.skills[props.skillOrd].miscBonus
+const getArmourPenalty = (state: CharacterSheetState) => state.armour.checkPenalty + state.shield.checkPenalty
 
 const calcSkillBonus = (abilityBonus: number, ranks: number, featBonus: number, miscBonus: number,
     armourPenalty: number, isClassSkill: boolean) => {

@@ -5,7 +5,6 @@ import SectionHeader from "../components/common/SectionHeader";
 import InputField from "../components/common/InputField";
 import DropdownField from "../components/common/DropdownField";
 import CharacterSheetState from "../store/types";
-import { stat } from "fs";
 import { nameUpdate, descriptionUpdate, typeUpdate, maxSpeedUpdate, maxDexUpdate, checkPenaltyUpdate, acUpdate } from "../store/actions/armourActions";
 
 interface OwnProps {
