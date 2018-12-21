@@ -10,7 +10,7 @@ interface AttackProps {
     critical: string
 }
 
-export default (props: AttackProps) => {
+export default function Attack(props: AttackProps) {
     return (
         <div className="form-row align-items-end">
             <OutputField

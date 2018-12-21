@@ -41,13 +41,10 @@ export interface BaseAttackState {
 }
 
 export interface SaveState {
-    readonly fortSave: number
     readonly baseFortSave: number
     readonly miscFortBonus: number
-    readonly reflexSave: number
     readonly baseReflexSave: number
     readonly miscReflexBonus: number
-    readonly willSave: number
     readonly baseWillSave: number
     readonly miscWillBonus: number
 }

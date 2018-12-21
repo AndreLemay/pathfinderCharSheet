@@ -6,15 +6,25 @@ import InputField from "../components/common/InputField";
 import { fortUpdate, reflexUpdate, willUpdate } from "../store/actions/saveActions";
 import { connect } from "react-redux";
 import { getConstitutionBonus, getDexterityBonus, getWisdomBonus } from "../store/selectors/abilityScoreSelectors";
+import { getFortSave, getReflexSave, getWillSave } from "../store/selectors/saveSelectors";
 
 interface OwnProps {
     className?: string
 }
 
 interface StateProps {
+    fortSave: number
+    reflexSave: number
+    willSave: number
+    baseFort: number
+    baseReflex: number
+    baseWill: number
     conBonus: number
     dexBonus: number
     wisBonus: number
+    miscFort: number
+    miscReflex: number
+    miscWill: number
 }
 
 interface DispatchProps {
@@ -23,7 +33,7 @@ interface DispatchProps {
     willSaveChange: (will: number) => void
  }
 
- type SavesContainerProps = SaveState & StateProps & DispatchProps & OwnProps
+ type SavesContainerProps = StateProps & DispatchProps & OwnProps
 
  class SavesContainer extends React.Component<SavesContainerProps> {
      render() {
@@ -32,33 +42,41 @@ interface DispatchProps {
                  <SectionHeader label="Saves" />
                  <div className="form-row">
                      <OutputField label="Fortitude" inputType="number" className="col" value={this.props.fortSave} />
-                     <InputField label="Base" inputType="number" className="col" value={this.props.baseFortSave} onValueChange={this.props.fortSaveChange} />
+                     <InputField label="Base" inputType="number" className="col" value={this.props.baseFort} onValueChange={this.props.fortSaveChange} />
                      <OutputField label="CON" inputType="number" className="col" value={this.props.conBonus} />
-                     <OutputField label="Misc" inputType="number" className="col" value={this.props.miscFortBonus} />
+                     <OutputField label="Misc" inputType="number" className="col" value={this.props.miscFort} />
                  </div>
                  <div className="form-row">
                      <OutputField label="Reflex" inputType="number" className="col" value={this.props.reflexSave} />
-                     <InputField label="Base" inputType="number" className="col" value={this.props.baseReflexSave} onValueChange={this.props.reflexSaveChange} />
+                     <InputField label="Base" inputType="number" className="col" value={this.props.baseReflex} onValueChange={this.props.reflexSaveChange} />
                      <OutputField label="DEX" inputType="number" className="col" value={this.props.dexBonus} />
-                     <OutputField label="Misc" inputType="number" className="col" value={this.props.miscReflexBonus} />
+                     <OutputField label="Misc" inputType="number" className="col" value={this.props.miscReflex} />
                  </div>
                  <div className="form-row">
                      <OutputField label="Will" inputType="number" className="col" value={this.props.willSave} />
-                     <InputField label="Base" inputType="number" className="col" value={this.props.baseWillSave} onValueChange={this.props.willSaveChange} />
+                     <InputField label="Base" inputType="number" className="col" value={this.props.baseWill} onValueChange={this.props.willSaveChange} />
                      <OutputField label="WIS" inputType="number" className="col" value={this.props.wisBonus} />
-                     <OutputField label="Misc" inputType="number" className="col" value={this.props.miscWillBonus} />
+                     <OutputField label="Misc" inputType="number" className="col" value={this.props.miscWill} />
                  </div>
              </div>
          )
      }
  }
 
- function mapStateToProps(state: CharacterSheetState): SaveState & StateProps {
+ function mapStateToProps(state: CharacterSheetState): StateProps {
      return {
-         ...state.saves,
+         fortSave: getFortSave(state),
+         reflexSave: getReflexSave(state),
+         willSave: getWillSave(state),
+         baseFort: state.saves.baseFortSave,
+         baseReflex: state.saves.baseReflexSave,
+         baseWill: state.saves.baseWillSave,
          conBonus: getConstitutionBonus(state),
          dexBonus: getDexterityBonus(state),
-         wisBonus: getWisdomBonus(state)
+         wisBonus: getWisdomBonus(state),
+         miscFort: state.saves.miscFortBonus,
+         miscReflex: state.saves.miscReflexBonus,
+         miscWill: state.saves.miscWillBonus
      }
  }
 

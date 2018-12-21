@@ -64,10 +64,10 @@ const makeMapStateToProps = (state: CharacterSheetState, props: OwnProps) => {
     return mapStateToProps
 }
 
-const mapDispatchToProps = (dispatch, props: OwnProps) => {
+const mapDispatchToProps = (dispatch, props: OwnProps): DispatchProps => {
     return {
         classSkillChange: classSkill => dispatch(classSkillUpdate(props, classSkill)),
-        ranksUpdate: ranks => dispatch(ranksUpdate(props, ranks))
+        ranksChange: ranks => dispatch(ranksUpdate(props, ranks))
     }
 }
 

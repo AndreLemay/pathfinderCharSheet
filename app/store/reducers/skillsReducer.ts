@@ -23,13 +23,13 @@ const skillsReducer: Reducer<{ [key: number]: SkillState }> = (state = initialSt
             let { [action.payload.skillOrd]: skill, ...rest } = state
             let { isClassSkill, ...sRest } = skill
             let newSkill = { isClassSkill: action.payload.classSkill, ...sRest }
-            return { newSkill, ...rest }
+            return { [action.payload.skillOrd]: newSkill, ...rest }
         }
         case SkillActionTypes.RANKS_UPDATE: {
             let { [action.payload.skillOrd]: skill, ...rest } = state
             let { ranks, ...sRest } = skill
             let newSkill = { ranks: action.payload.ranks, ...sRest }
-            return { newSkill, ...rest }
+            return { [action.payload.skillOrd]: newSkill, ...rest }
         }
         default: return state
     }

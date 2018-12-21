@@ -10,7 +10,8 @@ interface InputProps {
 
 export default function InputField(props: InputProps) {
     function change(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-        props.onValueChange(event.currentTarget.value)
+        let val: number | string = props.inputType === "number" ? +event.currentTarget.value : event.currentTarget.value
+        props.onValueChange(val)
     }
 
     if (props.label && props.label.length > 0)

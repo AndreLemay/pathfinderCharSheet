@@ -10,7 +10,7 @@ interface AbilityScoreProps {
     bonus: number
 }
 
-export default (props: AbilityScoreProps) => {
+export default function AbilityScore(props: AbilityScoreProps) {
     return (
         <div className="form-row align-items-end">
             <div className="col-2 ability-title"><label>{props.label}</label></div>

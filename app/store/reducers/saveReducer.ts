@@ -5,13 +5,10 @@ import { ActionType } from "typesafe-actions"
 import { SaveActionTypes } from "../actions/actionTypes";
 
 const initialState: SaveState = {
-    fortSave: 0,
     baseFortSave: 0,
     miscFortBonus: 0,
-    reflexSave: 0,
     baseReflexSave: 0,
     miscReflexBonus: 0,
-    willSave: 0,
     baseWillSave: 0,
     miscWillBonus: 0
 }

@@ -13,7 +13,7 @@ const calcAC = (dex: number, dodge: number, deflect: number, armour: number, shi
     return 10 + dex + dodge + deflect + armour + shield + nat + size
 }
 const calcFlatFooted = (deflect: number, armour: number, shield: number, nat: number, size: number) => {
-    return calcAC(0, 0, deflect, armour, shield, name, size)
+    return calcAC(0, 0, deflect, armour, shield, nat, size)
 }
 const calcTouch = (dex: number, dodge: number, deflect: number, size: number) => {
     return calcAC(dex, dodge, deflect, 0, 0, 0, size)

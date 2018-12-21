@@ -10,7 +10,7 @@ interface FeatProps {
     onActiveChange: (active: boolean) => void
 }
 
-export default (props: FeatProps) => {
+export default function Feat(props: FeatProps) {
     function activeChange(event: React.ChangeEvent<HTMLInputElement>) {
         props.onActiveChange(event.currentTarget.checked)
     }

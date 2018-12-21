@@ -16,7 +16,7 @@ interface SkillProps {
     classSkillChange: (classSkill: boolean) => void
 }
 
-export default (props: SkillProps) => {
+export default function Skill(props: SkillProps) {
     function classSkillChange(event: React.ChangeEvent<HTMLInputElement>) {
         props.classSkillChange(event.currentTarget.checked)
     }
@@ -24,7 +24,7 @@ export default (props: SkillProps) => {
     return (
         <div className="form-row align-items-end">
             <div className="col-4"><span>{props.skill.description}</span></div>
-            <div>
+            <div className="col">
                 {props.skill.trainedOnly &&
                     <input
                         className="form-control form-control-sm"

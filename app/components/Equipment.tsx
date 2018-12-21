@@ -8,7 +8,7 @@ interface EquipmentProps {
     bonuses: ValueBonus[]
 }
 
-export default (props: EquipmentProps) => {
+export default function Equipment(props: EquipmentProps) {
     return (
         <div className="equipment-item">
             <div className="form-row align-items-center">
