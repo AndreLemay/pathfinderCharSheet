@@ -59,3 +59,11 @@ export const enum ShieldActionTypes {
 export const enum FeatActionTypes {
     ACTIVE_UPDATE = "ACTIVE_UPDATE"
 }
+
+export const enum ToolbarActionTypes {
+    SAVE = "SAVE",
+    LOAD = "LOAD",
+    ADD_FEAT = "ADD_FEAT",
+    ADD_EQUIP = "ADD_EQUIP",
+    ADD_ATTACK = "ADD_ATTACK"
+}

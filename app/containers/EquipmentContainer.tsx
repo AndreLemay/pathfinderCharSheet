@@ -18,9 +18,9 @@ class EquipmentContainer extends React.Component<EquipmentContainerProps> {
     render() {
         return (
             <div className={this.props.className}>
-                <SectionHeader label="Equipment" />
+                <SectionHeader label="Equipment" className="mb-3" />
                 {this.props.equipment.map((equip, index) => {
-                    return <IndividualEquipmentContainer equipIndex={index} />
+                    return <IndividualEquipmentContainer key={index} equipIndex={index} />
                 })}
             </div>
         )

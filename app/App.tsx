@@ -1,5 +1,4 @@
 import * as React from "react"
-import Toolbar from "./components/Toolbar";
 import configureStore from "./store/configureStore";
 import { Provider } from "react-redux"
 import AbilityScoresContainer from "./containers/AbilityScoresContainer";
@@ -16,6 +15,7 @@ import ArmourContainer from "./containers/ArmourContainer";
 import ShieldContainer from "./containers/ShieldContainer";
 import EquipmentContainer from "./containers/EquipmentContainer";
 import InitiativeContainer from "./containers/InitiativeContainer";
+import ToolbarContainer from "./containers/ToolbarContainer";
 
 const store = configureStore()
 
@@ -23,12 +23,7 @@ export default function App() {
     return (
         <Provider store={store}>
             <div>
-                {/* <Toolbar
-                    save={this.toolbarSave}
-                    load={this.toolbarLoad}
-                    addEquip={this.addEquipment}
-                    addFeat={this.addFeat}
-                    addAttack={this.addAttack} /> */}
+                <ToolbarContainer />
                 <div className="container-fluid">
                     <div className="row mt-4">
                         <div className="col-6 px-5">

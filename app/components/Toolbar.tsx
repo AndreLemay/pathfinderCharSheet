@@ -1,10 +1,6 @@
 import * as React from "react"
 
-interface OwnProps {
-    className?: string
-}
-
-interface DispatchProps {
+interface ToolbarProps {
     save: () => void
     load: () => void
     addEquip: () => void
@@ -15,8 +11,6 @@ interface DispatchProps {
 interface OwnState {
     dropdownOpen: boolean
 }
-
-type ToolbarProps = DispatchProps & OwnProps
 
 export default class Toolbar extends React.Component<ToolbarProps, OwnState> {
     constructor(props) {

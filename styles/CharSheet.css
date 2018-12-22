@@ -2,12 +2,12 @@ body {
     overflow-x: hidden;
 }
 
-input, select, .form-group, .skill-table-head>.col {
+input, select, .form-group:not(.row), .skill-table-head>.col {
     text-align: center;
     text-align-last: center;
 }
 
-input[type="text"] {
+input[type="text"], textarea {
     text-align: start;
     text-align-last: start;
 }
