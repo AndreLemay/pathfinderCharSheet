@@ -18,7 +18,7 @@ type IndividualEquipmentContainerProps = StateProps & OwnProps
 class IndividualEquipmentContainer extends React.Component<IndividualEquipmentContainerProps> {
     render() {
         return (
-            <Equipment name={this.props.name} description={this.props.description} bonuses={this.props.bonuses} />
+            <Equipment className="mt-3" name={this.props.name} description={this.props.description} bonuses={this.props.bonuses} />
         )
     }
 }

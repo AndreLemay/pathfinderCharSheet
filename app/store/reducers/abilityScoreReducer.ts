@@ -8,33 +8,27 @@ import { ActionType } from "typesafe-actions";
 const initialState: AbilitiesState = {
     strength: {
         type: AbilityType.Strength,
-        base: 10,
-        additional: 0,
+        base: 10
     },
     dexterity: {
         type: AbilityType.Dexterity,
-        base: 10,
-        additional: 0,
+        base: 10
     },
     constitution: {
         type: AbilityType.Constitution,
-        base: 10,
-        additional: 0,
+        base: 10
     },
     intelligence: {
         type: AbilityType.Intelligence,
-        base: 10,
-        additional: 0,
+        base: 10
     },
     wisdom: {
         type: AbilityType.Wisdom,
-        base: 10,
-        additional: 0,
+        base: 10
     },
     charisma: {
         type: AbilityType.Charisma,
-        base: 10,
-        additional: 0,
+        base: 10
     }
 }
 

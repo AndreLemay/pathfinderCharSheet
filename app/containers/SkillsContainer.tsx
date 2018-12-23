@@ -27,7 +27,6 @@ class SkillsContainer extends React.Component<SkillsContainerProps> {
                     <div className="col"><label>Ability Bonus</label></div>
                     <div className="col"><label>Class Skill</label></div>
                     <div className="col"><label>Ranks</label></div>
-                    <div className="col"><label>Feats / Abilities</label></div>
                     <div className="col"><label>Misc</label></div>
                     <div className="col"><label>Armour Check Penalty</label></div>
                 </div>

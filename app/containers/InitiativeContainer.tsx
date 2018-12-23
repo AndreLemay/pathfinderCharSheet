@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import SectionHeader from "../components/common/SectionHeader";
 import OutputField from "../components/common/OutputField";
 import CharacterSheetState from "../store/types";
-import { getInitiative } from "../store/selectors/initiativeSelectors";
+import { getInitiative, getMiscInitiative } from "../store/selectors/initiativeSelectors";
 import { getDexterityBonus } from "../store/selectors/abilityScoreSelectors";
 
 interface OwnProps {
@@ -44,7 +44,7 @@ function mapStateToProps(state: CharacterSheetState): StateProps {
     return {
         initiative: getInitiative(state),
         dexBonus: getDexterityBonus(state),
-        miscInitiative: state.initiative.miscInitiative
+        miscInitiative: getMiscInitiative(state)
     }
 } 
 

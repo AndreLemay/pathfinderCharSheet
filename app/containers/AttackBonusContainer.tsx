@@ -5,7 +5,7 @@ import InputField from "../components/common/InputField";
 import OutputField from "../components/common/OutputField";
 import { baseUpdate } from "../store/actions/baseAttackActions";
 import { connect } from "react-redux"
-import { getMeleeAttackBonus, getRangedAttackBonus } from "../store/selectors/baseAttackSelectors";
+import { getMeleeAttackBonus, getRangedAttackBonus, getMiscAttackBonus } from "../store/selectors/baseAttackSelectors";
 
 interface OwnProps {
     className?: string
@@ -45,7 +45,7 @@ class AttackBonusContainer extends React.Component<AttackBonusContainerProps> {
 function mapStateToProps(state: CharacterSheetState): StateProps {
     return {
         base: state.baseAttack.base,
-        miscBonus: state.baseAttack.miscBonus,
+        miscBonus: getMiscAttackBonus(state),
         meleeBonus: getMeleeAttackBonus(state),
         rangedBonus: getRangedAttackBonus(state)
     }

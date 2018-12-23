@@ -19,7 +19,7 @@ class AttacksContainer extends React.Component<AttacksContainerProps> {
         return (
             <div className={this.props.className}>
                 <SectionHeader label="Attacks" />
-                {this.props.attacks.map((attack, index) => {
+                {this.props.attacks.map((_, index) => {
                     return <IndividualAttackContainer key={index} attackIndex={index} />
                 })}
             </div>

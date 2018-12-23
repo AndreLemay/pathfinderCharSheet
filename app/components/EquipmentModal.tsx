@@ -49,12 +49,8 @@ export default class EquipmentModal extends React.Component<ModalProps, ModalSta
     }
 
     toggle = () => {
-        $(this.modalRef.current).modal("toggle")
-    }
-
-    private onCancel = () => {
-        this.toggle()
         this.setState(defaultState)
+        $(this.modalRef.current).modal("toggle")
     }
 
     private addStatBonus = () => {
@@ -160,7 +156,7 @@ export default class EquipmentModal extends React.Component<ModalProps, ModalSta
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" onClick={this.onCancel}>Cancel</button>
+                            <button type="button" className="btn btn-secondary" onClick={this.toggle}>Cancel</button>
                             <button type="button" className="btn btn-primary" onClick={this.addEquip}>Add Equipment</button>
                         </div>
                     </div>

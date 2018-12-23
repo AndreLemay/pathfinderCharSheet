@@ -1,8 +1,8 @@
 import * as React from "react"
-import OutputField from "./common/OutputField";
 import { ValueBonus } from "../store/types";
 
 interface EquipmentProps {
+    className?: string
     name: string
     description: string
     bonuses: ValueBonus[]
@@ -10,7 +10,7 @@ interface EquipmentProps {
 
 export default function Equipment(props: EquipmentProps) {
     return (
-        <div className="equipment-item form-row align-items-end">
+        <div className={`equipment-item form-row align-items-end ${props.className}`}>
             <div className="col-12">
                 <div className="form-group row">
                     <div className="col-2">

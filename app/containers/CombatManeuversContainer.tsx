@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import SectionHeader from "../components/common/SectionHeader";
 import OutputField from "../components/common/OutputField";
 import CharacterSheetState from "../store/types";
-import { getCMB, getCMD, getFlatFooted } from "../store/selectors/combatManeuverSelectors";
+import { getCMB, getCMD, getFlatFooted, getMiscCMB, getMiscCMD } from "../store/selectors/combatManeuverSelectors";
 import { getStrengthBonus, getDexterityBonus } from "../store/selectors/abilityScoreSelectors";
 import { getDodgeMod, getDeflectionMod, getSizeMod } from "../store/selectors/armourClassSelectors";
 
@@ -163,8 +163,8 @@ function mapStateToProps(state: CharacterSheetState): CombatManeuversContainerPr
         deflectionMod: getDeflectionMod(state),
         bab: state.baseAttack.base,
         sizeMod: getSizeMod(state),
-        miscCMB: state.combatManeuvers.miscCMB,
-        miscCMD: state.combatManeuvers.miscCMD
+        miscCMB: getMiscCMB(state),
+        miscCMD: getMiscCMD(state)
     }
 }
 

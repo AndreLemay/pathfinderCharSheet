@@ -1,10 +1,10 @@
 import * as React from "react"
 import { connect } from "react-redux"
 import AbilityScore from "../components/AbilityScore";
-import CharacterSheetState, { AbilitiesState } from "../store/types";
+import CharacterSheetState from "../store/types";
 import { strengthUpdate, dexterityUpdate, constitutionUpdate, intelligenceUpdate, wisdomUpdate, charismaUpdate } from "../store/actions/abilityScoreActions";
 import SectionHeader from "../components/common/SectionHeader";
-import { getStrengthBonus, getDexterityBonus, getConstitutionBonus, getIntelligenceBonus, getWisdomBonus, getCharismaBonus } from "../store/selectors/abilityScoreSelectors";
+import { getStrengthBonus, getDexterityBonus, getConstitutionBonus, getIntelligenceBonus, getWisdomBonus, getCharismaBonus, getAdditionalStrength, getAdditionalDexterity, getAdditionalConstitution, getAdditionalIntelligence, getAdditionalWisdom, getAdditionalCharisma } from "../store/selectors/abilityScoreSelectors";
 
 interface OwnProps {
     className?: string
@@ -96,12 +96,12 @@ function mapStateToProps(state: CharacterSheetState): StateProps {
         baseInt: state.abilities.intelligence.base,
         baseWis: state.abilities.wisdom.base,
         baseCha: state.abilities.charisma.base,
-        addStr: state.abilities.charisma.additional,
-        addDex: state.abilities.dexterity.additional,
-        addCon: state.abilities.constitution.additional,
-        addInt: state.abilities.intelligence.additional,
-        addWis: state.abilities.wisdom.additional,
-        addCha: state.abilities.charisma.additional,
+        addStr: getAdditionalStrength(state),
+        addDex: getAdditionalDexterity(state),
+        addCon: getAdditionalConstitution(state),
+        addInt: getAdditionalIntelligence(state),
+        addWis: getAdditionalWisdom(state),
+        addCha: getAdditionalCharisma(state),
         strBonus: getStrengthBonus(state),
         dexBonus: getDexterityBonus(state),
         conBonus: getConstitutionBonus(state),

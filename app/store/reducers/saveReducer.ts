@@ -6,11 +6,8 @@ import { SaveActionTypes } from "../actions/actionTypes";
 
 const initialState: SaveState = {
     baseFortSave: 0,
-    miscFortBonus: 0,
     baseReflexSave: 0,
-    miscReflexBonus: 0,
-    baseWillSave: 0,
-    miscWillBonus: 0
+    baseWillSave: 0
 }
 
 const saveReducer: Reducer<SaveState> = (state = initialState, action: ActionType<typeof actions>): SaveState => {

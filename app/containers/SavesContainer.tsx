@@ -6,7 +6,7 @@ import InputField from "../components/common/InputField";
 import { fortUpdate, reflexUpdate, willUpdate } from "../store/actions/saveActions";
 import { connect } from "react-redux";
 import { getConstitutionBonus, getDexterityBonus, getWisdomBonus } from "../store/selectors/abilityScoreSelectors";
-import { getFortSave, getReflexSave, getWillSave } from "../store/selectors/saveSelectors";
+import { getFortSave, getReflexSave, getWillSave, getMiscFortSave, getMiscReflexSave, getMiscWillSave } from "../store/selectors/saveSelectors";
 
 interface OwnProps {
     className?: string
@@ -74,9 +74,9 @@ interface DispatchProps {
          conBonus: getConstitutionBonus(state),
          dexBonus: getDexterityBonus(state),
          wisBonus: getWisdomBonus(state),
-         miscFort: state.saves.miscFortBonus,
-         miscReflex: state.saves.miscReflexBonus,
-         miscWill: state.saves.miscWillBonus
+         miscFort: getMiscFortSave(state),
+         miscReflex: getMiscReflexSave(state),
+         miscWill: getMiscWillSave(state)
      }
  }
 

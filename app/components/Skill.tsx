@@ -10,7 +10,6 @@ interface SkillProps {
     abilityBonus: number
     isClassSkill: boolean
     ranks: number
-    featBonus: number
     miscBonus: number
     armourPenalty: number
     rankChange: (ranks: number) => void
@@ -58,12 +57,6 @@ export default function Skill(props: SkillProps) {
                     inputType="number"
                     value={props.ranks}
                     onValueChange={props.rankChange} />
-            </div>
-            <div className="col">
-                <OutputField
-                    inputType="number"
-                    value={props.featBonus}
-                />
             </div>
             <div className="col">
                 <OutputField

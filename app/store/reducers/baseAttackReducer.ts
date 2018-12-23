@@ -5,8 +5,7 @@ import { ActionType } from "typesafe-actions";
 import { BaseAttackActionTypes } from "../actions/actionTypes";
 
 const initialState: BaseAttackState = {
-    base: 0,
-    miscBonus: 0
+    base: 0
 }
 
 const baseAttackReducer: Reducer<BaseAttackState> = (state = initialState, action: ActionType<typeof actions>): BaseAttackState => {

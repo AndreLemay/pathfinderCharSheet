@@ -1,18 +1,56 @@
 import {createSelector} from "reselect"
 import CharacterSheetState from "../types";
+import { getBonusTotal } from "./bonusSelectors";
+import { BonusType, StatType } from "../../api/enums";
 
 const getBaseStr = (state: CharacterSheetState) => state.abilities.strength.base
-const getAddStr = (state: CharacterSheetState) => state.abilities.strength.additional
+const getAddStr = (state: CharacterSheetState) => getBonusTotal(state, { 
+    includedBonuses: [BonusType.Alchemical,
+        BonusType.Enhancement,
+        BonusType.Inherent,
+        BonusType.Morale],
+    statToSum: [StatType.Strength]
+})
 const getBaseDex = (state: CharacterSheetState) => state.abilities.dexterity.base
-const getAddDex = (state: CharacterSheetState) => state.abilities.dexterity.additional
+const getAddDex = (state: CharacterSheetState) => getBonusTotal(state, {
+    includedBonuses: [BonusType.Alchemical,
+        BonusType.Enhancement,
+        BonusType.Inherent,
+        BonusType.Morale],
+    statToSum: [StatType.Dexterity]
+})
 const getBaseCon = (state: CharacterSheetState) => state.abilities.constitution.base
-const getAddCon = (state: CharacterSheetState) => state.abilities.constitution.additional
+const getAddCon = (state: CharacterSheetState) => getBonusTotal(state, {
+    includedBonuses: [BonusType.Alchemical,
+        BonusType.Enhancement,
+        BonusType.Inherent,
+        BonusType.Morale],
+    statToSum: [StatType.Constitution]
+})
 const getBaseInt = (state: CharacterSheetState) => state.abilities.intelligence.base
-const getAddInt = (state: CharacterSheetState) => state.abilities.intelligence.additional
+const getAddInt = (state: CharacterSheetState) => getBonusTotal(state, {
+    includedBonuses: [BonusType.Alchemical,
+        BonusType.Enhancement,
+        BonusType.Inherent,
+        BonusType.Morale],
+    statToSum: [StatType.Intelligence]
+})
 const getBaseWis = (state: CharacterSheetState) => state.abilities.wisdom.base
-const getAddWis = (state: CharacterSheetState) => state.abilities.wisdom.additional
+const getAddWis = (state: CharacterSheetState) => getBonusTotal(state, {
+    includedBonuses: [BonusType.Alchemical,
+        BonusType.Enhancement,
+        BonusType.Inherent,
+        BonusType.Morale],
+    statToSum: [StatType.Wisdom]
+})
 const getBaseCha = (state: CharacterSheetState) => state.abilities.charisma.base
-const getAddCha = (state: CharacterSheetState) => state.abilities.charisma.additional
+const getAddCha = (state: CharacterSheetState) => getBonusTotal(state, {
+    includedBonuses: [BonusType.Alchemical,
+        BonusType.Enhancement,
+        BonusType.Inherent,
+        BonusType.Morale],
+    statToSum: [StatType.Charisma]
+})
 
 const calcAbilityBonus = (base: number, additional: number) => Math.floor((base + additional - 10) / 2)
 
@@ -22,3 +60,9 @@ export const getConstitutionBonus = createSelector([getBaseCon, getAddCon], calc
 export const getIntelligenceBonus = createSelector([getBaseInt, getAddInt], calcAbilityBonus)
 export const getWisdomBonus = createSelector([getBaseWis, getAddWis], calcAbilityBonus)
 export const getCharismaBonus = createSelector([getBaseCha, getAddCha], calcAbilityBonus)
+export const getAdditionalStrength = createSelector([getAddStr], add => add)
+export const getAdditionalDexterity = createSelector([getAddDex], add => add)
+export const getAdditionalConstitution = createSelector([getAddCon], add => add)
+export const getAdditionalIntelligence = createSelector([getAddInt], add => add)
+export const getAdditionalWisdom = createSelector([getAddWis], add => add)
+export const getAdditionalCharisma = createSelector([getAddCha], add => add)

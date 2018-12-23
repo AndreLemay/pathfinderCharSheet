@@ -9,13 +9,10 @@ const initialState: { [key: number]: SkillState } =
     SkillName.values.reduce((obj, skill) => {
         obj[skill.ordinal] = {
             isClassSkill: false,
-            ranks: 0,
-            miscBonus: 0,
-            featBonus: 0,
-            armourPenalty: 0
+            ranks: 0
         }
         return obj
-    }, {})
+    }, {} as { [key: number]: SkillState })
 
 const skillsReducer: Reducer<{ [key: number]: SkillState }> = (state = initialState, action: ActionType<typeof actions>) => {
     switch (action.type) {
