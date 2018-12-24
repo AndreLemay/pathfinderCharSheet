@@ -4,7 +4,7 @@ import OutputField from "./common/OutputField";
 interface AttackProps {
     name: string
     description: string
-    range: string
+    range: number
     type: string
     damage: string
     critical: string
@@ -19,29 +19,30 @@ export default function Attack(props: AttackProps) {
                 value={props.name}
             />
             <OutputField
+                label="Properties"
                 inputType="textarea"
                 className="col-8"
                 value={props.description}
             />
             <OutputField
                 label="Range"
-                className="col-4"
+                className="col-3"
                 inputType="number"
                 value={props.range}
             />
             <OutputField
                 label="Type"
-                className="col-4"
+                className="col-3"
                 value={props.type}
             />
             <OutputField
                 label="Damage"
-                className="col-4"
+                className="col-3"
                 value={props.damage}
             />
             <OutputField
                 label="Critical"
-                className="col-4"
+                className="col-3"
                 value={props.critical}
             />
         </div>

@@ -1,7 +1,8 @@
 import * as React from "react"
 import { connect } from "react-redux"
 import Attack from "../components/Attack";
-import CharacterSheetState from "../store/types";
+import CharacterSheetState, { AttackState } from "../store/types";
+import { getDamageBonus } from "../store/selectors/baseAttackSelectors";
 
 interface OwnProps {
     attackIndex: number
@@ -10,13 +11,21 @@ interface OwnProps {
 interface StateProps {
     name: string
     description: string
-    range: string
+    range: number
     type: string
     damage: string
     critical: string
 }
 
 type IndividualAttackContainerProps = StateProps & OwnProps
+
+function damageString(atk: AttackState, dmgBonus: number): string {
+    return `${atk.dmgDieCount}d${atk.dmgDie.description} +${dmgBonus}`
+}
+
+function critString(atk: AttackState): string {
+    return `${atk.critRange}-20x${atk.critMultiplier}`
+}
 
 class IndividualAttackContainer extends React.Component<IndividualAttackContainerProps> {
     render() {
@@ -38,8 +47,8 @@ function mapStateToProps(state: CharacterSheetState, props: OwnProps): StateProp
         description: state.attacks[props.attackIndex].description,
         range: state.attacks[props.attackIndex].range,
         type: state.attacks[props.attackIndex].type,
-        damage: state.attacks[props.attackIndex].damage,
-        critical: state.attacks[props.attackIndex].critical
+        damage: damageString(state.attacks[props.attackIndex], getDamageBonus(state)),
+        critical: critString(state.attacks[props.attackIndex])
     }
 }
 

@@ -218,3 +218,25 @@ class ArmourTypeEnum extends Enum<ArmourTypeValue> {
     Heavy: ArmourTypeValue = new ArmourTypeValue("Heavy")
 }
 export const ArmourType: ArmourTypeEnum = new ArmourTypeEnum()
+
+export class DamageDieValue extends EnumValue {
+    constructor(name: string) {
+        super(name)
+    }
+}
+class DamageDieEnum extends Enum<DamageDieValue> {
+    constructor() {
+        super()
+        this.initEnum("DamageDie")
+    }
+
+    2: DamageDieValue = new DamageDieValue("2")
+    3: DamageDieValue = new DamageDieValue("3")
+    4: DamageDieValue = new DamageDieValue("4")
+    6: DamageDieValue = new DamageDieValue("6")
+    8: DamageDieValue = new DamageDieValue("8")
+    10: DamageDieValue = new DamageDieValue("10")
+    12: DamageDieValue = new DamageDieValue("12")
+    20: DamageDieValue = new DamageDieValue("20")
+}
+export const DamageDie: DamageDieEnum = new DamageDieEnum()

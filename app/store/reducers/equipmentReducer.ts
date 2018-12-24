@@ -1,15 +1,20 @@
 import { EquipmentState } from "../types";
 import { Reducer } from "redux";
 import { ActionType } from "typesafe-actions";
-import { addEquip } from "../actions/toolbarActions";
+import { addEquip, addAttack } from "../actions/toolbarActions";
 import { ToolbarActionTypes } from "../actions/actionTypes";
+
+type actions = typeof addEquip | typeof addAttack
 
 const intialState: EquipmentState[] = []
 
-const equipmentReducer: Reducer<EquipmentState[]> = (state = intialState, action: ActionType<typeof addEquip>) => {
+const equipmentReducer: Reducer<EquipmentState[]> = (state = intialState, action: ActionType<actions>) => {
     switch(action.type) {
         case ToolbarActionTypes.ADD_EQUIP: {
             return [...state, action.payload]
+        }
+        case ToolbarActionTypes.ADD_ATTACK: {
+            return [...state, action.payload.equip]
         }
         default: return state
     }

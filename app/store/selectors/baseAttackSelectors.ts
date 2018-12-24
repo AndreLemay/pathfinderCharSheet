@@ -17,9 +17,18 @@ const getMiscAttack = (state: CharacterSheetState) => getBonusTotal(state, {
         BonusType.Size],
     statToSum: [StatType.BaseAttack]
 })
+const getMiscDamage = (state: CharacterSheetState) => getBonusTotal(state, {
+    includedBonuses: [BonusType.Enhancement,
+            BonusType.Luck,
+            BonusType.Morale,
+            BonusType.Profane,
+            BonusType.Sacred],
+    statToSum: [StatType.Damage]
+})
 
 const calcAttackBonus = (base: number, bonus: number, misc: number) => base + bonus + misc
 
+export const getDamageBonus = createSelector([getMiscDamage], dmg => dmg)
 export const getMiscAttackBonus = createSelector([getMiscAttack], atk => atk)
 export const getMeleeAttackBonus = createSelector([getBaseAttack, getStrengthBonus, getMiscAttack], calcAttackBonus)
 export const getRangedAttackBonus = createSelector([getBaseAttack, getDexterityBonus, getMiscAttack], calcAttackBonus)

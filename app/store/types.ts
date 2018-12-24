@@ -1,5 +1,5 @@
 import {
-    AbilityTypeValue, AlignmentValue, GenderValue, SizeValue, BonusTypeValue, StatTypeValue, SkillNameValue, ArmourTypeValue
+    AbilityTypeValue, AlignmentValue, GenderValue, SizeValue, BonusTypeValue, StatTypeValue, SkillNameValue, ArmourTypeValue, DamageDieValue
 } from "../api/enums"
 import { EnumValue } from "ts-enums";
 
@@ -59,10 +59,12 @@ export interface SkillState {
 export interface AttackState {
     readonly name: string
     readonly description: string
-    readonly range: string
+    readonly range: number
     readonly type: string
-    readonly damage: string
-    readonly critical: string
+    readonly dmgDieCount: number
+    readonly dmgDie: DamageDieValue
+    readonly critRange: number
+    readonly critMultiplier: number
 }
 
 export interface ArmourState {
@@ -128,65 +130,3 @@ export class ValueBonus {
         return retStr
     }
 }
-
-// export class Skill {
-//     isClassSkill: boolean = false
-//     ranks: number = 0
-
-//     constructor(
-//         readonly skillName: enums.SkillNameValue,
-//         readonly trained: boolean,
-//         readonly abilityBonus: () => number,
-//         readonly miscBonus: (skill: enums.SkillNameValue, ...bonuses: enums.BonusTypeValue[]) => number,
-//         readonly featBonus: (skill: enums.SkillNameValue, ...bonuses: enums.BonusTypeValue[]) => number,
-//         readonly armourPenalty: () => number = () => { return null }, ) { }
-
-//     //need a noargs version of this so the renderer process can call it without being able to pass arguments
-//     calcMiscBonus = (): number => {
-//         return this.miscBonus(this.skillName,
-//             enums.BonusType.Circumstance,
-//             enums.BonusType.Competence,
-//             enums.BonusType.Insight,
-//             enums.BonusType.Luck,
-//             enums.BonusType.Morale,
-//             enums.BonusType.Profane,
-//             enums.BonusType.Sacred)
-//     }
-
-//     calcFeatBonus = (): number => {
-//         return this.featBonus(this.skillName,
-//             enums.BonusType.Circumstance,
-//             enums.BonusType.Competence,
-//             enums.BonusType.Insight,
-//             enums.BonusType.Luck,
-//             enums.BonusType.Morale,
-//             enums.BonusType.Profane,
-//             enums.BonusType.Sacred)
-//     }
-
-//     calcSkillBonus = (): number => {
-//         if (this.trained && this.ranks === 0) return null
-
-//         return this.abilityBonus() + (this.isClassSkill && this.ranks > 0 ? 3 : 0) + this.ranks + this.calcFeatBonus()
-//             + this.armourPenalty() //expecting this be be negative, so we want to add 
-//             + this.calcMiscBonus()
-//     }
-// }
-
-// export class CharacterSheet {
-//     calcMiscDamageBonus = (): number => {
-//         return this.sumEquipmentStatBonuses([enums.StatType.Damage],
-//             enums.BonusType.Enhancement,
-//             enums.BonusType.Luck,
-//             enums.BonusType.Morale,
-//             enums.BonusType.Profane,
-//             enums.BonusType.Sacred) +
-//             this.sumFeatStatBonuses([enums.StatType.Damage],
-//                 enums.BonusType.Enhancement,
-//                 enums.BonusType.Luck,
-//                 enums.BonusType.Morale,
-//                 enums.BonusType.Profane,
-//                 enums.BonusType.Sacred)
-//     }
-
-// }

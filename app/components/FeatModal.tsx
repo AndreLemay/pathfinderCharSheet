@@ -23,7 +23,7 @@ interface ModalState {
     curSkillBonusAmt: number
 }
 
-const defaultState = {
+const defaultState: ModalState = {
     modal: false,
     name: "",
     description: "",
@@ -67,7 +67,7 @@ export default class FeatModal extends React.Component<ModalProps, ModalState> {
         })
     }
 
-    private addEquip = () => {
+    private addFeat = () => {
         this.props.addFeat(this.state.name, this.state.description, this.state.bonuses)
         this.toggle()
     }
@@ -157,7 +157,7 @@ export default class FeatModal extends React.Component<ModalProps, ModalState> {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" onClick={this.toggle}>Cancel</button>
-                            <button type="button" className="btn btn-primary" onClick={this.addEquip}>Add Feat</button>
+                            <button type="button" className="btn btn-primary" onClick={this.addFeat}>Add Feat</button>
                         </div>
                     </div>
                 </div>

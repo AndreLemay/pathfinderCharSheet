@@ -23,7 +23,7 @@ interface ModalState {
     curSkillBonusAmt: number
 }
 
-const defaultState = {
+const defaultState: ModalState = {
     modal: false,
     name: "",
     description: "",
