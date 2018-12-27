@@ -61,12 +61,15 @@ class ArmourContainer extends React.Component<ArmourContainerProps> {
                         label="Max Speed"
                         className="col"
                         inputType="number"
+                        min={0}
+                        step={5}
                         value={this.props.maxSpeed}
                         onValueChange={this.props.maxSpeedChange} />
                     <InputField 
                         label="Max DEX"
                         className="col"
                         inputType="number"
+                        min={0}
                         value={this.props.maxDex}
                         onValueChange={this.props.maxDexChange} />
                 </div>
@@ -75,12 +78,14 @@ class ArmourContainer extends React.Component<ArmourContainerProps> {
                         label="Check Penalty"
                         className="col"
                         inputType="number"
+                        max={0}
                         value={this.props.checkPenalty}
                         onValueChange={this.props.checkPenaltyChange} />
                     <InputField 
                         label="AC Bonus"
                         className="col"
                         inputType="number"
+                        min={0}
                         value={this.props.ac}
                         onValueChange={this.props.acChange} />
                 </div>

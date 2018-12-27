@@ -42,19 +42,28 @@ interface DispatchProps {
                  <SectionHeader label="Saves" />
                  <div className="form-row">
                      <OutputField label="Fortitude" inputType="number" className="col" value={this.props.fortSave} />
-                     <InputField label="Base" inputType="number" className="col" value={this.props.baseFort} onValueChange={this.props.fortSaveChange} />
+                     <InputField label="Base" inputType="number" className="col" 
+                        min={0}
+                        value={this.props.baseFort} 
+                        onValueChange={this.props.fortSaveChange} />
                      <OutputField label="CON" inputType="number" className="col" value={this.props.conBonus} />
                      <OutputField label="Misc" inputType="number" className="col" value={this.props.miscFort} />
                  </div>
                  <div className="form-row">
                      <OutputField label="Reflex" inputType="number" className="col" value={this.props.reflexSave} />
-                     <InputField label="Base" inputType="number" className="col" value={this.props.baseReflex} onValueChange={this.props.reflexSaveChange} />
+                     <InputField label="Base" inputType="number" className="col" 
+                        min={0}
+                        value={this.props.baseReflex} 
+                        onValueChange={this.props.reflexSaveChange} />
                      <OutputField label="DEX" inputType="number" className="col" value={this.props.dexBonus} />
                      <OutputField label="Misc" inputType="number" className="col" value={this.props.miscReflex} />
                  </div>
                  <div className="form-row">
                      <OutputField label="Will" inputType="number" className="col" value={this.props.willSave} />
-                     <InputField label="Base" inputType="number" className="col" value={this.props.baseWill} onValueChange={this.props.willSaveChange} />
+                     <InputField label="Base" inputType="number" className="col" 
+                        min={0}
+                        value={this.props.baseWill} 
+                        onValueChange={this.props.willSaveChange} />
                      <OutputField label="WIS" inputType="number" className="col" value={this.props.wisBonus} />
                      <OutputField label="Misc" inputType="number" className="col" value={this.props.miscWill} />
                  </div>

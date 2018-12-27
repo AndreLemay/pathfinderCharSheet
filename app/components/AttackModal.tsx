@@ -129,7 +129,7 @@ export default class AttackModal extends React.Component<ModalProps, ModalState>
                                 </div>
                                 <div className="form-row align-items-end">
                                     <InputField label="Range" inputType="number" className="col-1"
-                                        value={this.state.range}
+                                        value={this.state.range} step={5}
                                         onValueChange={range => this.setState({ range: +range })} />
                                     <div className="form-group col-5">
                                         <label>Type</label>

@@ -55,6 +55,7 @@ export default function Skill(props: SkillProps) {
             <div className="col">
                 <InputField
                     inputType="number"
+                    min={0}
                     value={props.ranks}
                     onValueChange={props.rankChange} />
             </div>

@@ -25,10 +25,22 @@ class HealthContainer extends React.Component<HealthContainerProps> {
         return (
             <div className={this.props.className}>
                 <SectionHeader label="Health" />
-                <InputField label="Current" inputType="number" className="col-3" value={this.props.current} onValueChange={this.props.currentChange} />
-                <InputField label="Max" inputType="number" className="col-3" value={this.props.max} onValueChange={this.props.maxChange} />
-                <InputField label="Temp" inputType="number" className="col-3" value={this.props.temp} onValueChange={this.props.tempChange} />
-                <InputField label="Non-Lethal" inputType="number" className="col-3" value={this.props.nonlethal} onValueChange={this.props.nonlethalChange} />
+                <InputField label="Current" inputType="number" className="col-3" 
+                    min={0}
+                    value={this.props.current} 
+                    onValueChange={this.props.currentChange} />
+                <InputField label="Max" inputType="number" className="col-3" 
+                    min={1}
+                    value={this.props.max} 
+                    onValueChange={this.props.maxChange} />
+                <InputField label="Temp" inputType="number" className="col-3" 
+                    min={0}
+                    value={this.props.temp} 
+                    onValueChange={this.props.tempChange} />
+                <InputField label="Non-Lethal" inputType="number" className="col-3" 
+                    min={0}
+                    value={this.props.nonlethal} 
+                    onValueChange={this.props.nonlethalChange} />
                 <InputField label="Damage Resistance" inputType="textarea" className="col-6" value={this.props.damageResistance} onValueChange={this.props.drChange} />
                 <InputField label="Energy Resistance" inputType="textarea" className="col-6" value={this.props.energyResistance} onValueChange={this.props.erChange} />
             </div>

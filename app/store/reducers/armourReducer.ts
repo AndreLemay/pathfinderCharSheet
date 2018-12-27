@@ -9,8 +9,8 @@ const initialState: ArmourState = {
     name: "No Armour",
     description: "",
     type: ArmourType.None,
-    maxSpeed: undefined,
-    maxDex: undefined,
+    maxSpeed: null,
+    maxDex: null,
     checkPenalty: 0,
     ac: 0
 }

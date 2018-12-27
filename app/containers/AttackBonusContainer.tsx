@@ -30,7 +30,10 @@ class AttackBonusContainer extends React.Component<AttackBonusContainerProps> {
             <div className={this.props.className}>
                 <SectionHeader label="Attack Bonus" />
                 <div className="form-row">
-                    <InputField label="Base" inputType="number" className="col" value={this.props.base} onValueChange={this.props.baseChange} />
+                    <InputField label="Base" inputType="number" className="col" 
+                        min={0}
+                        value={this.props.base} 
+                        onValueChange={this.props.baseChange} />
                     <OutputField label="Misc" inputType="number" className="col" value={this.props.miscBonus} />
                 </div>
                 <div className="form-row">

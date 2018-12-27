@@ -34,7 +34,7 @@ const getArmourCheckPenalty = (state: CharacterSheetState) => state.armour.check
 const getShieldCheckPenalty = (state: CharacterSheetState) => state.shield.checkPenalty
 
 const calcAC = (dex: number, dodge: number, deflect: number, armour: number, shield: number, nat: number, size: number, maxDex: number) => {
-    return 10 + (typeof(maxDex) === "number" ? Math.min(dex, maxDex) : dex) + dodge + deflect + armour + shield + nat + size
+    return 10 + (maxDex !== null ? Math.min(dex, maxDex) : dex) + dodge + deflect + armour + shield + nat + size
 }
 const calcFlatFooted = (deflect: number, armour: number, shield: number, nat: number, size: number) => {
     return calcAC(0, 0, deflect, armour, shield, nat, size, 0)
