@@ -28,7 +28,7 @@ export default class Toolbar extends React.Component<ToolbarProps, OwnState> {
 
     render() {
         return (
-            <div className="navbar sticky-top navbar-expand navbar-dark bg-dark">
+            <div className="navbar fixed-top navbar-expand navbar-dark bg-dark">
                 <div className="navbar-nav">
                     <div className="nav-item dropdown">
                         <a href="#" className="nav-link dropdown-toggle" id="fileMenuLink" role="button" data-toggle="dropdown"
