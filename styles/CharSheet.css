@@ -85,6 +85,10 @@ so set it back*/
     display: none;
 }
 
+.feat .form-row:first-child .form-group {
+    margin-bottom: 0;
+}
+
 /* Slider/Toggle checkbox css*/
 .switch {
     position: relative;

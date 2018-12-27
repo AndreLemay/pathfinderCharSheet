@@ -38,6 +38,7 @@ const sumBonuses = (bundle: StatSumBundle): number => {
 
     //sort all equipment bonuses into their respective buckets
     from.forEach((item) => {
+        if (item)
         item.bonuses.forEach((bonus) => {
             if (bonusesByType[bonus.bonusType.ordinal] !== undefined && statToSum.indexOf(bonus.affected) >= 0)
                 bonusesByType[bonus.bonusType.ordinal].push(bonus)
@@ -58,7 +59,7 @@ const sumBonuses = (bundle: StatSumBundle): number => {
     return add
 }
 const getEquipment = (state: CharacterSheetState) => state.equipment
-const getFeats = (state: CharacterSheetState) => state.feats
+const getFeats = (state: CharacterSheetState) => state.feats.filter(item => item.active)
 const getBundle = (state: CharacterSheetState, props: BonusSelectorProps): StatSumBundle => {
     let fromArr: (EquipmentState | FeatState)[] = [...getFeats(state), ...getEquipment(state)]
     return {

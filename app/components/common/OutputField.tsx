@@ -14,6 +14,7 @@ export default function OutputField(props: OutputProps) {
                 <label>{props.label}</label>}
             {props.inputType !== "textarea" ?
                 <input
+                    tabIndex={-1}
                     className="form-control form-control-sm form-control-plaintext"
                     type={props.inputType || "text"}
                     value={props.value}

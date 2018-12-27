@@ -1,7 +1,6 @@
 import * as React from "react"
 import CharacterSheetState, { FeatState } from "../store/types";
 import SectionHeader from "../components/common/SectionHeader";
-import Feat from "../components/Feat";
 import { connect } from "react-redux"
 import IndividualFeatContainer from "./IndividualFeatContainer";
 
@@ -21,7 +20,7 @@ class FeatsContainer extends React.Component<FeatsContainerProps> {
             <div className={this.props.className}>
                 <SectionHeader label="Feats/Abilities" />
                 {this.props.feats.map((_, index) => {
-                    return <IndividualFeatContainer key={index} className="form-row align-items-end" featIndex={index} />
+                    return <IndividualFeatContainer key={index} featIndex={index} />
                 })}
             </div>
         )

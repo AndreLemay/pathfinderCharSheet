@@ -17,11 +17,18 @@ export default function Feat(props: FeatProps) {
     }
 
     return (
-        <div className={`feat-name ${props.className}`}>
+        <div className={`feat ${props.className || ""}`}>
             <div className="form-row align-items-center">
-                <div className="col-3"><label>Name</label></div>
-                <div className="col-6">
-                    <OutputField className="form-control-plaintext" value={props.name} />
+                <div className="col-9">
+                    <div className="form-group row">
+                        <div className="col-4">
+                            <label>Name</label>
+                        </div>
+                        <div className="col-8">
+                            <input type="text" className="form-control form-control-sm" readOnly={true} value={props.name} />
+                        </div>
+                        
+                    </div>
                 </div>
                 <div className="col-3">
                     <label className="switch">
@@ -30,12 +37,17 @@ export default function Feat(props: FeatProps) {
                         <span className="absolute-no">Off</span>
                     </label>
                 </div>
-            </div>
-            <div className="form-row align-items-center">
-                <div className="col-3"><label>Properties</label></div>
-                <div className="col-9">
-                    <OutputField inputType="textarea" value={
-                        props.bonuses.map((bonus) => { return bonus.asString(true) }) + "\n" + props.description} />
+                <div className="col-12">
+                    <div className="form-group row">
+                        <div className="col-3">
+                            <label>Properties</label>
+                        </div>
+                        <div className="col-9">
+                            <textarea className="form-control form-control-sm" readOnly={true} value={
+                                props.bonuses.map((bonus) => { return bonus.asString(true) }).join(" ") + "\n" + props.description
+                            } />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
