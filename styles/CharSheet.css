@@ -2,6 +2,10 @@ body {
     overflow-x: hidden;
 }
 
+input:read-only {
+    cursor: default;
+}
+
 input, select, .form-group:not(.row), .skill-table-head>.col {
     text-align: center;
     text-align-last: center;
