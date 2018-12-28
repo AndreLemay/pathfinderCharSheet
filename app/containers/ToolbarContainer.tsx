@@ -2,20 +2,26 @@ import * as React from "react"
 import { connect } from "react-redux"
 import Toolbar from "../components/Toolbar";
 import EquipmentModal from "../components/EquipmentModal";
-import { saveCharacter, loadCharacter, addAttack, addFeat, addEquip } from "../store/actions/toolbarActions";
-import { EquipmentState, ValueBonus, FeatState, AttackState } from "../store/types";
+import { loadCharacter, addAttack, addFeat, addEquip } from "../store/actions/toolbarActions";
+import CharacterSheetState, { EquipmentState, ValueBonus, FeatState, AttackState } from "../store/types";
 import FeatModal from "../components/FeatModal";
 import AttackModal, { AttackInfoBundle } from "../components/AttackModal";
+import { remote } from "electron";
+import * as path from "path"
+import * as jetpack from "fs-jetpack"
+
+interface StateProps {
+    state: CharacterSheetState
+}
 
 interface DispatchProps {
-    save: () => void
     load: () => void
     addFeat: (feat: FeatState) => void
     addEquip: (equip: EquipmentState) => void
     addAttack: (attack: AttackState, equip: EquipmentState) => void
 }
 
-type ToolbarContainerProps = DispatchProps
+type ToolbarContainerProps = StateProps & DispatchProps
 
 class ToolbarContainer extends React.Component<ToolbarContainerProps> {
     private equipModalRef: React.RefObject<EquipmentModal>
@@ -29,7 +35,13 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
         this.attackModalRef = React.createRef()
     }
     private onSaveClicked = () => {
-
+        let savePath = path.join(remote.app.getPath("appData"), "pfCharSheets", this.props.state.character.name + ".sav")
+        remote.dialog.showSaveDialog({
+            title: "Save Character",
+            defaultPath: savePath
+        }, (path) => {
+            jetpack.write(path, JSON.stringify(this.props.state))
+        })
     }
 
     private onLoadClicked = () => {
@@ -104,9 +116,14 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
     }
 }
 
+function mapStateToProps(state: CharacterSheetState): StateProps {
+    return {
+        state
+    }
+}
+
 function mapDispatchToProps(dispatch): DispatchProps {
     return {
-        save: () => dispatch(saveCharacter()),
         load: () => dispatch(loadCharacter()),
         addAttack: (attack, equip) => dispatch(addAttack(attack, equip)),
         addFeat: feat => dispatch(addFeat(feat)),
@@ -114,4 +131,4 @@ function mapDispatchToProps(dispatch): DispatchProps {
     }
 }
 
-export default connect(null, mapDispatchToProps)(ToolbarContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ToolbarContainer)

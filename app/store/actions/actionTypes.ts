@@ -61,7 +61,6 @@ export const enum FeatActionTypes {
 }
 
 export const enum ToolbarActionTypes {
-    SAVE = "SAVE",
     LOAD = "LOAD",
     ADD_FEAT = "ADD_FEAT",
     ADD_EQUIP = "ADD_EQUIP",
