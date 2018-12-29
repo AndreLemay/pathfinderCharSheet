@@ -9,13 +9,15 @@ import AttackModal, { AttackInfoBundle } from "../components/AttackModal";
 import { remote } from "electron";
 import * as path from "path"
 import * as jetpack from "fs-jetpack"
+import { EnumValue } from "ts-enums";
+import { StatTypeValue } from "../api/enums";
 
 interface StateProps {
     state: CharacterSheetState
 }
 
 interface DispatchProps {
-    load: () => void
+    load: (path: string) => void
     addFeat: (feat: FeatState) => void
     addEquip: (equip: EquipmentState) => void
     addAttack: (attack: AttackState, equip: EquipmentState) => void
@@ -34,18 +36,63 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
         this.featModalRef = React.createRef()
         this.attackModalRef = React.createRef()
     }
+
+    private stateAsSav = (): any => {
+        let copyProps = (obj: any): any => {
+            let newObj = {}
+            for (var key in obj) {
+                switch (typeof obj[key]) {
+                    default:                        
+                        newObj[key] = obj[key]
+                        break
+                    case "object":
+                        if (obj[key] instanceof EnumValue) {
+                            newObj[key] = (obj[key] as EnumValue).ordinal
+                        }
+                        else if (obj[key] instanceof Array) {
+                            newObj[key] = (obj[key] as any[]).map((item) => copyProps(item))
+                        }
+                        else {
+                            newObj[key] = copyProps(obj[key])                           
+                        }
+                        break
+                }
+            }
+
+            if (obj instanceof ValueBonus) {
+                newObj["affectedType"] = (obj as ValueBonus).affected instanceof StatTypeValue
+                    ? "stat" : "skill"
+            }
+
+            return newObj
+        }
+
+        let state = this.props.state
+
+        return copyProps(state)
+    }
+
     private onSaveClicked = () => {
         let savePath = path.join(remote.app.getPath("appData"), "pfCharSheets", this.props.state.character.name + ".sav")
         remote.dialog.showSaveDialog({
             title: "Save Character",
             defaultPath: savePath
         }, (path) => {
-            jetpack.write(path, JSON.stringify(this.props.state))
+            jetpack.write(path, JSON.stringify(this.stateAsSav(), null, 4))
         })
     }
 
     private onLoadClicked = () => {
-
+        remote.dialog.showOpenDialog(remote.getCurrentWindow(), {
+            defaultPath: path.join(remote.app.getPath("appData"), "pfCharSheets"),
+            filters: [{ name: "Character Save Files", extensions: ["sav"] }],
+            properties: ["openFile"]
+        }, (paths: string[]) => {
+            if (paths.length > 0) {
+                let loadPath = paths[0]
+                this.props.load(loadPath)
+            }
+        })
     }
 
     private onAddFeatClicked = () => {
@@ -124,7 +171,7 @@ function mapStateToProps(state: CharacterSheetState): StateProps {
 
 function mapDispatchToProps(dispatch): DispatchProps {
     return {
-        load: () => dispatch(loadCharacter()),
+        load: path => dispatch(loadCharacter(path)),
         addAttack: (attack, equip) => dispatch(addAttack(attack, equip)),
         addFeat: feat => dispatch(addFeat(feat)),
         addEquip: equip => dispatch(addEquip(equip))
