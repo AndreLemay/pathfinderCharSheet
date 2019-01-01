@@ -3,18 +3,13 @@ import {
 } from "../api/enums"
 import { EnumValue } from "ts-enums";
 
-export interface AbilityScoreState {
-    readonly type: AbilityTypeValue
-    readonly base: number
-}
-
 export interface AbilitiesState {
-    readonly strength: AbilityScoreState
-    readonly dexterity: AbilityScoreState
-    readonly constitution: AbilityScoreState
-    readonly intelligence: AbilityScoreState
-    readonly wisdom: AbilityScoreState
-    readonly charisma: AbilityScoreState
+    readonly strength: number
+    readonly dexterity: number
+    readonly constitution: number
+    readonly intelligence: number
+    readonly wisdom: number
+    readonly charisma: number
 }
 
 export interface CharacterState {

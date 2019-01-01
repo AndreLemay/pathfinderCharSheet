@@ -90,12 +90,12 @@ class StrengthContainer extends React.Component<AbilityScoresContainerProps> {
 
 function mapStateToProps(state: CharacterSheetState): StateProps {
     return {
-        baseStr: state.abilities.strength.base,
-        baseDex: state.abilities.dexterity.base,
-        baseCon: state.abilities.constitution.base,
-        baseInt: state.abilities.intelligence.base,
-        baseWis: state.abilities.wisdom.base,
-        baseCha: state.abilities.charisma.base,
+        baseStr: state.abilities.strength,
+        baseDex: state.abilities.dexterity,
+        baseCon: state.abilities.constitution,
+        baseInt: state.abilities.intelligence,
+        baseWis: state.abilities.wisdom,
+        baseCha: state.abilities.charisma,
         addStr: getAdditionalStrength(state),
         addDex: getAdditionalDexterity(state),
         addCon: getAdditionalConstitution(state),

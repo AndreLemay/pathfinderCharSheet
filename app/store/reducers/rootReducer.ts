@@ -57,30 +57,12 @@ const rootReducer: Reducer<CharacterSheetState> = (state: CharacterSheetState, a
         //fuuuuuck type safety amirite?
         let state: CharacterSheetState = {
             abilities: {
-                strength: {
-                    type: AbilityType.Strength,
-                    base: obj.abilities.strength.base
-                },
-                dexterity: {
-                    type: AbilityType.Dexterity,
-                    base: obj.abilities.dexterity.base
-                },
-                constitution: {
-                    type: AbilityType.Constitution,
-                    base: obj.abilities.constitution.base
-                },
-                intelligence: {
-                    type: AbilityType.Intelligence,
-                    base: obj.abilities.intelligence.base
-                },
-                wisdom: {
-                    type: AbilityType.Wisdom,
-                    base: obj.abilities.wisdom.base
-                },
-                charisma: {
-                    type: AbilityType.Charisma,
-                    base: obj.abilities.charisma.base
-                }
+                strength: obj.abilities.strength,
+                dexterity: obj.abilities.dexterity,
+                constitution: obj.abilities.constitution,
+                intelligence: obj.abilities.intelligence,
+                wisdom: obj.abilities.wisdom,
+                charisma: obj.abilities.charisma,
             },
             armour: {
                 ac: obj.armour.ac,
