@@ -28,7 +28,8 @@ export default function Equipment(props: EquipmentProps) {
                     </div>
                     <div className="col-10">
                         <textarea className="form-control form-control-sm" readOnly={true} value={
-                            props.bonuses.map((bonus) => { return bonus.asString(true) }).join(" ") + "\n" + props.description
+                            props.bonuses.map((bonus) => { return bonus.asString(true) }).join(" ") + 
+                            (props.bonuses.length > 0 ? "\n" : "") + props.description
                         } />
                     </div>
                 </div>
