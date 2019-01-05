@@ -21,13 +21,13 @@ const sumBonuses = (bundle: StatSumBundle): number => {
 
     //initialize types dictionary based on what's included
     if (includedBonuses.length > 0) {
+        //these affect everything, so just add them always
+        includedBonuses.push(BonusType.Racial)
+        includedBonuses.push(BonusType.Trait)
+
         includedBonuses.forEach((type: BonusTypeValue) => {
             bonusesByType[type.ordinal] = []
         })
-
-        //these affect everything, so just add them always
-        bonusesByType[BonusType.Racial.ordinal] = []
-        bonusesByType[BonusType.Trait.ordinal] = []
     }
     else {
         BonusType.values.forEach((type: BonusTypeValue) => {

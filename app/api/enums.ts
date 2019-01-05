@@ -101,7 +101,7 @@ class SkillNameEnum extends Enum<SkillNameValue> {
     Spellcraft: SkillNameValue = new SkillNameValue("Spellcraft", true, false, AbilityType.Intelligence)
     Stealth: SkillNameValue = new SkillNameValue("Stealth", false, true, AbilityType.Dexterity)
     Survival: SkillNameValue = new SkillNameValue("Survival", false, false, AbilityType.Wisdom)
-    Swim: SkillNameValue = new SkillNameValue("Swim", false, false, AbilityType.Strength)
+    Swim: SkillNameValue = new SkillNameValue("Swim", false, true, AbilityType.Strength)
     UseMagicDevice: SkillNameValue = new SkillNameValue("Use Magic Device", true, false, AbilityType.Charisma)
 }
 export const SkillName: SkillNameEnum = new SkillNameEnum()
