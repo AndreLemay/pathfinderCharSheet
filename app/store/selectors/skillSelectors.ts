@@ -39,7 +39,8 @@ const getMiscBonus = (state: CharacterSheetState, props: OwnProps) => getBonusTo
         BonusType.Sacred],
     statToSum: [SkillName.values[props.skillOrd]]
 })
-const getArmourPenalty = (state: CharacterSheetState) => state.armour.checkPenalty + state.shield.checkPenalty
+const getArmourPenalty = (state: CharacterSheetState, props: OwnProps) => 
+    SkillName.values[props.skillOrd].checkPenaltyApplies ? state.armour.checkPenalty + state.shield.checkPenalty : 0
 
 const calcSkillBonus = (abilityBonus: number, ranks: number, miscBonus: number,
     armourPenalty: number, isClassSkill: boolean) => {
