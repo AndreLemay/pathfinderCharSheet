@@ -29,7 +29,7 @@ class CharacterContainer extends React.Component<CharacterContainerProps> {
                 <InputField label="Name" className="col-4" value={this.props.name} onValueChange={this.props.nameChange} />
                 <DropdownField label="Alignment" className="col-4" dropdownType={Alignment} value={this.props.alignment} onValueChange={this.props.alignmentChange} />
                 <DropdownField label="Gender" className="col-4" dropdownType={Gender} value={this.props.gender} onValueChange={this.props.genderChange} />
-                <InputField label="Race" className="col-6" value="Human" onValueChange={this.props.raceChange} />
+                <InputField label="Race" className="col-6" value={this.props.race} onValueChange={this.props.raceChange} />
                 <DropdownField label="Size" className="col-6" dropdownType={Size} value={this.props.size} onValueChange={this.props.sizeChange} />
             </div>
         )

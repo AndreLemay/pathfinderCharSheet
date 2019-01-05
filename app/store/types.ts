@@ -1,7 +1,6 @@
 import {
-    AbilityTypeValue, AlignmentValue, GenderValue, SizeValue, BonusTypeValue, StatTypeValue, SkillNameValue, ArmourTypeValue, DamageDieValue
+    AlignmentValue, GenderValue, SizeValue, BonusTypeValue, StatTypeValue, SkillNameValue, ArmourTypeValue, DamageDieValue
 } from "../api/enums"
-import { EnumValue } from "ts-enums";
 
 export interface AbilitiesState {
     readonly strength: number
