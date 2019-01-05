@@ -130,7 +130,7 @@ export default class AttackModal extends React.Component<ModalProps, ModalState>
                                 <div className="form-row align-items-end">
                                     <InputField label="Range" inputType="number" className="col-1"
                                         value={this.state.range} step={5}
-                                        onValueChange={range => this.setState({ range: +range })} />
+                                        onValueChange={range => this.setState({ range: range !== null ? +range : null })} />
                                     <div className="form-group col-5">
                                         <label>Type</label>
                                         <div className="form-control form-control-sm">
@@ -252,7 +252,7 @@ export default class AttackModal extends React.Component<ModalProps, ModalState>
                                         inputType="number"
                                         value={this.state.curStatBonusAmt}
                                         onValueChange={(amt) => {
-                                            this.setState({ curStatBonusAmt: +amt })
+                                            this.setState({ curStatBonusAmt: amt !== null ? +amt : null })
                                         }} />
                                     <div className="form-group">
                                         <button className="btn btn-secondary" onClick={this.addStatBonus}>Add</button>
@@ -278,7 +278,7 @@ export default class AttackModal extends React.Component<ModalProps, ModalState>
                                         inputType="number"
                                         value={this.state.curSkillBonusAmt}
                                         onValueChange={(amt) => {
-                                            this.setState({ curSkillBonusAmt: +amt })
+                                            this.setState({ curSkillBonusAmt: amt !== null ? +amt : null })
                                         }} />
                                     <div className="form-group">
                                         <button className="btn btn-secondary" onClick={this.addSkillBonus}>Add</button>

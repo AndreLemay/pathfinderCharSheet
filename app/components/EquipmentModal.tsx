@@ -121,7 +121,7 @@ export default class EquipmentModal extends React.Component<ModalProps, ModalSta
                                         inputType="number"
                                         value={this.state.curStatBonusAmt}
                                         onValueChange={(amt) => {
-                                            this.setState({ curStatBonusAmt: +amt })
+                                            this.setState({ curStatBonusAmt: amt !== null ? +amt : null })
                                         }} />
                                     <div className="form-group">
                                         <button className="btn btn-secondary" onClick={this.addStatBonus}>Add</button>
@@ -147,7 +147,7 @@ export default class EquipmentModal extends React.Component<ModalProps, ModalSta
                                         inputType="number"
                                         value={this.state.curSkillBonusAmt}
                                         onValueChange={(amt) => {
-                                            this.setState({ curSkillBonusAmt: +amt })
+                                            this.setState({ curSkillBonusAmt: amt !== null ? +amt : null })
                                         }} />
                                     <div className="form-group">
                                         <button className="btn btn-secondary" onClick={this.addSkillBonus}>Add</button>
