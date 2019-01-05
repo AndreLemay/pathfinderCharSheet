@@ -17,7 +17,7 @@ export default function Feat(props: FeatProps) {
     }
 
     return (
-        <div className={`feat ${props.className || ""}`}>
+        <div className={`feat-item ${props.className || ""}`}>
             <div className="form-row align-items-center">
                 <div className="col-9">
                     <div className="form-group row">

@@ -60,8 +60,8 @@ input[type="text"], textarea {
     border-bottom: 1px solid darkgray;
 }
 
-.equipment-item .form-inline,
-.feat-item .form-inline {
+.equipment-item.form-row,
+.feat-item .form-row {
     margin-bottom: 5px;
 }
 
@@ -90,7 +90,7 @@ so set it back*/
     display: none;
 }
 
-.feat .form-row:first-child .form-group {
+.feat-item .form-row:first-child .form-group {
     margin-bottom: 0;
 }
 
@@ -100,7 +100,7 @@ so set it back*/
     display: inline-block;
     width: 70px;
     height: 30px;
-    margin: 0.25rem 0 0 0;
+    margin: 5px 0 0 0;
 }
 
 .switch input {

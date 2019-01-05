@@ -12,7 +12,7 @@ interface AttackProps {
 
 export default function Attack(props: AttackProps) {
     return (
-        <div className="form-row align-items-end">
+        <div className="attack-item form-row align-items-end">
             <OutputField
                 label="Name"
                 className="col-4"
