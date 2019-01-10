@@ -65,6 +65,10 @@ input[type="text"], textarea {
     margin-bottom: 5px;
 }
 
+.feat-item .btn-group-vertical button {
+    border-radius: 1rem;
+}
+
 .skill-table-body .form-row {
     padding: 3px 0 3px 0;
 }

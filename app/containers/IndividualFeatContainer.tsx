@@ -18,6 +18,8 @@ interface StateProps {
 
 interface DispatchProps {
     activeChange: (active: boolean) => void
+    edit: () => void
+    delete: () => void
 }
 
 type IndividualFeatContainerProps = StateProps & DispatchProps & OwnProps
@@ -30,7 +32,9 @@ class IndividualFeatContainer extends React.Component<IndividualFeatContainerPro
                 description={this.props.description}
                 bonuses={this.props.bonuses}
                 active={this.props.active}
-                onActiveChange={this.props.activeChange} />
+                onActiveChange={this.props.activeChange}
+                onEdit={this.props.edit}
+                onDelete={this.props.delete} />
         )
     }
 }
@@ -46,7 +50,10 @@ function mapStateToProps(state: CharacterSheetState, props: OwnProps): StateProp
 
 function mapDispatchToProps(dispatch, props: OwnProps): DispatchProps {
     return {
-        activeChange: active => dispatch(activeUpdate(active, props))
+        activeChange: active => dispatch(activeUpdate(active, props)),
+        //temp noops
+        edit: () => {return},
+        delete: () => {return}
     }
 }
 
