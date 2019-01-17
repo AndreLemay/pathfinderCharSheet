@@ -3,12 +3,8 @@ import * as $ from "jquery"
 import { BonusType, StatType, BonusTypeValue, StatTypeValue, SkillNameValue, SkillName } from "../api/enums";
 import InputField from "./common/InputField";
 import DropdownField from "./common/DropdownField";
-import { ValueBonus } from "../store/types";
+import { ValueBonus, FeatState } from "../store/types";
 import OutputField from "./common/OutputField";
-
-interface ModalProps {
-    addFeat: (name: string, desc: string, bonuses: ValueBonus[]) => void
-}
 
 interface ModalState {
     modal: boolean
@@ -36,8 +32,9 @@ const defaultState: ModalState = {
     curSkillBonusAmt: 0
 }
 
-export default class FeatModal extends React.Component<ModalProps, ModalState> {
+export default class FeatModal extends React.Component<any, ModalState> {
     private modalRef: React.RefObject<HTMLDivElement>
+    private def: JQueryDeferred<FeatState>
     state = defaultState
     constructor(props) {
         super(props);
@@ -48,9 +45,23 @@ export default class FeatModal extends React.Component<ModalProps, ModalState> {
         $(this.modalRef.current).modal({ show: false })
     }
 
-    toggle = () => {
+    open = (feat?: FeatState) => {
         this.setState(defaultState)
-        $(this.modalRef.current).modal("toggle")
+        this.def = $.Deferred()
+        if (feat) {
+            this.setState({
+                name: feat.name,
+                description: feat.description,
+                bonuses: feat.bonuses
+            })
+        }
+        $(this.modalRef.current).modal("show")
+        return this.def.promise()
+    }
+
+    private onCancel = () => {
+        this.def.reject()
+        $(this.modalRef.current).modal("hide")
     }
 
     private addStatBonus = () => {
@@ -67,9 +78,14 @@ export default class FeatModal extends React.Component<ModalProps, ModalState> {
         })
     }
 
-    private addFeat = () => {
-        this.props.addFeat(this.state.name, this.state.description, this.state.bonuses)
-        this.toggle()
+    private onSave = () => {
+        this.def.resolve({
+            name: this.state.name,
+            description: this.state.description,
+            bonuses: this.state.bonuses,
+            active: true
+        })
+        $(this.modalRef.current).modal("hide")
     }
 
     render() {
@@ -156,8 +172,8 @@ export default class FeatModal extends React.Component<ModalProps, ModalState> {
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" onClick={this.toggle}>Cancel</button>
-                            <button type="button" className="btn btn-primary" onClick={this.addFeat}>Add Feat</button>
+                            <button type="button" className="btn btn-secondary" onClick={this.onCancel}>Cancel</button>
+                            <button type="button" className="btn btn-primary" onClick={this.onSave}>Add Feat</button>
                         </div>
                     </div>
                 </div>

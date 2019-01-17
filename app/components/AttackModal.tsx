@@ -3,7 +3,7 @@ import * as $ from "jquery"
 import { BonusType, StatType, BonusTypeValue, StatTypeValue, SkillNameValue, SkillName, DamageDieValue, DamageDie } from "../api/enums";
 import InputField from "./common/InputField";
 import DropdownField from "./common/DropdownField";
-import { ValueBonus } from "../store/types";
+import { ValueBonus, AttackState, EquipmentState } from "../store/types";
 import OutputField from "./common/OutputField";
 
 export interface AttackInfoBundle {
@@ -16,10 +16,6 @@ export interface AttackInfoBundle {
     critMultiplier: number
     dmgDieCount: number
     dmgDie: DamageDieValue
-}
-
-interface ModalProps {
-    addAttack: (bundle: AttackInfoBundle) => void
 }
 
 interface ModalState {
@@ -60,8 +56,9 @@ const defaultState: ModalState = {
     curSkillBonusAmt: 0
 }
 
-export default class AttackModal extends React.Component<ModalProps, ModalState> {
+export default class AttackModal extends React.Component<any, ModalState> {
     private modalRef: React.RefObject<HTMLDivElement>
+    private def: JQueryDeferred<AttackInfoBundle>
     state = defaultState
     constructor(props) {
         super(props);
@@ -72,9 +69,29 @@ export default class AttackModal extends React.Component<ModalProps, ModalState>
         $(this.modalRef.current).modal({ show: false })
     }
 
-    toggle = () => {
+    open = (attack?: AttackState) => {
         this.setState(defaultState)
-        $(this.modalRef.current).modal("toggle")
+        this.def = $.Deferred()
+        if (attack) {
+            this.setState({
+                name: attack.name,
+                description: attack.description,
+                range: attack.range,
+                type: attack.type,
+                //bonuses here once attack and its equip are tied together
+                dmgDieCount: attack.dmgDieCount,
+                dmgDie: attack.dmgDie,
+                critRange: attack.critRange,
+                critMultiplier: attack.critMultiplier
+            })
+        }
+        $(this.modalRef.current).modal("show")
+        return this.def.promise()
+    }
+
+    private onCancel = () => {
+        this.def.reject()
+        $(this.modalRef.current).modal("hide")
     }
 
     private addStatBonus = () => {
@@ -91,8 +108,8 @@ export default class AttackModal extends React.Component<ModalProps, ModalState>
         })
     }
 
-    private addAttack = () => {
-        this.props.addAttack({
+    private onSave = () => {
+        this.def.resolve({
             name: this.state.name,
             description: this.state.description,
             bonuses: this.state.bonuses,
@@ -103,7 +120,7 @@ export default class AttackModal extends React.Component<ModalProps, ModalState>
             critRange: this.state.critRange,
             critMultiplier: this.state.critMultiplier
         })
-        this.toggle()
+        $(this.modalRef.current).modal("hide")
     }
 
     render() {
@@ -287,8 +304,8 @@ export default class AttackModal extends React.Component<ModalProps, ModalState>
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" onClick={this.toggle}>Cancel</button>
-                            <button type="button" className="btn btn-primary" onClick={this.addAttack}>Add Attack</button>
+                            <button type="button" className="btn btn-secondary" onClick={this.onCancel}>Cancel</button>
+                            <button type="button" className="btn btn-primary" onClick={this.onSave}>Add Attack</button>
                         </div>
                     </div>
                 </div>

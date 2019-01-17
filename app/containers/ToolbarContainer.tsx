@@ -1,16 +1,20 @@
 import * as React from "react"
 import { connect } from "react-redux"
 import Toolbar from "../components/Toolbar";
-import EquipmentModal from "../components/EquipmentModal";
 import { loadCharacter, addAttack, addFeat, addEquip } from "../store/actions/toolbarActions";
 import CharacterSheetState, { EquipmentState, ValueBonus, FeatState, AttackState } from "../store/types";
-import FeatModal from "../components/FeatModal";
-import AttackModal, { AttackInfoBundle } from "../components/AttackModal";
+import { AttackInfoBundle } from "../components/AttackModal";
 import { remote } from "electron";
 import * as path from "path"
 import * as jetpack from "fs-jetpack"
 import { EnumValue } from "ts-enums";
 import { StatTypeValue } from "../api/enums";
+
+interface OwnProps {
+    openFeatModal: (onSave: (state: FeatState) => void, feat?: FeatState) => void
+    openEquipModal: (onSave: (state: EquipmentState) => void, equip?: EquipmentState) => void
+    openAttackModal: (onSave: (state: AttackInfoBundle) => void, attack?: AttackState) => void
+}
 
 interface StateProps {
     state: CharacterSheetState
@@ -23,26 +27,15 @@ interface DispatchProps {
     addAttack: (attack: AttackState, equip: EquipmentState) => void
 }
 
-type ToolbarContainerProps = StateProps & DispatchProps
+type ToolbarContainerProps = OwnProps & StateProps & DispatchProps
 
-class ToolbarContainer extends React.Component<ToolbarContainerProps> {
-    private equipModalRef: React.RefObject<EquipmentModal>
-    private featModalRef: React.RefObject<FeatModal>
-    private attackModalRef: React.RefObject<AttackModal>
-    constructor(props: ToolbarContainerProps) {
-        super(props)
-
-        this.equipModalRef = React.createRef()
-        this.featModalRef = React.createRef()
-        this.attackModalRef = React.createRef()
-    }
-
+class ToolbarContainer extends React.Component<ToolbarContainerProps> {    
     private stateAsSav = (): any => {
         let copyProps = (obj: any): any => {
             let newObj = {}
             for (var key in obj) {
                 switch (typeof obj[key]) {
-                    default:                        
+                    default:
                         newObj[key] = obj[key]
                         break
                     case "object":
@@ -53,7 +46,7 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
                             newObj[key] = (obj[key] as any[]).map((item) => copyProps(item))
                         }
                         else {
-                            newObj[key] = copyProps(obj[key])                           
+                            newObj[key] = copyProps(obj[key])
                         }
                         break
                 }
@@ -96,34 +89,23 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
     }
 
     private onAddFeatClicked = () => {
-        this.featModalRef.current.toggle()
+        this.props.openFeatModal(this.addFeat)
     }
 
     private onAddEquipClicked = () => {
-        this.equipModalRef.current.toggle()
+        this.props.openEquipModal(this.addEquipment)
     }
 
     private onAddAttackClicked = () => {
-        this.attackModalRef.current.toggle()
+        this.props.openAttackModal(this.addAttack)
     }
 
-    private addEquipment = (name: string, desc: string, bonuses: ValueBonus[]) => {
-        let equip: EquipmentState = {
-            name: name,
-            description: desc,
-            bonuses: bonuses
-        }
-        this.props.addEquip(equip)
+    private addEquipment = (state: EquipmentState) => {
+        this.props.addEquip(state)
     }
 
-    private addFeat = (name: string, desc: string, bonuses: ValueBonus[]) => {
-        let feat: FeatState = {
-            name: name,
-            description: desc,
-            bonuses: bonuses,
-            active: true
-        }
-        this.props.addFeat(feat)
+    private addFeat = (state: FeatState) => {
+        this.props.addFeat(state)
     }
 
     private addAttack = (bundle: AttackInfoBundle) => {
@@ -155,9 +137,6 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
                     addAttack={this.onAddAttackClicked}
                     addEquip={this.onAddEquipClicked}
                     addFeat={this.onAddFeatClicked} />
-                <EquipmentModal ref={this.equipModalRef} addEquipment={this.addEquipment} />
-                <FeatModal ref={this.featModalRef} addFeat={this.addFeat} />
-                <AttackModal ref={this.attackModalRef} addAttack={this.addAttack} />
             </div>
         )
     }
