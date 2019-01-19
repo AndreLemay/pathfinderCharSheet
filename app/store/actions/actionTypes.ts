@@ -57,7 +57,9 @@ export const enum ShieldActionTypes {
 }
 
 export const enum FeatActionTypes {
-    ACTIVE_UPDATE = "ACTIVE_UPDATE"
+    ACTIVE_UPDATE = "ACTIVE_UPDATE",
+    EDIT = "EDIT_FEAT",
+    DELETE = "DELETE_FEAT"
 }
 
 export const enum ToolbarActionTypes {

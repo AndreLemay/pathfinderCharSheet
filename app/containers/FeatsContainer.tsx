@@ -6,6 +6,7 @@ import IndividualFeatContainer from "./IndividualFeatContainer";
 
 interface OwnProps {
     className?: string
+    openFeatModal: (onSave: (state: FeatState) => void, feat?: FeatState) => void
 }
 
 interface StateProps {
@@ -20,7 +21,7 @@ class FeatsContainer extends React.Component<FeatsContainerProps> {
             <div className={this.props.className}>
                 <SectionHeader label="Feats/Abilities" />
                 {this.props.feats.map((_, index) => {
-                    return <IndividualFeatContainer key={index} featIndex={index} />
+                    return <IndividualFeatContainer key={index} featIndex={index} openFeatModal={this.props.openFeatModal} />
                 })}
             </div>
         )

@@ -74,7 +74,7 @@ export default class App extends React.Component {
                             </div>
                         </div>
                         <div className="row mt-4">
-                            <FeatsContainer className="col-4 pl-5" />
+                            <FeatsContainer className="col-4 pl-5" openFeatModal={this.openFeatModal} />
                             <SkillsContainer className="col-8 px-5" />
                         </div>
                         <div className="row mt-4">

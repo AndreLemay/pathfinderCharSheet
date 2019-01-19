@@ -1,12 +1,13 @@
 import * as React from "react"
 import { connect } from "react-redux"
-import CharacterSheetState, { ValueBonus } from "../store/types";
+import CharacterSheetState, { ValueBonus, FeatState } from "../store/types";
 import Feat from "../components/Feat";
-import { activeUpdate } from "../store/actions/featActions";
+import { activeUpdate, edit, deleteFeat } from "../store/actions/featActions";
 
 export interface OwnProps {
     featIndex: number
     className?: string
+    openFeatModal: (onSave: (state: FeatState) => void, feat?: FeatState) => void
 }
 
 interface StateProps {
@@ -18,13 +19,23 @@ interface StateProps {
 
 interface DispatchProps {
     activeChange: (active: boolean) => void
-    edit: () => void
+    edit: (feat: FeatState) => void
     delete: () => void
 }
 
 type IndividualFeatContainerProps = StateProps & DispatchProps & OwnProps
 
 class IndividualFeatContainer extends React.Component<IndividualFeatContainerProps> {
+    edit = () => {
+        this.props.openFeatModal((feat: FeatState) => {
+            this.props.edit(feat)
+        }, {
+            name: this.props.name,
+            description: this.props.description,
+            bonuses: this.props.bonuses,
+            active: this.props.active
+        })
+    }
     render() {
         return (
             <Feat className={this.props.className}
@@ -33,7 +44,7 @@ class IndividualFeatContainer extends React.Component<IndividualFeatContainerPro
                 bonuses={this.props.bonuses}
                 active={this.props.active}
                 onActiveChange={this.props.activeChange}
-                onEdit={this.props.edit}
+                onEdit={this.edit}
                 onDelete={this.props.delete} />
         )
     }
@@ -51,9 +62,8 @@ function mapStateToProps(state: CharacterSheetState, props: OwnProps): StateProp
 function mapDispatchToProps(dispatch, props: OwnProps): DispatchProps {
     return {
         activeChange: active => dispatch(activeUpdate(active, props)),
-        //temp noops
-        edit: () => {return},
-        delete: () => {return}
+        edit: feat => dispatch(edit(feat, props)),
+        delete: () => dispatch(deleteFeat(props))
     }
 }
 

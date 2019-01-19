@@ -3,14 +3,14 @@ import { Reducer } from "redux";
 import { ActionType } from "typesafe-actions";
 import { addFeat } from "../actions/toolbarActions";
 import { ToolbarActionTypes, FeatActionTypes } from "../actions/actionTypes";
-import { activeUpdate } from "../actions/featActions";
+import * as featActions from "../actions/featActions";
 
-type featActions = (typeof addFeat) | (typeof activeUpdate)
+type FeatActions = (typeof addFeat) | (typeof featActions)
 
 const initialState: FeatState[] = []
 
-const featReducer: Reducer<FeatState[]> = (state = initialState, action: ActionType<featActions>) => {
-    switch(action.type) {
+const featReducer: Reducer<FeatState[]> = (state = initialState, action: ActionType<FeatActions>) => {
+    switch (action.type) {
         case ToolbarActionTypes.ADD_FEAT: {
             return [...state, action.payload]
         }
@@ -22,8 +22,17 @@ const featReducer: Reducer<FeatState[]> = (state = initialState, action: ActionT
                         ...item,
                         active: action.payload.active
                     }
-                } 
-            })            
+                }
+            })
+        }
+        case FeatActionTypes.EDIT: {
+            return [...state.slice(0, action.payload.featIndex),
+            action.payload.feat,
+            ...state.slice(action.payload.featIndex + 1)]
+        }
+        case FeatActionTypes.DELETE: {
+            return [...state.slice(0, action.payload.featIndex),
+            ...state.slice(action.payload.featIndex + 1)]
         }
         default: return state
     }
