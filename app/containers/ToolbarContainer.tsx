@@ -110,6 +110,11 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
 
     private addAttack = (bundle: AttackInfoBundle) => {
         let { name, description, bonuses, range, type, dmgDieCount, dmgDie, critRange, critMultiplier } = bundle
+        let equip: EquipmentState = {
+            name,
+            description,
+            bonuses
+        }
         let attack: AttackState = {
             name,
             description,
@@ -118,12 +123,8 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
             dmgDieCount,
             dmgDie,
             critRange,
-            critMultiplier
-        }
-        let equip: EquipmentState = {
-            name,
-            description,
-            bonuses
+            critMultiplier,
+            //equipIndex: -1 //this will get updated once equipment is added
         }
         this.props.addAttack(attack, equip)
     }

@@ -43,7 +43,7 @@ export default class App extends React.Component {
         this.equipModalRef.current.open(equip).then(onSave)
     }
 
-    public openAttackModal = (onSave: (state: AttackInfoBundle) => void, attack?: AttackState) => {
+    public openAttackModal = (onSave: (state: AttackInfoBundle) => void, attack?: AttackInfoBundle) => {
         this.attackModalRef.current.open(attack).then(onSave)
     }
 
@@ -86,7 +86,7 @@ export default class App extends React.Component {
                                     <CombatManeuversContainer className="col" />
                                 </div>
                             </div>
-                            <AttacksContainer className="col-6 px-5" />
+                            <AttacksContainer className="col-6 px-5" openAttackModal={this.openAttackModal}/>
                         </div>
                         <div className="row mt-4">
                             <div className="col-6 px-5">

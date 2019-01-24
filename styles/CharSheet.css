@@ -66,12 +66,14 @@ input[type="text"], textarea {
 }
 
 .feat-item .btn-group-vertical button,
-.equipment-item .btn-group-vertical button {
+.equipment-item .btn-group-vertical button,
+.attack-item .btn-group.vertical button {
     border-radius: 1rem;
 }
 
 .feat-item .btn-group-vertical,
-.equipment-item .btn-group-vertical {
+.equipment-item .btn-group-vertical,
+.attack-item .btn-group-vertical {
     max-width: 69px; /* this amount was determined experimentally, I swear */
 }
 
