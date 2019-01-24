@@ -1,10 +1,12 @@
 import * as React from "react"
 import { connect } from "react-redux"
-import CharacterSheetState, { ValueBonus } from "../store/types";
+import CharacterSheetState, { ValueBonus, EquipmentState } from "../store/types";
 import Equipment from "../components/Equipment";
+import { editEquip, deleteEquip } from "../store/actions/equipmentActions";
 
 interface OwnProps {
     equipIndex: number
+    openEquipModal: (onSave: (state: EquipmentState) => void, equip?: EquipmentState) => void
 }
 
 interface StateProps {
@@ -13,12 +15,32 @@ interface StateProps {
     bonuses: ValueBonus[]
 }
 
-type IndividualEquipmentContainerProps = StateProps & OwnProps
+interface DispatchProps {
+    edit: (equip: EquipmentState) => void
+    delete: () => void
+}
+
+type IndividualEquipmentContainerProps = StateProps & DispatchProps & OwnProps
 
 class IndividualEquipmentContainer extends React.Component<IndividualEquipmentContainerProps> {
+    edit = () => {
+        this.props.openEquipModal((equip: EquipmentState) => {
+            this.props.edit(equip)
+        }, {
+                name: this.props.name,
+                description: this.props.description,
+                bonuses: this.props.bonuses,
+            })
+    }
+
     render() {
         return (
-            <Equipment className="mt-3" name={this.props.name} description={this.props.description} bonuses={this.props.bonuses} />
+            <Equipment className="mt-3"
+                name={this.props.name}
+                description={this.props.description}
+                bonuses={this.props.bonuses}
+                onEdit={this.edit}
+                onDelete={this.props.delete} />
         )
     }
 }
@@ -31,4 +53,11 @@ function mapStateToProps(state: CharacterSheetState, props: OwnProps): StateProp
     }
 }
 
-export default connect(mapStateToProps)(IndividualEquipmentContainer)
+function mapDispatchToProps(dispatch, props: OwnProps): DispatchProps {
+    return {
+        edit: (equip: EquipmentState) => dispatch(editEquip(equip, props.equipIndex)),
+        delete: () => dispatch(deleteEquip(props.equipIndex))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(IndividualEquipmentContainer)

@@ -62,6 +62,11 @@ export const enum FeatActionTypes {
     DELETE = "DELETE_FEAT"
 }
 
+export const enum EquipmentActionTypes {
+    EDIT = "EDIT_EQUIP",
+    DELETE = "DELETE_EQUIP"
+}
+
 export const enum ToolbarActionTypes {
     LOAD = "LOAD",
     ADD_FEAT = "ADD_FEAT",

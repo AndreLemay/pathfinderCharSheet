@@ -65,8 +65,14 @@ input[type="text"], textarea {
     margin-bottom: 5px;
 }
 
-.feat-item .btn-group-vertical button {
+.feat-item .btn-group-vertical button,
+.equipment-item .btn-group-vertical button {
     border-radius: 1rem;
+}
+
+.feat-item .btn-group-vertical,
+.equipment-item .btn-group-vertical {
+    max-width: 69px; /* this amount was determined experimentally, I swear */
 }
 
 .skill-table-body .form-row {

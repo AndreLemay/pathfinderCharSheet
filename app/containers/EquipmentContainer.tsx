@@ -6,6 +6,7 @@ import SectionHeader from "../components/common/SectionHeader";
 
 interface OwnProps {
     className?: string
+    openEquipModal: (onSave: (state: EquipmentState) => void, equip?: EquipmentState) => void
 }
 
 interface StateProps {
@@ -20,7 +21,7 @@ class EquipmentContainer extends React.Component<EquipmentContainerProps> {
             <div className={this.props.className}>
                 <SectionHeader label="Equipment" />
                 {this.props.equipment.map((_, index) => {
-                    return <IndividualEquipmentContainer key={index} equipIndex={index} />
+                    return <IndividualEquipmentContainer key={index} equipIndex={index} openEquipModal={this.props.openEquipModal} />
                 })}
             </div>
         )

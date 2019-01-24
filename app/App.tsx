@@ -97,7 +97,7 @@ export default class App extends React.Component {
                                     <ShieldContainer className="col" />
                                 </div>
                             </div>
-                            <EquipmentContainer className="col-6 px-5" />
+                            <EquipmentContainer className="col-6 px-5" openEquipModal={this.openEquipModal} />
                         </div>
                     </div>
                 </div>
