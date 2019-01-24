@@ -16,7 +16,7 @@ const featReducer: Reducer<FeatState[]> = (state = initialState, action: ActionT
         }
         case FeatActionTypes.ACTIVE_UPDATE: {
             return state.map((item, index) => {
-                if (index !== action.payload.featIndex) return item
+                if (index !== action.payload.index) return item
                 else {
                     return {
                         ...item,
@@ -26,13 +26,13 @@ const featReducer: Reducer<FeatState[]> = (state = initialState, action: ActionT
             })
         }
         case FeatActionTypes.EDIT: {
-            return [...state.slice(0, action.payload.featIndex),
+            return [...state.slice(0, action.payload.index),
             action.payload.feat,
-            ...state.slice(action.payload.featIndex + 1)]
+            ...state.slice(action.payload.index + 1)]
         }
         case FeatActionTypes.DELETE: {
-            return [...state.slice(0, action.payload.featIndex),
-            ...state.slice(action.payload.featIndex + 1)]
+            return [...state.slice(0, action.payload.index),
+            ...state.slice(action.payload.index + 1)]
         }
         default: return state
     }

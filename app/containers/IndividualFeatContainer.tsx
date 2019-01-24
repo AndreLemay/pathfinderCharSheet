@@ -2,7 +2,7 @@ import * as React from "react"
 import { connect } from "react-redux"
 import CharacterSheetState, { ValueBonus, FeatState } from "../store/types";
 import Feat from "../components/Feat";
-import { activeUpdate, edit, deleteFeat } from "../store/actions/featActions";
+import { activeUpdate, editFeat, deleteFeat } from "../store/actions/featActions";
 
 export interface OwnProps {
     featIndex: number
@@ -61,9 +61,9 @@ function mapStateToProps(state: CharacterSheetState, props: OwnProps): StateProp
 
 function mapDispatchToProps(dispatch, props: OwnProps): DispatchProps {
     return {
-        activeChange: active => dispatch(activeUpdate(active, props)),
-        edit: feat => dispatch(edit(feat, props)),
-        delete: () => dispatch(deleteFeat(props))
+        activeChange: active => dispatch(activeUpdate(active, props.featIndex)),
+        edit: feat => dispatch(editFeat(feat, props.featIndex)),
+        delete: () => dispatch(deleteFeat(props.featIndex))
     }
 }
 
