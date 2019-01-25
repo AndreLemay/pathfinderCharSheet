@@ -6,6 +6,12 @@ import DropdownField from "./common/DropdownField";
 import { ValueBonus, EquipmentState } from "../store/types";
 import OutputField from "./common/OutputField";
 
+export interface EquipInfoBundle {
+    name: string
+    description: string
+    bonuses: ValueBonus[]
+}
+
 interface ModalState {
     modal: boolean
     name: string
@@ -34,7 +40,7 @@ const defaultState: ModalState = {
 
 export default class EquipmentModal extends React.Component<any, ModalState> {
     private modalRef: React.RefObject<HTMLDivElement>
-    private def: JQueryDeferred<EquipmentState>
+    private def: JQueryDeferred<EquipInfoBundle>
     state = defaultState
     constructor(props) {
         super(props);
@@ -45,7 +51,7 @@ export default class EquipmentModal extends React.Component<any, ModalState> {
         $(this.modalRef.current).modal({ show: false })
     }
 
-    open = (equip?: EquipmentState) => {
+    open = (equip?: EquipInfoBundle) => {
         this.setState(defaultState)
         this.def = $.Deferred()
         if (equip) {

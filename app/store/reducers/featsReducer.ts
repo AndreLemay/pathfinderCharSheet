@@ -15,24 +15,28 @@ const featReducer: Reducer<FeatState[]> = (state = initialState, action: ActionT
             return [...state, action.payload]
         }
         case FeatActionTypes.ACTIVE_UPDATE: {
-            return state.map((item, index) => {
-                if (index !== action.payload.index) return item
+            return state.map((item) => {
+                if (item.uuid !== action.payload.uuid) return item
                 else {
                     return {
                         ...item,
-                        active: action.payload.active
+                        active: action.payload.active,
                     }
                 }
             })
         }
         case FeatActionTypes.EDIT: {
-            return [...state.slice(0, action.payload.index),
-            action.payload.feat,
-            ...state.slice(action.payload.index + 1)]
+            return state.map(item => {
+                if (item.uuid !== action.payload.uuid) return item
+                else return {
+                    uuid: action.payload.uuid,
+                    ...action.payload.feat,
+                    active: item.active
+                }
+            })
         }
         case FeatActionTypes.DELETE: {
-            return [...state.slice(0, action.payload.index),
-            ...state.slice(action.payload.index + 1)]
+            return state.filter(f => f.uuid !== action.payload.uuid)
         }
         default: return state
     }

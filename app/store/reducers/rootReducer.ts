@@ -24,7 +24,7 @@ import * as shieldActions from "../actions/shieldActions"
 import * as skillActions from "../actions/skillActions"
 import * as toolbarActions from "../actions/toolbarActions";
 import { ToolbarActionTypes } from "../actions/actionTypes";
-import { AbilityType, ArmourType, Alignment, Gender, Size, DamageDie, StatType, SkillName, BonusType } from "../../api/enums";
+import { ArmourType, Alignment, Gender, Size, DamageDie, StatType, SkillName, BonusType } from "../../api/enums";
 
 type RootAction =
     typeof abilityScoreActions |
@@ -75,6 +75,7 @@ const rootReducer: Reducer<CharacterSheetState> = (state: CharacterSheetState, a
             },
             attacks: (obj.attacks as any[]).map((item) => {
                 let atk: AttackState = {
+                    uuid: item.uuid,
                     critMultiplier: item.critMultiplier,
                     critRange: item.critRange,
                     description: item.description,
@@ -82,7 +83,8 @@ const rootReducer: Reducer<CharacterSheetState> = (state: CharacterSheetState, a
                     dmgDieCount: item.dmgDieCount,
                     name: item.name,
                     range: item.range,
-                    type: item.type
+                    type: item.type,
+                    equipId: item.equipId
                 }
 
                 return atk
@@ -99,6 +101,7 @@ const rootReducer: Reducer<CharacterSheetState> = (state: CharacterSheetState, a
             },
             equipment: (obj.equipment as any[]).map((item) => {
                 let equip: EquipmentState = {
+                    uuid: item.uuid,
                     name: item.name,
                     description: item.description,
                     bonuses: (item.bonuses as any[]).map((bon) => {
@@ -113,6 +116,7 @@ const rootReducer: Reducer<CharacterSheetState> = (state: CharacterSheetState, a
             }),
             feats: (obj.feats as any[]).map((item) => {
                 let feat: FeatState = {
+                    uuid: item.uuid,
                     name: item.name,
                     description: item.description,
                     bonuses: (item.bonuses as any[]).map((bon) => {

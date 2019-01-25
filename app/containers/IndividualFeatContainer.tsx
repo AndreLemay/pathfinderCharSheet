@@ -3,11 +3,12 @@ import { connect } from "react-redux"
 import CharacterSheetState, { ValueBonus, FeatState } from "../store/types";
 import Feat from "../components/Feat";
 import { activeUpdate, editFeat, deleteFeat } from "../store/actions/featActions";
+import { FeatInfoBundle } from "../components/FeatModal";
 
 export interface OwnProps {
-    featIndex: number
+    uuid: string
     className?: string
-    openFeatModal: (onSave: (state: FeatState) => void, feat?: FeatState) => void
+    openFeatModal: (onSave: (state: FeatInfoBundle) => void, feat?: FeatInfoBundle) => void
 }
 
 interface StateProps {
@@ -19,7 +20,7 @@ interface StateProps {
 
 interface DispatchProps {
     activeChange: (active: boolean) => void
-    edit: (feat: FeatState) => void
+    edit: (feat: FeatInfoBundle) => void
     delete: () => void
 }
 
@@ -27,13 +28,12 @@ type IndividualFeatContainerProps = StateProps & DispatchProps & OwnProps
 
 class IndividualFeatContainer extends React.Component<IndividualFeatContainerProps> {
     edit = () => {
-        this.props.openFeatModal((feat: FeatState) => {
+        this.props.openFeatModal((feat: FeatInfoBundle) => {
             this.props.edit(feat)
         }, {
             name: this.props.name,
             description: this.props.description,
-            bonuses: this.props.bonuses,
-            active: this.props.active
+            bonuses: this.props.bonuses
         })
     }
     render() {
@@ -51,19 +51,20 @@ class IndividualFeatContainer extends React.Component<IndividualFeatContainerPro
 }
 
 function mapStateToProps(state: CharacterSheetState, props: OwnProps): StateProps {
+    let feat = state.feats.filter(e => e.uuid === props.uuid)[0]
     return {
-        name: state.feats[props.featIndex].name,
-        description: state.feats[props.featIndex].description,
-        bonuses: state.feats[props.featIndex].bonuses,
-        active: state.feats[props.featIndex].active
+        name: feat.name,
+        description: feat.description,
+        bonuses: feat.bonuses,
+        active: feat.active
     }
 }
 
 function mapDispatchToProps(dispatch, props: OwnProps): DispatchProps {
     return {
-        activeChange: active => dispatch(activeUpdate(active, props.featIndex)),
-        edit: feat => dispatch(editFeat(feat, props.featIndex)),
-        delete: () => dispatch(deleteFeat(props.featIndex))
+        activeChange: active => dispatch(activeUpdate(props.uuid, active)),
+        edit: feat => dispatch(editFeat(props.uuid, feat)),
+        delete: () => dispatch(deleteFeat(props.uuid))
     }
 }
 

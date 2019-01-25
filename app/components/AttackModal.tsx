@@ -69,16 +69,16 @@ export default class AttackModal extends React.Component<any, ModalState> {
         $(this.modalRef.current).modal({ show: false })
     }
 
-    open = (attack?: AttackState) => {
+    open = (attack?: AttackInfoBundle) => {
         this.setState(defaultState)
         this.def = $.Deferred()
         if (attack) {
             this.setState({
                 name: attack.name,
                 description: attack.description,
+                bonuses: attack.bonuses,
                 range: attack.range,
-                type: attack.type,
-                //bonuses here once attack and its equip are tied together
+                type: attack.type,                
                 dmgDieCount: attack.dmgDieCount,
                 dmgDie: attack.dmgDie,
                 critRange: attack.critRange,

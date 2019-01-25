@@ -2,5 +2,5 @@ import { AttackInfoBundle } from "../../components/AttackModal";
 import { action } from "typesafe-actions";
 import { AttackActionTypes } from "./actionTypes";
 
-export const editAttack = (bundle: AttackInfoBundle, index: number) => action(AttackActionTypes.EDIT, { bundle, index })
-export const deleteAttack = (index: number) => action(AttackActionTypes.DELETE, { index })
+export const editAttack = (attackUuid: string, equipUuid: string, bundle: AttackInfoBundle) => action(AttackActionTypes.EDIT, { bundle, attackUuid, equipUuid })
+export const deleteAttack = (attackUuid: string, equipUuid: string) => action(AttackActionTypes.DELETE, { attackUuid, equipUuid })

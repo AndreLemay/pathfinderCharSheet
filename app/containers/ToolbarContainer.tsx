@@ -9,6 +9,9 @@ import * as path from "path"
 import * as jetpack from "fs-jetpack"
 import { EnumValue } from "ts-enums";
 import { StatTypeValue } from "../api/enums";
+import uuid = require("uuid");
+import { EquipInfoBundle } from "../components/EquipmentModal";
+import { FeatInfoBundle } from "../components/FeatModal";
 
 interface OwnProps {
     openFeatModal: (onSave: (state: FeatState) => void, feat?: FeatState) => void
@@ -100,22 +103,31 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
         this.props.openAttackModal(this.addAttack)
     }
 
-    private addEquipment = (state: EquipmentState) => {
-        this.props.addEquip(state)
+    private addEquipment = (bundle: EquipInfoBundle) => {
+        this.props.addEquip({
+            uuid: uuid.v4(),
+            ...bundle
+        })
     }
 
-    private addFeat = (state: FeatState) => {
-        this.props.addFeat(state)
+    private addFeat = (bundle: FeatInfoBundle) => {
+        this.props.addFeat({
+            uuid: uuid.v4(),
+            ...bundle,
+            active: true
+        })
     }
 
     private addAttack = (bundle: AttackInfoBundle) => {
         let { name, description, bonuses, range, type, dmgDieCount, dmgDie, critRange, critMultiplier } = bundle
         let equip: EquipmentState = {
+            uuid: uuid.v4(),
             name,
             description,
             bonuses
         }
         let attack: AttackState = {
+            uuid: uuid.v4(),
             name,
             description,
             range,
@@ -124,7 +136,7 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
             dmgDie,
             critRange,
             critMultiplier,
-            //equipIndex: -1 //this will get updated once equipment is added
+            equipId: equip.uuid
         }
         this.props.addAttack(attack, equip)
     }

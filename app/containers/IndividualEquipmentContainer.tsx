@@ -3,10 +3,11 @@ import { connect } from "react-redux"
 import CharacterSheetState, { ValueBonus, EquipmentState } from "../store/types";
 import Equipment from "../components/Equipment";
 import { editEquip, deleteEquip } from "../store/actions/equipmentActions";
+import { EquipInfoBundle } from "../components/EquipmentModal";
 
 interface OwnProps {
-    equipIndex: number
-    openEquipModal: (onSave: (state: EquipmentState) => void, equip?: EquipmentState) => void
+    uuid: string
+    openEquipModal: (onSave: (state: EquipInfoBundle) => void, equip?: EquipInfoBundle) => void
 }
 
 interface StateProps {
@@ -16,7 +17,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    edit: (equip: EquipmentState) => void
+    edit: (equip: EquipInfoBundle) => void
     delete: () => void
 }
 
@@ -24,7 +25,7 @@ type IndividualEquipmentContainerProps = StateProps & DispatchProps & OwnProps
 
 class IndividualEquipmentContainer extends React.Component<IndividualEquipmentContainerProps> {
     edit = () => {
-        this.props.openEquipModal((equip: EquipmentState) => {
+        this.props.openEquipModal((equip: EquipInfoBundle) => {
             this.props.edit(equip)
         }, {
                 name: this.props.name,
@@ -46,17 +47,18 @@ class IndividualEquipmentContainer extends React.Component<IndividualEquipmentCo
 }
 
 function mapStateToProps(state: CharacterSheetState, props: OwnProps): StateProps {
+    let equip = state.equipment.filter(e => e.uuid === props.uuid)[0]
     return {
-        name: state.equipment[props.equipIndex].name,
-        description: state.equipment[props.equipIndex].description,
-        bonuses: state.equipment[props.equipIndex].bonuses
+        name: equip.name,
+        description: equip.description,
+        bonuses: equip.bonuses
     }
 }
 
 function mapDispatchToProps(dispatch, props: OwnProps): DispatchProps {
     return {
-        edit: (equip: EquipmentState) => dispatch(editEquip(equip, props.equipIndex)),
-        delete: () => dispatch(deleteEquip(props.equipIndex))
+        edit: equip => dispatch(editEquip(props.uuid, equip)),
+        delete: () => dispatch(deleteEquip(props.uuid))
     }
 }
 

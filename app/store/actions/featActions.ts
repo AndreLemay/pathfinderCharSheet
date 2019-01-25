@@ -1,7 +1,8 @@
 import { action } from "typesafe-actions";
-import { FeatActionTypes, EquipmentActionTypes } from "./actionTypes";
-import { FeatState, EquipmentState } from "../types";
+import { FeatActionTypes } from "./actionTypes";
+import { FeatState } from "../types";
+import { FeatInfoBundle } from "../../components/FeatModal";
 
-export const activeUpdate = (active: boolean, index: number) => action(FeatActionTypes.ACTIVE_UPDATE, { active, index })
-export const editFeat = (feat: FeatState, index: number) => action(FeatActionTypes.EDIT, { feat, index })
-export const deleteFeat = (index: number) => action(FeatActionTypes.DELETE, { index })
+export const activeUpdate = (uuid: string, active: boolean) => action(FeatActionTypes.ACTIVE_UPDATE, { active, uuid })
+export const editFeat = (uuid: string, feat: FeatInfoBundle) => action(FeatActionTypes.EDIT, { feat, uuid })
+export const deleteFeat = (uuid: string) => action(FeatActionTypes.DELETE, { uuid })

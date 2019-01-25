@@ -17,7 +17,7 @@ import EquipmentContainer from "./containers/EquipmentContainer";
 import InitiativeContainer from "./containers/InitiativeContainer";
 import ToolbarContainer from "./containers/ToolbarContainer";
 import EquipmentModal from "./components/EquipmentModal";
-import FeatModal from "./components/FeatModal";
+import FeatModal, { FeatInfoBundle } from "./components/FeatModal";
 import AttackModal, { AttackInfoBundle } from "./components/AttackModal";
 import { FeatState, EquipmentState, AttackState } from "./store/types";
 
@@ -35,11 +35,11 @@ export default class App extends React.Component {
         this.attackModalRef = React.createRef()
     }
 
-    public openFeatModal = (onSave: (state: FeatState) => void, feat?: FeatState) => {
+    public openFeatModal = (onSave: (state: FeatInfoBundle) => void, feat?: FeatInfoBundle) => {
         this.featModalRef.current.open(feat).then(onSave)
     }
 
-    public openEquipModal = (onSave: (state: EquipmentState) => void, equip?: EquipmentState) => {
+    public openEquipModal = (onSave: (state: FeatInfoBundle) => void, equip?: FeatInfoBundle) => {
         this.equipModalRef.current.open(equip).then(onSave)
     }
 

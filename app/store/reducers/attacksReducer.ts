@@ -2,10 +2,11 @@ import { AttackState } from "../types";
 import { Reducer } from "redux";
 import { ActionType } from "typesafe-actions";
 import { addAttack } from "../actions/toolbarActions";
-import * as actions from "../actions/attackActions"
-import { ToolbarActionTypes, AttackActionTypes } from "../actions/actionTypes";
+import * as attackActions from "../actions/attackActions"
+import * as equipActions from "../actions/equipmentActions"
+import { ToolbarActionTypes, AttackActionTypes, EquipmentActionTypes } from "../actions/actionTypes";
 
-type AttackActions = typeof addAttack | typeof actions
+type AttackActions = typeof addAttack | typeof attackActions | typeof equipActions
 
 const initialState: AttackState[] = []
 
@@ -15,8 +16,10 @@ const attackReducer: Reducer<AttackState[]> = (state = initialState, action: Act
             return [...state, action.payload.attack]
         }
         case AttackActionTypes.EDIT: {
-            return [...state.slice(0, action.payload.index),
-                {
+            return state.map(item => {
+                if (item.uuid !== action.payload.attackUuid) return item
+                else return {
+                    uuid: action.payload.attackUuid,
                     name: action.payload.bundle.name,
                     description: action.payload.bundle.description,
                     range: action.payload.bundle.range,
@@ -24,13 +27,26 @@ const attackReducer: Reducer<AttackState[]> = (state = initialState, action: Act
                     critRange: action.payload.bundle.critRange,
                     critMultiplier: action.payload.bundle.critMultiplier,
                     dmgDieCount: action.payload.bundle.dmgDieCount,
-                    dmgDie: action.payload.bundle.dmgDie
-                },
-            ...state.slice(action.payload.index + 1)]
+                    dmgDie: action.payload.bundle.dmgDie,
+                    equipId: action.payload.equipUuid
+                }
+            })
+        }
+        case EquipmentActionTypes.EDIT: {
+            return state.map(item => {
+                if (item.equipId !== action.payload.uuid) return item
+                else return {
+                    ...item,
+                    name: action.payload.equip.name,
+                    description: action.payload.equip.description
+                }
+            })
         }
         case AttackActionTypes.DELETE: {
-            return [...state.slice(0, action.payload.index),
-            ...state.slice(action.payload.index + 1)]
+            return state.filter(a => a.uuid !== action.payload.attackUuid)
+        }
+        case EquipmentActionTypes.DELETE: {
+            return state.filter(a => a.equipId !== action.payload.uuid)
         }
         default: return state
     }

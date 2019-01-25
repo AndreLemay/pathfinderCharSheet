@@ -3,10 +3,11 @@ import CharacterSheetState, { FeatState } from "../store/types";
 import SectionHeader from "../components/common/SectionHeader";
 import { connect } from "react-redux"
 import IndividualFeatContainer from "./IndividualFeatContainer";
+import { FeatInfoBundle } from "../components/FeatModal";
 
 interface OwnProps {
     className?: string
-    openFeatModal: (onSave: (state: FeatState) => void, feat?: FeatState) => void
+    openFeatModal: (onSave: (state: FeatInfoBundle) => void, feat?: FeatInfoBundle) => void
 }
 
 interface StateProps {
@@ -20,8 +21,8 @@ class FeatsContainer extends React.Component<FeatsContainerProps> {
         return (
             <div className={this.props.className}>
                 <SectionHeader label="Feats/Abilities" />
-                {this.props.feats.map((_, index) => {
-                    return <IndividualFeatContainer key={index} featIndex={index} openFeatModal={this.props.openFeatModal} />
+                {this.props.feats.map((feat, index) => {
+                    return <IndividualFeatContainer key={index} uuid={feat.uuid} openFeatModal={this.props.openFeatModal} />
                 })}
             </div>
         )

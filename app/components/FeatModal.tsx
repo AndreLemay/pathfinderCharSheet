@@ -6,6 +6,12 @@ import DropdownField from "./common/DropdownField";
 import { ValueBonus, FeatState } from "../store/types";
 import OutputField from "./common/OutputField";
 
+export interface FeatInfoBundle {
+    name: string
+    description: string
+    bonuses: ValueBonus[]
+}
+
 interface ModalState {
     modal: boolean
     name: string
@@ -34,7 +40,7 @@ const defaultState: ModalState = {
 
 export default class FeatModal extends React.Component<any, ModalState> {
     private modalRef: React.RefObject<HTMLDivElement>
-    private def: JQueryDeferred<FeatState>
+    private def: JQueryDeferred<FeatInfoBundle>
     state = defaultState
     constructor(props) {
         super(props);
@@ -45,7 +51,7 @@ export default class FeatModal extends React.Component<any, ModalState> {
         $(this.modalRef.current).modal({ show: false })
     }
 
-    open = (feat?: FeatState) => {
+    open = (feat?: FeatInfoBundle) => {
         this.setState(defaultState)
         this.def = $.Deferred()
         if (feat) {
@@ -82,8 +88,7 @@ export default class FeatModal extends React.Component<any, ModalState> {
         this.def.resolve({
             name: this.state.name,
             description: this.state.description,
-            bonuses: this.state.bonuses,
-            active: true
+            bonuses: this.state.bonuses
         })
         $(this.modalRef.current).modal("hide")
     }

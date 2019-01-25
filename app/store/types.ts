@@ -39,6 +39,7 @@ export interface SaveState {
 }
 
 export interface FeatState {
+    readonly uuid: string
     readonly name: string
     readonly description: string
     readonly bonuses: ValueBonus[]
@@ -51,6 +52,7 @@ export interface SkillState {
 }
 
 export interface AttackState {
+    readonly uuid: string
     readonly name: string
     readonly description: string
     readonly range: number
@@ -59,6 +61,7 @@ export interface AttackState {
     readonly dmgDie: DamageDieValue
     readonly critRange: number
     readonly critMultiplier: number
+    readonly equipId: string
 }
 
 export interface ArmourState {
@@ -79,6 +82,7 @@ export interface ShieldState {
 }
 
 export interface EquipmentState {
+    readonly uuid: string
     readonly name: string
     readonly description: string
     readonly bonuses: ValueBonus[]
