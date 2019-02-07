@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as $ from "jquery"
-import { BonusType, StatType, BonusTypeValue, StatTypeValue, SkillNameValue, SkillName, DamageDieValue, DamageDie } from "../api/enums";
+import { BonusType, StatType, BonusTypeValue, StatTypeValue, SkillNameValue, SkillName, DamageDieValue, DamageDie, AbilityTypeValue, AbilityType } from "../api/enums";
 import InputField from "./common/InputField";
 import DropdownField from "./common/DropdownField";
 import { ValueBonus, AttackState, EquipmentState } from "../store/types";
@@ -16,6 +16,8 @@ export interface AttackInfoBundle {
     critMultiplier: number
     dmgDieCount: number
     dmgDie: DamageDieValue
+    toHitBonusAbility: AbilityTypeValue
+    dmgBonusAbility: AbilityTypeValue
 }
 
 interface ModalState {
@@ -28,6 +30,8 @@ interface ModalState {
     critMultiplier: number
     dmgDieCount: number
     dmgDie: DamageDieValue
+    toHitBonusAbility: AbilityTypeValue
+    dmgBonusAbility: AbilityTypeValue
     bonuses: ValueBonus[]
     curStatBonusType: BonusTypeValue
     curStatAffected: StatTypeValue
@@ -48,6 +52,8 @@ const defaultState: ModalState = {
     dmgDie: DamageDie[2],
     critRange: 20,
     critMultiplier: 2,
+    toHitBonusAbility: AbilityType.Strength,
+    dmgBonusAbility: AbilityType.Strength,
     curStatBonusType: BonusType.Alchemical,
     curStatAffected: StatType.AllSaves,
     curStatBonusAmt: 0,
@@ -78,7 +84,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
                 description: attack.description,
                 bonuses: attack.bonuses,
                 range: attack.range,
-                type: attack.type,                
+                type: attack.type,
                 dmgDieCount: attack.dmgDieCount,
                 dmgDie: attack.dmgDie,
                 critRange: attack.critRange,
@@ -118,7 +124,9 @@ export default class AttackModal extends React.Component<any, ModalState> {
             dmgDieCount: this.state.dmgDieCount,
             dmgDie: this.state.dmgDie,
             critRange: this.state.critRange,
-            critMultiplier: this.state.critMultiplier
+            critMultiplier: this.state.critMultiplier,
+            toHitBonusAbility: this.state.toHitBonusAbility,
+            dmgBonusAbility: this.state.dmgBonusAbility
         })
         $(this.modalRef.current).modal("hide")
     }
@@ -165,38 +173,38 @@ export default class AttackModal extends React.Component<any, ModalState> {
                                                 <label className="form-check-label">Bludegeoning</label>
                                             </div>
                                             <div className="form-check form-check-inline">
-                                                    <input type="checkbox" className="form-check-input"
-                                                        checked={this.state.type.indexOf("P") >= 0}
-                                                        onChange={event => {
-                                                            let checked = event.currentTarget.checked
-                                                            this.setState(prevState => {
-                                                                //this is ugly as fuck but the best I can do on a plane with no access to download
-                                                                //better string/array manipulation
-                                                                let brokenStr = [...prevState.type]
-                                                                let newStr = ""
-                                                                if (brokenStr[0] === "B") {
-                                                                    newStr = checked ? "BP" + (brokenStr[1] || "")
-                                                                        : "B" + (brokenStr[2] || "")
-                                                                }
-                                                                else {
-                                                                    newStr = checked ? "P" + (brokenStr[0] || "")
-                                                                        : brokenStr.join("")
-                                                                }
-                                                                return { type: newStr }
-                                                            })
+                                                <input type="checkbox" className="form-check-input"
+                                                    checked={this.state.type.indexOf("P") >= 0}
+                                                    onChange={event => {
+                                                        let checked = event.currentTarget.checked
+                                                        this.setState(prevState => {
+                                                            //this is ugly as fuck but the best I can do on a plane with no access to download
+                                                            //better string/array manipulation
+                                                            let brokenStr = [...prevState.type]
+                                                            let newStr = ""
+                                                            if (brokenStr[0] === "B") {
+                                                                newStr = checked ? "BP" + (brokenStr[1] || "")
+                                                                    : "B" + (brokenStr[2] || "")
+                                                            }
+                                                            else {
+                                                                newStr = checked ? "P" + (brokenStr[0] || "")
+                                                                    : brokenStr.join("")
+                                                            }
+                                                            return { type: newStr }
+                                                        })
                                                     }} />
                                                 <label className="form-check-label">Piercing</label>
                                             </div>
                                             <div className="form-check form-check-inline">
-                                                    <input type="checkbox" className="form-check-input"
-                                                        checked={this.state.type.indexOf("S") >= 0}
-                                                        onChange={event => {
-                                                            let checked = event.currentTarget.checked
-                                                            this.setState(prevState => {
-                                                                return checked ?
-                                                                    { type: prevState.type + "S" } :
-                                                                    { type: prevState.type.slice(0, prevState.type.length - 1) }
-                                                            })
+                                                <input type="checkbox" className="form-check-input"
+                                                    checked={this.state.type.indexOf("S") >= 0}
+                                                    onChange={event => {
+                                                        let checked = event.currentTarget.checked
+                                                        this.setState(prevState => {
+                                                            return checked ?
+                                                                { type: prevState.type + "S" } :
+                                                                { type: prevState.type.slice(0, prevState.type.length - 1) }
+                                                        })
                                                     }} />
                                                 <label className="form-check-label">Slashing</label>
                                             </div>
@@ -247,6 +255,22 @@ export default class AttackModal extends React.Component<any, ModalState> {
                                                 }} />
                                         </div>
                                     </div>
+                                </div>
+                                <div className="form-row align-items-end">
+                                    <DropdownField className="col-6"
+                                        label="To-Hit Bonus Stat"
+                                        dropdownType={AbilityType}
+                                        value={this.state.toHitBonusAbility}
+                                        onValueChange={(newAbility: AbilityTypeValue) => {
+                                            this.setState({ toHitBonusAbility: newAbility })
+                                        }} />
+                                    <DropdownField className="col-6"
+                                        label="Damage Bonus Stat"
+                                        dropdownType={AbilityType}
+                                        value={this.state.dmgBonusAbility}
+                                        onValueChange={(newAbility: AbilityTypeValue) => {
+                                            this.setState({ dmgBonusAbility: newAbility })
+                                        }} />
                                 </div>
                                 <div className="form-row align-items-end">
                                     <label>Stat Bonus</label>

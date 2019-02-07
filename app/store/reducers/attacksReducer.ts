@@ -28,6 +28,8 @@ const attackReducer: Reducer<AttackState[]> = (state = initialState, action: Act
                     critMultiplier: action.payload.bundle.critMultiplier,
                     dmgDieCount: action.payload.bundle.dmgDieCount,
                     dmgDie: action.payload.bundle.dmgDie,
+                    toHitBonusAbility: action.payload.bundle.toHitBonusAbility,
+                    dmgBonusAbility: action.payload.bundle.dmgBonusAbility,
                     equipId: action.payload.equipUuid
                 }
             })

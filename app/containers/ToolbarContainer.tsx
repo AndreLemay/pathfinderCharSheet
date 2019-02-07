@@ -119,7 +119,7 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
     }
 
     private addAttack = (bundle: AttackInfoBundle) => {
-        let { name, description, bonuses, range, type, dmgDieCount, dmgDie, critRange, critMultiplier } = bundle
+        let { name, description, bonuses, range, type, dmgDieCount, dmgDie, critRange, critMultiplier, toHitBonusAbility, dmgBonusAbility } = bundle
         let equip: EquipmentState = {
             uuid: uuid.v4(),
             name,
@@ -136,6 +136,8 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
             dmgDie,
             critRange,
             critMultiplier,
+            toHitBonusAbility,
+            dmgBonusAbility,
             equipId: equip.uuid
         }
         this.props.addAttack(attack, equip)

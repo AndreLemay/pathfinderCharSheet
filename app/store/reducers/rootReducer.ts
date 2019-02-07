@@ -84,6 +84,8 @@ const rootReducer: Reducer<CharacterSheetState> = (state: CharacterSheetState, a
                     name: item.name,
                     range: item.range,
                     type: item.type,
+                    toHitBonusAbility: item.toHitBonusAbility,
+                    dmgBonusAbility: item.dmgBonusAbility,
                     equipId: item.equipId
                 }
 

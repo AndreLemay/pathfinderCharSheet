@@ -6,6 +6,7 @@ interface AttackProps {
     description: string
     range: number
     type: string
+    toHit: string
     damage: string
     critical: string
     onEdit: () => void
@@ -31,15 +32,19 @@ export default function Attack(props: AttackProps) {
                         />
                         <OutputField
                             label="Range"
-                            className="col-3"
+                            className="col-2"
                             inputType="number"
                             value={props.range}
                         />
                         <OutputField
                             label="Type"
-                            className="col-3"
+                            className="col-2"
                             value={props.type}
                         />
+                        <OutputField 
+                            label="To-Hit"
+                            className="col-2"
+                            value={props.toHit} />
                         <OutputField
                             label="Damage"
                             className="col-3"

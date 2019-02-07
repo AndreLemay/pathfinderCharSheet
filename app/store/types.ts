@@ -1,5 +1,5 @@
 import {
-    AlignmentValue, GenderValue, SizeValue, BonusTypeValue, StatTypeValue, SkillNameValue, ArmourTypeValue, DamageDieValue
+    AlignmentValue, GenderValue, SizeValue, BonusTypeValue, StatTypeValue, SkillNameValue, ArmourTypeValue, DamageDieValue, AbilityTypeValue
 } from "../api/enums"
 
 export interface AbilitiesState {
@@ -61,6 +61,8 @@ export interface AttackState {
     readonly dmgDie: DamageDieValue
     readonly critRange: number
     readonly critMultiplier: number
+    readonly toHitBonusAbility: AbilityTypeValue
+    readonly dmgBonusAbility: AbilityTypeValue
     readonly equipId: string
 }
 

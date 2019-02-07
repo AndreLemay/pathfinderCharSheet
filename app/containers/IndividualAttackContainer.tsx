@@ -1,11 +1,12 @@
 import * as React from "react"
 import { connect } from "react-redux"
 import Attack from "../components/Attack";
-import CharacterSheetState, { ValueBonus } from "../store/types";
-import { getDamageBonus } from "../store/selectors/baseAttackSelectors";
+import CharacterSheetState, { ValueBonus, AttackState } from "../store/types";
+import { getDamageBonus, getMiscAttackBonus } from "../store/selectors/baseAttackSelectors";
 import { AttackInfoBundle } from "../components/AttackModal";
-import { DamageDieValue } from "../api/enums";
+import { DamageDieValue, AbilityTypeValue, AbilityType } from "../api/enums";
 import { editAttack, deleteAttack } from "../store/actions/attackActions";
+import { getStrengthBonus, getDexterityBonus, getConstitutionBonus, getIntelligenceBonus, getWisdomBonus, getCharismaBonus } from "../store/selectors/abilityScoreSelectors";
 
 interface OwnProps {
     attackUuid: string
@@ -23,6 +24,9 @@ interface StateProps {
     dmgDieCount: number
     dmgDie: DamageDieValue
     dmgBonus: number
+    toHitBonus: number
+    toHitBonusAbility: AbilityTypeValue
+    dmgBonusAbility: AbilityTypeValue
     bonuses: ValueBonus[]
 }
 
@@ -46,7 +50,9 @@ class IndividualAttackContainer extends React.Component<IndividualAttackContaine
                 critRange: this.props.critRange,
                 critMultiplier: this.props.critMultiplier,
                 dmgDieCount: this.props.dmgDieCount,
-                dmgDie: this.props.dmgDie
+                dmgDie: this.props.dmgDie,
+                toHitBonusAbility: this.props.toHitBonusAbility,
+                dmgBonusAbility: this.props.dmgBonusAbility
             })
     }
 
@@ -65,6 +71,7 @@ class IndividualAttackContainer extends React.Component<IndividualAttackContaine
                 description={this.props.description}
                 range={this.props.range}
                 type={this.props.type}
+                toHit={'+' + this.props.toHitBonus}
                 damage={this.damageString()}
                 critical={this.critString()}
                 onEdit={this.edit}
@@ -75,6 +82,30 @@ class IndividualAttackContainer extends React.Component<IndividualAttackContaine
 
 function mapStateToProps(state: CharacterSheetState, props: OwnProps): StateProps {
     let attack = state.attacks.filter(a => a.uuid === props.attackUuid)[0]
+
+    let getAbilityBonus = (type: AbilityTypeValue) => {
+        switch(type) {
+            case AbilityType.Strength:{
+                return getStrengthBonus(state)
+            }
+            case AbilityType.Dexterity:{
+                return getDexterityBonus(state)
+            }
+            case AbilityType.Constitution:{
+                return getConstitutionBonus(state)
+            }
+            case AbilityType.Intelligence:{
+                return getIntelligenceBonus(state)
+            }
+            case AbilityType.Wisdom:{
+                return getWisdomBonus(state)
+            }
+            case AbilityType.Charisma:{
+                return getCharismaBonus(state)
+            }
+        }
+    }
+
     return {
         name: attack.name,
         description: attack.description,
@@ -85,7 +116,10 @@ function mapStateToProps(state: CharacterSheetState, props: OwnProps): StateProp
         critMultiplier: attack.critMultiplier,
         dmgDieCount: attack.dmgDieCount,
         dmgDie: attack.dmgDie,
-        dmgBonus: getDamageBonus(state),
+        toHitBonusAbility: attack.toHitBonusAbility,
+        dmgBonusAbility: attack.dmgBonusAbility,
+        dmgBonus: getDamageBonus(state) + getAbilityBonus(attack.dmgBonusAbility),
+        toHitBonus: getMiscAttackBonus(state) + getAbilityBonus(attack.toHitBonusAbility)
     }
 }
 
