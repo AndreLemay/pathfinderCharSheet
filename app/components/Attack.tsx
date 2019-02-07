@@ -38,21 +38,21 @@ export default function Attack(props: AttackProps) {
                         />
                         <OutputField
                             label="Type"
-                            className="col-2"
+                            className="col-2 text-center"
                             value={props.type}
                         />
                         <OutputField 
                             label="To-Hit"
-                            className="col-2"
+                            className="col-2 text-center"
                             value={props.toHit} />
                         <OutputField
                             label="Damage"
-                            className="col-3"
+                            className="col-3 text-center"
                             value={props.damage}
                         />
                         <OutputField
                             label="Critical"
-                            className="col-3"
+                            className="col-3 text-center"
                             value={props.critical}
                         />
                     </div>

@@ -17,6 +17,11 @@ input[type="text"], textarea {
     text-align-last: start;
 }
 
+.form-group.text-center input[type="text"] {
+    text-align: center!important;
+    text-align-last: center!important;
+}
+
 .section-head {
     color: white;
     background-color: dimgray;
