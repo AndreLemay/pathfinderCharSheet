@@ -27,6 +27,8 @@ import IntelligenceContainer from "../shared/containers/ability_scores/Intellige
 import WisdomContainer from "../shared/containers/ability_scores/WisdomContainer"
 import CharismaContainer from "../shared/containers/ability_scores/CharismaContainer"
 import OutputField from "./components/common/OutputField";
+import AbilityScoresSection from "./components/AbilityScoresSection";
+import CharacterSection from "./components/CharacterSection";
 
 const store = configureStore()
 
@@ -64,19 +66,9 @@ export default class App extends React.Component {
                         openAttackModal={this.openAttackModal} />
                     <div className="container-fluid">
                         <div className="row mt-4">
+                            <AbilityScoresSection className="col-6 px-5" />
                             <div className="col-6 px-5">
-                                <SectionHeader className="row" label="Ability Scores" />
-                                <StrengthContainer className="row" abilityScoreComponent={AbilityScore} />
-                                <DexterityContainer className="row" abilityScoreComponent={AbilityScore} />
-                                <ConstitutionContainer className="row" abilityScoreComponent={AbilityScore} />
-                                <IntelligenceContainer className="row" abilityScoreComponent={AbilityScore} />
-                                <WisdomContainer className="row" abilityScoreComponent={AbilityScore} />
-                                <CharismaContainer className="row" abilityScoreComponent={AbilityScore} />
-                                <InitiativeContainer className="form-row align-items-end" />
-                            </div>
-
-                            <div className="col-6 px-5">
-                                <CharacterContainer className="form-row align-items-end" />
+                                <CharacterContainer className="form-row align-items-end" characterSectionComponent={CharacterSection} />
                                 <HealthContainer className="form-row align-items-end" />
                                 <div className="row">
                                     <AttackBonusContainer className="col-4 pl-0" />
