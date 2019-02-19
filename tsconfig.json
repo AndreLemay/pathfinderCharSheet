@@ -1,7 +1,9 @@
 {
     "include": [
-        "app/**/*.ts",
-        "app/**/*.tsx",
+        "desktop/**/*.ts",
+        "desktop/**/*.tsx",
+        "shared/**/*.ts",
+        "shared/**/*.tsx",
         "node_modules/@types/**/*.d.ts"
     ],
     "exclude": [
