@@ -1,12 +1,12 @@
 import * as React from "react"
-import SectionHeader from "../../desktop/components/common/SectionHeader";
-import InputField from "../../desktop/components/common/InputField";
 import CharacterSheetState, { HealthState } from "../store/types";
 import { currentUpdate, maxUpdate, tempUpdate, nonlethalUpdate, drUpdate, erUpdate } from "../store/actions/healthActions";
 import { connect } from "react-redux";
+import { HealthProps } from "../api/componentPropTypes";
 
 interface OwnProps {
     className?: string
+    healthSectionComponent: React.ComponentClass<HealthProps>
 }
 
 interface DispatchProps {
@@ -22,29 +22,21 @@ type HealthContainerProps = HealthState & DispatchProps & OwnProps
 
 class HealthContainer extends React.Component<HealthContainerProps> {
     render() {
-        return (
-            <div className={this.props.className}>
-                <SectionHeader label="Health" />
-                <InputField label="Current" inputType="number" className="col-3" 
-                    min={0}
-                    value={this.props.current} 
-                    onValueChange={this.props.currentChange} />
-                <InputField label="Max" inputType="number" className="col-3" 
-                    min={1}
-                    value={this.props.max} 
-                    onValueChange={this.props.maxChange} />
-                <InputField label="Temp" inputType="number" className="col-3" 
-                    min={0}
-                    value={this.props.temp} 
-                    onValueChange={this.props.tempChange} />
-                <InputField label="Non-Lethal" inputType="number" className="col-3" 
-                    min={0}
-                    value={this.props.nonlethal} 
-                    onValueChange={this.props.nonlethalChange} />
-                <InputField label="Damage Resistance" inputType="textarea" className="col-6" value={this.props.damageResistance} onValueChange={this.props.drChange} />
-                <InputField label="Energy Resistance" inputType="textarea" className="col-6" value={this.props.energyResistance} onValueChange={this.props.erChange} />
-            </div>
-        )
+        return React.createElement(this.props.healthSectionComponent, {
+            className: this.props.className,
+            current: this.props.current,
+            max: this.props.max,
+            temp: this.props.temp,
+            nonlethal: this.props.nonlethal,
+            damageResistance: this.props.damageResistance,
+            energyResistance: this.props.energyResistance,
+            currentChange: this.props.currentChange,
+            maxChange: this.props.maxChange,
+            tempChange: this.props.tempChange,
+            nonlethalChange: this.props.nonlethalChange,
+            drChange: this.props.drChange,
+            erChange: this.props.erChange
+        })
     }
 }
 

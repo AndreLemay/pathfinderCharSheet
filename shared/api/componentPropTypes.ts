@@ -34,3 +34,18 @@ export interface CharacterProps extends ClassNameProp {
     raceChange: (race: string) => void
     sizeChange: (size: SizeValue) => void
 }
+
+export interface HealthProps extends ClassNameProp {
+    current: number
+    max: number
+    temp: number
+    nonlethal: number
+    damageResistance: string
+    energyResistance: string
+    currentChange: (current: number) => void
+    maxChange: (max: number) => void
+    tempChange: (temp: number) => void
+    nonlethalChange: (nonlethal: number) => void
+    drChange: (dr: string) => void
+    erChange: (er: string) => void
+}

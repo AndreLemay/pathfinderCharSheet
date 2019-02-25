@@ -29,6 +29,7 @@ import CharismaContainer from "../shared/containers/ability_scores/CharismaConta
 import OutputField from "./components/common/OutputField";
 import AbilityScoresSection from "./components/AbilityScoresSection";
 import CharacterSection from "./components/CharacterSection";
+import HealthSection from "./components/HealthSection";
 
 const store = configureStore()
 
@@ -69,7 +70,7 @@ export default class App extends React.Component {
                             <AbilityScoresSection className="col-6 px-5" />
                             <div className="col-6 px-5">
                                 <CharacterContainer className="form-row align-items-end" characterSectionComponent={CharacterSection} />
-                                <HealthContainer className="form-row align-items-end" />
+                                <HealthContainer className="form-row align-items-end" healthSectionComponent={HealthSection} />
                                 <div className="row">
                                     <AttackBonusContainer className="col-4 pl-0" />
                                     <SavesContainer className="col-8 pr-0" />
