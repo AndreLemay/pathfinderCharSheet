@@ -30,6 +30,7 @@ import OutputField from "./components/common/OutputField";
 import AbilityScoresSection from "./components/AbilityScoresSection";
 import CharacterSection from "./components/CharacterSection";
 import HealthSection from "./components/HealthSection";
+import AttackBonusSection from "./components/AttackBonusSection";
 
 const store = configureStore()
 
@@ -72,7 +73,7 @@ export default class App extends React.Component {
                                 <CharacterContainer className="form-row align-items-end" characterSectionComponent={CharacterSection} />
                                 <HealthContainer className="form-row align-items-end" healthSectionComponent={HealthSection} />
                                 <div className="row">
-                                    <AttackBonusContainer className="col-4 pl-0" />
+                                    <AttackBonusContainer className="col-4 pl-0" attackBonusComponent={AttackBonusSection} />
                                     <SavesContainer className="col-8 pr-0" />
                                 </div>
                             </div>

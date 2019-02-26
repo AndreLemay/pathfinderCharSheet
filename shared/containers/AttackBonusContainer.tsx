@@ -6,9 +6,11 @@ import OutputField from "../../desktop/components/common/OutputField";
 import { baseUpdate } from "../store/actions/baseAttackActions";
 import { connect } from "react-redux"
 import { getMeleeAttackBonus, getRangedAttackBonus, getMiscAttackBonus } from "../store/selectors/baseAttackSelectors";
+import { AttackBonusProps } from "../api/componentPropTypes";
 
 interface OwnProps {
     className?: string
+    attackBonusComponent: React.ComponentClass<AttackBonusProps>
 }
 
 interface StateProps {
@@ -26,22 +28,14 @@ type AttackBonusContainerProps = StateProps & DispatchProps & OwnProps
 
 class AttackBonusContainer extends React.Component<AttackBonusContainerProps> {
     render() {
-        return (
-            <div className={this.props.className}>
-                <SectionHeader label="Attack Bonus" />
-                <div className="form-row">
-                    <InputField label="Base" inputType="number" className="col" 
-                        min={0}
-                        value={this.props.base} 
-                        onValueChange={this.props.baseChange} />
-                    <OutputField label="Misc" fieldType="number" className="col" value={this.props.miscBonus} />
-                </div>
-                <div className="form-row">
-                    <OutputField label="Melee" fieldType="number" className="col" value={this.props.meleeBonus} />
-                    <OutputField label="Ranged" fieldType="number" className="col" value={this.props.rangedBonus} />
-                </div>
-            </div>
-        )
+        return React.createElement(this.props.attackBonusComponent, {
+            className: this.props.className,
+            base: this.props.base,
+            miscBonus: this.props.miscBonus,
+            meleeBonus: this.props.meleeBonus,
+            rangedBonus: this.props.rangedBonus,
+            baseChange: this.props.baseChange
+        })
     }
 }
 

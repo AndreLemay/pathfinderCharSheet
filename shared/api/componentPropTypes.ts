@@ -49,3 +49,11 @@ export interface HealthProps extends ClassNameProp {
     drChange: (dr: string) => void
     erChange: (er: string) => void
 }
+
+export interface AttackBonusProps extends ClassNameProp {
+    base: number
+    miscBonus: number
+    meleeBonus: number
+    rangedBonus: number
+    baseChange: (base: number) => void
+}
