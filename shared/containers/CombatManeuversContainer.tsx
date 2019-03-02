@@ -6,9 +6,11 @@ import CharacterSheetState from "../store/types";
 import { getCMB, getCMD, getFlatFooted, getMiscCMB, getMiscCMD } from "../store/selectors/combatManeuverSelectors";
 import { getStrengthBonus, getDexterityBonus } from "../store/selectors/abilityScoreSelectors";
 import { getDodgeMod, getDeflectionMod, getSizeMod } from "../store/selectors/armourClassSelectors";
+import { CombatManeuvreProps } from "../api/componentPropTypes";
 
 interface OwnProps {
     className?: string
+    combatManeuverComponent: React.ComponentClass<CombatManeuvreProps>
 }
 
 interface StateProps {
@@ -29,130 +31,24 @@ type CombatManeuversContainerProps = StateProps & OwnProps
 
 class CombatManeuversContainer extends React.Component<CombatManeuversContainerProps> {
     render() {
-        return (
-            <div className={this.props.className}>
-                <SectionHeader label="Combat Manoeuvres" />
-                <div className="form-row align-items-end">
-                    <OutputField label="CMB"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.cmb}
-                    />
-                    <OutputField label="STR"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.strBonus}
-                    />
-                    <OutputField label="BAB"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.bab}
-                    />
-                    <OutputField label="Size"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.sizeMod}
-                    />
-                    <OutputField label="Misc"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.miscCMB}
-                    />
-                    <div className="col" />
-                    <div className="col" />
-                    <div className="col" />
-                    <div className="col" />
-                </div>
-                <div className="form-row align-items-end">
-                    <OutputField label="CMD"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.cmd}
-                    />
-                    <OutputField label="Base"
-                        className="col"
-                        fieldType="number"
-                        value={10} />
-                    <OutputField label="STR"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.strBonus}
-                    />
-                    <OutputField label="DEX"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.dexBonus}
-                    />
-                    <OutputField label="Dodge"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.dodgeMod}
-                    />
-                    <OutputField label="Deflection"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.deflectionMod}
-                    />
-                    <OutputField label="BAB"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.bab}
-                    />
-                    <OutputField label="Size"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.sizeMod}
-                    />
-                    <OutputField label="Misc"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.miscCMD}
-                    />
-                </div>
-                <div className="form-row align-items-end">
-                    <OutputField label="Flat-Footed"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.flatFooted}
-                    />
-                    <OutputField label="Base"
-                        className="col"
-                        fieldType="number"
-                        value={10} />
-                    <OutputField label="STR"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.strBonus}
-                    />
-                    <div className="col" />
-                    <div className="col" />
-                    <OutputField label="Deflection"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.deflectionMod}
-                    />
-                    <OutputField label="BAB"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.bab}
-                    />
-                    <OutputField label="Size"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.sizeMod}
-                    />
-                    <OutputField label="Misc"
-                        className="col"
-                        fieldType="number"
-                        value={this.props.miscCMD}
-                    />
-                </div>
-            </div>
-        )
+        return React.createElement(this.props.combatManeuverComponent, {
+            className: this.props.className,
+            cmb: this.props.cmb,
+            cmd: this.props.cmd,
+            flatFooted: this.props.flatFooted,
+            strBonus: this.props.strBonus,
+            dexBonus: this.props.dexBonus,
+            bab: this.props.bab,
+            dodgeMod: this.props.dodgeMod,
+            deflectionMod: this.props.deflectionMod,
+            sizeMod: this.props.sizeMod,
+            miscCMB: this.props.miscCMB,
+            miscCMD: this.props.miscCMD
+        })
     }
 }
 
-function mapStateToProps(state: CharacterSheetState): CombatManeuversContainerProps {
+function mapStateToProps(state: CharacterSheetState): StateProps {
     return {
         cmb: getCMB(state),
         cmd: getCMD(state),

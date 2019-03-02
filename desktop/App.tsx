@@ -34,6 +34,7 @@ import AttackBonusSection from "./components/AttackBonusSection";
 import InitiativeSection from "./components/InitiativeSection";
 import SaveSection from "./components/SaveSection";
 import ArmourClassSection from "./components/ArmourClassSection";
+import CombatManeuverSection from "./components/CombatManeuverSection";
 
 const store = configureStore()
 
@@ -94,7 +95,7 @@ export default class App extends React.Component {
                                     <ArmourClassContainer className="col" armourClassComponent={ArmourClassSection} />
                                 </div>
                                 <div className="row">
-                                    <CombatManeuversContainer className="col" />
+                                    <CombatManeuversContainer className="col" combatManeuverComponent={CombatManeuverSection} />
                                 </div>
                             </div>
                             <AttacksContainer className="col-6 px-5" openAttackModal={this.openAttackModal} />

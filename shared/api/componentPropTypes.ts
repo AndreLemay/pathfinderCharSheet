@@ -88,3 +88,17 @@ export interface ArmourClassProps extends ClassNameProp {
     natBonus: number
     sizeBonus: number
 }
+
+export interface CombatManeuvreProps extends ClassNameProp {
+    cmb: number,
+    cmd: number,
+    flatFooted: number,
+    strBonus: number,
+    dexBonus: number,
+    bab: number,
+    dodgeMod: number,
+    deflectionMod: number
+    sizeMod: number,
+    miscCMB: number,
+    miscCMD: number
+}
