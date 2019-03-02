@@ -32,6 +32,7 @@ import CharacterSection from "./components/CharacterSection";
 import HealthSection from "./components/HealthSection";
 import AttackBonusSection from "./components/AttackBonusSection";
 import InitiativeSection from "./components/InitiativeSection";
+import SaveSection from "./components/SaveSection";
 
 const store = configureStore()
 
@@ -78,7 +79,7 @@ export default class App extends React.Component {
                                 <HealthContainer className="form-row align-items-end" healthSectionComponent={HealthSection} />
                                 <div className="row">
                                     <AttackBonusContainer className="col-4 pl-0" attackBonusComponent={AttackBonusSection} />
-                                    <SavesContainer className="col-8 pr-0" />
+                                    <SavesContainer className="col-8 pr-0" saveComponent={SaveSection} />
                                 </div>
                             </div>
                         </div>

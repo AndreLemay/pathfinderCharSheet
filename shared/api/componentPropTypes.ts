@@ -63,3 +63,21 @@ export interface InitiativeProps extends ClassNameProp {
     dexBonus: number
     miscBonus: number
 }
+
+export interface SaveProps extends ClassNameProp {
+    fortSave: number
+    reflexSave: number
+    willSave: number
+    baseFort: number
+    baseReflex: number
+    baseWill: number
+    conBonus: number
+    dexBonus: number
+    wisBonus: number
+    miscFort: number
+    miscReflex: number
+    miscWill: number
+    fortSaveChange: (fort: number) => void
+    reflexSaveChange: (reflex: number) => void
+    willSaveChange: (will: number) => void
+}

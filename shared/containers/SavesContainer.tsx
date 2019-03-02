@@ -1,15 +1,14 @@
 import * as React from "react"
-import CharacterSheetState, { SaveState } from "../store/types";
-import SectionHeader from "../../desktop/components/common/SectionHeader";
-import OutputField from "../../desktop/components/common/OutputField";
-import InputField from "../../desktop/components/common/InputField";
+import CharacterSheetState from "../store/types";
 import { fortUpdate, reflexUpdate, willUpdate } from "../store/actions/saveActions";
 import { connect } from "react-redux";
 import { getConstitutionBonus, getDexterityBonus, getWisdomBonus } from "../store/selectors/abilityScoreSelectors";
 import { getFortSave, getReflexSave, getWillSave, getMiscFortSave, getMiscReflexSave, getMiscWillSave } from "../store/selectors/saveSelectors";
+import { SaveProps } from "../api/componentPropTypes";
 
 interface OwnProps {
     className?: string
+    saveComponent: React.ComponentClass<SaveProps>
 }
 
 interface StateProps {
@@ -37,38 +36,24 @@ interface DispatchProps {
 
  class SavesContainer extends React.Component<SavesContainerProps> {
      render() {
-         return (
-             <div className={this.props.className}>
-                 <SectionHeader label="Saves" />
-                 <div className="form-row">
-                     <OutputField label="Fortitude" fieldType="number" className="col" value={this.props.fortSave} />
-                     <InputField label="Base" inputType="number" className="col" 
-                        min={0}
-                        value={this.props.baseFort} 
-                        onValueChange={this.props.fortSaveChange} />
-                     <OutputField label="CON" fieldType="number" className="col" value={this.props.conBonus} />
-                     <OutputField label="Misc" fieldType="number" className="col" value={this.props.miscFort} />
-                 </div>
-                 <div className="form-row">
-                     <OutputField label="Reflex" fieldType="number" className="col" value={this.props.reflexSave} />
-                     <InputField label="Base" inputType="number" className="col" 
-                        min={0}
-                        value={this.props.baseReflex} 
-                        onValueChange={this.props.reflexSaveChange} />
-                     <OutputField label="DEX" fieldType="number" className="col" value={this.props.dexBonus} />
-                     <OutputField label="Misc" fieldType="number" className="col" value={this.props.miscReflex} />
-                 </div>
-                 <div className="form-row">
-                     <OutputField label="Will" fieldType="number" className="col" value={this.props.willSave} />
-                     <InputField label="Base" inputType="number" className="col" 
-                        min={0}
-                        value={this.props.baseWill} 
-                        onValueChange={this.props.willSaveChange} />
-                     <OutputField label="WIS" fieldType="number" className="col" value={this.props.wisBonus} />
-                     <OutputField label="Misc" fieldType="number" className="col" value={this.props.miscWill} />
-                 </div>
-             </div>
-         )
+         return React.createElement(this.props.saveComponent, {
+             className: this.props.className,
+             fortSave: this.props.fortSave,
+             reflexSave: this.props.reflexSave,
+             willSave: this.props.willSave,
+             baseFort: this.props.baseFort,
+             baseReflex: this.props.baseReflex,
+             baseWill: this.props.baseWill,
+             conBonus: this.props.conBonus,
+             dexBonus: this.props.dexBonus,
+             wisBonus: this.props.wisBonus,
+             miscFort: this.props.miscFort,
+             miscReflex: this.props.miscReflex,
+             miscWill: this.props.miscWill,
+             fortSaveChange: this.props.fortSaveChange,
+             reflexSaveChange: this.props.reflexSaveChange,
+             willSaveChange: this.props.willSaveChange
+         })
      }
  }
 
