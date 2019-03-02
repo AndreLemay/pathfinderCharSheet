@@ -1,4 +1,4 @@
-import { AlignmentValue, GenderValue, SizeValue } from "./enums";
+import { AlignmentValue, GenderValue, SizeValue, ArmourTypeValue } from "./enums";
 
 export interface ClassNameProp {
     className?: string
@@ -101,4 +101,21 @@ export interface CombatManeuvreProps extends ClassNameProp {
     sizeMod: number,
     miscCMB: number,
     miscCMD: number
+}
+
+export interface ArmourProps extends ClassNameProp {
+    name: string
+    description: string
+    type: ArmourTypeValue
+    maxSpeed: number
+    maxDex: number
+    checkPenalty: number
+    ac: number
+    nameChange: (name: string) => void
+    descriptionChange: (description: string) => void
+    typeChange: (type: ArmourTypeValue) => void
+    maxSpeedChange: (maxSpeed: number) => void
+    maxDexChange: (maxDex: number) => void
+    checkPenaltyChange: (checkPenalty: number) => void
+    acChange: (ac: number) => void
 }

@@ -1,14 +1,13 @@
 import * as React from "react"
 import { connect } from "react-redux"
 import { ArmourTypeValue, ArmourType } from "../api/enums";
-import SectionHeader from "../../desktop/components/common/SectionHeader";
-import InputField from "../../desktop/components/common/InputField";
-import DropdownField from "../../desktop/components/common/DropdownField";
 import CharacterSheetState from "../store/types";
 import { nameUpdate, descriptionUpdate, typeUpdate, maxSpeedUpdate, maxDexUpdate, checkPenaltyUpdate, acUpdate } from "../store/actions/armourActions";
+import { ArmourProps } from "../api/componentPropTypes";
 
 interface OwnProps {
     className?: string
+    armourComponent: React.ComponentClass<ArmourProps>
 }
 
 interface StateProps {
@@ -35,62 +34,23 @@ type ArmourContainerProps = StateProps & DispatchProps & OwnProps
 
 class ArmourContainer extends React.Component<ArmourContainerProps> {
     render() {
-        return (
-            <div className={this.props.className}>
-                <SectionHeader label="Armour" />
-                <div className="form-row align-items-end">
-                    <InputField 
-                        label="Name"
-                        className="col-12"
-                        value={this.props.name}
-                        onValueChange={this.props.nameChange} />                    
-                    <InputField 
-                        className="col-12"
-                        inputType="textarea"
-                        value={this.props.description}
-                        onValueChange={this.props.descriptionChange} />                    
-                </div>
-                <div className="form-row align-items-end">
-                    <DropdownField 
-                        label="Type"
-                        className="col"
-                        dropdownType={ArmourType}
-                        value={this.props.type}
-                        onValueChange={this.props.typeChange} />
-                    <InputField 
-                        label="Max Speed"
-                        className="col"
-                        inputType="number"
-                        min={0}
-                        step={5}
-                        value={this.props.maxSpeed}
-                        onValueChange={this.props.maxSpeedChange} />
-                    <InputField 
-                        label="Max DEX"
-                        className="col"
-                        inputType="number"
-                        min={0}
-                        value={this.props.maxDex}
-                        onValueChange={this.props.maxDexChange} />
-                </div>
-                <div className="form-row align-items-end">
-                    <InputField 
-                        label="Check Penalty"
-                        className="col"
-                        inputType="number"
-                        max={0}
-                        value={this.props.checkPenalty}
-                        onValueChange={this.props.checkPenaltyChange} />
-                    <InputField 
-                        label="AC Bonus"
-                        className="col"
-                        inputType="number"
-                        min={0}
-                        value={this.props.ac}
-                        onValueChange={this.props.acChange} />
-                </div>
-            </div>
-        )
+        return React.createElement(this.props.armourComponent, {
+            className: this.props.className,
+            name: this.props.name,
+            description: this.props.description,
+            type: this.props.type,
+            maxSpeed: this.props.maxSpeed,
+            maxDex: this.props.maxDex,
+            checkPenalty: this.props.checkPenalty,
+            ac: this.props.ac,
+            nameChange: this.props.nameChange,
+            descriptionChange: this.props.descriptionChange,
+            typeChange: this.props.typeChange,
+            maxSpeedChange: this.props.maxSpeedChange,
+            maxDexChange: this.props.maxDexChange,
+            checkPenaltyChange: this.props.checkPenaltyChange,
+            acChange: this.props.acChange
+        })
     }
 }
 

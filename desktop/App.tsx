@@ -35,6 +35,7 @@ import InitiativeSection from "./components/InitiativeSection";
 import SaveSection from "./components/SaveSection";
 import ArmourClassSection from "./components/ArmourClassSection";
 import CombatManeuverSection from "./components/CombatManeuverSection";
+import ArmourSection from "./components/ArmourSection";
 
 const store = configureStore()
 
@@ -103,7 +104,7 @@ export default class App extends React.Component {
                         <div className="row mt-4">
                             <div className="col-6 px-5">
                                 <div className="row">
-                                    <ArmourContainer className="col" />
+                                    <ArmourContainer className="col" armourComponent={ArmourSection} />
                                 </div>
                                 <div className="row">
                                     <ShieldContainer className="col" />
