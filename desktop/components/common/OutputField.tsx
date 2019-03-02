@@ -1,5 +1,11 @@
 import * as React from "react"
-import { OutputProps } from "../../../shared/api/componentPropTypes";
+
+interface OutputProps {
+    className?: string
+    label?: string
+    fieldType?: string
+    value: string | number
+}
 
 export default function OutputField(props: OutputProps) {
     return (

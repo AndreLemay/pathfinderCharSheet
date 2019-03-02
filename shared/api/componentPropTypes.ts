@@ -4,12 +4,6 @@ export interface ClassNameProp {
     className?: string
 }
 
-export interface OutputProps extends ClassNameProp {
-    label?: string
-    fieldType?: "text" | "number" | "textarea"
-    value: number | string
-}
-
 export interface SectionHeaderProps extends ClassNameProp {
     label: string
 }
@@ -80,4 +74,17 @@ export interface SaveProps extends ClassNameProp {
     fortSaveChange: (fort: number) => void
     reflexSaveChange: (reflex: number) => void
     willSaveChange: (will: number) => void
+}
+
+export interface ArmourClassProps extends ClassNameProp {
+    ac: number
+    flatFooted: number
+    touch: number
+    dexBonus: number
+    dodgeBonus: number
+    deflectionBonus: number
+    armourBonus: number
+    shieldBonus: number
+    natBonus: number
+    sizeBonus: number
 }
