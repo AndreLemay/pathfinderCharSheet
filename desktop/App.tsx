@@ -36,6 +36,7 @@ import SaveSection from "./components/SaveSection";
 import ArmourClassSection from "./components/ArmourClassSection";
 import CombatManeuverSection from "./components/CombatManeuverSection";
 import ArmourSection from "./components/ArmourSection";
+import ShieldSection from "./components/ShieldSection";
 
 const store = configureStore()
 
@@ -107,7 +108,7 @@ export default class App extends React.Component {
                                     <ArmourContainer className="col" armourComponent={ArmourSection} />
                                 </div>
                                 <div className="row">
-                                    <ShieldContainer className="col" />
+                                    <ShieldContainer className="col" shieldComponent={ShieldSection} />
                                 </div>
                             </div>
                             <EquipmentContainer className="col-6 px-5" openEquipModal={this.openEquipModal} />

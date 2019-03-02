@@ -119,3 +119,14 @@ export interface ArmourProps extends ClassNameProp {
     checkPenaltyChange: (checkPenalty: number) => void
     acChange: (ac: number) => void
 }
+
+export interface ShieldProps extends ClassNameProp {
+    name: string
+    description: string
+    checkPenalty: number
+    ac: number
+    nameChange: (name: string) => void
+    descriptionChange: (desc: string) => void
+    checkPenaltyChange: (penalty: number) => void
+    acChange: (ac: number) => void
+}

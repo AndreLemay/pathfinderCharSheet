@@ -1,12 +1,12 @@
 import * as React from "react"
 import { connect } from "react-redux"
-import SectionHeader from "../../desktop/components/common/SectionHeader";
-import InputField from "../../desktop/components/common/InputField";
 import CharacterSheetState from "../store/types";
 import { nameUpdate, descriptionUpdate, checkPenaltyUpdate, acUpdate } from "../store/actions/shieldActions";
+import { ShieldProps } from "../api/componentPropTypes";
 
 interface OwnProps {
     className?: string
+    shieldComponent: React.ComponentClass<ShieldProps>
 }
 
 interface StateProps {
@@ -27,39 +27,17 @@ type ShieldContainerProps = StateProps & DispatchProps & OwnProps
 
 class ShieldContainer extends React.Component<ShieldContainerProps> {
     render() {
-        return (
-            <div className={this.props.className}>
-                <SectionHeader label="Shield" />
-                <div className="form-row align-items-end">
-                    <InputField 
-                        label="Name"
-                        className="col-12"
-                        value={this.props.name}
-                        onValueChange={this.props.nameChange} />
-                    
-                    <InputField 
-                        inputType="textarea"
-                        className="col"
-                        value={this.props.description}
-                        onValueChange={this.props.descriptionChange} />
-                    
-                </div>
-                <div className="form-row align-items-end">
-                    <InputField 
-                        label="Check Penalty"
-                        className="col"
-                        inputType="number"
-                        value={this.props.checkPenalty}
-                        onValueChange={this.props.checkPenaltyChange} />
-                    <InputField 
-                        label="AC Bonus"
-                        className="col"
-                        inputType="number"
-                        value={this.props.ac}
-                        onValueChange={this.props.acChange} />
-                </div>
-            </div>
-        )
+        return React.createElement(this.props.shieldComponent, {
+            className: this.props.className,
+            name: this.props.name,
+            description: this.props.description,
+            checkPenalty: this.props.checkPenalty,
+            ac: this.props.ac,
+            nameChange: this.props.nameChange,
+            descriptionChange: this.props.descriptionChange,
+            checkPenaltyChange: this.props.checkPenaltyChange,
+            acChange: this.props.acChange
+        })
     }
 }
 
