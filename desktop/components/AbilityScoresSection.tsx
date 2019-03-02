@@ -20,7 +20,6 @@ export default function AbilityScoresSection(props: ClassNameProp) {
             <IntelligenceContainer className="row" abilityScoreComponent={AbilityScore} />
             <WisdomContainer className="row" abilityScoreComponent={AbilityScore} />
             <CharismaContainer className="row" abilityScoreComponent={AbilityScore} />
-            <InitiativeContainer className="form-row align-items-end" />
         </div>
     )
 }

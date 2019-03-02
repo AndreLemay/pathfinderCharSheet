@@ -57,3 +57,9 @@ export interface AttackBonusProps extends ClassNameProp {
     rangedBonus: number
     baseChange: (base: number) => void
 }
+
+export interface InitiativeProps extends ClassNameProp {
+    initiative: number
+    dexBonus: number
+    miscBonus: number
+}

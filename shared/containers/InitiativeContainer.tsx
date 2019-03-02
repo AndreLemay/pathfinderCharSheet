@@ -1,13 +1,13 @@
 import * as React from "react"
 import { connect } from "react-redux"
-import SectionHeader from "../../desktop/components/common/SectionHeader";
-import OutputField from "../../desktop/components/common/OutputField";
 import CharacterSheetState from "../store/types";
 import { getInitiative, getMiscInitiative } from "../store/selectors/initiativeSelectors";
 import { getDexterityBonus } from "../store/selectors/abilityScoreSelectors";
+import { InitiativeProps } from "../api/componentPropTypes";
 
 interface OwnProps {
     className?: string
+    initiativeComponent: React.ComponentClass<InitiativeProps>
 }
 
 interface StateProps {
@@ -20,23 +20,12 @@ type InitiativeContainerProps = StateProps & OwnProps
 
 class InitiativeContainer extends React.Component<InitiativeContainerProps> {
     render() {
-        return (
-            <div className={this.props.className}>
-                <SectionHeader label="Initiative" />
-                <OutputField className="col"
-                    label="Total"
-                    value={this.props.initiative}
-                    fieldType="number" />
-                <OutputField className="col"
-                    label="From DEX"
-                    value={this.props.dexBonus}
-                    fieldType="number" />
-                <OutputField className="col"
-                    label="Misc"
-                    value={this.props.miscInitiative}
-                    fieldType="number" />
-            </div>
-        )
+        return React.createElement(this.props.initiativeComponent, {
+            className: this.props.className,
+            initiative: this.props.initiative,
+            dexBonus: this.props.dexBonus,
+            miscBonus: this.props.miscInitiative
+        })
     }
 }
 

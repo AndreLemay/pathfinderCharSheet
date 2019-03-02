@@ -31,6 +31,7 @@ import AbilityScoresSection from "./components/AbilityScoresSection";
 import CharacterSection from "./components/CharacterSection";
 import HealthSection from "./components/HealthSection";
 import AttackBonusSection from "./components/AttackBonusSection";
+import InitiativeSection from "./components/InitiativeSection";
 
 const store = configureStore()
 
@@ -68,7 +69,10 @@ export default class App extends React.Component {
                         openAttackModal={this.openAttackModal} />
                     <div className="container-fluid">
                         <div className="row mt-4">
-                            <AbilityScoresSection className="col-6 px-5" />
+                        <div className="col-6 px-5">
+                                <AbilityScoresSection className="form-row align-items-end" />
+                                <InitiativeContainer className="form-row align-items-end" initiativeComponent={InitiativeSection} />
+                        </div>
                             <div className="col-6 px-5">
                                 <CharacterContainer className="form-row align-items-end" characterSectionComponent={CharacterSection} />
                                 <HealthContainer className="form-row align-items-end" healthSectionComponent={HealthSection} />
