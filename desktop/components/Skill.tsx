@@ -1,20 +1,7 @@
 import * as React from "react"
 import OutputField from "./common/OutputField";
 import InputField from "./common/InputField";
-import { SkillNameValue } from "../../shared/api/enums";
-
-interface SkillProps {
-    className?: string
-    skill: SkillNameValue
-    skillBonus: number
-    abilityBonus: number
-    isClassSkill: boolean
-    ranks: number
-    miscBonus: number
-    armourPenalty: number
-    rankChange: (ranks: number) => void
-    classSkillChange: (classSkill: boolean) => void
-}
+import { SkillProps } from "../../shared/api/componentPropTypes";
 
 export default function Skill(props: SkillProps) {
     function classSkillChange(event: React.ChangeEvent<HTMLInputElement>) {

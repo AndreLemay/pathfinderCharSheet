@@ -37,6 +37,7 @@ import ArmourClassSection from "./components/ArmourClassSection";
 import CombatManeuverSection from "./components/CombatManeuverSection";
 import ArmourSection from "./components/ArmourSection";
 import ShieldSection from "./components/ShieldSection";
+import SkillsSection from "./components/SkillsSection";
 
 const store = configureStore()
 
@@ -89,7 +90,7 @@ export default class App extends React.Component {
                         </div>
                         <div className="row mt-4">
                             <FeatsContainer className="col-4 pl-5" openFeatModal={this.openFeatModal} />
-                            <SkillsContainer className="col-8 px-5" />
+                            <SkillsContainer className="col-8 px-5" skillsSectionComponent={SkillsSection} />
                         </div>
                         <div className="row mt-4">
                             <div className="col-6 px-5">

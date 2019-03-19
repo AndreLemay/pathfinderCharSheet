@@ -1,4 +1,4 @@
-import { AlignmentValue, GenderValue, SizeValue, ArmourTypeValue } from "./enums";
+import { AlignmentValue, GenderValue, SizeValue, ArmourTypeValue, SkillNameValue } from "./enums";
 
 export interface ClassNameProp {
     className?: string
@@ -129,4 +129,20 @@ export interface ShieldProps extends ClassNameProp {
     descriptionChange: (desc: string) => void
     checkPenaltyChange: (penalty: number) => void
     acChange: (ac: number) => void
+}
+
+export interface SkillProps extends ClassNameProp {
+    skill: SkillNameValue
+    skillBonus: number
+    abilityBonus: number
+    isClassSkill: boolean
+    ranks: number
+    miscBonus: number
+    armourPenalty: number
+    rankChange: (ranks: number) => void
+    classSkillChange: (classSkill: boolean) => void
+}
+
+export interface SkillsSectionProps extends ClassNameProp {
+    skills: number[]
 }
