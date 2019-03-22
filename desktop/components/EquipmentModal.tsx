@@ -3,14 +3,9 @@ import * as $ from "jquery"
 import { BonusType, StatType, BonusTypeValue, StatTypeValue, SkillNameValue, SkillName } from "../../shared/api/enums";
 import InputField from "./common/InputField";
 import DropdownField from "./common/DropdownField";
-import { ValueBonus, EquipmentState } from "../../shared/store/types";
+import { ValueBonus } from "../../shared/store/types";
 import OutputField from "./common/OutputField";
-
-export interface EquipInfoBundle {
-    name: string
-    description: string
-    bonuses: ValueBonus[]
-}
+import { EquipInfoBundle } from "../../shared/api/componentPropTypes";
 
 interface ModalState {
     modal: boolean

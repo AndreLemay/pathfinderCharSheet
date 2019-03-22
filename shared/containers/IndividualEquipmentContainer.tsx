@@ -1,13 +1,13 @@
 import * as React from "react"
 import { connect } from "react-redux"
-import CharacterSheetState, { ValueBonus, EquipmentState } from "../store/types";
-import Equipment from "../../desktop/components/Equipment";
+import CharacterSheetState, { ValueBonus } from "../store/types";
 import { editEquip, deleteEquip } from "../store/actions/equipmentActions";
-import { EquipInfoBundle } from "../../desktop/components/EquipmentModal";
+import { EquipInfoBundle, EquipmentProps } from "../api/componentPropTypes";
 
 interface OwnProps {
     uuid: string
     openEquipModal: (onSave: (state: EquipInfoBundle) => void, equip?: EquipInfoBundle) => void
+    equipmentComponent: React.ComponentClass<EquipmentProps>
 }
 
 interface StateProps {
@@ -35,14 +35,14 @@ class IndividualEquipmentContainer extends React.Component<IndividualEquipmentCo
     }
 
     render() {
-        return (
-            <Equipment className="mt-3"
-                name={this.props.name}
-                description={this.props.description}
-                bonuses={this.props.bonuses}
-                onEdit={this.edit}
-                onDelete={this.props.delete} />
-        )
+        return React.createElement(this.props.equipmentComponent, {
+            className: "mt-3",
+            name: this.props.name,
+            description: this.props.description,
+            bonuses: this.props.bonuses,
+            onEdit: this.edit,
+            onDelete: this.props.delete
+        })
     }
 }
 

@@ -18,15 +18,6 @@ import ToolbarContainer from "../shared/containers/ToolbarContainer";
 import EquipmentModal from "./components/EquipmentModal";
 import FeatModal, { FeatInfoBundle } from "./components/FeatModal";
 import AttackModal, { AttackInfoBundle } from "./components/AttackModal";
-import SectionHeader from "./components/common/SectionHeader";
-import AbilityScore from "./components/AbilityScore";
-import StrengthContainer from "../shared/containers/ability_scores/StrengthContainer";
-import DexterityContainer from "../shared/containers/ability_scores/DexterityContainer"
-import ConstitutionContainer from "../shared/containers/ability_scores/ConstitutionContainer"
-import IntelligenceContainer from "../shared/containers/ability_scores/IntelligenceContainer"
-import WisdomContainer from "../shared/containers/ability_scores/WisdomContainer"
-import CharismaContainer from "../shared/containers/ability_scores/CharismaContainer"
-import OutputField from "./components/common/OutputField";
 import AbilityScoresSection from "./components/AbilityScoresSection";
 import CharacterSection from "./components/CharacterSection";
 import HealthSection from "./components/HealthSection";
@@ -38,6 +29,7 @@ import CombatManeuverSection from "./components/CombatManeuverSection";
 import ArmourSection from "./components/ArmourSection";
 import ShieldSection from "./components/ShieldSection";
 import SkillsSection from "./components/SkillsSection";
+import EquipmentSection from "./components/EquipmentSection";
 
 const store = configureStore()
 
@@ -112,7 +104,7 @@ export default class App extends React.Component {
                                     <ShieldContainer className="col" shieldComponent={ShieldSection} />
                                 </div>
                             </div>
-                            <EquipmentContainer className="col-6 px-5" openEquipModal={this.openEquipModal} />
+                            <EquipmentContainer className="col-6 px-5" openEquipModal={this.openEquipModal} equipmentSectionComponent={EquipmentSection} />
                         </div>
                     </div>
                 </div>

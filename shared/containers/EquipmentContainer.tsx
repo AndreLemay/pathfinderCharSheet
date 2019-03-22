@@ -1,36 +1,32 @@
 import * as React from "react"
 import { connect } from "react-redux"
 import CharacterSheetState, { EquipmentState } from "../store/types";
-import IndividualEquipmentContainer from "./IndividualEquipmentContainer";
-import SectionHeader from "../../desktop/components/common/SectionHeader";
+import { EquipmentSectionProps } from "../api/componentPropTypes";
 
 interface OwnProps {
     className?: string
     openEquipModal: (onSave: (state: EquipmentState) => void, equip?: EquipmentState) => void
+    equipmentSectionComponent: React.ComponentClass<EquipmentSectionProps>
 }
 
 interface StateProps {
-    equipment: EquipmentState[]
+    equipIds: string[]
 }
 
 type EquipmentContainerProps = StateProps & OwnProps
 
 class EquipmentContainer extends React.Component<EquipmentContainerProps> {
     render() {
-        return (
-            <div className={this.props.className}>
-                <SectionHeader label="Equipment" />
-                {this.props.equipment.map((equip, index) => {
-                    return <IndividualEquipmentContainer key={index} uuid={equip.uuid} openEquipModal={this.props.openEquipModal} />
-                })}
-            </div>
-        )
+        return React.createElement(this.props.equipmentSectionComponent, {
+            equipIds: this.props.equipIds,
+            openEquipModal: this.props.openEquipModal
+        })
     }
 }
 
 function mapStateToProps(state: CharacterSheetState): StateProps {
     return {
-        equipment: state.equipment
+        equipIds: state.equipment.map(e => e.uuid)
     }
 }
 

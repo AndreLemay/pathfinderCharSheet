@@ -1,4 +1,5 @@
 import { AlignmentValue, GenderValue, SizeValue, ArmourTypeValue, SkillNameValue } from "./enums";
+import { ValueBonus, EquipmentState } from "../store/types";
 
 export interface ClassNameProp {
     className?: string
@@ -145,4 +146,23 @@ export interface SkillProps extends ClassNameProp {
 
 export interface SkillsSectionProps extends ClassNameProp {
     skills: number[]
+}
+
+export interface EquipmentProps extends ClassNameProp {
+    name: string
+    description: string
+    bonuses: ValueBonus[]
+    onEdit: (equip: EquipInfoBundle) => void
+    onDelete: () => void
+}
+
+export interface EquipmentSectionProps extends ClassNameProp {
+    equipIds: string[]
+    openEquipModal: (onSave: (state: EquipmentState) => void, equip?: EquipmentState) => void
+}
+
+export interface EquipInfoBundle {
+    name: string
+    description: string
+    bonuses: ValueBonus[]
 }

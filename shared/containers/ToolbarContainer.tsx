@@ -10,8 +10,8 @@ import * as jetpack from "fs-jetpack"
 import { EnumValue } from "ts-enums";
 import { StatTypeValue } from "../api/enums";
 import uuid = require("uuid");
-import { EquipInfoBundle } from "../../desktop/components/EquipmentModal";
 import { FeatInfoBundle } from "../../desktop/components/FeatModal";
+import { EquipInfoBundle } from "../api/componentPropTypes";
 
 interface OwnProps {
     openFeatModal: (onSave: (state: FeatState) => void, feat?: FeatState) => void
