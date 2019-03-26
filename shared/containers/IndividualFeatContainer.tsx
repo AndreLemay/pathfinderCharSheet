@@ -44,7 +44,7 @@ class IndividualFeatContainer extends React.Component<IndividualFeatContainerPro
             bonuses: this.props.bonuses,
             active: this.props.active,
             onActiveChange: this.props.activeChange,
-            onEdit: this.props.edit,
+            onEdit: this.edit,
             onDelete: this.props.delete
         })
     }
