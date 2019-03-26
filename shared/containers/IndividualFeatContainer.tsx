@@ -1,7 +1,6 @@
 import * as React from "react"
 import { connect } from "react-redux"
 import CharacterSheetState, { ValueBonus } from "../store/types";
-import Feat from "../../desktop/components/Feat";
 import { activeUpdate, editFeat, deleteFeat } from "../store/actions/featActions";
 import { FeatInfoBundle, FeatProps } from "../api/componentPropTypes";
 
