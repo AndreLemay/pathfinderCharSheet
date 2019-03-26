@@ -18,6 +18,7 @@ type EquipmentContainerProps = StateProps & OwnProps
 class EquipmentContainer extends React.Component<EquipmentContainerProps> {
     render() {
         return React.createElement(this.props.equipmentSectionComponent, {
+            className: this.props.className,
             equipIds: this.props.equipIds,
             openEquipModal: this.props.openEquipModal
         })
