@@ -16,7 +16,7 @@ import EquipmentContainer from "../shared/containers/EquipmentContainer";
 import InitiativeContainer from "../shared/containers/InitiativeContainer";
 import ToolbarContainer from "../shared/containers/ToolbarContainer";
 import EquipmentModal from "./components/EquipmentModal";
-import FeatModal, { FeatInfoBundle } from "./components/FeatModal";
+import FeatModal from "./components/FeatModal";
 import AttackModal, { AttackInfoBundle } from "./components/AttackModal";
 import AbilityScoresSection from "./components/AbilityScoresSection";
 import CharacterSection from "./components/CharacterSection";
@@ -30,6 +30,8 @@ import ArmourSection from "./components/ArmourSection";
 import ShieldSection from "./components/ShieldSection";
 import SkillsSection from "./components/SkillsSection";
 import EquipmentSection from "./components/EquipmentSection";
+import { FeatInfoBundle } from "../shared/api/componentPropTypes";
+import FeatsSection from "./components/FeatsSection";
 
 const store = configureStore()
 
@@ -81,7 +83,7 @@ export default class App extends React.Component {
                             </div>
                         </div>
                         <div className="row mt-4">
-                            <FeatsContainer className="col-4 pl-5" openFeatModal={this.openFeatModal} />
+                            <FeatsContainer className="col-4 pl-5" openFeatModal={this.openFeatModal} featsSectionComponent={FeatsSection} />
                             <SkillsContainer className="col-8 px-5" skillsSectionComponent={SkillsSection} />
                         </div>
                         <div className="row mt-4">

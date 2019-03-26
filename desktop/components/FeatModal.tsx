@@ -5,12 +5,9 @@ import InputField from "./common/InputField";
 import DropdownField from "./common/DropdownField";
 import { ValueBonus, FeatState } from "../../shared/store/types";
 import OutputField from "./common/OutputField";
+import { FeatInfoBundle } from "../../shared/api/componentPropTypes";
 
-export interface FeatInfoBundle {
-    name: string
-    description: string
-    bonuses: ValueBonus[]
-}
+
 
 interface ModalState {
     modal: boolean

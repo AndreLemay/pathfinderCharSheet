@@ -1,37 +1,33 @@
 import * as React from "react"
-import CharacterSheetState, { FeatState } from "../store/types";
-import SectionHeader from "../../desktop/components/common/SectionHeader";
+import CharacterSheetState from "../store/types";
 import { connect } from "react-redux"
-import IndividualFeatContainer from "./IndividualFeatContainer";
-import { FeatInfoBundle } from "../../desktop/components/FeatModal";
+import { FeatInfoBundle, FeatsSectionProps } from "../api/componentPropTypes";
 
 interface OwnProps {
     className?: string
     openFeatModal: (onSave: (state: FeatInfoBundle) => void, feat?: FeatInfoBundle) => void
+    featsSectionComponent: React.ComponentClass<FeatsSectionProps>
 }
 
 interface StateProps {
-    feats: FeatState[]
+    featIds: string[]
 }
 
 type FeatsContainerProps = StateProps & OwnProps
 
 class FeatsContainer extends React.Component<FeatsContainerProps> {
     render() {
-        return (
-            <div className={this.props.className}>
-                <SectionHeader label="Feats/Abilities" />
-                {this.props.feats.map((feat, index) => {
-                    return <IndividualFeatContainer key={index} uuid={feat.uuid} openFeatModal={this.props.openFeatModal} />
-                })}
-            </div>
-        )
+        return React.createElement(this.props.featsSectionComponent, {
+            className: this.props.className,
+            featIds: this.props.featIds,
+            openFeatModal: this.props.openFeatModal
+        })
     }
 }
 
 function mapStateToProps(state: CharacterSheetState): StateProps {
     return {
-        feats: state.feats
+        featIds: state.feats.map(f => f.uuid)
     }
 }
 

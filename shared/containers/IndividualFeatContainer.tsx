@@ -1,14 +1,15 @@
 import * as React from "react"
 import { connect } from "react-redux"
-import CharacterSheetState, { ValueBonus, FeatState } from "../store/types";
+import CharacterSheetState, { ValueBonus } from "../store/types";
 import Feat from "../../desktop/components/Feat";
 import { activeUpdate, editFeat, deleteFeat } from "../store/actions/featActions";
-import { FeatInfoBundle } from "../../desktop/components/FeatModal";
+import { FeatInfoBundle, FeatProps } from "../api/componentPropTypes";
 
 export interface OwnProps {
     uuid: string
     className?: string
     openFeatModal: (onSave: (state: FeatInfoBundle) => void, feat?: FeatInfoBundle) => void
+    featComponent: React.ComponentClass<FeatProps>
 }
 
 interface StateProps {
@@ -37,16 +38,16 @@ class IndividualFeatContainer extends React.Component<IndividualFeatContainerPro
         })
     }
     render() {
-        return (
-            <Feat className={this.props.className}
-                name={this.props.name}
-                description={this.props.description}
-                bonuses={this.props.bonuses}
-                active={this.props.active}
-                onActiveChange={this.props.activeChange}
-                onEdit={this.edit}
-                onDelete={this.props.delete} />
-        )
+        return React.createElement(this.props.featComponent, {
+            className: this.props.className,
+            name: this.props.name,
+            description: this.props.description,
+            bonuses: this.props.bonuses,
+            active: this.props.active,
+            onActiveChange: this.props.activeChange,
+            onEdit: this.props.edit,
+            onDelete: this.props.delete
+        })
     }
 }
 

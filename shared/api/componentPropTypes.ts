@@ -166,3 +166,24 @@ export interface EquipInfoBundle {
     description: string
     bonuses: ValueBonus[]
 }
+
+export interface FeatProps extends ClassNameProp {
+    name: string
+    description: string
+    bonuses: ValueBonus[]
+    active: boolean
+    onActiveChange: (active: boolean) => void
+    onEdit: (feat: FeatInfoBundle) => void
+    onDelete: () => void
+}
+
+export interface FeatsSectionProps extends ClassNameProp {
+    featIds: string[]
+    openFeatModal: (onSave: (state: FeatInfoBundle) => void, feat?: FeatInfoBundle) => void
+}
+
+export interface FeatInfoBundle {
+    name: string
+    description: string
+    bonuses: ValueBonus[]
+}
