@@ -33,6 +33,7 @@ import EquipmentSection from "./components/EquipmentSection";
 import { FeatInfoBundle, AttackInfoBundle } from "../shared/api/componentPropTypes";
 import FeatsSection from "./components/FeatsSection";
 import AttacksSection from "./components/AttacksSection";
+import Toolbar from "./components/Toolbar";
 
 const store = configureStore()
 
@@ -67,7 +68,8 @@ export default class App extends React.Component {
                     <ToolbarContainer
                         openFeatModal={this.openFeatModal}
                         openEquipModal={this.openEquipModal}
-                        openAttackModal={this.openAttackModal} />
+                        openAttackModal={this.openAttackModal}
+                        toolbarComponent={Toolbar} />
                     <div className="container-fluid">
                         <div className="row mt-4">
                         <div className="col-6 px-5">

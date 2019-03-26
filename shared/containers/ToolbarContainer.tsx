@@ -3,10 +3,7 @@ import { connect } from "react-redux"
 import Toolbar from "../../desktop/components/Toolbar";
 import { loadCharacter, addAttack, addFeat, addEquip } from "../store/actions/toolbarActions";
 import CharacterSheetState, { EquipmentState, ValueBonus, FeatState, AttackState } from "../store/types";
-import { AttackInfoBundle } from "../api/componentPropTypes";
-import { remote } from "electron";
-import * as path from "path"
-import * as jetpack from "fs-jetpack"
+import { AttackInfoBundle, ToolbarProps } from "../api/componentPropTypes";
 import { EnumValue } from "ts-enums";
 import { StatTypeValue } from "../api/enums";
 import uuid = require("uuid");
@@ -16,6 +13,7 @@ interface OwnProps {
     openFeatModal: (onSave: (state: FeatState) => void, feat?: FeatState) => void
     openEquipModal: (onSave: (state: EquipmentState) => void, equip?: EquipmentState) => void
     openAttackModal: (onSave: (state: AttackInfoBundle) => void, attack?: AttackState) => void
+    toolbarComponent: React.ComponentClass<ToolbarProps>
 }
 
 interface StateProps {
@@ -122,17 +120,14 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
     private defaultSaveName = () => this.props.state.character.name
     
     render() {
-        return (
-            <div>
-                <Toolbar
-                    defaultSaveName={this.defaultSaveName}
-                    getSaveFile={this.stateAsSav}
-                    load={this.props.load}
-                    addAttack={this.onAddAttackClicked}
-                    addEquip={this.onAddEquipClicked}
-                    addFeat={this.onAddFeatClicked} />
-            </div>
-        )
+        return React.createElement(this.props.toolbarComponent, {
+            defaultSaveName: this.defaultSaveName,
+            getSaveFile: this.stateAsSav,
+            load: this.props.load,
+            addAttack: this.onAddAttackClicked,
+            addEquip: this.onAddEquipClicked,
+            addFeat: this.onAddFeatClicked
+        })
     }
 }
 

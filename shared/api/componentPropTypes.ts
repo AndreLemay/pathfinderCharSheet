@@ -218,3 +218,12 @@ export interface AttackInfoBundle {
     toHitBonusAbility: AbilityTypeValue
     dmgBonusAbility: AbilityTypeValue
 }
+
+export interface ToolbarProps {
+    defaultSaveName: () => string
+    getSaveFile: () => any
+    load: (data: any) => void
+    addEquip: () => void
+    addFeat: () => void
+    addAttack: () => void
+}

@@ -2,15 +2,7 @@ import * as React from "react"
 import * as path from "path"
 import * as jetpack from "fs-jetpack"
 import { remote } from "electron"
-
-interface ToolbarProps {
-    defaultSaveName: () => string
-    getSaveFile: () => any
-    load: (data: any) => void
-    addEquip: () => void
-    addFeat: () => void
-    addAttack: () => void
-}
+import { ToolbarProps } from "../../shared/api/componentPropTypes";
 
 interface OwnState {
     dropdownOpen: boolean
