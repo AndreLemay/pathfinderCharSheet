@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import Toolbar from "../../desktop/components/Toolbar";
 import { loadCharacter, addAttack, addFeat, addEquip } from "../store/actions/toolbarActions";
 import CharacterSheetState, { EquipmentState, ValueBonus, FeatState, AttackState } from "../store/types";
-import { AttackInfoBundle } from "../../desktop/components/AttackModal";
+import { AttackInfoBundle } from "../api/componentPropTypes";
 import { remote } from "electron";
 import * as path from "path"
 import * as jetpack from "fs-jetpack"

@@ -1,17 +1,19 @@
 import * as React from "react"
 import { connect } from "react-redux"
-import Attack from "../../desktop/components/Attack";
-import CharacterSheetState, { ValueBonus, AttackState } from "../store/types";
+import CharacterSheetState, { ValueBonus } from "../store/types";
 import { getDamageBonus, getMiscAttackBonus } from "../store/selectors/baseAttackSelectors";
-import { AttackInfoBundle } from "../../desktop/components/AttackModal";
+import { AttackInfoBundle } from "../api/componentPropTypes";
 import { DamageDieValue, AbilityTypeValue, AbilityType } from "../api/enums";
 import { editAttack, deleteAttack } from "../store/actions/attackActions";
 import { getStrengthBonus, getDexterityBonus, getConstitutionBonus, getIntelligenceBonus, getWisdomBonus, getCharismaBonus } from "../store/selectors/abilityScoreSelectors";
+import { AttackProps } from "../api/componentPropTypes";
 
 interface OwnProps {
+    className?: string
     attackUuid: string
     equipUuid: string
     openAttackModal: (onSave: (state: AttackInfoBundle) => void, attack?: AttackInfoBundle) => void
+    attackComponent: React.ComponentClass<AttackProps>
 }
 
 interface StateProps {
@@ -65,18 +67,18 @@ class IndividualAttackContainer extends React.Component<IndividualAttackContaine
     }
 
     render() {
-        return (
-            <Attack
-                name={this.props.name}
-                description={this.props.description}
-                range={this.props.range}
-                type={this.props.type}
-                toHit={'+' + this.props.toHitBonus}
-                damage={this.damageString()}
-                critical={this.critString()}
-                onEdit={this.edit}
-                onDelete={this.props.delete} />
-        )
+        return React.createElement(this.props.attackComponent, {
+            className: this.props.className,
+            name: this.props.name,
+            description: this.props.description,
+            range: this.props.range,
+            type: this.props.type,
+            toHit: `+${this.props.toHitBonus}`,
+            damage: this.damageString(),
+            critical: this.critString(),
+            onEdit: this.edit,
+            onDelete: this.props.delete
+        })
     }
 }
 

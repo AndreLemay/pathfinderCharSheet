@@ -17,7 +17,7 @@ import InitiativeContainer from "../shared/containers/InitiativeContainer";
 import ToolbarContainer from "../shared/containers/ToolbarContainer";
 import EquipmentModal from "./components/EquipmentModal";
 import FeatModal from "./components/FeatModal";
-import AttackModal, { AttackInfoBundle } from "./components/AttackModal";
+import AttackModal from "./components/AttackModal";
 import AbilityScoresSection from "./components/AbilityScoresSection";
 import CharacterSection from "./components/CharacterSection";
 import HealthSection from "./components/HealthSection";
@@ -30,8 +30,9 @@ import ArmourSection from "./components/ArmourSection";
 import ShieldSection from "./components/ShieldSection";
 import SkillsSection from "./components/SkillsSection";
 import EquipmentSection from "./components/EquipmentSection";
-import { FeatInfoBundle } from "../shared/api/componentPropTypes";
+import { FeatInfoBundle, AttackInfoBundle } from "../shared/api/componentPropTypes";
 import FeatsSection from "./components/FeatsSection";
+import AttacksSection from "./components/AttacksSection";
 
 const store = configureStore()
 
@@ -95,7 +96,7 @@ export default class App extends React.Component {
                                     <CombatManeuversContainer className="col" combatManeuverComponent={CombatManeuverSection} />
                                 </div>
                             </div>
-                            <AttacksContainer className="col-6 px-5" openAttackModal={this.openAttackModal} />
+                            <AttacksContainer className="col-6 px-5" openAttackModal={this.openAttackModal} attacksSectionComponent={AttacksSection} />
                         </div>
                         <div className="row mt-4">
                             <div className="col-6 px-5">

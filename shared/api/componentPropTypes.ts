@@ -1,4 +1,4 @@
-import { AlignmentValue, GenderValue, SizeValue, ArmourTypeValue, SkillNameValue } from "./enums";
+import { AlignmentValue, GenderValue, SizeValue, ArmourTypeValue, SkillNameValue, DamageDieValue, AbilityTypeValue } from "./enums";
 import { ValueBonus, EquipmentState } from "../store/types";
 
 export interface ClassNameProp {
@@ -152,7 +152,7 @@ export interface EquipmentProps extends ClassNameProp {
     name: string
     description: string
     bonuses: ValueBonus[]
-    onEdit: (equip: EquipInfoBundle) => void
+    onEdit: () => void
     onDelete: () => void
 }
 
@@ -173,7 +173,7 @@ export interface FeatProps extends ClassNameProp {
     bonuses: ValueBonus[]
     active: boolean
     onActiveChange: (active: boolean) => void
-    onEdit: (feat: FeatInfoBundle) => void
+    onEdit: () => void
     onDelete: () => void
 }
 
@@ -186,4 +186,35 @@ export interface FeatInfoBundle {
     name: string
     description: string
     bonuses: ValueBonus[]
+}
+
+export interface AttackProps extends ClassNameProp {
+    name: string
+    description: string
+    range: number
+    type: string
+    toHit: string
+    damage: string
+    critical: string
+    onEdit: () => void
+    onDelete: () => void
+}
+
+export interface AttacksSectionProps extends ClassNameProp {
+    attackAndEquipIds: [string, string][]
+    openAttackModal: (onSave: (state: AttackInfoBundle) => void, attack?: AttackInfoBundle) => void
+}
+
+export interface AttackInfoBundle {
+    name: string
+    description: string
+    bonuses: ValueBonus[]
+    range: number
+    type: string
+    critRange: number
+    critMultiplier: number
+    dmgDieCount: number
+    dmgDie: DamageDieValue
+    toHitBonusAbility: AbilityTypeValue
+    dmgBonusAbility: AbilityTypeValue
 }

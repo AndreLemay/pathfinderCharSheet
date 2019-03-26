@@ -5,20 +5,7 @@ import InputField from "./common/InputField";
 import DropdownField from "./common/DropdownField";
 import { ValueBonus } from "../../shared/store/types";
 import OutputField from "./common/OutputField";
-
-export interface AttackInfoBundle {
-    name: string
-    description: string
-    bonuses: ValueBonus[]
-    range: number
-    type: string
-    critRange: number
-    critMultiplier: number
-    dmgDieCount: number
-    dmgDie: DamageDieValue
-    toHitBonusAbility: AbilityTypeValue
-    dmgBonusAbility: AbilityTypeValue
-}
+import { AttackInfoBundle } from "../../shared/api/componentPropTypes";
 
 interface ModalState {
     modal: boolean

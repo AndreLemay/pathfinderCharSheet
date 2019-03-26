@@ -1,4 +1,4 @@
-import { AttackInfoBundle } from "../../../desktop/components/AttackModal";
+import { AttackInfoBundle } from "../../api/componentPropTypes";
 import { action } from "typesafe-actions";
 import { AttackActionTypes } from "./actionTypes";
 
