@@ -1,8 +1,12 @@
 import * as React from "react"
+import * as path from "path"
+import * as jetpack from "fs-jetpack"
+import { remote } from "electron"
 
 interface ToolbarProps {
-    save: () => void
-    load: () => void
+    defaultSaveName: () => string
+    getSaveFile: () => any
+    load: (data: any) => void
     addEquip: () => void
     addFeat: () => void
     addAttack: () => void
@@ -26,6 +30,29 @@ export default class Toolbar extends React.Component<ToolbarProps, OwnState> {
         })
     }
 
+    onSaveClicked = () => {
+        let savePath = path.join(remote.app.getPath("appData"), "pfCharSheets", `${this.props.defaultSaveName()}.sav`)
+        remote.dialog.showSaveDialog({
+            title: "Save Character",
+            defaultPath: savePath
+        }, (path) => {
+            jetpack.write(path.endsWith(".sav") ? path : `${path}.sav`, this.props.getSaveFile())
+        })
+    }
+
+    onLoadClicked = () => {
+        remote.dialog.showOpenDialog(remote.getCurrentWindow(), {
+            defaultPath: path.join(remote.app.getPath("appData"), "pfCharSheets"),
+            filters: [{ name: "Character Save Files", extensions: ["sav"] }],
+            properties: ["openFile"]
+        }, (paths: string[]) => {
+            if (paths && paths.length > 0) {
+                let loadPath = paths[0]
+                this.props.load(jetpack.read(loadPath, "json"))
+            }
+        })
+    }
+
     render() {
         return (
             <div className="navbar fixed-top navbar-expand navbar-dark bg-dark">
@@ -34,8 +61,8 @@ export default class Toolbar extends React.Component<ToolbarProps, OwnState> {
                         <a href="#" className="nav-link dropdown-toggle" id="fileMenuLink" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">File</a>
                         <div className="dropdown-menu" aria-labelledby="fileMenuLink">
-                            <a className="dropdown-item" href="#" onClick={this.props.save}>Save</a>
-                            <a className="dropdown-item" href="#" onClick={this.props.load}>Load</a>
+                            <a className="dropdown-item" href="#" onClick={this.onSaveClicked}>Save</a>
+                            <a className="dropdown-item" href="#" onClick={this.onLoadClicked}>Load</a>
                         </div>
                     </div>
                     <div className="nav-item">

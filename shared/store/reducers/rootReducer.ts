@@ -168,7 +168,7 @@ const rootReducer: Reducer<CharacterSheetState> = (state: CharacterSheetState, a
 
     switch (action.type) {
         case ToolbarActionTypes.LOAD: {
-            return savAsState(jetpack.read(action.payload, "json"))
+            return savAsState(action.payload.data)
         }
         default: return appReducer(state, action)
     }

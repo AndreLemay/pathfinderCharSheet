@@ -23,7 +23,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    load: (path: string) => void
+    load: (data: any) => void
     addFeat: (feat: FeatState) => void
     addEquip: (equip: EquipmentState) => void
     addAttack: (attack: AttackState, equip: EquipmentState) => void
@@ -65,29 +65,6 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
         let state = this.props.state
 
         return copyProps(state)
-    }
-
-    private onSaveClicked = () => {
-        let savePath = path.join(remote.app.getPath("appData"), "pfCharSheets", this.props.state.character.name + ".sav")
-        remote.dialog.showSaveDialog({
-            title: "Save Character",
-            defaultPath: savePath
-        }, (path) => {
-            jetpack.write(path, JSON.stringify(this.stateAsSav(), null, 4))
-        })
-    }
-
-    private onLoadClicked = () => {
-        remote.dialog.showOpenDialog(remote.getCurrentWindow(), {
-            defaultPath: path.join(remote.app.getPath("appData"), "pfCharSheets"),
-            filters: [{ name: "Character Save Files", extensions: ["sav"] }],
-            properties: ["openFile"]
-        }, (paths: string[]) => {
-            if (paths.length > 0) {
-                let loadPath = paths[0]
-                this.props.load(loadPath)
-            }
-        })
     }
 
     private onAddFeatClicked = () => {
@@ -142,12 +119,15 @@ class ToolbarContainer extends React.Component<ToolbarContainerProps> {
         this.props.addAttack(attack, equip)
     }
 
+    private defaultSaveName = () => this.props.state.character.name
+    
     render() {
         return (
             <div>
                 <Toolbar
-                    save={this.onSaveClicked}
-                    load={this.onLoadClicked}
+                    defaultSaveName={this.defaultSaveName}
+                    getSaveFile={this.stateAsSav}
+                    load={this.props.load}
                     addAttack={this.onAddAttackClicked}
                     addEquip={this.onAddEquipClicked}
                     addFeat={this.onAddFeatClicked} />
@@ -164,7 +144,7 @@ function mapStateToProps(state: CharacterSheetState): StateProps {
 
 function mapDispatchToProps(dispatch): DispatchProps {
     return {
-        load: path => dispatch(loadCharacter(path)),
+        load: data => dispatch(loadCharacter(data)),
         addAttack: (attack, equip) => dispatch(addAttack(attack, equip)),
         addFeat: feat => dispatch(addFeat(feat)),
         addEquip: equip => dispatch(addEquip(equip))
