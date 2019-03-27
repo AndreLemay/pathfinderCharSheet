@@ -8,6 +8,7 @@
     "watch": "tsc -w",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "start": "npm run build && electron ./dist/desktop/main.js",
+    "start-mobile": "npm run build && cd mobile && npm start",
     "dist": "npm run build && electron-builder"
   },
   "build": {
