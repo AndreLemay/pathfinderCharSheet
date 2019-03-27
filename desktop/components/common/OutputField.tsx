@@ -3,7 +3,7 @@ import * as React from "react"
 interface OutputProps {
     className?: string
     label?: string
-    fieldType?: string
+    fieldType?: "text" | "number" | "textarea"
     value: string | number
 }
 
