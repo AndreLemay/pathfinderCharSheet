@@ -1,14 +1,21 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, ScrollView, ViewPagerAndroid } from 'react-native';
+import { Provider } from "react-redux"
+import configureStore from "../shared/store/configureStore";
+import AbilityScoreSection from './components/AbilityScoreSection';
 
-export default class App extends React.Component<{}> {
+const store = configureStore()
+
+export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.ts to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <Provider store={store}>
+        <ScrollView>
+          <ViewPagerAndroid>
+            <AbilityScoreSection key="1"/>
+          </ViewPagerAndroid>
+        </ScrollView>
+      </Provider>
     );
   }
 }

@@ -1,4 +1,8 @@
 {
+  "include": [
+    "../shared/**/*.ts",
+    "../shared/**/*.tsx"
+  ],
   "compilerOptions": {
     "target": "es5",
     "module": "es2015",
@@ -6,7 +10,11 @@
     "sourceMap": true,
     "experimentalDecorators": true,
     "jsx": "react-native",
-    "lib": ["dom", "es2015", "es2016"],
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016"
+    ],
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "noEmitHelpers": true,
