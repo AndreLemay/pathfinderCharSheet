@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, ScrollView, ViewPagerAndroid } from 'react-native';
+import { StyleSheet, ScrollView, ViewPagerAndroid, View } from 'react-native';
 import { Provider } from "react-redux"
 import configureStore from "../shared/store/configureStore";
 import AbilityScoreSection from './components/AbilityScoreSection';
@@ -10,11 +10,13 @@ export class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <ScrollView>
-          <ViewPagerAndroid>
-            <AbilityScoreSection key="1"/>
-          </ViewPagerAndroid>
-        </ScrollView>
+        <View style={styles.container}>
+          <ScrollView>
+            {/* <ViewPagerAndroid style={styles.container}> */}
+            <AbilityScoreSection key="1" />
+            {/* </ViewPagerAndroid> */}
+          </ScrollView>
+        </View>
       </Provider>
     );
   }
@@ -23,8 +25,7 @@ export class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexGrow: 1,
+    backgroundColor: '#fff'
   },
 });
