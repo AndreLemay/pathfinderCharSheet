@@ -9,6 +9,7 @@
     "watch": "tsc -w",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "start": "npm run build && electron ./dist/desktop/main.js",
+    "start-mobile": "npm run build-mobile && npm run start --prefix expo",
     "dist": "npm run build && electron-builder"
   },
   "build": {
