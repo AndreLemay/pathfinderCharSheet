@@ -1,29 +1,30 @@
 {
     "include": [
-        "src/desktop/**/*.ts",
-        "src/desktop/**/*.tsx",
         "src/shared/**/*.ts",
-        "src/shared/**/*.tsx"
+        "src/shared/**/*.tsx",
+        "src/mobile/**/*.ts",
+        "src/mobile/**/*.tsx"
     ],
     "exclude": [
-        "dist"
+        "expo/dist",
+        "dist",
+        "node_module/@types/node/"
     ],
     "compilerOptions": {
         "lib": [
-            "es6",
-            "dom"
+            "es6"
         ],
         "types": [
-            "bootstrap",
-            "jquery",
             "react",
+            "react-native",
+            "react-redux",
             "react-dom",
             "uuid"
         ],
-        "jsx": "react",
+        "jsx": "react-native",
         "target": "es6",
         "module": "commonjs",
-        "outDir": "dist",
+        "outDir": "expo/dist",
         "moduleResolution": "node",
         "sourceMap": true,
     }
