@@ -10,3 +10,4 @@ packaged
 *.log
 
 out/
+expo/.expo
