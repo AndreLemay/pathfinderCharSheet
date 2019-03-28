@@ -6,7 +6,9 @@ import OutputField from "./common/OutputField";
 
 export default function AbilityScore(props: AbilityScoreProps) {
     return (
-        <View>
+        <View style={{
+            flexDirection: "row"
+        }}>
             <View><Text>{props.label}</Text></View>
             <InputField 
                 label="Base"
