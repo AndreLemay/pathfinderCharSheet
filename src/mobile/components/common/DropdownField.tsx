@@ -22,7 +22,7 @@ export default function DropdownField(props: DropdownProps) {
                 selectedValue={props.value}
                 onValueChange={onChange}>
                 {props.dropdownType.values.map(x => 
-                    <Picker.Item label={x.description} value={x.ordinal} />)}
+                    <Picker.Item key={x.ordinal} label={x.description} value={x.ordinal} />)}
             </Picker>
         </View>
     )
