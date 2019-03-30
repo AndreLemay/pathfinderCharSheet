@@ -17,6 +17,7 @@
         "types": [
             "react",
             "react-native",
+            "react-native-elements",
             "react-redux",
             "react-dom",
             "uuid"
