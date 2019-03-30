@@ -1,5 +1,5 @@
 import * as React from "react"
-import { TextInput, View, Text } from "react-native";
+import { Input } from "react-native-elements";
 
 interface InputProps {
     label?: string
@@ -32,18 +32,14 @@ export default class InputField extends React.Component<InputProps, InputState> 
 
     render() {
         return (
-            <View>
-                {this.props.label && this.props.label.length > 0 &&
-                    <Text>{this.props.label}</Text>}
-                <TextInput
-                    keyboardType={this.props.inputType === "number" ? "numeric" : "default"}
-                    multiline={this.props.inputType === "textarea"}
-                    numberOfLines={3}
-                    onChangeText={this.change}
-                    value={this.props.value + ""} />
-                {this.state.error && this.state.error.length > 0 &&
-                    <Text>{this.state.error}</Text>}
-            </View>
+            <Input
+                label={this.props.label}
+                keyboardType={this.props.inputType === "number" ? "numeric" : "default"}
+                multiline={this.props.inputType === "textarea"}
+                numberOfLines={3}
+                value={this.props.value + ""}
+                onChangeText={this.props.onValueChange}
+                errorMessage={this.state.error} />
         )
     }
 }

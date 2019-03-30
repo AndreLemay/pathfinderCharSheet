@@ -12,7 +12,7 @@ export default function AbilityScore(props: AbilityScoreProps) {
             <View><Text>{props.label}</Text></View>
             <InputField 
                 label="Base"
-                inputType={"number"}
+                inputType="number"
                 value={props.base}
                 onValueChange={props.baseChange}
                 validator={(val: number) => {

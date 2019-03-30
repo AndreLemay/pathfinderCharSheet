@@ -1,5 +1,5 @@
 import * as React from "react"
-import { View, TextInput, Text } from "react-native";
+import { Input } from "react-native-elements";
 
 interface OutputProps {
     label?: string
@@ -9,14 +9,10 @@ interface OutputProps {
 
 export default function OutputField(props: OutputProps) {
     return (
-        <View>
-            {props.label && props.label.length > 0 &&
-                <Text>{props.label}</Text>}
-            <TextInput
-                editable={false}
-                multiline={props.inputType === "textarea"}
-                numberOfLines={3}
-                value={props.value + ""} />            
-        </View>
+        <Input
+            label={props.label}
+            multiline={props.inputType === "textarea"}
+            numberOfLines={3}
+            value={props.value + ""} />
     )
 }
