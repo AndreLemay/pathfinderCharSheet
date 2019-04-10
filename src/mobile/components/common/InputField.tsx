@@ -1,8 +1,12 @@
 import * as React from "react"
 import { Input } from "react-native-elements";
+import Styles from "../../styles/Styles";
 
 interface InputProps {
     label?: string
+    style?: any[]
+    labelStyle?: any[]
+    containerStyle?: any[]
     inputType?: "text" | "number" | "textarea"
     value: number | string
     onValueChange: (value: number | string) => void
@@ -32,7 +36,9 @@ export default class InputField extends React.Component<InputProps, InputState> 
 
     render() {
         return (
-            <Input
+            <Input inputStyle={[...(this.props.style || []), { backgroundColor: 'green' }]} 
+                containerStyle={[...(this.props.containerStyle || []), { backgroundColor: 'red'}]} 
+                labelStyle={[...(this.props.labelStyle || []), { backgroundColor: 'blue' }]}
                 label={this.props.label}
                 keyboardType={this.props.inputType === "number" ? "numeric" : "default"}
                 multiline={this.props.inputType === "textarea"}

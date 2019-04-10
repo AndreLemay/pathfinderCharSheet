@@ -8,10 +8,11 @@ import IntelligenceContainer from "../../shared/containers/ability_scores/Intell
 import WisdomContainer from "../../shared/containers/ability_scores/WisdomContainer";
 import CharismaContainer from "../../shared/containers/ability_scores/CharismaContainer";
 import AbilityScore from "./AbilityScore";
+import Styles from "../styles/Styles";
 
 export default function AbilityScoreSection() {
     return (
-        <View>
+        <View style={{}}>
             <SectionHeader label="Ability Scores" />
             <StrengthContainer abilityScoreComponent={AbilityScore} />
             <DexterityContainer abilityScoreComponent={AbilityScore} />

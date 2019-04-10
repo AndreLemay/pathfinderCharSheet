@@ -3,14 +3,14 @@ import { AbilityScoreProps } from "../../shared/api/componentPropTypes";
 import { View, Text } from "react-native";
 import InputField from "./common/InputField";
 import OutputField from "./common/OutputField";
+import Styles from "../styles/Styles";
 
 export default function AbilityScore(props: AbilityScoreProps) {
     return (
-        <View style={{
-            flexDirection: "row"
-        }}>
-            <View><Text>{props.label}</Text></View>
+        <View style={[Styles.row]}>
+            <View style={[Styles.col]}><Text>{props.label}</Text></View>
             <InputField 
+                containerStyle={[Styles.col]}
                 label="Base"
                 inputType="number"
                 value={props.base}
@@ -22,9 +22,11 @@ export default function AbilityScore(props: AbilityScoreProps) {
                     return null;
                 }} />
             <OutputField
+                containerStyle={[Styles.col]}
                 label="Additional"
                 value={props.additional} />
             <OutputField
+                containerStyle={[Styles.col]}
                 label="Bonus"
                 value={props.bonus} />
         </View>

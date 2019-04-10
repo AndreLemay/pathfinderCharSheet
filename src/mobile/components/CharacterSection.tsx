@@ -5,38 +5,39 @@ import SectionHeader from "./common/SectionHeader";
 import InputField from "./common/InputField";
 import DropdownField from "./common/DropdownField"
 import { Alignment, Gender, Size } from "../../shared/api/enums";
+import Styles from "../styles/Styles";
 
 export default function CharacterSection(props: CharacterProps) {
     return (
-        <View>
+        <View style={[Styles.container]}>
             <SectionHeader label="Character" />
-            <View style={{
-                flexDirection: "row"
-            }}>
-                <InputField
+            <View style={[Styles.row]}>
+                <InputField containerStyle={[Styles.col]}
                     label="Name"
                     value={props.name}
                     onValueChange={props.nameChange} />
-                <DropdownField
+                <DropdownField containerStyle={[Styles.col]}
                     label="Alignment"
                     value={props.alignment}
                     onValueChange={props.alignmentChange}
                     dropdownType={Alignment} />
-                <DropdownField
+                <DropdownField containerStyle={[Styles.col]}
                     label="Gender"
                     value={props.gender}
                     onValueChange={props.genderChange}
                     dropdownType={Gender} />
-                <InputField
+            </View>
+            <View style={[Styles.row]}>
+                <InputField containerStyle={[Styles.col]}
                     label="Race"
                     value={props.race}
                     onValueChange={props.raceChange} />
-                <DropdownField
+                <DropdownField containerStyle={[Styles.col]}
                     label="Size"
                     value={props.size}
                     onValueChange={props.sizeChange}
                     dropdownType={Size} />
             </View>
-        </View>
+        </View >
     )
 }
