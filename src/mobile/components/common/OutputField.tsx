@@ -13,9 +13,9 @@ interface OutputProps {
 
 export default function OutputField(props: OutputProps) {
     return (
-        <Input inputStyle={[...(props.style || []), { backgroundColor: 'green' }]} 
-            containerStyle={[...(props.containerStyle || []), { backgroundColor: 'red'}]} 
-            labelStyle={[...(props.labelStyle || []), {backgroundColor: 'blue'}]}
+        <Input inputStyle={[...(props.style || [])]} 
+            containerStyle={[...(props.containerStyle || [])]} 
+            labelStyle={[...(props.labelStyle || [])]}
             label={props.label}
             multiline={props.inputType === "textarea"}
             numberOfLines={3}

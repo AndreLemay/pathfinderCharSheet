@@ -11,7 +11,6 @@ export default function CharacterSection(props: CharacterProps) {
     return (
         <View style={[Styles.container]}>
             <SectionHeader label="Character" />
-            <View style={[Styles.row]}>
                 <InputField containerStyle={[Styles.col]}
                     label="Name"
                     value={props.name}
@@ -26,8 +25,6 @@ export default function CharacterSection(props: CharacterProps) {
                     value={props.gender}
                     onValueChange={props.genderChange}
                     dropdownType={Gender} />
-            </View>
-            <View style={[Styles.row]}>
                 <InputField containerStyle={[Styles.col]}
                     label="Race"
                     value={props.race}
@@ -37,7 +34,6 @@ export default function CharacterSection(props: CharacterProps) {
                     value={props.size}
                     onValueChange={props.sizeChange}
                     dropdownType={Size} />
-            </View>
         </View >
     )
 }

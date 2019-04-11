@@ -36,9 +36,9 @@ export default class InputField extends React.Component<InputProps, InputState> 
 
     render() {
         return (
-            <Input inputStyle={[...(this.props.style || []), { backgroundColor: 'green' }]} 
-                containerStyle={[...(this.props.containerStyle || []), { backgroundColor: 'red'}]} 
-                labelStyle={[...(this.props.labelStyle || []), { backgroundColor: 'blue' }]}
+            <Input inputStyle={[...(this.props.style || [])]} 
+                containerStyle={[...(this.props.containerStyle || [])]} 
+                labelStyle={[...(this.props.labelStyle || [])]}
                 label={this.props.label}
                 keyboardType={this.props.inputType === "number" ? "numeric" : "default"}
                 multiline={this.props.inputType === "textarea"}
