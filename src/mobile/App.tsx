@@ -7,7 +7,8 @@ import CharacterSection from './components/CharacterSection';
 import CharacterContainer from "../shared/containers/CharacterContainer"
 import InitiativeSection from "./components/InitiativeSection"
 import InitiativeContainer from "../shared/containers/InitiativeContainer"
-import Styles from './styles/Styles';
+import SavesContainer from "../shared/containers/SavesContainer"
+import SaveSection from './components/SaveSection';
 
 const store = configureStore()
 
@@ -24,6 +25,7 @@ export class App extends React.Component {
               </View>
               <View key="2">
                 <CharacterContainer characterSectionComponent={CharacterSection} />
+                <SavesContainer saveComponent={SaveSection} />
               </View>
             </ViewPagerAndroid>
           </ScrollView>
