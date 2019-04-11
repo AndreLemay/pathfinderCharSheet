@@ -19,15 +19,17 @@ export default function DropdownField(props: DropdownProps) {
     }
 
     return (
-        <View style={[...(props.containerStyle || [])]}>
+        <View style={[...(props.containerStyle || []), { padding: '5%' }]}>
             {props.label && props.label.length > 0 &&
                 <Text style={[...(props.labelStyle || [])]}>{props.label}</Text>}
-            <Picker style={[...(props.style || []), { width: '100%' }]}
-                selectedValue={props.value}
-                onValueChange={onChange}>
-                {props.dropdownType.values.map(x =>
-                    <Picker.Item key={x.ordinal} label={x.description} value={x.ordinal} />)}
-            </Picker>
+            <View style={[...(props.style || []), Styles.picker]}>
+                <Picker style={{ width: '100%' }}
+                    selectedValue={props.value}
+                    onValueChange={onChange}>
+                    {props.dropdownType.values.map(x =>
+                        <Picker.Item key={x.ordinal} label={x.description} value={x.ordinal} />)}
+                </Picker>
+            </View>
         </View>
     )
 }

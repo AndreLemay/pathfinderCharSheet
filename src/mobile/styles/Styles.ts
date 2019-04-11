@@ -17,6 +17,12 @@ const Styles = StyleSheet.create({
     },
     sectionHeader: {
         flex: 0
+    },
+    picker: {
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'black',
+        width: '100%'
     }
 })
 
