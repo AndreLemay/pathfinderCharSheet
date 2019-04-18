@@ -11,6 +11,8 @@ import SavesContainer from "../shared/containers/SavesContainer"
 import SaveSection from './components/SaveSection';
 import HealthContainer from "../shared/containers/HealthContainer"
 import HealthSection from './components/HealthSection';
+import AttackBonusContainer from "../shared/containers/AttackBonusContainer"
+import AttackBonusSection from './components/AttackBonusSection';
 
 const store = configureStore()
 
@@ -31,6 +33,7 @@ export class App extends React.Component {
               </View>
               <View key="3">
                 <HealthContainer healthSectionComponent={HealthSection} />
+                <AttackBonusContainer attackBonusComponent={AttackBonusSection} />
               </View>
             </ViewPagerAndroid>
           </ScrollView>
