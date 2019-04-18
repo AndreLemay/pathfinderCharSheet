@@ -9,6 +9,8 @@ import InitiativeSection from "./components/InitiativeSection"
 import InitiativeContainer from "../shared/containers/InitiativeContainer"
 import SavesContainer from "../shared/containers/SavesContainer"
 import SaveSection from './components/SaveSection';
+import HealthContainer from "../shared/containers/HealthContainer"
+import HealthSection from './components/HealthSection';
 
 const store = configureStore()
 
@@ -26,6 +28,9 @@ export class App extends React.Component {
               <View key="2">
                 <CharacterContainer characterSectionComponent={CharacterSection} />
                 <SavesContainer saveComponent={SaveSection} />
+              </View>
+              <View key="3">
+                <HealthContainer healthSectionComponent={HealthSection} />
               </View>
             </ViewPagerAndroid>
           </ScrollView>
