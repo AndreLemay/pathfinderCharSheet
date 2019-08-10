@@ -16,7 +16,11 @@ import AttackBonusSection from './components/AttackBonusSection'
 import ArmourClassContainer from "../shared/containers/ArmourClassContainer"
 import ArmourClassSection from "./components/ArmourClassSection"
 import CombatManeuverContainer from "../shared/containers/CombatManeuversContainer"
-import CombatManeuverSection from './components/CombatManeuverSection';
+import CombatManeuverSection from './components/CombatManeuverSection'
+import ArmourContainer from '../shared/containers/ArmourContainer'
+import ArmourSection from './components/ArmourSection'
+import ShieldContainer from "../shared/containers/ShieldContainer"
+import ShieldSection from './components/ShieldSection';
 
 const store = configureStore()
 
@@ -42,6 +46,10 @@ export class App extends React.Component {
               <View key="4">
                 <ArmourClassContainer armourClassComponent={ArmourClassSection} />
                 <CombatManeuverContainer combatManeuverComponent={CombatManeuverSection} />
+              </View>
+              <View key="5">
+                <ArmourContainer armourComponent={ArmourSection} />
+                <ShieldContainer shieldComponent={ShieldSection} />
               </View>
             </ViewPagerAndroid>
           </ScrollView>
