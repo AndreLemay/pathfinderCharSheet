@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 import { CharacterState } from '../types'
-import { Alignment, Gender, Size } from '../../api/Enums'
+import { Alignment, Gender, Size } from '../../api/enums'
 import { CharacterStateActionTypes } from '../actions/actionTypes'
 import * as actions from '../actions/characterStateActions'
 import { ActionType } from 'typesafe-actions'

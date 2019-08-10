@@ -3,7 +3,7 @@ import { ArmourProps } from '../../shared/api/componentPropTypes'
 import SectionHeader from './common/SectionHeader'
 import InputField from './common/InputField'
 import DropdownField from './common/DropdownField'
-import { ArmourType } from '../../shared/api/Enums'
+import { ArmourType } from '../../shared/api/enums'
 
 export default function ArmourSection(props: ArmourProps) {
 	return (

@@ -6,7 +6,7 @@ import {
 	getMiscAttackBonus
 } from '../store/selectors/baseAttackSelectors'
 import { AttackInfoBundle, AttackProps } from '../api/componentPropTypes'
-import { DamageDieValue, AbilityTypeValue, AbilityType } from '../api/Enums'
+import { DamageDieValue, AbilityTypeValue, AbilityType } from '../api/enums'
 import { editAttack, deleteAttack } from '../store/actions/attackActions'
 import {
 	getStrengthBonus,

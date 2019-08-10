@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { SkillName } from '../api/Enums'
+import { SkillName } from '../api/enums'
 import CharacterSheetState from '../store/types'
 import {
 	makeGetSkillBonus,

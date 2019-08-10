@@ -11,7 +11,7 @@ import {
 	DamageDie,
 	AbilityTypeValue,
 	AbilityType
-} from '../../shared/api/Enums'
+} from '../../shared/api/enums'
 import InputField from './common/InputField'
 import DropdownField from './common/DropdownField'
 import { ValueBonus } from '../../shared/store/types'

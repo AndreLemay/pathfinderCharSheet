@@ -3,7 +3,7 @@ import { CharacterProps } from '../../shared/api/componentPropTypes'
 import SectionHeader from './common/SectionHeader'
 import InputField from './common/InputField'
 import DropdownField from './common/DropdownField'
-import { Alignment, Gender, Size } from '../../shared/api/Enums'
+import { Alignment, Gender, Size } from '../../shared/api/enums'
 
 export default function CharacterSection(props: CharacterProps) {
 	return (

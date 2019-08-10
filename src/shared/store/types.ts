@@ -8,7 +8,7 @@ import {
 	ArmourTypeValue,
 	DamageDieValue,
 	AbilityTypeValue
-} from '../api/Enums'
+} from '../api/enums'
 
 export interface AbilitiesState {
 	readonly strength: number

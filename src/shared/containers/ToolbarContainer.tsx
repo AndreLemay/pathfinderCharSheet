@@ -19,7 +19,7 @@ import {
 	FeatInfoBundle
 } from '../api/componentPropTypes'
 import { EnumValue } from 'ts-enums'
-import { StatTypeValue } from '../api/Enums'
+import { StatTypeValue } from '../api/enums'
 import uuid = require('uuid')
 
 interface OwnProps {

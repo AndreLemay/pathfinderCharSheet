@@ -1,6 +1,6 @@
 import { action } from 'typesafe-actions'
 import { CharacterStateActionTypes } from './actionTypes'
-import { AlignmentValue, GenderValue, SizeValue } from '../../api/Enums'
+import { AlignmentValue, GenderValue, SizeValue } from '../../api/enums'
 
 export const nameUpdate = (name: string) =>
 	action(CharacterStateActionTypes.NAME_UPDATE, name)
