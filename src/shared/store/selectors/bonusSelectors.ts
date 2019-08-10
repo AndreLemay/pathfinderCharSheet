@@ -28,6 +28,7 @@ const sumBonuses = (bundle: StatSumBundle): number => {
 		// these affect everything, so just add them always
 		includedBonuses.push(BonusType.Racial)
 		includedBonuses.push(BonusType.Trait)
+		includedBonuses.push(BonusType.Inherent)
 
 		includedBonuses.forEach((type: BonusTypeValue) => {
 			bonusesByType[type.ordinal] = []
@@ -87,9 +88,9 @@ const getBundle = (
 	]
 
 	return {
-		'from': fromArr,
-		'includedBonuses': props.includedBonuses,
-		'statToSum': props.statToSum
+		from: fromArr,
+		includedBonuses: props.includedBonuses,
+		statToSum: props.statToSum
 	}
 }
 
