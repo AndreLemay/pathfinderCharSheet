@@ -1,194 +1,198 @@
 body {
-    overflow-x: hidden;
-    padding-top: 56px;
+	overflow-x: hidden;
+	padding-top: 56px;
 }
 
 input:read-only {
-    cursor: default;
+	cursor: default;
 }
 
-input, select, .form-group:not(.row), .skill-table-head>.col {
-    text-align: center;
-    text-align-last: center;
+input,
+select,
+.form-group:not(.row),
+.skill-table-head > .col {
+	text-align: center;
+	text-align-last: center;
 }
 
-input[type="text"], textarea {
-    text-align: start;
-    text-align-last: start;
+input[type='text'],
+textarea {
+	text-align: start;
+	text-align-last: start;
 }
 
-.form-group.text-center input[type="text"] {
-    text-align: center!important;
-    text-align-last: center!important;
+.form-group.text-center input[type='text'] {
+	text-align: center !important;
+	text-align-last: center !important;
 }
 
 .section-head {
-    color: white;
-    background-color: dimgray;
-    font-weight: bold;
-    width: 100%;
-    text-align: center;
+	color: white;
+	background-color: dimgray;
+	font-weight: bold;
+	width: 100%;
+	text-align: center;
 }
 
 .section-head > label {
-    margin: auto;
+	margin: auto;
 }
 
 .ability-title {
-    font-weight: bolder;
-    text-align: center;
-    margin: auto;
+	font-weight: bolder;
+	text-align: center;
+	margin: auto;
 }
 
 .equipment-container,
 .attack-container,
 .feat-container {
-    overflow: auto;
-    height: 405px;
-    padding: 0 5px 0 5px;
-    margin: 0 -15px 0 -15px;
+	overflow: auto;
+	height: 405px;
+	padding: 0 5px 0 5px;
+	margin: 0 -15px 0 -15px;
 }
 
 .attack-container,
 .feat-container {
-    height: 585px;
+	height: 585px;
 }
 
 .attack-container .form-group,
 .attack-container .form-group label {
-    margin-bottom: 2px;
+	margin-bottom: 2px;
 }
 
 .equipment-item,
 .attack-item,
 .feat-item {
-    border-bottom: 1px solid darkgray;
+	border-bottom: 1px solid darkgray;
 }
 
 .equipment-item.form-row,
 .feat-item .form-row {
-    margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .feat-item .btn-group-vertical button,
 .equipment-item .btn-group-vertical button,
 .attack-item .btn-group.vertical button {
-    border-radius: 1rem;
+	border-radius: 1rem;
 }
 
 .feat-item .btn-group-vertical,
 .equipment-item .btn-group-vertical,
 .attack-item .btn-group-vertical {
-    max-width: 69px; /* this amount was determined experimentally, I swear */
+	max-width: 69px; /* this amount was determined experimentally, I swear */
 }
 
 .skill-table-body .form-row {
-    padding: 3px 0 3px 0;
+	padding: 3px 0 3px 0;
 }
 
 .skill-table-body .form-row:nth-child(odd) {
-    background-color: rgba(211, 211, 211, 0.4);
+	background-color: rgba(211, 211, 211, 0.4);
 }
 
-/*This basically defeats the point of the form-group class but it's easier than making the 
+/*This basically defeats the point of the form-group class but it's easier than making the
 form-group from OutputField optional*/
 .skill-table-body .form-group {
-    margin: 0;
+	margin: 0;
 }
 
 /*bootstrap's form-control-plaintext sets this, but apparently its input[readonly] style overrides this,
 so set it back*/
 .skill-table-body input:read-only {
-    background-color: transparent;
+	background-color: transparent;
 }
 
-.skill-table-body input[type="checkbox"]:disabled:not(:checked),
+.skill-table-body input[type='checkbox']:disabled:not(:checked),
 .skill-table-body input:read-only:placeholder-shown {
-    display: none;
+	display: none;
 }
 
 .feat-item .form-row:first-child .form-group {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 /* Slider/Toggle checkbox css*/
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 70px;
-    height: 30px;
-    margin: 5px 0 0 0;
+	position: relative;
+	display: inline-block;
+	width: 70px;
+	height: 30px;
+	margin: 5px 0 0 0;
 }
 
 .switch input {
-    display:none;
+	display: none;
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #f2f2f2;
-    transition: .4s;
+	position: absolute;
+	cursor: pointer;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #f2f2f2;
+	transition: 0.4s;
 }
 
 .slider:before {
-    position: absolute;
-    z-index: 2;
-    content: "";
-    height: 30px;
-    width: 30px;
-    left: 0px;
-    bottom: 0px;
-    background-color: lightgray;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22); 
-    transition: all 0.4s ease-in-out;
+	position: absolute;
+	z-index: 2;
+	content: '';
+	height: 30px;
+	width: 30px;
+	left: 0px;
+	bottom: 0px;
+	background-color: lightgray;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+	transition: all 0.4s ease-in-out;
 }
 .slider:after {
-    position: absolute;
-    left: 0;
-    z-index: 1;
-    content: "On";
-    text-align: left !important;
-    padding-left: 0;
-    width: 70px;
-    color: #fff;
-    height: 30px;
-    border-radius: 100px;
-    background-color: #007bff;
-    transform: translateX(-40px);
-    transition: all 0.4s ease-in-out;
-    padding-top: 2px;
+	position: absolute;
+	left: 0;
+	z-index: 1;
+	content: 'On';
+	text-align: left !important;
+	padding-left: 0;
+	width: 70px;
+	color: #fff;
+	height: 30px;
+	border-radius: 100px;
+	background-color: #007bff;
+	transform: translateX(-40px);
+	transition: all 0.4s ease-in-out;
+	padding-top: 2px;
 }
 
 input:checked + .slider:after {
-  transform: translateX(0px);
-  padding-left: 10px;
+	transform: translateX(0px);
+	padding-left: 10px;
 }
 
 input:checked + .slider:before {
-  transform: translateX(40px);
+	transform: translateX(40px);
 }
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 100px;
+	border-radius: 100px;
 }
 
 .slider.round:before {
-  border-radius: 100%;
+	border-radius: 100%;
 }
 .absolute-no {
 	position: absolute;
 	left: 0;
 	color: darkslategrey;
 	text-align: right !important;
-    width: calc(100% - 10px);
-    height: 30px;
-    cursor: pointer;
-    padding-top: 2px;
+	width: calc(100% - 10px);
+	height: 30px;
+	cursor: pointer;
+	padding-top: 2px;
 }

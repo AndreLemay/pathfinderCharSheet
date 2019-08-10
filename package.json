@@ -1,56 +1,61 @@
 {
-  "name": "pathfinder-char-sheet",
-  "version": "1.0.0",
-  "description": "Pathfinder Character Sheet",
-  "main": "dist/desktop/main.js",
-  "scripts": {
-    "build": "tsc --forceConsistentCasingInFileNames",
-    "build-mobile": "tsc --forceConsistentCasingInFileNames --p tsconfig.mobile.json",
-    "watch": "tsc -w",
-    "lint": "tslint -c tslint.json -p tsconfig.json",
-    "start": "npm run build && electron ./dist/desktop/main.js",
-    "start-mobile": "npm run build-mobile && npm run start --prefix expo",
-    "dist": "npm run build && electron-builder"
-  },
-  "build": {
-    "directories": {
-      "output": "packaged"
-    },
-    "win": {
-      "target": "portable"
-    }
-  },
-  "repository": "https://github.com/AndreLemay/pathfinderCharSheet",
-  "author": "Andre Lemay",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/bootstrap": "^4.1.2",
-    "@types/electron-devtools-installer": "^2.2.0",
-    "@types/jquery": "^3.3.22",
-    "@types/react": "^16.7.7",
-    "@types/react-dom": "^16.7.x",
-    "@types/uuid": "^3.4.4",
-    "@types/react-native": "^0.57.42",
-    "@types/react-redux": "^7.0.5",
-    "react-native-elements": "^1.1.0",
-    "electron": "3.0.10",
-    "electron-builder": "^20.39.0",
-    "electron-devtools-installer": "^2.2.4",
-    "tslint": "^5.14.0",
-    "typescript": "^3.1.6"
-  },
-  "dependencies": {
-    "bootstrap": "^4.1.3",
-    "fs-jetpack": "^2.2.0",
-    "jquery": "^3.3.1",
-    "popper.js": "^1.14.6",
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
-    "react-redux": "^6.0.0",
-    "redux": "^4.0.1",
-    "reselect": "^4.0.0",
-    "typesafe-actions": "^2.0.4",
-    "ts-enums": "0.0.6",
-    "uuid": "^3.3.2"
-  }
+	"name": "pathfinder-char-sheet",
+	"version": "1.0.0",
+	"description": "Pathfinder Character Sheet",
+	"main": "dist/desktop/main.js",
+	"scripts": {
+		"build": "tsc --forceConsistentCasingInFileNames",
+		"build-mobile": "tsc --forceConsistentCasingInFileNames --p tsconfig.mobile.json",
+		"watch": "tsc -w",
+		"lint": "tslint -c tslint.json -p tsconfig.json",
+		"start": "npm run build && electron ./dist/desktop/main.js",
+		"start-mobile": "npm run build-mobile && npm run start --prefix expo",
+		"dist": "npm run build && electron-builder",
+		"prettier": "prettier --write src/**/*.{ts,tsx,js,html,css}"
+	},
+	"build": {
+		"directories": {
+			"output": "packaged"
+		},
+		"win": {
+			"target": "portable"
+		}
+	},
+	"repository": "https://github.com/AndreLemay/pathfinderCharSheet",
+	"author": "Andre Lemay",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/bootstrap": "^4.1.2",
+		"@types/electron-devtools-installer": "^2.2.0",
+		"@types/jquery": "^3.3.22",
+		"@types/react": "^16.7.7",
+		"@types/react-dom": "^16.7.x",
+		"@types/react-native": "^0.57.42",
+		"@types/react-redux": "^7.0.5",
+		"@types/uuid": "^3.4.4",
+		"electron": "3.0.10",
+		"electron-builder": "^20.39.0",
+		"electron-devtools-installer": "^2.2.4",
+		"prettier": "^1.18.2",
+		"react-native-elements": "^1.1.0",
+		"tslint": "^5.18.0",
+		"tslint-config-prettier": "^1.18.0",
+		"tslint-config-standard": "^8.0.1",
+		"tslint-react": "^4.0.0",
+		"typescript": "^3.1.6"
+	},
+	"dependencies": {
+		"bootstrap": "^4.1.3",
+		"fs-jetpack": "^2.2.0",
+		"jquery": "^3.3.1",
+		"popper.js": "^1.14.6",
+		"react": "^16.5.0",
+		"react-dom": "^16.5.0",
+		"react-redux": "^6.0.0",
+		"redux": "^4.0.1",
+		"reselect": "^4.0.0",
+		"typesafe-actions": "^3.3",
+		"ts-enums": "0.0.6",
+		"uuid": "^3.3.2"
+	}
 }

@@ -1,8 +1,8 @@
-import * as React from "react"
-import * as ReactDOM from "react-dom"
-import App from "./App"
-import * as $ from "jquery"
-//import { remote } from "electron";
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import App from './App'
+import * as $ from 'jquery'
+// import { remote } from "electron";
 
 /* Remove this stuff when finished, just a debug menu */
 // let rightClickPosition = null
@@ -25,5 +25,5 @@ import * as $ from "jquery"
 /* --------------------------------------------------- */
 
 window.onload = () => {
-    ReactDOM.render(<App />, $("#app")[0])
+	ReactDOM.render(<App />, $('#app')[0])
 }

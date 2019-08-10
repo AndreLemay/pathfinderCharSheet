@@ -26,5 +26,6 @@
         "outDir": "dist",
         "moduleResolution": "node",
         "sourceMap": true,
+        "plugins": [{"name": "typescript-tslint-plugin"}]
     }
 }
