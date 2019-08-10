@@ -23,7 +23,7 @@
 		"jsx-alignment": false,
 		"jsx-no-multiline-js": false,
 		"jsx-no-lambda": false,
-		"linebreak-style": [true, "LF"],
+		"linebreak-style": [true, "CRLF"],
 		"match-default-export-name": false,
 		"max-classes-per-file": false,
 		"member-access": [true, "no-public"],
