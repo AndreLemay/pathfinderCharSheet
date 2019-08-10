@@ -36,7 +36,9 @@ import {
 	DamageDie,
 	StatType,
 	SkillName,
-	BonusType
+	BonusType,
+	AbilityTypeValue,
+	AbilityType
 } from '../../api/enums'
 
 type RootAction =
@@ -100,8 +102,8 @@ const rootReducer: Reducer<CharacterSheetState> = (
 					name: item.name,
 					range: item.range,
 					type: item.type,
-					toHitBonusAbility: item.toHitBonusAbility,
-					dmgBonusAbility: item.dmgBonusAbility,
+					toHitBonusAbility: AbilityType.values[item.toHitBonusAbility],
+					dmgBonusAbility: AbilityType.values[item.dmgBonusAbility],
 					equipId: item.equipId
 				}
 
