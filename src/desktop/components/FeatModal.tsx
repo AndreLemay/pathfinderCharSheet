@@ -43,7 +43,9 @@ const defaultState: ModalState = {
 export default class FeatModal extends React.Component<any, ModalState> {
 	state = defaultState
 	private readonly modalRef: React.RefObject<HTMLDivElement>
-	private def: JQueryDeferred<FeatInfoBundle>
+	private def: Promise<FeatInfoBundle>
+	private defResolve: (arg0: FeatInfoBundle) => void
+	private defReject: () => void
 	constructor(props) {
 		super(props)
 		this.modalRef = React.createRef()
@@ -55,7 +57,10 @@ export default class FeatModal extends React.Component<any, ModalState> {
 
 	open = (feat?: FeatInfoBundle) => {
 		this.setState(defaultState)
-		this.def = $.Deferred()
+		this.def = new Promise((resolve, reject) => {
+			this.defResolve = resolve
+			this.defReject = reject
+		})
 		if (feat) {
 			this.setState({
 				'name': feat.name,
@@ -65,7 +70,7 @@ export default class FeatModal extends React.Component<any, ModalState> {
 		}
 		$(this.modalRef.current).modal('show')
 
-		return this.def.promise()
+		return this.def
 	}
 
 	render() {
@@ -202,7 +207,7 @@ export default class FeatModal extends React.Component<any, ModalState> {
 	}
 
 	private readonly onCancel = () => {
-		this.def.reject()
+		this.defReject()
 		$(this.modalRef.current).modal('hide')
 	}
 
@@ -229,7 +234,7 @@ export default class FeatModal extends React.Component<any, ModalState> {
 	}
 
 	private readonly onSave = () => {
-		this.def.resolve({
+		this.defResolve({
 			'name': this.state.name,
 			'description': this.state.description,
 			'bonuses': this.state.bonuses

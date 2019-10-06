@@ -16,82 +16,65 @@ import InputField from './common/InputField'
 import DropdownField from './common/DropdownField'
 import { ValueBonus } from '../../shared/store/types'
 import OutputField from './common/OutputField'
-import { AttackInfoBundle } from '../../shared/api/componentPropTypes'
-
-interface ModalState {
-	modal: boolean
-	name: string
-	description: string
-	range: number
-	type: string
-	critRange: number
-	critMultiplier: number
-	dmgDieCount: number
-	dmgDie: DamageDieValue
-	toHitBonusAbility: AbilityTypeValue
-	dmgBonusAbility: AbilityTypeValue
-	bonuses: ValueBonus[]
-	curStatBonusType: BonusTypeValue
-	curStatAffected: StatTypeValue
-	curStatBonusAmt: number
-	curSkillBonusType: BonusTypeValue
-	curSkillAffected: SkillNameValue
-	curSkillBonusAmt: number
-}
+import { AttackInfoBundle, ModalState } from '../../shared/api/componentPropTypes'
 
 const defaultState: ModalState = {
-	'modal': false,
-	'name': '',
-	'description': '',
-	'range': 0,
-	'type': '',
-	'bonuses': [],
-	'dmgDieCount': 1,
-	'dmgDie': DamageDie['2'],
-	'critRange': 20,
-	'critMultiplier': 2,
-	'toHitBonusAbility': AbilityType.Strength,
-	'dmgBonusAbility': AbilityType.Strength,
-	'curStatBonusType': BonusType.Alchemical,
-	'curStatAffected': StatType.AllSaves,
-	'curStatBonusAmt': 0,
-	'curSkillBonusType': BonusType.Alchemical,
-	'curSkillAffected': SkillName.Acrobatics,
-	'curSkillBonusAmt': 0
+	name: '',
+	description: '',
+	range: 0,
+	type: '',
+	bonuses: [],
+	dmgDieCount: 1,
+	dmgDie: DamageDie['2'],
+	critRange: 20,
+	critMultiplier: 2,
+	toHitBonusAbility: AbilityType.Strength,
+	dmgBonusAbility: AbilityType.Strength,
+	curStatBonusType: BonusType.Alchemical,
+	curStatAffected: StatType.AllSaves,
+	curStatBonusAmt: 0,
+	curSkillBonusType: BonusType.Alchemical,
+	curSkillAffected: SkillName.Acrobatics,
+	curSkillBonusAmt: 0
 }
 
 export default class AttackModal extends React.Component<any, ModalState> {
 	state = defaultState
 	private readonly modalRef: React.RefObject<HTMLDivElement>
-	private def: JQueryDeferred<AttackInfoBundle>
+	private def: Promise<AttackInfoBundle>
+	private defResolve: (arg0: AttackInfoBundle) => void
+	private defReject: () => void
 	constructor(props) {
 		super(props)
 		this.modalRef = React.createRef()
 	}
 
 	componentDidMount = () => {
-		$(this.modalRef.current).modal({ 'show': false })
+		$(this.modalRef.current).modal({ show: false })
 	}
 
 	open = (attack?: AttackInfoBundle) => {
 		this.setState(defaultState)
-		this.def = $.Deferred()
+		this.def = new Promise((resolve, reject) => {
+			this.defResolve = resolve
+			this.defReject = reject
+		})
 		if (attack) {
 			this.setState({
-				'name': attack.name,
-				'description': attack.description,
-				'bonuses': attack.bonuses,
-				'range': attack.range,
-				'type': attack.type,
-				'dmgDieCount': attack.dmgDieCount,
-				'dmgDie': attack.dmgDie,
-				'critRange': attack.critRange,
-				'critMultiplier': attack.critMultiplier
+				name: attack.name,
+				description: attack.description,
+				bonuses: attack.bonuses,
+				range: attack.range,
+				type: attack.type,
+				dmgDieCount: attack.dmgDieCount,
+				dmgDie: attack.dmgDie,
+				critRange: attack.critRange,
+				critMultiplier: attack.critMultiplier
 			})
 		}
 		$(this.modalRef.current).modal('show')
 
-		return this.def.promise()
+		return this.def
 	}
 
 	render() {
@@ -118,7 +101,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 										label="Name"
 										className="col-3"
 										value={this.state.name}
-										onValueChange={name => this.setState({ 'name': name.toString() })}
+										onValueChange={name => this.setState({ name: name.toString() })}
 									/>
 									<OutputField
 										label="Properties"
@@ -131,7 +114,9 @@ export default class AttackModal extends React.Component<any, ModalState> {
 										inputType="textarea"
 										className="col"
 										value={this.state.description}
-										onValueChange={desc => this.setState({ 'description': desc.toString() })}
+										onValueChange={desc =>
+											this.setState({ description: desc.toString() })
+										}
 									/>
 								</div>
 								<div className="form-row align-items-end">
@@ -142,7 +127,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 										value={this.state.range}
 										step={5}
 										onValueChange={range =>
-											this.setState({ 'range': range !== null ? +range : null })
+											this.setState({ range: range !== null ? +range : null })
 										}
 									/>
 									<div className="form-group col-5">
@@ -157,8 +142,8 @@ export default class AttackModal extends React.Component<any, ModalState> {
 														let checked = event.currentTarget.checked
 														this.setState(prevState => {
 															return checked
-																? { 'type': `B ${prevState.type}` }
-																: { 'type': prevState.type.slice(1) }
+																? { type: `B ${prevState.type}` }
+																: { type: prevState.type.slice(1) }
 														})
 													}}
 												/>
@@ -178,15 +163,15 @@ export default class AttackModal extends React.Component<any, ModalState> {
 															let newStr = ''
 															if (brokenStr[0] === 'B') {
 																newStr = checked
-																	? `BP ${(brokenStr[1] || '')}`
-																	: `B ${(brokenStr[2] || '')}`
+																	? `BP ${brokenStr[1] || ''}`
+																	: `B ${brokenStr[2] || ''}`
 															} else {
 																newStr = checked
-																	? `P ${(brokenStr[0] || '')}`
+																	? `P ${brokenStr[0] || ''}`
 																	: brokenStr.join('')
 															}
 
-															return { 'type': newStr }
+															return { type: newStr }
 														})
 													}}
 												/>
@@ -201,8 +186,8 @@ export default class AttackModal extends React.Component<any, ModalState> {
 														let checked = event.currentTarget.checked
 														this.setState(prevState => {
 															return checked
-																? { 'type': `${prevState.type} S` }
-																: { 'type': prevState.type.slice(0, prevState.type.length - 1) }
+																? { type: `${prevState.type} S` }
+																: { type: prevState.type.slice(0, prevState.type.length - 1) }
 														})
 													}}
 												/>
@@ -218,7 +203,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 												className="form-control form-control-sm"
 												value={this.state.dmgDieCount}
 												onChange={event => {
-													this.setState({ 'dmgDieCount': event.currentTarget.valueAsNumber })
+													this.setState({ dmgDieCount: event.currentTarget.valueAsNumber })
 												}}
 											/>
 											<div className="input-group-prepend input-group-append">
@@ -229,7 +214,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 												value={this.state.dmgDie.propName}
 												onChange={event => {
 													this.setState({
-														'dmgDie': DamageDie.byPropName(event.currentTarget.value)
+														dmgDie: DamageDie.byPropName(event.currentTarget.value)
 													})
 												}}>
 												<option value={DamageDie[2].propName}>
@@ -269,7 +254,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 												className="form-control form-control-sm"
 												value={this.state.critRange}
 												onChange={event => {
-													this.setState({ 'critRange': event.currentTarget.valueAsNumber })
+													this.setState({ critRange: event.currentTarget.valueAsNumber })
 												}}
 											/>
 											<div className="input-group-prepend input-group-append">
@@ -281,7 +266,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 												value={this.state.critMultiplier}
 												onChange={event => {
 													this.setState({
-														'critMultiplier': event.currentTarget.valueAsNumber
+														critMultiplier: event.currentTarget.valueAsNumber
 													})
 												}}
 											/>
@@ -295,7 +280,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 										dropdownType={AbilityType}
 										value={this.state.toHitBonusAbility}
 										onValueChange={(newAbility: AbilityTypeValue) => {
-											this.setState({ 'toHitBonusAbility': newAbility })
+											this.setState({ toHitBonusAbility: newAbility })
 										}}
 									/>
 									<DropdownField
@@ -304,7 +289,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 										dropdownType={AbilityType}
 										value={this.state.dmgBonusAbility}
 										onValueChange={(newAbility: AbilityTypeValue) => {
-											this.setState({ 'dmgBonusAbility': newAbility })
+											this.setState({ dmgBonusAbility: newAbility })
 										}}
 									/>
 								</div>
@@ -316,7 +301,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 										dropdownType={BonusType}
 										value={this.state.curStatBonusType}
 										onValueChange={(newType: BonusTypeValue) => {
-											this.setState({ 'curStatBonusType': newType })
+											this.setState({ curStatBonusType: newType })
 										}}
 									/>
 									<DropdownField
@@ -325,7 +310,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 										dropdownType={StatType}
 										value={this.state.curStatAffected}
 										onValueChange={(newStat: StatTypeValue) => {
-											this.setState({ 'curStatAffected': newStat })
+											this.setState({ curStatAffected: newStat })
 										}}
 									/>
 									<InputField
@@ -334,7 +319,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 										inputType="number"
 										value={this.state.curStatBonusAmt}
 										onValueChange={amt => {
-											this.setState({ 'curStatBonusAmt': amt !== null ? +amt : null })
+											this.setState({ curStatBonusAmt: amt !== null ? +amt : null })
 										}}
 									/>
 									<div className="form-group">
@@ -351,7 +336,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 										dropdownType={BonusType}
 										value={this.state.curSkillBonusType}
 										onValueChange={(newType: BonusTypeValue) => {
-											this.setState({ 'curSkillBonusType': newType })
+											this.setState({ curSkillBonusType: newType })
 										}}
 									/>
 									<DropdownField
@@ -360,7 +345,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 										dropdownType={SkillName}
 										value={this.state.curSkillAffected}
 										onValueChange={(skill: SkillNameValue) => {
-											this.setState({ 'curSkillAffected': skill })
+											this.setState({ curSkillAffected: skill })
 										}}
 									/>
 									<InputField
@@ -369,7 +354,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 										inputType="number"
 										value={this.state.curSkillBonusAmt}
 										onValueChange={amt => {
-											this.setState({ 'curSkillBonusAmt': amt !== null ? +amt : null })
+											this.setState({ curSkillBonusAmt: amt !== null ? +amt : null })
 										}}
 									/>
 									<div className="form-group">
@@ -398,7 +383,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 	}
 
 	private readonly onCancel = () => {
-		this.def.reject()
+		this.defReject()
 		$(this.modalRef.current).modal('hide')
 	}
 
@@ -409,7 +394,7 @@ export default class AttackModal extends React.Component<any, ModalState> {
 			this.state.curStatBonusAmt
 		)
 		this.setState(prevState => {
-			return { 'bonuses': [...prevState.bonuses, bonus] }
+			return { bonuses: [...prevState.bonuses, bonus] }
 		})
 	}
 
@@ -420,23 +405,23 @@ export default class AttackModal extends React.Component<any, ModalState> {
 			this.state.curSkillBonusAmt
 		)
 		this.setState(prevState => {
-			return { 'bonuses': [...prevState.bonuses, bonus] }
+			return { bonuses: [...prevState.bonuses, bonus] }
 		})
 	}
 
 	private readonly onSave = () => {
-		this.def.resolve({
-			'name': this.state.name,
-			'description': this.state.description,
-			'bonuses': this.state.bonuses,
-			'range': this.state.range,
-			'type': this.state.type,
-			'dmgDieCount': this.state.dmgDieCount,
-			'dmgDie': this.state.dmgDie,
-			'critRange': this.state.critRange,
-			'critMultiplier': this.state.critMultiplier,
-			'toHitBonusAbility': this.state.toHitBonusAbility,
-			'dmgBonusAbility': this.state.dmgBonusAbility
+		this.defResolve({
+			name: this.state.name,
+			description: this.state.description,
+			bonuses: this.state.bonuses,
+			range: this.state.range,
+			type: this.state.type,
+			dmgDieCount: this.state.dmgDieCount,
+			dmgDie: this.state.dmgDie,
+			critRange: this.state.critRange,
+			critMultiplier: this.state.critMultiplier,
+			toHitBonusAbility: this.state.toHitBonusAbility,
+			dmgBonusAbility: this.state.dmgBonusAbility
 		})
 		$(this.modalRef.current).modal('hide')
 	}
