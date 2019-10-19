@@ -11,12 +11,14 @@ export default function ShieldSection(props: ShieldProps) {
 			<SectionHeader label="Shield" />
 			<View style={[Styles.row]}>
 				<InputField
+					containerStyle={[Styles.col]}
 					label="Name"
 					value={props.name}
 					onValueChange={props.nameChange}
 				/>
 
 				<InputField
+					containerStyle={[Styles.col]}
 					inputType="textarea"
 					value={props.description}
 					onValueChange={props.descriptionChange}
@@ -24,12 +26,14 @@ export default function ShieldSection(props: ShieldProps) {
 			</View>
 			<View style={[Styles.row]}>
 				<InputField
+					containerStyle={[Styles.col]}
 					label="Check Penalty"
 					inputType="number"
 					value={props.checkPenalty}
 					onValueChange={props.checkPenaltyChange}
 				/>
 				<InputField
+					containerStyle={[Styles.col]}
 					label="AC Bonus"
 					inputType="number"
 					value={props.ac}
