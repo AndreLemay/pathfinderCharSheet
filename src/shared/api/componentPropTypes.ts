@@ -5,7 +5,9 @@ import {
 	ArmourTypeValue,
 	SkillNameValue,
 	DamageDieValue,
-	AbilityTypeValue
+	AbilityTypeValue,
+	BonusTypeValue,
+	StatTypeValue
 } from './enums'
 import { ValueBonus } from '../store/types'
 
@@ -243,4 +245,25 @@ export interface ToolbarProps {
 	addEquip: () => void
 	addFeat: () => void
 	addAttack: () => void
+}
+
+export interface ModalState {
+	visible?: boolean
+	name: string
+	description: string
+	range: number
+	type: string
+	critRange: number
+	critMultiplier: number
+	dmgDieCount: number
+	dmgDie: DamageDieValue
+	toHitBonusAbility: AbilityTypeValue
+	dmgBonusAbility: AbilityTypeValue
+	bonuses: ValueBonus[]
+	curStatBonusType: BonusTypeValue
+	curStatAffected: StatTypeValue
+	curStatBonusAmt: number
+	curSkillBonusType: BonusTypeValue
+	curSkillAffected: SkillNameValue
+	curSkillBonusAmt: number
 }
