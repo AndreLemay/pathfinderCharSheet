@@ -17,7 +17,10 @@
 		"class-name": true,
 		"deprecation": true,
 		"encoding": true,
-		"file-name-casing": [true, { "^(?!renderer).*\\.tsx$": "pascal-case", ".ts": "camel-case" }],
+		"file-name-casing": [
+			true,
+			{ "^(?!renderer).*\\.tsx$": "pascal-case", ".ts": "camel-case" }
+		],
 		"indent": [true, "tabs"],
 		"interface-name": false,
 		"jsx-alignment": false,

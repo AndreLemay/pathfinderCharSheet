@@ -1,32 +1,26 @@
 {
-    "include": [
-        "src/shared/**/*.ts",
-        "src/shared/**/*.tsx",
-        "src/mobile/**/*.ts",
-        "src/mobile/**/*.tsx"
-    ],
-    "exclude": [
-        "expo/dist",
-        "dist",
-        "node_module/@types/node/"
-    ],
-    "compilerOptions": {
-        "lib": [
-            "es6"
-        ],
-        "types": [
-            "react",
-            "react-native",
-            "react-native-elements",
-            "react-redux",
-            "react-dom",
-            "uuid"
-        ],
-        "jsx": "react-native",
-        "target": "es6",
-        "module": "commonjs",
-        "outDir": "expo/dist",
-        "moduleResolution": "node",
-        "sourceMap": true,
-    }
+	"include": [
+		"src/shared/**/*.ts",
+		"src/shared/**/*.tsx",
+		"src/mobile/**/*.ts",
+		"src/mobile/**/*.tsx"
+	],
+	"exclude": ["expo/dist", "dist", "node_module/@types/node/"],
+	"compilerOptions": {
+		"lib": ["es6"],
+		"types": [
+			"react",
+			"react-native",
+			"react-native-elements",
+			"react-redux",
+			"react-dom",
+			"uuid"
+		],
+		"jsx": "react-native",
+		"target": "es6",
+		"module": "commonjs",
+		"outDir": "expo/dist",
+		"moduleResolution": "node",
+		"sourceMap": true
+	}
 }
